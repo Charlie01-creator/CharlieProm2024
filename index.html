@@ -1,0 +1,518 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            user-select: none; /* Prevent text selection */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        /* Gallery setup for responsive grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns by default */
+            gap: 10px;
+            padding: 10px;
+            justify-items: center;
+            max-width: 100%;
+            grid-auto-flow: row; /* Ensure items flow into rows */
+        }
+
+        /* General image styling for all types */
+        .gallery-item {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden; /* Ensure nothing overflows from the container */
+        }
+
+        .gallery-item img {
+            width: 100%; /* Ensure the image takes the full width of the container */
+            height: auto; /* Maintain aspect ratio */
+            object-fit: contain; /* Prevent cutting off the image */
+            max-height: 60vh; /* Limit the height to make sure images fit */
+            pointer-events: none; /* Disable interaction with image */
+            -webkit-user-drag: none;
+            -moz-user-drag: none;
+            user-drag: none; /* Disable image dragging */
+            touch-action: none; /* Disable zooming and panning */
+        }
+
+        /* Watermark styling */
+        .watermark, .watermark-2 {
+            position: absolute;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.7); /* Increased watermark opacity */
+            z-index: 10;
+            pointer-events: none; /* Prevent interaction with watermark */
+            text-align: center;
+            width: 100%; /* Make sure watermarks take full width of the image */
+        }
+
+        .watermark {
+            font-size: 24px; /* Increased watermark font size */
+            top: 40%; /* Position watermark slightly above center */
+            left: 50%;
+            transform: translateX(-50%); /* Horizontally center watermark */
+        }
+
+        .watermark-2 {
+            font-size: 18px; /* Increased watermark font size */
+            top: 55%; /* Position second watermark slightly below the first watermark */
+            left: 50%;
+            transform: translateX(-50%); /* Horizontally center watermark */
+        }
+
+        /* Media queries for responsive adjustments */
+        @media (max-width: 600px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+            }
+
+            .gallery-item img {
+                max-height: 50vh; /* Reduce the image size on smaller screens */
+            }
+
+            .watermark {
+                font-size: 20px; /* Adjust watermark size */
+                top: 35%; /* Adjust watermark position */
+            }
+
+            .watermark-2 {
+                font-size: 16px; /* Adjust watermark size */
+                top: 50%; /* Adjust the position slightly */
+            }
+        }
+
+        @media (max-width: 400px) {
+            .gallery {
+                grid-template-columns: 1fr; /* 1 column for very small screens */
+            }
+
+            .gallery-item img {
+                max-height: 40vh; /* Further reduce image height */
+            }
+
+            .watermark {
+                font-size: 18px; /* Adjust watermark size */
+                top: 30%; /* Adjust watermark position */
+            }
+
+            .watermark-2 {
+                font-size: 14px; /* Adjust watermark size */
+                top: 45%; /* Adjust the position slightly */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Arles' Gallery</h1>
+        <p>Scroll through our store and choose your purchases</p>
+        <p>We offer each photo at Ugx 1000</p>
+    </header>
+    
+    
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="1.jpg" alt="Image 1" class="portrait">
+            <div class="watermark">Arles' Gallery</div>
+            <div class="watermark-2">Arles' Gallery</div>
+        </div>
+        <div class="gallery-item">
+            <img src="2.jpg" alt="Image 2" class="portrait">
+            <div class="watermark">Arles' Gallery</div>
+            <div class="watermark-2">Arles' Gallery</div>
+        </div>
+        <div class="gallery-item">
+            <img src="3.jpg" alt="Image 3" class="portrait">
+            <div class="watermark">Arles' Gallery</div>
+            <div class="watermark-2">Arles' Gallery</div>
+        </div>
+        <div class="gallery-item">
+            <img src="4.jpg" alt="Image 4" class="portrait">
+            <div class="watermark">Arles' Gallery</div>
+            <div class="watermark-2">Arles' Gallery</div>
+        </div>
+        <div class="gallery-item">
+            <img src="5.jpg" alt="Image 5" class="portrait">
+            <div class="watermark">Arles' Gallery</div>
+            <div class="watermark-2">Arles' Gallery</div>
+        </div>
+        <div class="gallery-item">
+            <img src="6.jpg" alt="Image 6" class="portrait">
+            <div class="watermark">Arles' Gallery</div>
+            <div class="watermark-2">Arles' Gallery</div>
+        </div>
+    </div>
+
+    <script>
+        // Example JavaScript to add images dynamically (if needed)
+        function addImage(imageSrc, imageAlt) {
+            const gallery = document.querySelector('.gallery');
+            const newItem = document.createElement('div');
+            newItem.classList.add('gallery-item');
+            const newImage = document.createElement('img');
+            newImage.src = imageSrc;
+            newImage.alt = imageAlt;
+            newItem.appendChild(newImage);
+            const watermark1 = document.createElement('div');
+            watermark1.classList.add('watermark');
+            watermark1.textContent = 'Arles\' Gallery';
+            const watermark2 = document.createElement('div');
+            watermark2.classList.add('watermark-2');
+            watermark2.textContent = 'Arles\' Gallery';
+            newItem.appendChild(watermark1);
+            newItem.appendChild(watermark2);
+            gallery.appendChild(newItem);
+        }
+
+        // Example usage: Add more images dynamically
+       
+       
+       
+       
+       
+        addImage('7.jpg', '7');
+        addImage('8.jpg', '8');
+        addImage('9.jpg', '8');    
+        addImage('10.jpg', '8');    
+        addImage('11.jpg', '8');
+        addImage('12.jpg', '8');    
+        addImage('13.jpg', '8');
+        addImage('14.jpg', '8');
+        addImage('15.jpg', '8');
+        addImage('16.jpg', '8');
+        addImage('19.jpg', '8');
+        addImage('10.jpg', '8');
+        addImage('21.jpg', '8');
+        addImage('22.jpg', '8');
+        addImage('23.jpg', '13');
+        addImage('28.jpg', '8');
+        addImage('29.jpg', '8');
+        addImage('30.jpg', '8');
+        addImage('31.jpg', '8');
+        addImage('32.jpg', '8');
+        addImage('33.jpg', '13');
+        addImage('34.jpg', '8');
+        addImage('35.jpg', '8');
+        addImage('36.jpg', '8');
+        addImage('37.jpg', '8');
+        addImage('38.jpg', '8');
+        addImage('39.jpg', '8');
+        addImage('40.jpg', '8');
+        addImage('41.jpg', '8');
+        addImage('42.jpg', '8');
+        addImage('43.jpg', '13');
+        addImage('44.jpg', '8');
+        addImage('47.jpg', '8');
+        addImage('48.jpg', '8');
+        addImage('49.jpg', '8');
+        addImage('50.jpg', '8');
+        addImage('52.jpg', '8');
+        addImage('53.jpg', '1');
+        addImage('54.jpg', '8');
+        addImage('55.jpg', '8');
+        addImage('56.jpg', '8');
+        addImage('57.jpg', '8');
+        addImage('58.jpg', '8');
+        addImage('59.jpg', '8');
+        addImage('60.jpg', '8');
+        addImage('61.jpg', '8');
+        addImage('62.jpg', '8');
+        addImage('63.jpg', '1');
+        addImage('64.jpg', '8');
+        addImage('65.jpg', '8');
+        addImage('66.jpg', '8');
+        addImage('67.jpg', '8');
+        addImage('68.jpg', '8');
+        addImage('69.jpg', '8');
+        addImage('70.jpg', '8');
+        addImage('71.jpg', '8');
+        addImage('72.jpg', '8');
+        addImage('73.jpg', '13');
+        addImage('74.jpg', '8');
+        addImage('75.jpg', '8');
+        addImage('76.jpg', '8');
+        addImage('77.jpg', '8');
+        addImage('78.jpg', '8');
+        addImage('79.jpg', '8');
+        addImage('80.jpg', '8');
+        addImage('81.jpg', '8');
+        addImage('82.jpg', '8');
+        addImage('83.jpg', '13');
+        addImage('84.jpg', '8');
+        addImage('85.jpg', '8');
+        addImage('86.jpg', '8');
+        addImage('87.jpg', '8');
+        addImage('88.jpg', '8');
+        addImage('89.jpg', '8');
+        addImage('90.jpg', '8');
+        addImage('91.jpg', '8');
+        addImage('92.jpg', '8');
+        addImage('93.jpg', '13');
+        addImage('94.jpg', '8');
+        addImage('95.jpg', '8');
+        addImage('96.jpg', '8');
+        addImage('98.jpg', '8');
+        addImage('99.jpg', '8');
+        addImage('100.jpg', '8');
+        addImage('101.jpg', '8');
+        addImage('102.jpg', '8');
+        addImage('103.jpg', '13');
+        addImage('104.jpg', '8');
+        addImage('105.jpg', '8');
+        addImage('106.jpg', '8');
+        addImage('107.jpg', '8');
+        addImage('108.jpg', '8');
+        addImage('109.jpg', '8');
+        addImage('110.jpg', '8');
+        addImage('111.jpg', '8');
+        addImage('112.jpg', '8');    
+        addImage('113.jpg', '8');
+        addImage('114.jpg', '8');
+        addImage('115.jpg', '8');
+        addImage('116.jpg', '8');
+        addImage('119.jpg', '8');
+        addImage('110.jpg', '8');
+        addImage('121.jpg', '8');
+        addImage('122.jpg', '8');
+        addImage('123.jpg', '13');
+        addImage('124.jpg', '8');
+        addImage('125.jpg', '8');
+        addImage('126.jpg', '8');
+        addImage('127.jpg', '8');
+        addImage('128.jpg', '8');
+        addImage('129.jpg', '8');
+        addImage('130.jpg', '8');
+        addImage('132.jpg', '8');
+        addImage('133.jpg', '13');
+        addImage('134.jpg', '8');
+        addImage('135.jpg', '8');
+        addImage('136.jpg', '8');
+        addImage('137.jpg', '8');
+        addImage('138.jpg', '8');
+        addImage('139.jpg', '8');
+        addImage('140.jpg', '8');
+        addImage('141.jpg', '8');
+        addImage('142.jpg', '8');
+        addImage('143.jpg', '13');
+        addImage('144.jpg', '8');
+        addImage('145.jpg', '8');
+        addImage('146.jpg', '8');
+        addImage('147.jpg', '8');
+        addImage('148.jpg', '8');
+        addImage('149.jpg', '8');
+        addImage('150.jpg', '8');
+        addImage('151.jpg', '8');
+        addImage('152.jpg', '8');
+        addImage('153.jpg', '1');
+        addImage('154.jpg', '8');
+        addImage('155.jpg', '8');
+        addImage('156.jpg', '8');
+        addImage('157.jpg', '8');
+        addImage('158.jpg', '8');
+        addImage('159.jpg', '8');
+        addImage('160.jpg', '8');
+        addImage('161.jpg', '8');
+        addImage('162.jpg', '8');
+        addImage('163.jpg', '1');
+        addImage('165.jpg', '8');
+        addImage('166.jpg', '8');
+        addImage('167.jpg', '8');
+        addImage('168.jpg', '8');
+        addImage('169.jpg', '8');
+        addImage('170.jpg', '8');
+        addImage('171.jpg', '8');
+        addImage('172.jpg', '8');
+        addImage('173.jpg', '13');
+        addImage('174.jpg', '8');
+        addImage('175.jpg', '8');
+        addImage('176.jpg', '8');
+        addImage('177.jpg', '8');
+        addImage('178.jpg', '8');
+        addImage('179.jpg', '8');
+        addImage('180.jpg', '8');
+        addImage('181.jpg', '8');
+        addImage('182.jpg', '8');
+        addImage('183.jpg', '13');
+        addImage('184.jpg', '8');
+        addImage('185.jpg', '8');
+        addImage('186.jpg', '8');
+        addImage('187.jpg', '8');
+        addImage('188.jpg', '8');
+        addImage('189.jpg', '8');
+        addImage('190.jpg', '8');
+        addImage('191.jpg', '8');
+        addImage('192.jpg', '8');
+        addImage('193.jpg', '13');
+        addImage('194.jpg', '8');
+        addImage('195.jpg', '8');
+        addImage('196.jpg', '8');
+        addImage('197.jpg', '8');
+        addImage('198.jpg', '8');
+        addImage('199.jpg', '8');
+        addImage('200.jpg', '8');
+        addImage('201.jpg', '8');
+        addImage('202.jpg', '8');
+        addImage('203.jpg', '13');
+        addImage('204.jpg', '8');
+        addImage('205.jpg', '8');
+        addImage('206.jpg', '8');
+        addImage('207.jpg', '8');
+        addImage('208.jpg', '8');
+        addImage('209.jpg', '8');
+        addImage('210.jpg', '8');
+        addImage('211.jpg', '8');
+        addImage('212.jpg', '8');    
+        addImage('213.jpg', '8');
+        addImage('214.jpg', '8');
+        addImage('215.jpg', '8');
+        addImage('216.jpg', '8');
+        addImage('219.jpg', '8');
+        addImage('210.jpg', '8');
+        addImage('221.jpg', '8');
+        addImage('222.jpg', '8');
+        addImage('223.jpg', '13');
+        addImage('224.jpg', '8');
+        addImage('225.jpg', '8');
+        addImage('226.jpg', '8');
+        addImage('227.jpg', '8');
+        addImage('228.jpg', '8');
+        addImage('229.jpg', '8');
+        addImage('230.jpg', '8');
+        addImage('231.jpg', '8');
+        addImage('232.jpg', '8');
+        addImage('233.jpg', '13');
+        addImage('234.jpg', '8');
+        addImage('235.jpg', '8');
+        addImage('236.jpg', '8');
+        addImage('237.jpg', '8');
+        addImage('238.jpg', '8');
+        addImage('239.jpg', '8');
+        addImage('240.jpg', '8');
+        addImage('241.jpg', '8');
+        addImage('242.jpg', '8');
+        addImage('243.jpg', '13');
+        addImage('244.jpg', '8');
+        addImage('245.jpg', '8');
+        addImage('246.jpg', '8');
+        addImage('247.jpg', '8');
+        addImage('248.jpg', '8');
+        addImage('249.jpg', '8');
+        addImage('250.jpg', '8');
+        addImage('251.jpg', '8');
+        addImage('252.jpg', '8');
+        addImage('253.jpg', '1');
+        addImage('254.jpg', '8');
+        addImage('255.jpg', '8');
+        addImage('256.jpg', '8');
+        addImage('257.jpg', '8');
+        addImage('258.jpg', '8');
+        addImage('259.jpg', '8');
+        addImage('260.jpg', '8');
+        addImage('261.jpg', '8');
+        addImage('262.jpg', '8');
+        addImage('263.jpg', '1');
+        addImage('264.jpg', '8');
+        addImage('265.jpg', '8');
+        addImage('266.jpg', '8');
+        addImage('267.jpg', '8');
+        addImage('268.jpg', '8');
+        addImage('269.jpg', '8');
+        addImage('270.jpg', '8');
+        addImage('271.jpg', '8');
+        addImage('272.jpg', '8');
+        addImage('273.jpg', '13');
+        addImage('274.jpg', '8');
+        addImage('275.jpg', '8');
+        addImage('276.jpg', '8');
+        addImage('277.jpg', '8');
+        addImage('278.jpg', '8');
+        addImage('279.jpg', '8');
+        addImage('280.jpg', '8');
+        addImage('281.jpg', '8');
+        addImage('282.jpg', '8');
+        addImage('283.jpg', '13');
+        addImage('284.jpg', '8');
+        addImage('285.jpg', '8');
+        addImage('286.jpg', '8');
+        addImage('287.jpg', '8');
+        addImage('288.jpg', '8');
+        addImage('289.jpg', '8');
+        addImage('290.jpg', '8');
+        addImage('291.jpg', '8');
+        addImage('292.jpg', '8');
+        addImage('293.jpg', '13');
+        addImage('294.jpg', '8');
+        addImage('295.jpg', '8');
+        addImage('296.jpg', '8');
+        addImage('297.jpg', '8');
+        addImage('298.jpg', '8');
+        addImage('299.jpg', '8');
+        addImage('300.jpg', '300');
+          
+</script>
+
+<script>
+        // Disable right-click context menu for the entire page
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+    </script>
+
+    <footer style="text-align:center; padding: 20px;">
+        <a href="page2.html">Go to Page 2</a> | 
+        <a href="page3.html">Go to Page 3</a>
+    </footer>
+ </footer>
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .page-description {
+            padding: 20px;
+            text-align: center;
+        }
+        .page-description h2 {
+            font-size: 2em;
+            color: #333;
+        }
+        .page-description p {
+            font-size: 1.2em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-description">
+        <h1>Services & Contact</h1>
+        <h3>Contact Us</h3>
+        <p>Email: amexpandify@gmail.com</p>
+        <p>Phone: 0781915680 | 0744029552</p>
+<p>© 2022 Charlie. All rights reserved.</p> </footer>
+    </div>
+     
+<p>© 2022 RISE. All rights reserved.</p> </footer>
+    
+</body>
+</html>
