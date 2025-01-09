@@ -1,0 +1,336 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            user-select: none; /* Prevent text selection */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+        }
+
+        /* Gallery setup for responsive grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns by default */
+            gap: 10px;
+            padding: 10px;
+            justify-items: center;
+            max-width: 100%;
+            grid-auto-flow: row; /* Ensure items flow into rows */
+        }
+
+        /* General image styling for all types */
+        .gallery-item {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden; /* Ensure nothing overflows from the container */
+        }
+
+        .gallery-item img {
+            width: 100%; /* Ensure the image takes the full width of the container */
+            height: auto; /* Maintain aspect ratio */
+            object-fit: contain; /* Prevent cutting off the image */
+            max-height: 60vh; /* Limit the height to make sure images fit */
+            pointer-events: none; /* Disable interaction with image */
+            -webkit-user-drag: none;
+            -moz-user-drag: none;
+            user-drag: none; /* Disable image dragging */
+            touch-action: none; /* Disable zooming and panning */
+        }
+
+        /* Watermark styling */
+        .watermark, .watermark-2 {
+            position: absolute;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.7); /* Increased watermark opacity */
+            z-index: 10;
+            pointer-events: none; /* Prevent interaction with watermark */
+            text-align: center;
+            width: 100%; /* Make sure watermarks take full width of the image */
+        }
+
+        .watermark {
+            font-size: 24px; /* Increased watermark font size */
+            top: 40%; /* Position watermark slightly above center */
+            left: 50%;
+            transform: translateX(-50%); /* Horizontally center watermark */
+        }
+
+        .watermark-2 {
+            font-size: 18px; /* Increased watermark font size */
+            top: 55%; /* Position second watermark slightly below the first watermark */
+            left: 50%;
+            transform: translateX(-50%); /* Horizontally center watermark */
+        }
+
+        /* Media queries for responsive adjustments */
+        @media (max-width: 600px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+            }
+
+            .gallery-item img {
+                max-height: 50vh; /* Reduce the image size on smaller screens */
+            }
+
+            .watermark {
+                font-size: 20px; /* Adjust watermark size */
+                top: 35%; /* Adjust watermark position */
+            }
+
+            .watermark-2 {
+                font-size: 16px; /* Adjust watermark size */
+                top: 50%; /* Adjust the position slightly */
+            }
+        }
+
+        @media (max-width: 400px) {
+            .gallery {
+                grid-template-columns: 1fr; /* 1 column for very small screens */
+            }
+
+            .gallery-item img {
+                max-height: 40vh; /* Further reduce image height */
+            }
+
+            .watermark {
+                font-size: 18px; /* Adjust watermark size */
+                top: 30%; /* Adjust watermark position */
+            }
+
+            .watermark-2 {
+                font-size: 14px; /* Adjust watermark size */
+                top: 45%; /* Adjust the position slightly */
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Arles' Gallery</h1>
+        <p>Scroll through our store and choose your purchases</p>
+        <p>We offer each photo at Ugx 1000</p>
+    </header>
+    
+    
+
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src="601.jpg" alt="Image 601" class="portrait">
+            <div class="watermark">Arles' Gallery</div>
+            <div class="watermark-2">Arles' Gallery</div>
+        </div>
+        <div class="gallery-item">
+            <img src="602.jpg" alt="Image 602" class="portrait">
+            <div class="watermark">Arles' Gallery</div>
+            <div class="watermark-2">Arles' Gallery</div>
+        </div>
+        <div class="gallery-item">
+            <img src="603.jpg" alt="Image 603" class="portrait">
+            <div class="watermark">Arles' Gallery</div>
+            <div class="watermark-2">Arles' Gallery</div>
+        </div>
+        <div class="gallery-item">
+            <img src="604.jpg" alt="Image 604" class="portrait">
+            <div class="watermark">Arles' Gallery</div>
+            <div class="watermark-2">Arles' Gallery</div>
+        </div>
+        <div class="gallery-item">
+            <img src="605.jpg" alt="Image 605" class="portrait">
+            <div class="watermark">Arles' Gallery</div>
+            <div class="watermark-2">Arles' Gallery</div>
+        </div>
+        <div class="gallery-item">
+            <img src="606.jpg" alt="Image 606" class="portrait">
+            <div class="watermark">Arles' Gallery</div>
+            <div class="watermark-2">Arles' Gallery</div>
+        </div>
+    </div>
+
+    <script>
+        // Example JavaScript to add images dynamically (if needed)
+        function addImage(imageSrc, imageAlt) {
+            const gallery = document.querySelector('.gallery');
+            const newItem = document.createElement('div');
+            newItem.classList.add('gallery-item');
+            const newImage = document.createElement('img');
+            newImage.src = imageSrc;
+            newImage.alt = imageAlt;
+            newItem.appendChild(newImage);
+            const watermark1 = document.createElement('div');
+            watermark1.classList.add('watermark');
+            watermark1.textContent = 'Arles\' Gallery';
+            const watermark2 = document.createElement('div');
+            watermark2.classList.add('watermark-2');
+            watermark2.textContent = 'Arles\' Gallery';
+            newItem.appendChild(watermark1);
+            newItem.appendChild(watermark2);
+            gallery.appendChild(newItem);
+        }
+
+        // Example usage: Add more images dynamically
+       
+       
+       
+       
+       
+       addImage('607.jpg', '607');
+        addImage('608.jpg', '608');
+        addImage('609.jpg', '609');
+        addImage('610.jpg', '610');
+        addImage('611.jpg', '611');
+        addImage('612.jpg', '612');    
+        addImage('613.jpg', '613');
+        addImage('614.jpg', '614');
+        addImage('615.jpg', '615');
+        addImage('616.jpg', '616');
+        addImage('619.jpg', '619');
+        addImage('620.jpg', '620');
+        addImage('621.jpg', '621');
+        addImage('622.jpg', '622');
+        addImage('623.jpg', '623');
+        addImage('624.jpg', '624');
+        addImage('625.jpg', '625');
+        addImage('626.jpg', '626');
+        addImage('627.jpg', '627');
+        addImage('628.jpg', '628');
+        addImage('629.jpg', '629');
+        addImage('630.jpg', '630');
+        addImage('631.jpg', '8');
+        addImage('632.jpg', '8');
+        addImage('633.jpg', '13');
+        addImage('634.jpg', '8');
+        addImage('635.jpg', '8');
+        addImage('636.jpg', '8');
+        addImage('637.jpg', '8');
+        addImage('638.jpg', '8');
+        addImage('639.jpg', '8');
+        addImage('640.jpg', '8');
+        addImage('641.jpg', '8');
+        addImage('642.jpg', '8');
+        addImage('643.jpg', '13');
+        addImage('644.jpg', '8');
+        addImage('645.jpg', '8');
+        addImage('646.jpg', '8');
+        addImage('647.jpg', '8');
+        addImage('648.jpg', '8');
+        addImage('649.jpg', '8');
+        addImage('650.jpg', '8');
+        addImage('651.jpg', '8');
+        addImage('652.jpg', '8');
+        addImage('653.jpg', '1');
+        addImage('654.jpg', '8');
+        addImage('655.jpg', '8');
+        addImage('656.jpg', '8');
+        addImage('657.jpg', '8');
+        addImage('658.jpg', '8');
+        addImage('659.jpg', '8');
+        addImage('660.jpg', '8');
+        addImage('661.jpg', '8');
+        addImage('662.jpg', '8');
+        addImage('663.jpg', '1');
+        addImage('664.jpg', '8');
+        addImage('665.jpg', '8');
+        addImage('666.jpg', '8');
+        addImage('667.jpg', '8');
+        addImage('668.jpg', '8');
+        addImage('669.jpg', '8');
+        addImage('670.jpg', '8');
+        addImage('671.jpg', '8');
+        addImage('672.jpg', '8');
+        addImage('673.jpg', '13');
+        addImage('674.jpg', '8');
+        addImage('675.jpg', '8');
+        addImage('676.jpg', '8');
+        addImage('677.jpg', '8');
+        addImage('678.jpg', '8');
+        addImage('679.jpg', '8');
+        addImage('680.jpg', '8');
+        addImage('681.jpg', '8');
+        addImage('682.jpg', '8');
+        addImage('683.jpg', '13');
+        addImage('684.jpg', '8');
+        addImage('685.jpg', '8');
+        addImage('686.jpg', '8');
+        addImage('687.jpg', '8');
+        addImage('688.jpg', '8');
+        addImage('689.jpg', '8');
+        addImage('690.jpg', '8');
+        addImage('691.jpg', '8');
+        addImage('692.jpg', '8');
+        addImage('693.jpg', '13');
+        addImage('694.jpg', '8');
+        addImage('695.jpg', '8');
+        addImage('696.jpg', '8');
+        addImage('697.jpg', '8');
+        addImage('698.jpg', '8');
+        addImage('699.jpg', '8');
+        addImage('700.jpg', '8');
+          
+</script>
+
+<script>
+        // Disable right-click context menu for the entire page
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+    </script>
+
+    <footer style="text-align:center; padding: 20px;">
+         <a href="index.html">Go to Page 1</a> |
+        <a href="page2.html">Go to Page 2</a>|   
+        <a href="page3.html">Go to Page 3</a>| 
+        <a href="page4.html">Go to Page 4</a>| 
+        <a href="page5.html">Go to Page 5</a>| 
+        <a href="page6.html">Go to Page 6</a>| 
+        <a href="page8.html">Go to Page 8</a>
+    </footer>
+ </footer>
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .page-description {
+            padding: 20px;
+            text-align: center;
+        }
+        .page-description h2 {
+            font-size: 2em;
+            color: #333;
+        }
+        .page-description p {
+            font-size: 1.2em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class= "page-description">
+        <h1>Services & Contact</h1>
+        <h3>Contact Us</h3>
+        <p>Email: amexpandify@gmail.com</p>
+        <p>Phone: 0781915680 | 0744029552</p>
+<p>© 2025 Charlie. All rights reserved.</p> </footer>
+    </div>
+     
+    
+</body>
+</html>
