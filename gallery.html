@@ -52,7 +52,7 @@
 
         .container {
             width: 100%;
-            max-width: 935px; /* Instagram's max width */
+            max-width: 935px;
             margin: 0 auto;
             padding: 0 20px;
         }
@@ -185,9 +185,11 @@
         .photo-item {
             position: relative;
             width: 100%;
-            padding-bottom: 100%; /* Square aspect ratio */
+            padding-bottom: 100%;
             overflow: hidden;
             background: #f5f5f5;
+            background-size: cover;
+            background-position: center;
         }
 
         .photo-item img {
@@ -198,6 +200,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.3s ease;
+            pointer-events: none; /* Prevent image dragging */
         }
 
         .photo-item:hover img {
@@ -216,6 +219,7 @@
             padding: 5px;
             background: linear-gradient(transparent, rgba(0,0,0,0.5));
             z-index: 2;
+            pointer-events: none;
         }
 
         .load-more {
@@ -494,8 +498,8 @@
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
         <span class="close-btn">&times;</span>
-        <img class="lightbox-img" id="lightboxImg">
-        <div class="lightbox-watermark">STARLIGHT PROM 2024</div>
+        <img class="lightbox-img" id="lightboxImg" crossorigin="anonymous">
+        <div class="lightbox-watermark">STARLIGHT PROM 2024 © Arles's Gallery</div>
     </div>
 
     <!-- Footer -->
@@ -531,7 +535,7 @@
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2024 Starlight Prom. All Rights Reserved.</p>
+            <p>&copy; 2024 Starlight Prom. All Rights Reserved. Photos © Arles's Gallery</p>
         </div>
     </footer>
 
@@ -566,10 +570,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Configuration
             const config = {
-                totalPhotos: 500, // Total number of photos available
-                batchSize: 30,    // Number of photos to load at once
-                baseImagePath: 'photos/prom_', // Base path for images
-                imageExtension: '.webp' // Image extension
+                totalPhotos: 100, // Total number of photos available (1.jpg to 100.jpg)
+                batchSize: 15,    // Number of photos to load at once
+                baseImagePath: 'images/', // Base path for images
+                imagePrefix: '',   // Prefix before number
+                imageSuffix: '.jpg' // Image extension
             };
             
             // DOM Elements
@@ -602,19 +607,29 @@
                 loadMoreBtn.disabled = true;
                 spinner.classList.remove('hidden');
                 
-                // Simulate loading (in a real app, this would be an AJAX call)
-                setTimeout(() => {
-                    const fragment = document.createDocumentFragment();
+                // Load images in batches for better performance
+                const fragment = document.createDocumentFragment();
+                const loadPromises = [];
+                
+                const end = Math.min(loadedPhotos + config.batchSize, config.totalPhotos);
+                
+                for (let i = loadedPhotos + 1; i <= end; i++) {
+                    const photoItem = createPhotoItem(i);
+                    fragment.appendChild(photoItem);
                     
-                    for (let i = 0; i < config.batchSize; i++) {
-                        if (loadedPhotos >= config.totalPhotos) break;
-                        
-                        const photoId = loadedPhotos + 1;
-                        const photoItem = createPhotoItem(photoId);
-                        fragment.appendChild(photoItem);
-                        loadedPhotos++;
-                    }
+                    // Preload the image
+                    const img = new Image();
+                    img.src = getImagePath(i);
+                    loadPromises.push(new Promise(resolve => {
+                        img.onload = resolve;
+                        img.onerror = resolve; // Continue even if some images fail
+                    }));
                     
+                    loadedPhotos++;
+                }
+                
+                // Wait for images to load before adding to DOM
+                Promise.all(loadPromises).then(() => {
                     photoGrid.appendChild(fragment);
                     
                     // Update button state
@@ -625,23 +640,28 @@
                     isLoading = false;
                     loadMoreBtn.disabled = false;
                     spinner.classList.add('hidden');
-                }, 500); // Simulated delay
+                });
+            }
+            
+            function getImagePath(id) {
+                return `${config.baseImagePath}${config.imagePrefix}${id}${config.imageSuffix}`;
             }
             
             function createPhotoItem(id) {
                 const photoItem = document.createElement('div');
                 photoItem.className = 'photo-item';
                 
+                // Create image element
                 const img = document.createElement('img');
-                // Using placeholder images from Unsplash with different IDs
-                img.src = `https://source.unsplash.com/random/800x1000/?prom,party&sig=${id}`;
+                img.src = getImagePath(id);
                 img.loading = 'lazy';
                 img.alt = `Prom photo ${id}`;
                 img.dataset.id = id;
                 
+                // Watermark
                 const watermark = document.createElement('div');
                 watermark.className = 'photo-watermark';
-                watermark.textContent = 'STARLIGHT PROM 2024';
+                watermark.textContent = '© Arles\'s Gallery';
                 
                 photoItem.appendChild(img);
                 photoItem.appendChild(watermark);
@@ -655,20 +675,40 @@
                 return photoItem;
             }
             
-            // Download Protection
+            // Enhanced Download Protection
             document.addEventListener('contextmenu', function(e) {
                 if (e.target.tagName === 'IMG') {
                     e.preventDefault();
-                    alert('Photo downloads are disabled to protect our memories');
+                    showProtectionMessage();
                 }
             });
             
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'PrintScreen') {
+                // Disable PrintScreen, Save shortcuts, etc.
+                if (e.key === 'PrintScreen' || 
+                    (e.ctrlKey && (e.key === 's' || e.key === 'p' || e.key === 'c'))) {
                     e.preventDefault();
-                    return false;
+                    showProtectionMessage();
                 }
             });
+            
+            // Disable drag and drop of images
+            document.addEventListener('dragstart', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                }
+            });
+            
+            // Protection message
+            function showProtectionMessage() {
+                alert('Photo downloads are disabled to protect our memories. Please contact us for official copies.');
+            }
+            
+            // Disable right-click on the entire page (optional)
+            // document.addEventListener('contextmenu', function(e) {
+            //     e.preventDefault();
+            //     showProtectionMessage();
+            // });
         });
     </script>
 </body>
