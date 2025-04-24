@@ -56,8 +56,8 @@
         
         .gallery {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            grid-template-columns: repeat(3, 1fr); /* Always 3 columns */
+            gap: 8px; /* Smaller gap for mobile */
             width: 100%;
         }
         
@@ -90,21 +90,10 @@
             color: #777;
         }
 
-        /* Desktop - 3 columns */
-        @media (min-width: 768px) {
+        /* Adjust for very small screens (optional) */
+        @media (max-width: 400px) {
             .gallery {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Small mobile - 1 column */
-        @media (max-width: 480px) {
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 2em;
+                gap: 5px; /* Even smaller gap */
             }
         }
     </style>
