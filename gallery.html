@@ -1,289 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Prom Party 2024</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    /* ===== GLOBAL STYLES ===== */
-    :root {
-      --purple: #5E35B1;
-      --gold: #FFD700;
-      --pink: #FF4081;
-      --black: #000;
-      --white: #FFF;
-    }
-
-    body {
-      font-family: 'Montserrat', sans-serif;
-      margin: 0;
-      color: var(--black);
-      line-height: 1.6;
-    }
-
-    h1, h2, h3 {
-      font-family: 'Playfair Display', serif;
-    }
-
-    section {
-      padding: 60px 20px;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .btn {
-      background: var(--gold);
-      color: var(--black);
-      padding: 12px 24px;
-      border: none;
-      border-radius: 50px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.3s;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .btn:hover {
-      transform: translateY(-3px);
-    }
-
-    /* ===== HERO SECTION ===== */
-    .hero {
-      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/1.jpg');
-      background-size: cover;
-      background-position: center;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: var(--white);
-    }
-
-    .hero-content h1 {
-      font-size: 4rem;
-      margin: 0;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    }
-
-    .hero-content p {
-      font-size: 1.5rem;
-      margin: 20px 0;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    }
-
-    /* ===== GALLERY SECTION ===== */
-    .gallery-section {
-      text-align: center;
-      background-color: #f9f9f9;
-    }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 30px;
-    }
-
-    .gallery img {
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-      border-radius: 8px;
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-    }
-
-    .gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    /* ===== EVENT DETAILS ===== */
-    .details-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
-    }
-
-    .detail-card {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      transition: transform 0.3s;
-    }
-
-    .detail-card:hover {
-      transform: translateY(-10px);
-    }
-
-    .detail-card h3 {
-      color: var(--purple);
-      margin-top: 0;
-    }
-
-    /* ===== RSVP SECTION ===== */
-    .rsvp {
-      background-color: var(--purple);
-      color: white;
-      text-align: center;
-    }
-
-    .rsvp-form {
-      max-width: 500px;
-      margin: 30px auto 0;
-    }
-
-    .rsvp-form input {
-      width: 100%;
-      padding: 15px;
-      margin-bottom: 15px;
-      border: none;
-      border-radius: 50px;
-      font-size: 16px;
-    }
-
-    /* ===== LIGHTBOX ===== */
-    .lightbox {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      cursor: pointer;
-    }
-
-    .lightbox img {
-      max-height: 80vh;
-      max-width: 90vw;
-      border-radius: 5px;
-    }
-
-    /* ===== RESPONSIVE DESIGN ===== */
-    @media (max-width: 768px) {
-      .hero-content h1 {
-        font-size: 2.5rem;
-      }
-      
-      .hero-content p {
-        font-size: 1.2rem;
-      }
-    }
-  </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+        }
+        
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+            padding: 2px;
+        }
+        
+        .gallery-item {
+            width: calc(50% - 1px);
+            position: relative;
+        }
+        
+        .gallery-item::before {
+            content: "";
+            display: block;
+            padding-top: 150%; /* Default ratio (will be overridden) */
+        }
+        
+        .gallery-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #e0e0e0;
+            transition: opacity 0.3s;
+        }
+        
+        /* Portrait images (taller) - odd numbered */
+        .gallery-item:nth-child(4n+1),
+        .gallery-item:nth-child(4n+2) {
+            --img-ratio: 4/3;
+        }
+        
+        /* Landscape images (wider) - even numbered */
+        .gallery-item:nth-child(4n+3),
+        .gallery-item:nth-child(4n+4) {
+            --img-ratio: 3/4;
+        }
+        
+        .gallery-item::before {
+            padding-top: calc(100% / var(--img-ratio));
+        }
+        
+        /* Loading animation */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .gallery-item img[data-src] {
+            opacity: 0;
+            background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+    </style>
 </head>
 <body>
-  <!-- ===== HERO SECTION ===== -->
-  <header class="hero">
-    <div class="hero-content">
-      <h1>PROM NIGHT 2024</h1>
-      <p>May 25th • Grand Ballroom • 7 PM</p>
-      <a href="#rsvp" class="btn">RSVP Now</a>
-    </div>
-  </header>
-
-  <!-- ===== GALLERY SECTION ===== -->
-  <section class="gallery-section">
-    <div class="container">
-      <h2>Our Memories</h2>
-      <div class="gallery">
-        <!-- Images will be added dynamically by JavaScript -->
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== EVENT DETAILS ===== -->
-  <section class="details">
-    <div class="container">
-      <h2>Event Details</h2>
-      <div class="details-grid">
-        <div class="detail-card">
-          <h3>📍 Location</h3>
-          <p>Grand Ballroom, 123 Elite Ave, New York</p>
+    <div class="gallery">
+        <!-- Images 1-20 with lazy loading -->
+        <!-- First 4 images (portrait) -->
+        <div class="gallery-item">
+            <img data-src="1.jpg" alt="Image 1" loading="lazy" onload="this.style.opacity=1">
         </div>
-        <div class="detail-card">
-          <h3>🕒 Time</h3>
-          <p>7 PM - Midnight</p>
+        <div class="gallery-item">
+            <img data-src="2.jpg" alt="Image 2" loading="lazy" onload="this.style.opacity=1">
         </div>
-        <div class="detail-card">
-          <h3>👗 Dress Code</h3>
-          <p>Black Tie / Glam</p>
+        <div class="gallery-item">
+            <img data-src="3.jpg" alt="Image 3" loading="lazy" onload="this.style.opacity=1">
         </div>
-      </div>
+        <div class="gallery-item">
+            <img data-src="4.jpg" alt="Image 4" loading="lazy" onload="this.style.opacity=1">
+        </div>
+        
+        <!-- Next 4 images (landscape) -->
+        <div class="gallery-item">
+            <img data-src="5.jpg" alt="Image 5" loading="lazy" onload="this.style.opacity=1">
+        </div>
+        <div class="gallery-item">
+            <img data-src="6.jpg" alt="Image 6" loading="lazy" onload="this.style.opacity=1">
+        </div>
+        <div class="gallery-item">
+            <img data-src="7.jpg" alt="Image 7" loading="lazy" onload="this.style.opacity=1">
+        </div>
+        <div class="gallery-item">
+            <img data-src="8.jpg" alt="Image 8" loading="lazy" onload="this.style.opacity=1">
+        </div>
+        
+        <!-- Next 4 images (portrait) -->
+        <div class="gallery-item">
+            <img data-src="9.jpg" alt="Image 9" loading="lazy" onload="this.style.opacity=1">
+        </div>
+        <div class="gallery-item">
+            <img data-src="10.jpg" alt="Image 10" loading="lazy" onload="this.style.opacity=1">
+        </div>
+        <div class="gallery-item">
+            <img data-src="11.jpg" alt="Image 11" loading="lazy" onload="this.style.opacity=1">
+        </div>
+        <div class="gallery-item">
+            <img data-src="12.jpg" alt="Image 12" loading="lazy" onload="this.style.opacity=1">
+        </div>
+        
+        <!-- Next 4 images (landscape) -->
+        <div class="gallery-item">
+            <img data-src="13.jpg" alt="Image 13" loading="lazy" onload="this.style.opacity=1">
+        </div>
+        <div class="gallery-item">
+            <img data-src="14.jpg" alt="Image 14" loading="lazy" onload="this.style.opacity=1">
+        </div>
+        <div class="gallery-item">
+            <img data-src="15.jpg" alt="Image 15" loading="lazy" onload="this.style.opacity=1">
+        </div>
+        <div class="gallery-item">
+            <img data-src="16.jpg" alt="Image 16" loading="lazy" onload="this.style.opacity=1">
+        </div>
+        
+        <!-- Last 4 images (portrait) -->
+        <div class="gallery-item">
+            <img data-src="17.jpg" alt="Image 17" loading="lazy" onload="this.style.opacity=1">
+        </div>
+        <div class="gallery-item">
+            <img data-src="18.jpg" alt="Image 18" loading="lazy" onload="this.style.opacity=1">
+        </div>
+        <div class="gallery-item">
+            <img data-src="19.jpg" alt="Image 19" loading="lazy" onload="this.style.opacity=1">
+        </div>
+        <div class="gallery-item">
+            <img data-src="20.jpg" alt="Image 20" loading="lazy" onload="this.style.opacity=1">
+        </div>
     </div>
-  </section>
 
-  <!-- ===== RSVP SECTION ===== -->
-  <section id="rsvp" class="rsvp">
-    <div class="container">
-      <h2>RSVP</h2>
-      <form class="rsvp-form">
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Email" required>
-        <button type="submit" class="btn">Confirm Attendance</button>
-      </form>
-    </div>
-  </section>
-
-  <script>
-    // ===== DYNAMIC GALLERY LOADING =====
-    document.addEventListener('DOMContentLoaded', function() {
-      const gallery = document.querySelector('.gallery');
-      const totalImages = 20; // Change this if you have more images
-      
-      // Generate image elements
-      for (let i = 1; i <= totalImages; i++) {
-        const img = document.createElement('img');
-        img.src = `images/${i}.jpg`;
-        img.alt = `Prom photo ${i}`;
-        img.loading = 'lazy';
-        gallery.appendChild(img);
-      }
-
-      // ===== LIGHTBOX FUNCTIONALITY =====
-      gallery.addEventListener('click', function(e) {
-        if (e.target.tagName === 'IMG') {
-          const lightbox = document.createElement('div');
-          lightbox.className = 'lightbox';
-          
-          const lightboxImg = document.createElement('img');
-          lightboxImg.src = e.target.src;
-          
-          lightbox.appendChild(lightboxImg);
-          document.body.appendChild(lightbox);
-          
-          lightbox.addEventListener('click', () => lightbox.remove());
-        }
-      });
-
-      // ===== SMOOTH SCROLLING =====
-      document.querySelector('a[href="#rsvp"]').addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
+    <script>
+        // Lazy load images with Intersection Observer
+        document.addEventListener('DOMContentLoaded', function() {
+            const lazyImages = [].slice.call(document.querySelectorAll('img[data-src]'));
+            
+            if ('IntersectionObserver' in window) {
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.removeAttribute('data-src');
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            } else {
+                // Fallback for browsers without IntersectionObserver
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImage.src = lazyImage.dataset.src;
+                });
+            }
         });
-      });
-
-      // ===== FORM SUBMISSION =====
-      const rsvpForm = document.querySelector('.rsvp-form');
-      rsvpForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Thanks for your RSVP! We\'ll see you at the prom!');
-        this.reset();
-      });
-    });
-  </script>
+    </script>
 </body>
 </html>
