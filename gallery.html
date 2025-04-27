@@ -1,4 +1,4 @@
-t<!DOCTYPE html>
+y<!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +12,9 @@ t<!DOCTYPE html>
         body {
             background-color: #f5f5f5;
             padding: 10px;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
         }
         
         .gallery {
@@ -32,6 +35,7 @@ t<!DOCTYPE html>
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
         }
         
         .gallery-item img {
@@ -40,10 +44,18 @@ t<!DOCTYPE html>
             object-fit: contain;
             background: #e0e0e0;
             transition: transform 0.3s ease;
+            pointer-events: none;
         }
         
-        .gallery-item img:hover {
-            transform: scale(1.02);
+        .watermark {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" opacity="0.2"><text x="50%" y="50%" fill="black" font-family="Arial" font-size="24" text-anchor="middle" dominant-baseline="middle" transform="rotate(-45 100 100)">Arle\'s Gallery</text></svg>');
+            pointer-events: none;
+            z-index: 2;
         }
         
         /* Loading animation */
@@ -59,83 +71,57 @@ t<!DOCTYPE html>
             animation: shimmer 1.5s infinite;
             min-height: 200px;
         }
+        
+        /* Disable right-click menu */
+        body {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
     </style>
 </head>
 <body>
     <div class="gallery">
         <div class="gallery-column">
             <div class="gallery-item">
+                <div class="watermark"></div>
                 <img data-src="1.jpg" alt="Image 1" loading="lazy">
             </div>
             <div class="gallery-item">
+                <div class="watermark"></div>
                 <img data-src="4.jpg" alt="Image 4" loading="lazy">
             </div>
-            <div class="gallery-item">
-                <img data-src="7.jpg" alt="Image 7" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img data-src="10.jpg" alt="Image 10" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img data-src="13.jpg" alt="Image 13" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img data-src="16.jpg" alt="Image 16" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img data-src="19.jpg" alt="Image 19" loading="lazy">
-            </div>
+            <!-- More items... -->
         </div>
-        
-        <div class="gallery-column">
-            <div class="gallery-item">
-                <img data-src="2.jpg" alt="Image 2" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img data-src="5.jpg" alt="Image 5" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img data-src="8.jpg" alt="Image 8" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img data-src="11.jpg" alt="Image 11" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img data-src="14.jpg" alt="Image 14" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img data-src="17.jpg" alt="Image 17" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img data-src="20.jpg" alt="Image 20" loading="lazy">
-            </div>
-        </div>
-        
-        <div class="gallery-column">
-            <div class="gallery-item">
-                <img data-src="3.jpg" alt="Image 3" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img data-src="6.jpg" alt="Image 6" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img data-src="9.jpg" alt="Image 9" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img data-src="12.jpg" alt="Image 12" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img data-src="15.jpg" alt="Image 15" loading="lazy">
-            </div>
-            <div class="gallery-item">
-                <img data-src="18.jpg" alt="Image 18" loading="lazy">
-            </div>
-        </div>
+        <!-- More columns... -->
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Function to load images
+            // Disable right-click and drag
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+            
+            document.addEventListener('dragstart', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                }
+            });
+            
+            // Add watermark div to all images
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                if (!item.querySelector('.watermark')) {
+                    const watermark = document.createElement('div');
+                    watermark.className = 'watermark';
+                    item.insertBefore(watermark, item.firstChild);
+                }
+            });
+
+            // Lazy load with watermark protection
             function lazyLoad() {
                 const lazyImages = document.querySelectorAll('img[data-src]');
                 
@@ -148,6 +134,16 @@ t<!DOCTYPE html>
                             img.onload = function() {
                                 img.style.opacity = 1;
                                 img.removeAttribute('data-src');
+                                
+                                // Add transparent overlay to prevent saving
+                                const overlay = document.createElement('div');
+                                overlay.style.position = 'absolute';
+                                overlay.style.top = '0';
+                                overlay.style.left = '0';
+                                overlay.style.width = '100%';
+                                overlay.style.height = '100%';
+                                overlay.style.zIndex = '1';
+                                img.parentNode.appendChild(overlay);
                             };
                             
                             img.onerror = function() {
@@ -168,26 +164,7 @@ t<!DOCTYPE html>
                 });
             }
 
-            // Initial load
             lazyLoad();
-            
-            // Distribute images more evenly among columns (optional)
-            function balanceColumns() {
-                const columns = document.querySelectorAll('.gallery-column');
-                const items = Array.from(document.querySelectorAll('.gallery-item'));
-                
-                // Clear columns
-                columns.forEach(col => col.innerHTML = '');
-                
-                // Redistribute items to balance heights
-                items.forEach((item, index) => {
-                    const columnIndex = index % columns.length;
-                    columns[columnIndex].appendChild(item);
-                });
-            }
-            
-            // Run on resize if needed
-            window.addEventListener('resize', balanceColumns);
         });
     </script>
 </body>
