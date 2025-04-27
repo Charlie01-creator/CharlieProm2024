@@ -21,10 +21,10 @@
         }
         
         .gallery-item {
-            width: calc(50% - 1px);
             position: relative;
             background: white;
             overflow: hidden;
+            width: calc(50% - 1px); /* Default width */
         }
         
         .gallery-item::before {
@@ -60,7 +60,7 @@
 </head>
 <body>
     <div class="gallery">
-        <!-- Images without manual portrait/landscape classes -->
+        <!-- All images without manual classes -->
         <div class="gallery-item">
             <img data-src="1.jpg" alt="Image 1" loading="lazy">
         </div>
@@ -134,18 +134,27 @@
                     // If portrait (taller than wide)
                     if (ratio < 0.8) {
                         item.style.width = 'calc(50% - 1px)';
-                        img.style.objectPosition = 'center top'; // Ensure heads are visible
+                        item.style.flexGrow = '0';
+                        item.querySelector('img').style.objectPosition = 'center top';
+                        item.style.setProperty('--padding-top', '150%'); // Taller portrait
                     } 
                     // If landscape (wider than tall)
                     else if (ratio > 1.2) {
                         item.style.width = 'calc(50% - 1px)';
-                        img.style.objectPosition = 'center center';
+                        item.style.flexGrow = '0';
+                        item.querySelector('img').style.objectPosition = 'center center';
+                        item.style.setProperty('--padding-top', '75%'); // Shorter landscape
                     }
                     // If square
                     else {
                         item.style.width = 'calc(50% - 1px)';
-                        img.style.objectPosition = 'center center';
+                        item.style.flexGrow = '0';
+                        item.querySelector('img').style.objectPosition = 'center center';
+                        item.style.setProperty('--padding-top', '100%');
                     }
+                    
+                    // Apply the padding
+                    item.style.setProperty('--padding-top', ratio > 1.2 ? '85%' : '150%');
                 }
             }
 
@@ -162,7 +171,7 @@
                             img.onload = function() {
                                 img.style.opacity = 1;
                                 img.removeAttribute('data-src');
-                                adjustImageLayout(img); // Adjust layout after load
+                                adjustImageLayout(img);
                             };
                             
                             img.onerror = function() {
