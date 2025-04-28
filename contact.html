@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arle's Gallery - Optimized</title>
     <style>
         * {
             margin: 0;
@@ -65,6 +63,7 @@
             transform: scale(1.02);
         }
         
+        /* Loading animation */
         @keyframes shimmer {
             0% { background-position: -200% 0; }
             100% { background-position: 200% 0; }
@@ -78,6 +77,7 @@
             min-height: 200px;
         }
         
+        /* Protection overlay */
         .protection-overlay {
             position: absolute;
             top: 0;
@@ -87,6 +87,7 @@
             z-index: 3;
         }
 
+        /* Responsive columns */
         @media (max-width: 768px) {
             .gallery {
                 flex-direction: column;
@@ -100,13 +101,115 @@
             <div class="gallery-item">
                 <div class="watermark"></div>
                 <div class="protection-overlay"></div>
-                <img data-src="images/1.jpg" alt="Image 1" loading="lazy" decoding="async">
+                <img 
+                    data-src="1-1200.webp" 
+                    srcset="1-400.webp 400w, 1-800.webp 800w, 1-1200.webp 1200w"
+                    sizes="(max-width: 480px) 400px, (max-width: 1024px) 800px, 1200px"
+                    alt="Image 1" 
+                    loading="lazy"
+                    decoding="async">
             </div>
-            <!-- Repeat for all your images -->
+            <!-- Repeat for other images in column 1 with matching srcset -->
         </div>
-        <!-- Additional columns -->
+        
+        <div class="gallery-column">
+            <!-- Column 2 images with srcset -->
+        </div>
+        
+        <div class="gallery-column">
+            <!-- Column 3 images with srcset -->
+        </div>
     </div>
 
-    <script src="js/gallery.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Prevent right-click saving
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            
+            // Prevent dragging images
+            document.addEventListener('dragstart', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+            
+            // Prevent touch hold on mobile
+            document.addEventListener('touchstart', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            // Enhanced lazy loading with WebP fallback
+            function lazyLoad() {
+                const lazyImages = document.querySelectorAll('img[data-src]');
+                
+                const observer = new IntersectionObserver(function(entries) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            // Load the best image for the current viewport
+                            if (img.dataset.src) {
+                                img.src = img.dataset.src;
+                            }
+                            
+                            img.onload = function() {
+                                img.style.opacity = 1;
+                                img.removeAttribute('data-src');
+                            };
+                            
+                            img.onerror = function() {
+                                // Fallback to SVG placeholder if WebP isn't supported
+                                img.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Crect fill="%23ddd" width="100" height="100"/%3E%3Ctext fill="%23666" font-family="sans-serif" font-size="10" dy=".35em" text-anchor="middle" x="50" y="50"%3ENo Image%3C/text%3E%3C/svg%3E';
+                                img.style.opacity = 1;
+                            };
+                            
+                            observer.unobserve(img);
+                        }
+                    });
+                }, {
+                    rootMargin: '200px 0px', // Load images earlier
+                    threshold: 0.01
+                });
+
+                lazyImages.forEach(function(img) {
+                    observer.observe(img);
+                });
+            }
+
+            lazyLoad();
+            
+            // Balance columns on resize (mobile-friendly)
+            function balanceColumns() {
+                const screenWidth = window.innerWidth;
+                const columns = document.querySelectorAll('.gallery-column');
+                
+                // Only rebalance for desktop views
+                if (screenWidth > 768) {
+                    const items = Array.from(document.querySelectorAll('.gallery-item'));
+                    columns.forEach(col => col.innerHTML = '');
+                    
+                    items.forEach((item, index) => {
+                        const columnIndex = index % columns.length;
+                        columns[columnIndex].appendChild(item);
+                    });
+                }
+            }
+
+            // Debounce resize events
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(balanceColumns, 250);
+            });
+
+            // Initial balance
+            balanceColumns();
+        });
+    </script>
 </body>
 </html>
