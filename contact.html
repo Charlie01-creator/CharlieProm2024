@@ -1,1025 +1,112 @@
-y<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starlight Prom 2024 | Memories</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Arle's Gallery - Optimized</title>
     <style>
-        /* ===== Global Styles ===== */
-        :root {
-            --primary: #6a4c93;
-            --secondary: #f8c537;
-            --dark: #1a1a2e;
-            --light: #f8f9fa;
-            --accent: #ff6b6b;
-            --text: #333;
-            --text-light: #6c757d;
-            --transition: all 0.3s ease;
-            --shadow: 0 10px 20px rgba(0,0,0,0.1);
-            --radius: 12px;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.7;
-            color: var(--text);
-            background-color: var(--light);
-            overflow-x: hidden;
+            background-color: #f5f5f5;
+            padding: 10px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
-
-        h1, h2, h3, h4 {
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-            font-size: 0.9rem;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 15px rgba(106, 76, 147, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: #5a3d7d;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(106, 76, 147, 0.4);
-        }
-
-        .btn-secondary {
-            background: var(--secondary);
-            color: var(--dark);
-            box-shadow: 0 4px 15px rgba(248, 197, 55, 0.3);
-        }
-
-        .btn-secondary:hover {
-            background: #e6b732;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(248, 197, 55, 0.4);
-        }
-
-        .section {
-            padding: 100px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .section-title p {
-            color: var(--text-light);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* ===== Header & Navigation ===== */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            transition: var(--transition);
-            padding: 20px 0;
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .header-container {
+        
+        .gallery {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-        }
-
-        .logo i {
-            margin-right: 10px;
-            color: var(--secondary);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-left: 30px;
-        }
-
-        .nav-links a {
-            color: var(--dark);
-            font-weight: 600;
-            position: relative;
-            padding: 5px 0;
-            transition: var(--transition);
-        }
-
-        .nav-links a:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover:after,
-        .nav-links a.active:after {
-            width: 100%;
-        }
-
-        .nav-links a.active {
-            color: var(--primary);
-        }
-
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        .hamburger div {
-            width: 30px;
-            height: 3px;
-            background: var(--primary);
-            margin: 6px 0;
-            transition: var(--transition);
-        }
-
-        /* ===== Hero Section ===== */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, rgba(26,26,46,0.9) 0%, rgba(106,76,147,0.8) 100%);
-            color: white;
-        }
-
-        .hero:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80') no-repeat center center/cover;
-            z-index: -1;
-            opacity: 0.3;
-        }
-
-        .hero-content {
-            max-width: 800px;
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            line-height: 1.1;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
-
-        .hero-btns {
-            display: flex;
-            gap: 20px;
-        }
-
-        .hero-btns .btn {
-            padding: 15px 35px;
-        }
-
-        /* ===== Highlights Section ===== */
-        .highlights {
-            background: white;
-        }
-
-        .highlight-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .highlight-card {
-            background: white;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .highlight-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .card-img {
-            height: 250px;
-            overflow: hidden;
-        }
-
-        .card-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .highlight-card:hover .card-img img {
-            transform: scale(1.1);
-        }
-
-        .card-content {
-            padding: 25px;
-        }
-
-        .card-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .card-content p {
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
-
-        .card-stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        .card-stats span {
-            display: flex;
-            align-items: center;
-        }
-
-        .card-stats i {
-            margin-right: 5px;
-            color: var(--secondary);
-        }
-
-        /* ===== Gallery Preview Section ===== */
-        .gallery-preview {
-            background: #f5f5f8;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 200px;
-            gap: 15px;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .gallery-item:nth-child(1) {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        .gallery-item:nth-child(6) {
-            grid-column: span 2;
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
-            display: flex;
-            align-items: flex-end;
-            padding: 20px;
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-
-        .gallery-overlay span {
-            color: white;
-            font-weight: 600;
-        }
-
-        /* ===== Testimonials Section ===== */
-        .testimonials {
-            background: white;
-        }
-
-        .testimonial-slider {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .testimonial {
-            background: white;
-            padding: 40px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            text-align: center;
-            display: none;
-        }
-
-        .testimonial.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .testimonial-text {
-            font-size: 1.2rem;
-            font-style: italic;
-            color: var(--text);
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .testimonial-text:before,
-        .testimonial-text:after {
-            content: '"';
-            font-size: 3rem;
-            color: var(--secondary);
-            opacity: 0.3;
-            position: absolute;
-        }
-
-        .testimonial-text:before {
-            top: -20px;
-            left: -15px;
-        }
-
-        .testimonial-text:after {
-            bottom: -40px;
-            right: -15px;
-        }
-
-        .testimonial-author {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .author-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-bottom: 15px;
-            border: 3px solid var(--secondary);
-        }
-
-        .author-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .author-info h4 {
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-
-        .author-info p {
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        .slider-controls {
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
             gap: 10px;
         }
-
-        .slider-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ddd;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .slider-dot.active {
-            background: var(--primary);
-            transform: scale(1.2);
-        }
-
-        /* ===== Footer ===== */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 60px 0 20px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
-        }
-
-        .footer-column p {
-            margin-bottom: 15px;
-            opacity: 0.8;
-        }
-
-        .social-links {
+        
+        .gallery-column {
+            flex: 1;
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            flex-direction: column;
+            gap: 10px;
         }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            color: white;
-            transition: var(--transition);
+        
+        .gallery-item {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
         }
-
-        .social-links a:hover {
-            background: var(--secondary);
-            color: var(--dark);
-            transform: translateY(-3px);
+        
+        .gallery-item img {
+            width: 100%;
+            display: block;
+            object-fit: contain;
+            background: #e0e0e0;
+            transition: transform 0.3s ease;
+            pointer-events: none;
         }
-
-        .footer-links li {
-            margin-bottom: 10px;
-            list-style: none;
+        
+        .watermark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" opacity="0.2"><text x="50%" y="50%" fill="black" font-family="Arial" font-size="36" text-anchor="middle" dominant-baseline="middle" transform="rotate(-30 200 200)">Arle\'s Gallery</text></svg>');
+            pointer-events: none;
+            z-index: 2;
         }
-
-        .footer-links a {
-            opacity: 0.8;
-            transition: var(--transition);
+        
+        .gallery-item img:hover {
+            transform: scale(1.02);
         }
-
-        .footer-links a:hover {
-            opacity: 1;
-            color: var(--secondary);
-            padding-left: 5px;
+        
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
         }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.9rem;
-            opacity: 0.7;
+        
+        .gallery-item img[data-src] {
+            opacity: 0;
+            background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            min-height: 200px;
         }
-
-        /* ===== Responsive Styles ===== */
-        @media (max-width: 992px) {
-            .section {
-                padding: 80px 0;
-            }
-
-            .hero-content h1 {
-                font-size: 3rem;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+        
+        .protection-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 70%;
-                height: 100vh;
-                background: white;
+            .gallery {
                 flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transition: var(--transition);
-                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .nav-links li {
-                margin: 15px 0;
-                margin-left: 0;
-            }
-
-            .nav-links a {
-                color: var(--dark);
-                font-size: 1.2rem;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .hamburger.active div:nth-child(1) {
-                transform: rotate(-45deg) translate(-5px, 6px);
-            }
-
-            .hamburger.active div:nth-child(2) {
-                opacity: 0;
-            }
-
-            .hamburger.active div:nth-child(3) {
-                transform: rotate(45deg) translate(-5px, -6px);
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-btns {
-                flex-direction: column;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 576px) {
-            .section {
-                padding: 60px 0;
-            }
-
-            .section-title h2 {
-                font-size: 2rem;
-            }
-
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .gallery-item:nth-child(1),
-            .gallery-item:nth-child(6) {
-                grid-column: span 1;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header id="header">
-        <div class="container header-container">
-            <a href="#" class="logo"><i class="fas fa-star"></i> Starlight Prom</a>
-            
-            <div class="hamburger">
-                <div></div>
-                <div></div>
-                <div></div>
+    <div class="gallery">
+        <div class="gallery-column">
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img data-src="images/1.jpg" alt="Image 1" loading="lazy" decoding="async">
             </div>
-            
-            <ul class="nav-links">
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="#memories.html">Memories</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
+            <!-- Repeat for all your images -->
         </div>
-    </header>
+        <!-- Additional columns -->
+    </div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Starlight Prom 2024</h1>
-                <p>Relive the magical night through our photo gallery. Dancing, laughter, and memories that will last a lifetime.</p>
-                <div class="hero-btns">
-                    <a href="gallery.html" class="btn btn-primary">View Gallery</a>
-                    <a href="contact.html" class="btn btn-secondary">Order Photos</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Highlights Section -->
-    <section class="section highlights">
-        <div class="container">
-            <div class="section-title">
-                <h2>Night Highlights</h2>
-                <p>Experience the magic of Starlight Prom through these unforgettable moments</p>
-            </div>
-            
-            <div class="highlight-cards">
-                <div class="highlight-card">
-                    <div class="card-img">
-                        <img src="7.html" alt="Red Carpet">
-                    </div>
-                    <div class="card-content">
-                        <h3>Red Carpet Arrivals</h3>
-                        <p>Our students made their grand entrance in stunning outfits, walking the red carpet like celebrities.</p>
-                        <div class="card-stats">
-                            <span><i class="fas fa-images"></i> 120+ Photos</span>
-                            <span><i class="fas fa-heart"></i> 450 Likes</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="highlight-card">
-                    <div class="card-img">
-                        <img src="25.html" alt="Dance Floor">
-                    </div>
-                    <div class="card-content">
-                        <h3>Dance Floor Energy</h3>
-                        <p>The dance floor came alive with music, lights, and non-stop dancing throughout the night.</p>
-                        <div class="card-stats">
-                            <span><i class="fas fa-images"></i> 85+ Photos</span>
-                            <span><i class="fas fa-heart"></i> 520 Likes</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="highlight-card">
-                    <div class="card-img">
-                        <img src="14.html" alt="Award Ceremony">
-                    </div>
-                    <div class="card-content">
-                        <h3>Award Ceremony</h3>
-                        <p>We celebrated our students with special awards and recognitions for their achievements.</p>
-                        <div class="card-stats">
-                            <span><i class="fas fa-images"></i> 65+ Photos</span>
-                            <span><i class="fas fa-heart"></i> 380 Likes</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Preview Section -->
-    <section class="section gallery-preview">
-        <div class="container">
-            <div class="section-title">
-                <h2>Gallery Preview</h2>
-                <p>A glimpse of the magical moments captured at Starlight Prom</p>
-            </div>
-            
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1547153760-18fc86324498?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Prom Photo 1">
-                    <div class="gallery-overlay">
-                        <span>Prom King & Queen</span>
-                    </div>L
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-153174072545-7a4b6ad7a6a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Prom Photo 2">
-                    <div class="gallery-overlay">
-                        <span>Group Photo</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Prom Photo 3">
-                    <div class="gallery-overlay">
-                        <span>Dancing</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Prom Photo 4">
-                    <div class="gallery-overlay">
-                        <span>Red Carpet</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Prom Photo 5">
-                    <div class="gallery-overlay">
-                        <span>Party</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Prom Photo 6">
-                    <div class="gallery-overlay">
-                        <span>Awards</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1473&q=80" alt="Prom Photo 7">
-                    <div class="gallery-overlay">
-                        <span>Couples</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="#" class="btn btn-primary">View Full Gallery</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="section testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>Memories That Last</h2>
-                <p>Hear what our students say about their prom experience</p>
-            </div>
-            
-            <div class="testimonial-slider">
-                <div class="testimonial active">
-                    <div class="testimonial-text">
-                        Prom night was absolutely magical! The decorations, music, and atmosphere were perfect. It was the best way to celebrate our graduation with friends.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson">
-                        </div>
-                        <div class="author-info">
-                            <h4>Sarah Johnson</h4>
-                            <p>Class of 2024</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial">
-                    <div class="testimonial-text">
-                        I'll never forget dancing the night away with my friends. The photo booth was amazing and we got so many great pictures to remember the night.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
-                        </div>
-                        <div class="author-info">
-                            <h4>Michael Chen</h4>
-                            <p>Class of 2024</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial">
-                    <div class="testimonial-text">
-                        Being crowned Prom Queen was such a surprise! The whole night felt like a fairy tale. Thank you to everyone who made it so special.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma Rodriguez">
-                        </div>
-                        <div class="author-info">
-                            <h4>Emma Rodriguez</h4>
-                            <p>Class of 2024</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="slider-controls">
-                    <div class="slider-dot active" data-index="0"></div>
-                    <div class="slider-dot" data-index="1"></div>
-                    <div class="slider-dot" data-index="2"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Starlight Prom 2024</h3>
-                    <p>Creating unforgettable memories for our students since 1995. Each year we strive to make prom night more magical than the last.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#" class="active">Home</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="#">Memories</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i>  School Street, Mityana</p>
-                    <p><i class="fas fa-phone"></i> (256) 781-915680</p>
-                    <p><i class="fas fa-envelope"></i> prom@school.edu</p>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 Starlight Prom. All Rights Reserved. Designed with <i class="fas fa-heart" style="color: var(--accent);"></i> by Prom Committee</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile Navigation
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        const navItems = document.querySelectorAll('.nav-links li');
-        
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            
-            // Toggle body scroll when menu is open
-            if (navLinks.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
-        });
-        
-        // Close menu when clicking a link
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-        
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Testimonial Slider
-        const testimonials = document.querySelectorAll('.testimonial');
-        const dots = document.querySelectorAll('.slider-dot');
-        let currentTestimonial = 0;
-        
-        function showTestimonial(index) {
-            testimonials.forEach(testimonial => testimonial.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            
-            testimonials[index].classList.add('active');
-            dots[index].classList.add('active');
-            currentTestimonial = index;
-        }
-        
-        dots.forEach(dot => {
-            dot.addEventListener('click', function() {
-                showTestimonial(parseInt(this.dataset.index));
-            });
-        });
-        
-        // Auto-rotate testimonials every 5 seconds
-        setInterval(() => {
-            let nextIndex = (currentTestimonial + 1) % testimonials.length;
-            showTestimonial(nextIndex);
-        }, 5000);
-        
-        // Prevent image downloading
-        document.addEventListener('contextmenu', function(e) {
-            if (e.target.tagName === 'IMG') {
-                e.preventDefault();
-                alert('Right-click is disabled to protect our photos');
-            }
-        });
-        
-        document.addEventListener('keydown', function(e) {
-            // Disable PrintScreen key
-            if (e.key === 'PrintScreen') {
-                e.preventDefault();
-                return false;
-            }
-            
-            // Disable F12 (dev tools)
-            if (e.key === 'F12') {
-                e.preventDefault();
-                return false;
-            }
-            
-            // Disable Ctrl+Shift+I (dev tools)
-            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-                e.preventDefault();
-                return false;
-            }
-            
-            // Disable Ctrl+Shift+J (dev tools)
-            if (e.ctrlKey && e.shiftKey && e.key === 'J') {
-                e.preventDefault();
-                return false;
-            }
-            
-            // Disable Ctrl+U (view source)
-            if (e.ctrlKey && e.key === 'u') {
-                e.preventDefault();
-                return false;
-            }
-        });
-    </script>
+    <script src="js/gallery.js"></script>
 </body>
 </html>
