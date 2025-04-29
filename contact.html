@@ -2,423 +2,93 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lightweight image gallery">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background-color: #f5f5f5;
-            padding: 10px;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-        
-        .gallery {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .gallery-column {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .gallery-item {
-            width: 100%;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            display: block;
-            object-fit: contain;
-            background: #e0e0e0;
-            transition: transform 0.3s ease;
-            pointer-events: none;
-        }
-        
-        .watermark {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" opacity="0.2"><text x="50%" y="50%" fill="black" font-family="Arial" font-size="36" text-anchor="middle" dominant-baseline="middle" transform="rotate(-30 200 200)">Arle\'s Gallery</text></svg>');
-            pointer-events: none;
-            z-index: 2;
-        }
-        
-        .gallery-item img:hover {
-            transform: scale(1.02);
-        }
-        
-        /* Loading animation */
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-        
-        .gallery-item img[data-src] {
-            opacity: 0;
-            background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            min-height: 200px;
-        }
-        
-        /* Protection overlay */
-        .protection-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 3;
-        }
-
-        /* Responsive columns */
-        @media (max-width: 768px) {
-            .gallery {
-                flex-direction: column;
-            }
-        }
+        /* Minimal CSS inlined - no external resources */
+        *{margin:0;padding:0;box-sizing:border-box}body{background:#f5f5f5;padding:5px;user-select:none}.gallery{display:flex;gap:5px}.gallery-column{flex:1;display:flex;flex-direction:column;gap:5px}.gallery-item{width:100%;background:#fff;border-radius:4px;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,0.05);position:relative;aspect-ratio:3/4}.gallery-item img{width:100%;height:100%;display:block;object-fit:cover;background:#e0e0e0}.watermark{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2;opacity:0.1;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ctext x='50%25' y='50%25' fill='black' font-size='10' text-anchor='middle' dominant-baseline='middle' transform='rotate(-30 50 50)'%3EAG%3C/text%3E%3C/svg%3E")}.img-placeholder{width:100%;height:100%;background:#e0e0e0}
     </style>
 </head>
 <body>
     <div class="gallery">
-        <div class="gallery-column">
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="1.jpg" 
-                    alt="Image 1" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="4.jpg" 
-                    alt="Image 4" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="7.jpg" 
-                    alt="Image 7" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="10.jpg" 
-                    alt="Image 10" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="13.jpg" 
-                    alt="Image 13" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="16.jpg" 
-                    alt="Image 16" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="19.jpg" 
-                    alt="Image 19" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-        </div>
-        
-        <div class="gallery-column">
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="2.jpg" 
-                    alt="Image 2" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="5.jpg" 
-                    alt="Image 5" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="8.jpg" 
-                    alt="Image 8" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="11.jpg" 
-                    alt="Image 11" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="14.jpg" 
-                    alt="Image 14" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="17.jpg" 
-                    alt="Image 17" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="20.jpg" 
-                    alt="Image 20" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-        </div>
-        
-        <div class="gallery-column">
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="3.jpg" 
-                    alt="Image 3" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="6.jpg" 
-                    alt="Image 6" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="9.jpg" 
-                    alt="Image 9" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="12.jpg" 
-                    alt="Image 12" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="15.jpg" 
-                    alt="Image 15" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img 
-                    data-src="18.jpg" 
-                    alt="Image 18" 
-                    loading="lazy"
-                    decoding="async">
-            </div>
-        </div>
+        <div class="gallery-column" id="col1"></div>
+        <div class="gallery-column" id="col2"></div>
+        <div class="gallery-column" id="col3"></div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Prevent right-click saving
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-                return false;
-            });
+        // Minimal JavaScript with aggressive optimizations
+        (function() {
+            // Configuration - adjust based on your needs
+            const config = {
+                imageQuality: navigator.connection?.effectiveType.includes('2g') ? 'low' : 'medium',
+                loadThreshold: 300, // pixels from viewport to start loading
+                maxColumns: window.innerWidth < 600 ? 2 : 3
+            };
             
-            // Prevent dragging images
-            document.addEventListener('dragstart', function(e) {
-                if (e.target.tagName === 'IMG') {
-                    e.preventDefault();
-                    return false;
-                }
-            });
+            // Image data - format: [filename, width, height, placeholder color]
+            const images = [
+                ['1.jpg', 800, 600, 'e0d0c0'],
+                ['2.jpg', 800, 600, 'd0e0c0'],
+                // Add all your images here in the same format
+            ];
             
-            // Prevent touch hold on mobile
-            document.addEventListener('touchstart', function(e) {
-                if (e.target.tagName === 'IMG') {
-                    e.preventDefault();
-                }
-            }, { passive: false });
+            // DOM elements
+            const columns = [
+                document.getElementById('col1'),
+                document.getElementById('col2'),
+                document.getElementById('col3')
+            ].slice(0, config.maxColumns);
             
-            // Check WebP support
-            function checkWebPSupport(callback) {
-                const img = new Image();
-                img.onload = function() {
-                    callback(true);
-                };
-                img.onerror = function() {
-                    callback(false);
-                };
-                img.src = 'data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA';
-            }
-            
-            // Convert JPG to WebP using canvas
-            function convertToWebP(imgElement, originalSrc, callback) {
-                const img = new Image();
-                img.crossOrigin = 'Anonymous';
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    canvas.width = img.naturalWidth;
-                    canvas.height = img.naturalHeight;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0);
-                    
-                    try {
-                        const webpData = canvas.toDataURL('image/webp', 0.8);
-                        callback(webpData);
-                    } catch (e) {
-                        console.error('WebP conversion failed:', e);
-                        callback(originalSrc); // Fallback to original
-                    }
-                };
-                img.onerror = function() {
-                    callback(originalSrc); // Fallback to original if loading fails
-                };
-                img.src = originalSrc;
-            }
-            
-            // Enhanced lazy loading with WebP conversion
-            function lazyLoad() {
-                const lazyImages = document.querySelectorAll('img[data-src]');
+            // Generate gallery items
+            function createGalleryItem(imgData, index) {
+                const [filename, width, height, color] = imgData;
+                const col = index % columns.length;
+                const quality = config.imageQuality === 'low' ? 'low-' : '';
                 
-                checkWebPSupport(function(supportsWebP) {
-                    const observer = new IntersectionObserver(function(entries) {
-                        entries.forEach(function(entry) {
-                            if (entry.isIntersecting) {
-                                const img = entry.target;
-                                const originalSrc = img.dataset.src;
-                                
-                                if (supportsWebP) {
-                                    // Convert to WebP if supported
-                                    convertToWebP(img, originalSrc, function(webpData) {
-                                        img.src = webpData;
-                                        img.onload = function() {
-                                            img.style.opacity = 1;
-                                            img.removeAttribute('data-src');
-                                        };
-                                    });
-                                } else {
-                                    // Fallback to original JPG
-                                    img.src = originalSrc;
-                                    img.onload = function() {
-                                        img.style.opacity = 1;
-                                        img.removeAttribute('data-src');
-                                    };
-                                }
-                                
-                                observer.unobserve(img);
-                            }
-                        });
-                    }, {
-                        rootMargin: '200px 0px',
-                        threshold: 0.01
-                    });
-
-                    lazyImages.forEach(function(img) {
-                        observer.observe(img);
-                    });
-                });
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `
+                    <div class="watermark"></div>
+                    <div class="img-placeholder" style="background:#${color}"></div>
+                    <img 
+                        data-src="${quality}${filename}" 
+                        alt="Image ${index+1}"
+                        loading="lazy"
+                        decoding="async"
+                        width="${width}"
+                        height="${height}"
+                    >
+                `;
+                columns[col].appendChild(item);
+                return item.querySelector('img');
             }
-
-            lazyLoad();
             
-            // Balance columns on resize (mobile-friendly)
-            function balanceColumns() {
-                const screenWidth = window.innerWidth;
-                const columns = document.querySelectorAll('.gallery-column');
-                
-                // Only rebalance for desktop views
-                if (screenWidth > 768) {
-                    const items = Array.from(document.querySelectorAll('.gallery-item'));
-                    columns.forEach(col => col.innerHTML = '');
-                    
-                    items.forEach((item, index) => {
-                        const columnIndex = index % columns.length;
-                        columns[columnIndex].appendChild(item);
+            // Super lightweight lazy loading
+            function initLazyLoad() {
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.onload = () => {
+                                img.previousElementSibling.style.display = 'none';
+                                img.removeAttribute('data-src');
+                            };
+                            io.unobserve(img);
+                        }
                     });
-                }
+                }, { threshold: 0.01, rootMargin: `${config.loadThreshold}px` });
+                
+                document.querySelectorAll('img[data-src]').forEach(img => io.observe(img));
             }
-
-            // Debounce resize events
-            let resizeTimer;
-            window.addEventListener('resize', function() {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(balanceColumns, 250);
-            });
-
-            // Initial balance
-            balanceColumns();
-        });
+            
+            // Generate the gallery
+            images.forEach((img, i) => createGalleryItem(img, i));
+            initLazyLoad();
+            
+            // Basic protection
+            document.addEventListener('contextmenu', e => e.preventDefault());
+        })();
     </script>
 </body>
 </html>
