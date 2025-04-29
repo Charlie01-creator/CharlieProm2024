@@ -3,100 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arle's Gallery - Contact</title>
+    <title>Arle's Gallery</title>
     <style>
-        /* [All your CSS remains exactly the same] */
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:sans-serif;background:#f5f5f5;padding:5px;-webkit-user-select:none;user-select:none}
+        .gallery{display:flex;gap:5px}
+        .column{flex:1;display:flex;flex-direction:column;gap:5px;min-width:0}
+        .item{background:#fff;border-radius:3px;overflow:hidden;position:relative}
+        .item img{width:100%;height:auto;display:block;background:#eee}
+        .watermark{position:absolute;top:0;left:0;width:100%;height:100%;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.08"><text x="50%" y="50%" fill="%23000" font-size="10" text-anchor="middle" transform="rotate(-45 50 50)">ARLE</text></svg>')}
+        .protect{position:absolute;top:0;left:0;width:100%;height:100%;z-index:2}
+        .loading{width:100%;padding-bottom:100%;background:#eee}
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Arle's Gallery</h1>
-    </div>
-    
-    <div class="nav">
-        <a href="contact.html">Home</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="#contact">Contact</a>
-    </div>
-    
     <div class="gallery">
-        <div class="gallery-column">
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img data-src="1.jpg" alt="Gallery Image 1" loading="lazy" decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img data-src="4.jpg" alt="Gallery Image 4" loading="lazy" decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img data-src="7.jpg" alt="Gallery Image 7" loading="lazy" decoding="async">
-            </div>
+        <!-- Column 1 (7 images) -->
+        <div class="column">
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="1.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="4.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="7.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="10.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="13.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="16.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="19.jpg" alt="" loading="lazy" width="120" height="120"></div>
         </div>
         
-        <div class="gallery-column">
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img data-src="2.jpg" alt="Gallery Image 2" loading="lazy" decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img data-src="5.jpg" alt="Gallery Image 5" loading="lazy" decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img data-src="8.jpg" alt="Gallery Image 8" loading="lazy" decoding="async">
-            </div>
+        <!-- Column 2 (7 images) -->
+        <div class="column">
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="2.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="5.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="8.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="11.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="14.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="17.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="20.jpg" alt="" loading="lazy" width="120" height="120"></div>
         </div>
         
-        <div class="gallery-column">
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img data-src="3.jpg" alt="Gallery Image 3" loading="lazy" decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img data-src="6.jpg" alt="Gallery Image 6" loading="lazy" decoding="async">
-            </div>
-            <div class="gallery-item">
-                <div class="watermark"></div>
-                <div class="protection-overlay"></div>
-                <img data-src="9.jpg" alt="Gallery Image 9" loading="lazy" decoding="async">
-            </div>
+        <!-- Column 3 (6 images) -->
+        <div class="column">
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="3.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="6.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="9.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="12.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="15.jpg" alt="" loading="lazy" width="120" height="120"></div>
+            <div class="item"><div class="watermark"></div><div class="protect"></div><div class="loading"></div><img data-src="18.jpg" alt="" loading="lazy" width="120" height="120"></div>
         </div>
-    </div>
-    
-    <div class="contact-form" id="contact">
-        <h2>Contact Us</h2>
-        <form action="submit-form.php" method="POST">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" required></textarea>
-            </div>
-            
-            <button type="submit">Send Message</button>
-        </form>
     </div>
 
-    <script src="js/gallery.js"></script>
+    <script>
+        // Lightest possible lazy loader
+        document.addEventListener('DOMContentLoaded', function(){
+            const io = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting){
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.onload = () => img.previousElementSibling.remove();
+                        io.unobserve(img);
+                    }
+                });
+            }, {rootMargin: '50px'});
+            
+            document.querySelectorAll('img[data-src]').forEach(img => io.observe(img));
+            
+            // Download protection
+            document.addEventListener('contextmenu', e => e.preventDefault());
+            document.addEventListener('dragstart', e => e.preventDefault());
+            document.addEventListener('touchstart', e => {
+                if(e.target.tagName === 'IMG') e.preventDefault();
+            }, {passive:false});
+        });
+    </script>
 </body>
 </html>
