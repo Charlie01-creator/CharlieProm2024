@@ -102,22 +102,188 @@
                 <div class="watermark"></div>
                 <div class="protection-overlay"></div>
                 <img 
-                    data-src="1-1200.webp" 
-                    srcset="1-400.webp 400w, 1-800.webp 800w, 1-1200.webp 1200w"
-                    sizes="(max-width: 480px) 400px, (max-width: 1024px) 800px, 1200px"
+                    data-src="1.jpg" 
                     alt="Image 1" 
                     loading="lazy"
                     decoding="async">
             </div>
-            <!-- Repeat for other images in column 1 with matching srcset -->
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="4.jpg" 
+                    alt="Image 4" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="7.jpg" 
+                    alt="Image 7" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="10.jpg" 
+                    alt="Image 10" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="13.jpg" 
+                    alt="Image 13" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="16.jpg" 
+                    alt="Image 16" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="19.jpg" 
+                    alt="Image 19" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
         </div>
         
         <div class="gallery-column">
-            <!-- Column 2 images with srcset -->
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="2.jpg" 
+                    alt="Image 2" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="5.jpg" 
+                    alt="Image 5" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="8.jpg" 
+                    alt="Image 8" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="11.jpg" 
+                    alt="Image 11" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="14.jpg" 
+                    alt="Image 14" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="17.jpg" 
+                    alt="Image 17" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="20.jpg" 
+                    alt="Image 20" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
         </div>
         
         <div class="gallery-column">
-            <!-- Column 3 images with srcset -->
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="3.jpg" 
+                    alt="Image 3" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="6.jpg" 
+                    alt="Image 6" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="9.jpg" 
+                    alt="Image 9" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="12.jpg" 
+                    alt="Image 12" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="15.jpg" 
+                    alt="Image 15" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
+            <div class="gallery-item">
+                <div class="watermark"></div>
+                <div class="protection-overlay"></div>
+                <img 
+                    data-src="18.jpg" 
+                    alt="Image 18" 
+                    loading="lazy"
+                    decoding="async">
+            </div>
         </div>
     </div>
 
@@ -144,40 +310,83 @@
                 }
             }, { passive: false });
             
-            // Enhanced lazy loading with WebP fallback
+            // Check WebP support
+            function checkWebPSupport(callback) {
+                const img = new Image();
+                img.onload = function() {
+                    callback(true);
+                };
+                img.onerror = function() {
+                    callback(false);
+                };
+                img.src = 'data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA';
+            }
+            
+            // Convert JPG to WebP using canvas
+            function convertToWebP(imgElement, originalSrc, callback) {
+                const img = new Image();
+                img.crossOrigin = 'Anonymous';
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.naturalWidth;
+                    canvas.height = img.naturalHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0);
+                    
+                    try {
+                        const webpData = canvas.toDataURL('image/webp', 0.8);
+                        callback(webpData);
+                    } catch (e) {
+                        console.error('WebP conversion failed:', e);
+                        callback(originalSrc); // Fallback to original
+                    }
+                };
+                img.onerror = function() {
+                    callback(originalSrc); // Fallback to original if loading fails
+                };
+                img.src = originalSrc;
+            }
+            
+            // Enhanced lazy loading with WebP conversion
             function lazyLoad() {
                 const lazyImages = document.querySelectorAll('img[data-src]');
                 
-                const observer = new IntersectionObserver(function(entries) {
-                    entries.forEach(function(entry) {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            // Load the best image for the current viewport
-                            if (img.dataset.src) {
-                                img.src = img.dataset.src;
+                checkWebPSupport(function(supportsWebP) {
+                    const observer = new IntersectionObserver(function(entries) {
+                        entries.forEach(function(entry) {
+                            if (entry.isIntersecting) {
+                                const img = entry.target;
+                                const originalSrc = img.dataset.src;
+                                
+                                if (supportsWebP) {
+                                    // Convert to WebP if supported
+                                    convertToWebP(img, originalSrc, function(webpData) {
+                                        img.src = webpData;
+                                        img.onload = function() {
+                                            img.style.opacity = 1;
+                                            img.removeAttribute('data-src');
+                                        };
+                                    });
+                                } else {
+                                    // Fallback to original JPG
+                                    img.src = originalSrc;
+                                    img.onload = function() {
+                                        img.style.opacity = 1;
+                                        img.removeAttribute('data-src');
+                                    };
+                                }
+                                
+                                observer.unobserve(img);
                             }
-                            
-                            img.onload = function() {
-                                img.style.opacity = 1;
-                                img.removeAttribute('data-src');
-                            };
-                            
-                            img.onerror = function() {
-                                // Fallback to SVG placeholder if WebP isn't supported
-                                img.src = 'data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Crect fill="%23ddd" width="100" height="100"/%3E%3Ctext fill="%23666" font-family="sans-serif" font-size="10" dy=".35em" text-anchor="middle" x="50" y="50"%3ENo Image%3C/text%3E%3C/svg%3E';
-                                img.style.opacity = 1;
-                            };
-                            
-                            observer.unobserve(img);
-                        }
+                        });
+                    }, {
+                        rootMargin: '200px 0px',
+                        threshold: 0.01
                     });
-                }, {
-                    rootMargin: '200px 0px', // Load images earlier
-                    threshold: 0.01
-                });
 
-                lazyImages.forEach(function(img) {
-                    observer.observe(img);
+                    lazyImages.forEach(function(img) {
+                        observer.observe(img);
+                    });
                 });
             }
 
