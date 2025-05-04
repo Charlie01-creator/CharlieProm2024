@@ -39,7 +39,7 @@
                 return col;
             });
             
-            // Generate image items with minimal data usage
+            // Generate image items using only "1.jpg"
             function generateImageItems(count) {
                 const items = [];
                 const startIndex = loadedCount + 1;
@@ -51,7 +51,7 @@
                     item.innerHTML = `
                         <div class="watermark"></div>
                         <img src="${placeholder}" 
-                             data-src="${i}.jpg" 
+                             data-src="1.jpg" 
                              alt="Image ${i}" 
                              loading="lazy">
                     `;
@@ -75,7 +75,7 @@
                             const img = entry.target;
                             if (img.dataset.loaded) return;
                             
-                            // Load the actual image
+                            // Load the actual image (always "1.jpg")
                             img.src = img.dataset.src;
                             img.onload = function() {
                                 img.style.opacity = 1;
