@@ -18,148 +18,114 @@
             document.addEventListener('dragstart', e => e.target.tagName === 'IMG' && e.preventDefault());
             document.addEventListener('touchstart', e => e.target.tagName === 'IMG' && e.preventDefault(), {passive: false});
             
-            // Configuration - TUNE THESE FOR OPTIMAL PERFORMANCE
+            // Configuration
             const TOTAL_IMAGES = 845;
-            const INITIAL_LOAD = 12; // First load (4 per column)
-            const SUBSEQUENT_LOAD = 9; // Subsequent loads (3 per column)
-            const LOAD_AHEAD = 2; // How many screens ahead to preload
+            const INITIAL_LOAD = 15; // Load 15 images initially (5 per column)
+            const SCROLL_LOAD = 9; // Load 9 more images when scrolling (3 per column)
+            const LOAD_AHEAD_PAGES = 1.5; // How many viewports ahead to load
             const COLUMN_COUNT = 3;
             let loadedCount = 0;
             let isLoading = false;
             
-            // Create ultra-lightweight placeholder
-            const placeholderSVG = 'data:image/svg+xml;charset=UTF-8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"%3E%3Crect fill="%23e0e0e0" width="100" height="100"/%3E%3C/svg%3E';
+            // Create placeholder SVG (only 98 bytes)
+            const placeholder = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%23e0e0e0" width="100" height="100"/></svg>';
             
             // Create gallery structure
             const gallery = document.getElementById('gallery-container');
-            const columns = Array(COLUMN_COUNT).fill().map(() => {
+            const columns = Array.from({length: COLUMN_COUNT}, () => {
                 const col = document.createElement('div');
                 col.className = 'gallery-column';
                 gallery.appendChild(col);
                 return col;
             });
             
-            // Generate image items with extreme data efficiency
+            // Generate image items with minimal data usage
             function generateImageItems(count) {
-                const fragment = document.createDocumentFragment();
-                const newItems = [];
+                const items = [];
+                const startIndex = loadedCount + 1;
+                const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
                 
-                for (let i = 0; i < count && loadedCount < TOTAL_IMAGES; i++) {
-                    const imgNum = loadedCount + 1;
-                    const columnIndex = loadedCount % COLUMN_COUNT;
-                    
+                for (let i = startIndex; i <= endIndex; i++) {
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
-                    
-                    // Use placeholder first, detect orientation later
                     item.innerHTML = `
                         <div class="watermark"></div>
-                        <img src="${placeholderSVG}" data-src="${imgNum}.jpg" data-low-src="${imgNum}-low.jpg" alt="Image ${imgNum}" loading="lazy">
+                        <img src="${placeholder}" 
+                             data-src="${i}.jpg" 
+                             alt="Image ${i}" 
+                             loading="lazy">
                     `;
-                    
-                    newItems.push({ item, columnIndex });
-                    loadedCount++;
+                    items.push(item);
                 }
                 
-                // Batch DOM updates
-                newItems.forEach(({ item, columnIndex }) => {
-                    columns[columnIndex].appendChild(item);
+                // Distribute items evenly across columns
+                items.forEach((item, index) => {
+                    columns[(loadedCount + index) % COLUMN_COUNT].appendChild(item);
                 });
                 
-                return newItems.map(i => i.item);
+                loadedCount = endIndex;
+                return items;
             }
             
-            // Progressive loading: low-res → high-res
-            function loadImage(img) {
-                if (img.dataset.loaded) return;
-                
-                // Mark as loading to prevent duplicate loads
-                img.dataset.loading = true;
-                
-                // First load low-res version
-                const lowRes = new Image();
-                lowRes.src = img.dataset.lowSrc;
-                
-                lowRes.onload = function() {
-                    img.src = this.src;
-                    img.style.opacity = 1;
-                    
-                    // Then load high-res in background
-                    const hiRes = new Image();
-                    hiRes.src = img.dataset.src;
-                    
-                    hiRes.onload = function() {
-                        img.src = this.src;
-                        img.dataset.loaded = true;
-                        
-                        // Set correct orientation class
-                        const isPortrait = this.naturalHeight > this.naturalWidth;
-                        img.closest('.gallery-item').classList.add(isPortrait ? 'portrait' : 'landscape');
-                    };
-                };
-            }
-            
-            // Efficient lazy loading with IntersectionObserver
-            function initLazyLoad() {
+            // Efficient lazy loading
+            function lazyLoadImages() {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             const img = entry.target;
-                            loadImage(img);
+                            if (img.dataset.loaded) return;
+                            
+                            // Load the actual image
+                            img.src = img.dataset.src;
+                            img.onload = function() {
+                                img.style.opacity = 1;
+                                img.dataset.loaded = true;
+                                
+                                // Detect orientation
+                                const isPortrait = this.naturalHeight > this.naturalWidth;
+                                img.closest('.gallery-item').classList.add(
+                                    isPortrait ? 'portrait' : 'landscape'
+                                );
+                            };
                             observer.unobserve(img);
                         }
                     });
-                }, { 
-                    rootMargin: `${LOAD_AHEAD * window.innerHeight}px 0px`,
+                }, {
+                    rootMargin: `${LOAD_AHEAD_PAGES * 100}% 0px`,
                     threshold: 0.01
                 });
-
-                document.querySelectorAll('img[data-src]:not([data-loading])').forEach(img => {
+                
+                document.querySelectorAll('img[data-src]:not([data-loaded])').forEach(img => {
                     observer.observe(img);
                 });
             }
             
-            // Load more images when needed
-            function loadMoreIfNeeded() {
+            // Load more images when scrolling near bottom
+            function checkScroll() {
                 if (isLoading || loadedCount >= TOTAL_IMAGES) return;
                 
-                const scrollBottom = window.innerHeight + window.scrollY;
-                const threshold = document.body.offsetHeight - (LOAD_AHEAD * window.innerHeight);
+                const scrollPosition = window.innerHeight + window.scrollY;
+                const loadThreshold = document.body.offsetHeight - (window.innerHeight * 2);
                 
-                if (scrollBottom >= threshold) {
+                if (scrollPosition > loadThreshold) {
                     isLoading = true;
-                    
-                    // Use requestIdleCallback for smoother performance
-                    requestIdleCallback(() => {
-                        generateImageItems(SUBSEQUENT_LOAD);
-                        initLazyLoad();
+                    setTimeout(() => {
+                        generateImageItems(SCROLL_LOAD);
+                        lazyLoadImages();
                         isLoading = false;
-                        
-                        // Check again in case we're still near bottom
-                        requestAnimationFrame(loadMoreIfNeeded);
-                    }, { timeout: 500 });
+                    }, 100);
                 }
             }
             
             // Initial load
             generateImageItems(INITIAL_LOAD);
-            initLazyLoad();
+            lazyLoadImages();
             
             // Efficient scroll handling
-            let lastScrollPos = 0;
             let scrollTimeout;
             window.addEventListener('scroll', () => {
-                const currentScroll = window.scrollY;
-                
-                // Only check if scroll direction is down
-                if (currentScroll > lastScrollPos) {
-                    clearTimeout(scrollTimeout);
-                    scrollTimeout = setTimeout(() => {
-                        requestIdleCallback(loadMoreIfNeeded, { timeout: 200 });
-                    }, 50);
-                }
-                
-                lastScrollPos = currentScroll;
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(checkScroll, 50);
             }, { passive: true });
             
             // Balance columns on resize (desktop only)
@@ -174,9 +140,7 @@
                 });
             }
             
-            window.addEventListener('resize', () => {
-                requestAnimationFrame(balanceColumns);
-            });
+            window.addEventListener('resize', balanceColumns);
         });
     </script>
 </body>
