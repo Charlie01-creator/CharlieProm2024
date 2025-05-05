@@ -3,21 +3,55 @@
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{background:#f5f5f5;padding:10px;user-select:none}
-        .gallery{display:flex;flex-wrap:wrap;gap:10px}
-        .gallery-column{flex:1;min-width:calc(33.33% - 7px);display:flex;flex-direction:column;gap:10px}
-        @media(max-width:600px){.gallery-column{min-width:calc(33.33% - 7px)}}
-        .gallery-item{width:100%;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 4px rgba(0,0,0,0.1);position:relative}
-        .gallery-item.portrait{aspect-ratio:2/3}
-        .gallery-item.landscape{aspect-ratio:3/2}
-        .gallery-item img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .3s ease}
-        .watermark{position:absolute;top:0;left:0;width:100%;height:100%;
-                 background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBvcGFjaXR5PSIwLjIiPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmaWxsPSJibGFjayIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjM2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0cmFuc2Zvcm09InJvdGF0ZSgtMzAgMjAwIDIwMCkiPkFybGUncyBHYWxsZXJ5PC90ZXh0Pjwvc3ZnPg==');
-                 pointer-events:none;z-index:2}
-        .gallery-item img:hover{transform:scale(1.02)}
-        @keyframes pulse{0%{opacity:0.5}50%{opacity:0.8}100%{opacity:0.5}}
-        .gallery-item img[data-src]{opacity:0;animation:pulse 2s infinite}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f5f5f5;
+            padding: 10px;
+            user-select: none;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 10px;
+        }
+        .gallery-item {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+            aspect-ratio: 3/4;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item img.loaded {
+            opacity: 1;
+        }
+        .gallery-item img:not(.loaded) {
+            opacity: 0;
+            height: 0;
+            padding-bottom: 150%;
+            background: #eee;
+        }
+        .watermark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIiBvcGFjaXR5PSIwLjIiPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmaWxsPSJibGFjayIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjM2IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0cmFuc2Zvcm09InJvdGF0ZSgtMzAgMjAwIDIwMCkiPkFybGUncyBHYWxsZXJ5PC90ZXh0Pjwvc3ZnPg==');
+            pointer-events: none;
+            z-index: 2;
+        }
     </style>
 </head>
 <body>
@@ -26,70 +60,77 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Configuration
-            const TOTAL_IMAGES = 845; // All 845 gallery items
-            const INITIAL_LOAD = 15;  // Initial images to load
-            const SCROLL_LOAD = 9;    // Images to load on scroll
-            const COLUMN_COUNT = 3;   // Number of columns
+            const TOTAL_IMAGES = 845;
+            const INITIAL_LOAD = 12;
+            const SCROLL_LOAD = 9;
+            const VISIBLE_BUFFER = 2; // Load images 2 screens ahead
             
             let loadedCount = 0;
             const gallery = document.getElementById('gallery-container');
+            const imageCache = new Map(); // Cache loaded images
             
-            // Create columns
-            const columns = Array.from({length: COLUMN_COUNT}, () => {
-                const col = document.createElement('div');
-                col.className = 'gallery-column';
-                gallery.appendChild(col);
-                return col;
-            });
-            
-            // Generate gallery items
+            // Create gallery items
             function generateImageItems(count) {
+                const fragment = document.createDocumentFragment();
                 const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
                 
                 for (let i = loadedCount + 1; i <= endIndex; i++) {
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
-                    
                     item.innerHTML = `
                         <div class="watermark"></div>
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23eee' width='100' height='100'/%3E%3C/svg%3E" 
-                             data-src="1.jpg?${i}" 
-                             alt="Gallery image ${i}"
-                             loading="lazy">
+                        <img data-src="${i}.jpg" alt="Image ${i}" loading="lazy">
                     `;
-                    
-                    columns[i % COLUMN_COUNT].appendChild(item);
+                    fragment.appendChild(item);
                 }
+                
+                gallery.appendChild(fragment);
                 loadedCount = endIndex;
             }
             
-            // Lazy load images
+            // Lazy load with intelligent caching
             function lazyLoadImages() {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
                             const img = entry.target;
-                            if (img.dataset.loaded) return;
+                            const src = img.dataset.src;
                             
+                            if (img.classList.contains('loaded')) return;
+                            
+                            // Check cache first
+                            if (imageCache.has(src)) {
+                                const cached = imageCache.get(src);
+                                img.src = cached.src;
+                                img.classList.add('loaded');
+                                observer.unobserve(img);
+                                return;
+                            }
+                            
+                            // Load new image
                             const loader = new Image();
-                            loader.src = img.dataset.src;
+                            loader.src = src;
                             loader.onload = function() {
-                                img.src = this.src;
-                                img.style.opacity = 1;
-                                img.dataset.loaded = true;
+                                // Add to cache
+                                imageCache.set(src, {
+                                    src: src,
+                                    aspect: this.naturalHeight > this.naturalWidth ? 
+                                           'portrait' : 'landscape'
+                                });
                                 
-                                // Set orientation class
-                                const isPortrait = this.naturalHeight > this.naturalWidth;
-                                img.closest('.gallery-item').classList.add(
-                                    isPortrait ? 'portrait' : 'landscape'
-                                );
+                                // Apply to visible image
+                                img.src = src;
+                                img.classList.add('loaded');
+                                observer.unobserve(img);
                             };
-                            observer.unobserve(img);
                         }
                     });
-                }, {rootMargin: '200px 0px', threshold: 0.01});
-
-                document.querySelectorAll('img[data-src]:not([data-loaded])').forEach(img => {
+                }, {
+                    rootMargin: `${VISIBLE_BUFFER * 100}% 0px`,
+                    threshold: 0.01
+                });
+                
+                document.querySelectorAll('img[data-src]:not(.loaded)').forEach(img => {
                     observer.observe(img);
                 });
             }
@@ -99,7 +140,7 @@
                 if (loadedCount >= TOTAL_IMAGES) return;
                 
                 if (window.innerHeight + window.scrollY >= 
-                    document.body.offsetHeight - window.innerHeight) {
+                    document.body.offsetHeight - (window.innerHeight * 2)) {
                     generateImageItems(SCROLL_LOAD);
                     lazyLoadImages();
                 }
@@ -108,7 +149,7 @@
             // Initial setup
             generateImageItems(INITIAL_LOAD);
             lazyLoadImages();
-            window.addEventListener('scroll', checkScroll, {passive: true});
+            window.addEventListener('scroll', checkScroll, { passive: true });
         });
     </script>
 </body>
