@@ -26,14 +26,15 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Configuration
-            const TOTAL_IMAGES = 20; // Reduced for testing
-            const INITIAL_LOAD = 6;
-            const SCROLL_LOAD = 6;
-            const COLUMN_COUNT = 3;
-            let loadedCount = 0;
+            const TOTAL_IMAGES = 845; // All 845 gallery items
+            const INITIAL_LOAD = 15;  // Initial images to load
+            const SCROLL_LOAD = 9;    // Images to load on scroll
+            const COLUMN_COUNT = 3;   // Number of columns
             
-            // Create gallery structure
+            let loadedCount = 0;
             const gallery = document.getElementById('gallery-container');
+            
+            // Create columns
             const columns = Array.from({length: COLUMN_COUNT}, () => {
                 const col = document.createElement('div');
                 col.className = 'gallery-column';
@@ -41,22 +42,18 @@
                 return col;
             });
             
-            // Generate image items
+            // Generate gallery items
             function generateImageItems(count) {
-                const startIndex = loadedCount + 1;
                 const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
                 
-                for (let i = startIndex; i <= endIndex; i++) {
+                for (let i = loadedCount + 1; i <= endIndex; i++) {
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
-                    
-                    // Using the same image file but with cache-busting parameter
-                    const imgUrl = `1.jpg?${i}`; // Add unique query parameter
                     
                     item.innerHTML = `
                         <div class="watermark"></div>
                         <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23eee' width='100' height='100'/%3E%3C/svg%3E" 
-                             data-src="${imgUrl}" 
+                             data-src="1.jpg?${i}" 
                              alt="Gallery image ${i}"
                              loading="lazy">
                     `;
@@ -66,7 +63,7 @@
                 loadedCount = endIndex;
             }
             
-            // Lazy loading
+            // Lazy load images
             function lazyLoadImages() {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -108,7 +105,7 @@
                 }
             }
             
-            // Initial load
+            // Initial setup
             generateImageItems(INITIAL_LOAD);
             lazyLoadImages();
             window.addEventListener('scroll', checkScroll, {passive: true});
