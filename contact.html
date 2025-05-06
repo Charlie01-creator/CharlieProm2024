@@ -2,23 +2,22 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protected Gallery</title>
+    <title>Image Gallery</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         body {
             font-family: Arial, sans-serif;
             background: #f5f5f5;
             padding: 20px;
             -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
         }
         .gallery {
             display: flex;
@@ -40,20 +39,15 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             position: relative;
         }
-        .image-container {
-            position: relative;
+        .gallery-item img {
             width: 100%;
-            padding-bottom: 100%;
-            overflow: hidden;
-        }
-        .image-container img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            display: block;
+            transition: transform 0.3s;
             pointer-events: none;
+        }
+        .gallery-item img:hover {
+            transform: scale(1.02);
         }
         .protection-overlay {
             position: absolute;
@@ -62,17 +56,6 @@
             width: 100%;
             height: 100%;
             z-index: 2;
-            background: transparent;
-        }
-        .watermark {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" opacity="0.05"><text x="50%" y="50%" fill="black" font-family="Arial" font-size="36" text-anchor="middle" dominant-baseline="middle" transform="rotate(-30 200 200)">Protected Content</text></svg>');
-            pointer-events: none;
-            z-index: 1;
         }
         .loading {
             text-align: center;
@@ -82,21 +65,26 @@
     </style>
 </head>
 <body>
-    <div class="gallery" id="gallery-container"></div>
-    <div id="loading" class="loading">Loading gallery...</div>
+    <div class="gallery" id="gallery-container">
+        <!-- Images will be inserted here by JavaScript -->
+    </div>
+    <div id="loading" class="loading">Loading images...</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Anti-download protection
+            // Prevent all image downloading methods
             document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-            });
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                }
+            }, false);
             
             document.addEventListener('dragstart', function(e) {
                 if (e.target.tagName === 'IMG') {
                     e.preventDefault();
+                    return false;
                 }
-            });
+            }, false);
             
             document.addEventListener('touchstart', function(e) {
                 if (e.target.tagName === 'IMG') {
@@ -104,13 +92,12 @@
                 }
             }, { passive: false });
             
-            // Disable text selection
             document.addEventListener('selectstart', function(e) {
                 e.preventDefault();
             });
             
-            // Gallery configuration
-            const TOTAL_IMAGES = 20; // Test with 20 first, then change to 845
+            // Configuration
+            const TOTAL_IMAGES = 20; // Start with 20 for testing, change to 845 later
             const IMAGES_PER_LOAD = 9;
             const COLUMN_COUNT = 3;
             
@@ -127,32 +114,31 @@
                 columns.push(column);
             }
             
-            // Load images with protection
+            // Load initial set of images with protection
             function loadImages(count) {
                 const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
                 
                 for (let i = loadedCount + 1; i <= endIndex; i++) {
-                    const container = document.createElement('div');
-                    container.className = 'image-container';
-                    
                     const img = document.createElement('img');
                     img.src = i + '.jpg';
-                    img.alt = 'Protected Image ' + i;
+                    img.alt = 'Image ' + i;
                     img.loading = 'lazy';
+                    img.style.pointerEvents = 'none';
                     
                     const overlay = document.createElement('div');
                     overlay.className = 'protection-overlay';
                     
-                    const watermark = document.createElement('div');
-                    watermark.className = 'watermark';
-                    
-                    container.appendChild(img);
-                    container.appendChild(watermark);
-                    container.appendChild(overlay);
-                    
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
-                    item.appendChild(container);
+                    item.appendChild(img);
+                    item.appendChild(overlay);
+                    
+                    // Prevent opening image in new tab
+                    item.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    });
                     
                     // Distribute evenly across columns
                     columns[(i-1) % COLUMN_COUNT].appendChild(item);
@@ -160,12 +146,13 @@
                 
                 loadedCount = endIndex;
                 
+                // Hide loading message if all images are loaded
                 if (loadedCount >= TOTAL_IMAGES) {
                     loadingElement.style.display = 'none';
                 }
             }
             
-            // Load more on scroll
+            // Load more images when scrolling to bottom
             window.addEventListener('scroll', function() {
                 if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
                     if (loadedCount < TOTAL_IMAGES) {
