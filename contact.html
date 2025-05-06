@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Gallery</title>
+    <title>Secure Image Gallery</title>
     <style>
         * {
             margin: 0;
@@ -39,24 +39,19 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             position: relative;
         }
-        .gallery-item img {
+        .image-container {
+            position: relative;
             width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.3s;
-            pointer-events: none;
+            padding-bottom: 100%;
+            overflow: hidden;
         }
-        .gallery-item img:hover {
-            transform: scale(1.02);
-        }
-        .protection-overlay {
+        .image-container canvas {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 2;
-            background: transparent;
+            display: block;
         }
         .loading {
             text-align: center;
@@ -66,9 +61,7 @@
     </style>
 </head>
 <body>
-    <div class="gallery" id="gallery-container">
-        <!-- Images will be inserted here by JavaScript -->
-    </div>
+    <div class="gallery" id="gallery-container"></div>
     <div id="loading" class="loading">Loading images...</div>
 
     <script>
@@ -79,18 +72,17 @@
             });
             
             document.addEventListener('dragstart', function(e) {
-                if (e.target.tagName === 'IMG') {
-                    e.preventDefault();
-                    return false;
-                }
+                e.preventDefault();
+                return false;
             });
             
-            document.addEventListener('touchstart', function(e) {
-                if (e.target.tagName === 'IMG') {
+            document.addEventListener('keydown', function(e) {
+                // Disable dev tools
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
                     e.preventDefault();
                 }
-            }, { passive: false });
-            
+            });
+
             // Configuration
             const TOTAL_IMAGES = 20; // Start with 20 for testing
             const IMAGES_PER_LOAD = 9;
@@ -109,30 +101,46 @@
                 columns.push(column);
             }
             
-            // Load initial set of images
+            // Render image to protected canvas
+            function renderProtectedImage(imgUrl, container) {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+                
+                img.crossOrigin = 'Anonymous';
+                img.onload = function() {
+                    canvas.width = img.naturalWidth;
+                    canvas.height = img.naturalHeight;
+                    
+                    // Draw image with subtle watermark
+                    ctx.drawImage(img, 0, 0);
+                    ctx.fillStyle = 'rgba(0,0,0,0.01)';
+                    ctx.font = '20px Arial';
+                    for (let x = 0; x < canvas.width; x += 100) {
+                        for (let y = 0; y < canvas.height; y += 100) {
+                            ctx.fillText('PROTECTED', x + (y%200), y + (x%200));
+                        }
+                    }
+                    
+                    container.appendChild(canvas);
+                };
+                img.src = imgUrl + '?t=' + Date.now(); // Cache buster
+            }
+            
+            // Load images with canvas protection
             function loadImages(count) {
                 const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
                 
                 for (let i = loadedCount + 1; i <= endIndex; i++) {
-                    const img = document.createElement('img');
-                    img.src = i + '.jpg';
-                    img.alt = 'Image ' + i;
-                    img.loading = 'lazy';
-                    img.style.pointerEvents = 'none';
-                    
-                    const overlay = document.createElement('div');
-                    overlay.className = 'protection-overlay';
+                    const container = document.createElement('div');
+                    container.className = 'image-container';
                     
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
-                    item.appendChild(img);
-                    item.appendChild(overlay);
+                    item.appendChild(container);
                     
-                    // Prevent opening image
-                    item.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        return false;
-                    });
+                    // Render via protected canvas
+                    renderProtectedImage(i + '.jpg', container);
                     
                     // Distribute evenly across columns
                     columns[(i-1) % COLUMN_COUNT].appendChild(item);
@@ -140,13 +148,12 @@
                 
                 loadedCount = endIndex;
                 
-                // Hide loading message if all images are loaded
                 if (loadedCount >= TOTAL_IMAGES) {
                     loadingElement.style.display = 'none';
                 }
             }
             
-            // Load more images when scrolling to bottom
+            // Load more on scroll
             window.addEventListener('scroll', function() {
                 if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
                     if (loadedCount < TOTAL_IMAGES) {
