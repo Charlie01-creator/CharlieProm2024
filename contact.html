@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Working Protected Gallery</title>
+    <title>Image Gallery</title>
     <style>
         * {
             margin: 0;
@@ -43,7 +43,11 @@
             width: 100%;
             height: auto;
             display: block;
+            transition: transform 0.3s;
             pointer-events: none;
+        }
+        .gallery-item img:hover {
+            transform: scale(1.02);
         }
         .protection-overlay {
             position: absolute;
@@ -52,6 +56,7 @@
             width: 100%;
             height: 100%;
             z-index: 2;
+            background: transparent;
         }
         .loading {
             text-align: center;
@@ -61,7 +66,9 @@
     </style>
 </head>
 <body>
-    <div class="gallery" id="gallery-container"></div>
+    <div class="gallery" id="gallery-container">
+        <!-- Images will be inserted here by JavaScript -->
+    </div>
     <div id="loading" class="loading">Loading images...</div>
 
     <script>
@@ -74,13 +81,19 @@
             document.addEventListener('dragstart', function(e) {
                 if (e.target.tagName === 'IMG') {
                     e.preventDefault();
+                    return false;
                 }
             });
             
-            // Configuration - TEST WITH THESE FIRST
-            const TEST_MODE = true; // Set to false for production
-            const TOTAL_IMAGES = TEST_MODE ? 3 : 845;
-            const IMAGES_PER_LOAD = TEST_MODE ? 3 : 9;
+            document.addEventListener('touchstart', function(e) {
+                if (e.target.tagName === 'IMG') {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            // Configuration
+            const TOTAL_IMAGES = 20; // Start with 20 for testing
+            const IMAGES_PER_LOAD = 9;
             const COLUMN_COUNT = 3;
             
             const gallery = document.getElementById('gallery-container');
@@ -96,20 +109,16 @@
                 columns.push(column);
             }
             
-            // Load images with protection
+            // Load initial set of images
             function loadImages(count) {
                 const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
                 
                 for (let i = loadedCount + 1; i <= endIndex; i++) {
                     const img = document.createElement('img');
-                    // TEST IMAGE - REPLACE WITH YOUR OWN
-                    const testImageUrl = TEST_MODE ? 
-                        'https://picsum.photos/300/200?random=' + i : 
-                        i + '.jpg';
-                    
-                    img.src = testImageUrl;
+                    img.src = i + '.jpg';
                     img.alt = 'Image ' + i;
                     img.loading = 'lazy';
+                    img.style.pointerEvents = 'none';
                     
                     const overlay = document.createElement('div');
                     overlay.className = 'protection-overlay';
@@ -119,18 +128,25 @@
                     item.appendChild(img);
                     item.appendChild(overlay);
                     
+                    // Prevent opening image
+                    item.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        return false;
+                    });
+                    
                     // Distribute evenly across columns
                     columns[(i-1) % COLUMN_COUNT].appendChild(item);
                 }
                 
                 loadedCount = endIndex;
                 
+                // Hide loading message if all images are loaded
                 if (loadedCount >= TOTAL_IMAGES) {
                     loadingElement.style.display = 'none';
                 }
             }
             
-            // Load more on scroll
+            // Load more images when scrolling to bottom
             window.addEventListener('scroll', function() {
                 if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
                     if (loadedCount < TOTAL_IMAGES) {
@@ -141,12 +157,6 @@
             
             // Initial load
             loadImages(IMAGES_PER_LOAD);
-            
-            // Debugging help
-            console.log('Gallery initialized. Testing with', TOTAL_IMAGES, 'images');
-            if (TEST_MODE) {
-                console.log('TEST MODE: Using placeholder images from picsum.photos');
-            }
         });
     </script>
 </body>
