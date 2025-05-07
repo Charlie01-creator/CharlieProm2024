@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Gallery Debug Mode</title>
+    <title>Working Gallery Test</title>
     <style>
-        /* Previous styles remain the same */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .gallery { display: flex; flex-wrap: wrap; gap: 10px; }
+        .gallery-item { width: calc(33% - 10px); }
+        .image-container { width: 100%; height: 200px; background: #eee; }
+        .loading { text-align: center; padding: 20px; }
         .error { color: red; }
     </style>
 </head>
@@ -14,52 +19,41 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Debug configuration
-            const TOTAL_IMAGES = 20; // Reduced for testing
-            const USE_REMOTE_TEST_IMAGES = true; // Uses picsum.photos for testing
-            const LQIP_ENABLED = false; // Disabled for testing
+            const TOTAL_IMAGES = 5;
             
-            // Image URL generator
+            // Use working test images (IDs 101-105)
             const getImageUrl = (id) => {
-                if (USE_REMOTE_TEST_IMAGES) {
-                    return `https://picsum.photos/id/${id}/300/300`;
-                } else {
-                    return `${id}.jpg`; // Your local images
-                }
+                return `https://picsum.photos/id/${id+100}/300/300`;
             };
 
-            // Error logging
             const logError = (msg) => {
                 document.getElementById('error-log').innerHTML += `<p>${msg}</p>`;
                 console.error(msg);
             };
 
-            // Modified image loader
             const loadImage = (id, container) => {
                 const url = getImageUrl(id);
                 const img = new Image();
                 img.crossOrigin = "anonymous";
                 
                 img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    canvas.width = 300;
-                    canvas.height = 300;
-                    ctx.drawImage(img, 0, 0, 300, 300);
-                    container.appendChild(canvas);
+                    container.style.backgroundImage = `url(${url})`;
+                    container.style.backgroundSize = 'cover';
                 };
                 
                 img.onerror = () => logError(`Failed to load image ${id} from ${url}`);
                 img.src = url;
             };
 
-            // Load first batch
-            for (let i = 1; i <= 5; i++) {
+            // Load images
+            for (let i = 1; i <= TOTAL_IMAGES; i++) {
                 const container = document.createElement('div');
                 container.className = 'image-container';
                 document.getElementById('gallery-container').appendChild(container);
                 loadImage(i, container);
             }
+            
+            document.getElementById('loading').textContent = "Loaded test images!";
         });
     </script>
 </body>
