@@ -1,59 +1,178 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Working Gallery Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultra-Efficient Gallery</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .gallery { display: flex; flex-wrap: wrap; gap: 10px; }
-        .gallery-item { width: calc(33% - 10px); }
-        .image-container { width: 100%; height: 200px; background: #eee; }
-        .loading { text-align: center; padding: 20px; }
-        .error { color: red; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 10px;
+            -webkit-touch-callout: none;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            width: 100%;
+        }
+        .gallery-item {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 3/4;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            pointer-events: none;
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        .protection-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+        }
+        .loading {
+            text-align: center;
+            padding: 10px;
+            color: #666;
+            grid-column: 1 / -1;
+        }
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        @media (max-width: 600px) {
+            .gallery {
+                gap: 4px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="gallery" id="gallery-container"></div>
-    <div id="loading" class="loading">Loading images...</div>
-    <div id="error-log" class="error"></div>
+    <div class="gallery" id="gallery-container">
+        <div id="loading" class="loading">Loading images...</div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const TOTAL_IMAGES = 5;
+            // Protection against downloading
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
             
-            // Use working test images (IDs 101-105)
-            const getImageUrl = (id) => {
-                return `https://picsum.photos/id/${id+100}/300/300`;
-            };
-
-            const logError = (msg) => {
-                document.getElementById('error-log').innerHTML += `<p>${msg}</p>`;
-                console.error(msg);
-            };
-
-            const loadImage = (id, container) => {
-                const url = getImageUrl(id);
-                const img = new Image();
-                img.crossOrigin = "anonymous";
-                
-                img.onload = function() {
-                    container.style.backgroundImage = `url(${url})`;
-                    container.style.backgroundSize = 'cover';
-                };
-                
-                img.onerror = () => logError(`Failed to load image ${id} from ${url}`);
-                img.src = url;
-            };
-
-            // Load images
-            for (let i = 1; i <= TOTAL_IMAGES; i++) {
-                const container = document.createElement('div');
-                container.className = 'image-container';
-                document.getElementById('gallery-container').appendChild(container);
-                loadImage(i, container);
+            document.addEventListener('dragstart', function(e) {
+                if (e.target.classList.contains('gallery-img')) {
+                    e.preventDefault();
+                }
+            });
+            
+            // Configuration
+            const TEST_MODE = true; // Set to false for production
+            const TOTAL_IMAGES = TEST_MODE ? 9 : 845;
+            const IMAGES_PER_LOAD = TEST_MODE ? 3 : 9;
+            const LOW_RES_PLACEHOLDER = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMjAwIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2YwZjBmMCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjY2NjIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiPkxvYWRpbmcuLi48L3RleHQ+PC9zdmc+';
+            
+            const gallery = document.getElementById('gallery-container');
+            const loadingElement = document.getElementById('loading');
+            let loadedCount = 0;
+            
+            // Create low-quality image placeholders first
+            function createPlaceholders() {
+                for (let i = 1; i <= TOTAL_IMAGES; i++) {
+                    const item = document.createElement('div');
+                    item.className = 'gallery-item';
+                    
+                    const img = document.createElement('img');
+                    img.className = 'gallery-img';
+                    img.src = LOW_RES_PLACEHOLDER;
+                    img.alt = 'Image ' + i;
+                    img.loading = 'lazy';
+                    img.dataset.src = TEST_MODE ? 
+                        `https://picsum.photos/300/400?random=${i}&blur=1` : 
+                        `path/to/your/images/${i}-low.jpg`;
+                    img.dataset.fullSrc = TEST_MODE ? 
+                        `https://picsum.photos/600/800?random=${i}` : 
+                        `path/to/your/images/${i}.webp`;
+                    
+                    const overlay = document.createElement('div');
+                    overlay.className = 'protection-overlay';
+                    
+                    item.appendChild(img);
+                    item.appendChild(overlay);
+                    gallery.insertBefore(item, loadingElement);
+                }
             }
             
-            document.getElementById('loading').textContent = "Loaded test images!";
+            // Load actual images when visible
+            function lazyLoadImages() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            // First load low-res version
+                            if (img.src !== img.dataset.src) {
+                                img.src = img.dataset.src;
+                            }
+                            // Then load high-res version
+                            setTimeout(() => {
+                                if (img.dataset.fullSrc) {
+                                    const highResImg = new Image();
+                                    highResImg.src = img.dataset.fullSrc;
+                                    highResImg.onload = () => {
+                                        img.src = img.dataset.fullSrc;
+                                        img.style.animation = 'none';
+                                    };
+                                }
+                            }, 500);
+                            
+                            observer.unobserve(img);
+                            loadedCount++;
+                            
+                            if (loadedCount >= TOTAL_IMAGES) {
+                                loadingElement.style.display = 'none';
+                            }
+                        }
+                    });
+                }, {
+                    rootMargin: '200px',
+                    threshold: 0.01
+                });
+                
+                document.querySelectorAll('.gallery-img').forEach(img => {
+                    observer.observe(img);
+                });
+            }
+            
+            // Initial setup
+            createPlaceholders();
+            lazyLoadImages();
+            
+            // Debugging help
+            console.log('Optimized gallery initialized. Total images:', TOTAL_IMAGES);
+            if (TEST_MODE) {
+                console.log('TEST MODE: Using placeholder images from picsum.photos');
+            }
         });
     </script>
 </body>
