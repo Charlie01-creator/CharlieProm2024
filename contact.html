@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultra-Efficient Gallery</title>
+    <title>Ultra-Light 1-100.jpg Gallery (5MB Total)</title>
     <style>
         * {
             margin: 0;
@@ -10,39 +10,29 @@
             box-sizing: border-box;
             -webkit-user-select: none;
             -moz-user-select: none;
-            -ms-user-select: none;
             user-select: none;
         }
         body {
             font-family: Arial, sans-serif;
             background: #f5f5f5;
-            padding: 10px;
-            -webkit-touch-callout: none;
+            padding: 8px;
         }
         .gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            width: 100%;
+            gap: 6px;
         }
         .gallery-item {
-            position: relative;
-            width: 100%;
             aspect-ratio: 3/4;
             background: #eee;
-            border-radius: 4px;
+            position: relative;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         .gallery-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
-            pointer-events: none;
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
+            background: #eee;
         }
         .protection-overlay {
             position: absolute;
@@ -50,29 +40,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 2;
-        }
-        .loading {
-            text-align: center;
-            padding: 10px;
-            color: #666;
-            grid-column: 1 / -1;
-        }
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-        @media (max-width: 600px) {
-            .gallery {
-                gap: 4px;
-            }
         }
     </style>
 </head>
 <body>
-    <div class="gallery" id="gallery-container">
-        <div id="loading" class="loading">Loading images...</div>
-    </div>
+    <div class="gallery" id="gallery-container"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -80,100 +52,32 @@
             document.addEventListener('contextmenu', function(e) {
                 e.preventDefault();
             });
-            
             document.addEventListener('dragstart', function(e) {
                 if (e.target.classList.contains('gallery-img')) {
                     e.preventDefault();
                 }
             });
-            
-            // Configuration
-            const TEST_MODE = true; // Set to false for production
-            const TOTAL_IMAGES = TEST_MODE ? 9 : 845;
-            const IMAGES_PER_LOAD = TEST_MODE ? 3 : 9;
-            const LOW_RES_PLACEHOLDER = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMjAwIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2YwZjBmMCIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjY2NjIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiPkxvYWRpbmcuLi48L3RleHQ+PC9zdmc+';
-            
+
+            const TOTAL_IMAGES = 100;
+            const TARGET_SIZE_KB = 50; // 50KB per image = 5MB total
             const gallery = document.getElementById('gallery-container');
-            const loadingElement = document.getElementById('loading');
-            let loadedCount = 0;
-            
-            // Create low-quality image placeholders first
-            function createPlaceholders() {
-                for (let i = 1; i <= TOTAL_IMAGES; i++) {
-                    const item = document.createElement('div');
-                    item.className = 'gallery-item';
-                    
-                    const img = document.createElement('img');
-                    img.className = 'gallery-img';
-                    img.src = LOW_RES_PLACEHOLDER;
-                    img.alt = 'Image ' + i;
-                    img.loading = 'lazy';
-                    
-                    // Modified to use "1.jpg" for the first image in test mode
-                    img.dataset.src = TEST_MODE ? 
-                        (i === 1 ? '1.jpg' : `https://picsum.photos/300/400?random=${i}&blur=1`) : 
-                        `path/to/your/images/${i}-low.jpg`;
-                    img.dataset.fullSrc = TEST_MODE ? 
-                        (i === 1 ? '1.jpg' : `https://picsum.photos/600/800?random=${i}`) : 
-                        `path/to/your/images/${i}.webp`;
-                    
-                    const overlay = document.createElement('div');
-                    overlay.className = 'protection-overlay';
-                    
-                    item.appendChild(img);
-                    item.appendChild(overlay);
-                    gallery.insertBefore(item, loadingElement);
-                }
-            }
-            
-            // Load actual images when visible
-            function lazyLoadImages() {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            // First load low-res version
-                            if (img.src !== img.dataset.src) {
-                                img.src = img.dataset.src;
-                            }
-                            // Then load high-res version
-                            setTimeout(() => {
-                                if (img.dataset.fullSrc) {
-                                    const highResImg = new Image();
-                                    highResImg.src = img.dataset.fullSrc;
-                                    highResImg.onload = () => {
-                                        img.src = img.dataset.fullSrc;
-                                        img.style.animation = 'none';
-                                    };
-                                }
-                            }, 500);
-                            
-                            observer.unobserve(img);
-                            loadedCount++;
-                            
-                            if (loadedCount >= TOTAL_IMAGES) {
-                                loadingElement.style.display = 'none';
-                            }
-                        }
-                    });
-                }, {
-                    rootMargin: '200px',
-                    threshold: 0.01
-                });
+
+            // Create image elements with lazy loading
+            for (let i = 1; i <= TOTAL_IMAGES; i++) {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
                 
-                document.querySelectorAll('.gallery-img').forEach(img => {
-                    observer.observe(img);
-                });
-            }
-            
-            // Initial setup
-            createPlaceholders();
-            lazyLoadImages();
-            
-            // Debugging help
-            console.log('Optimized gallery initialized. Total images:', TOTAL_IMAGES);
-            if (TEST_MODE) {
-                console.log('TEST MODE: Using "1.jpg" for first image and placeholders for others');
+                const img = document.createElement('img');
+                img.className = 'gallery-img';
+                img.loading = 'lazy';
+                img.alt = `${i}.jpg`;
+                img.src = `${i}.jpg?size=${TARGET_SIZE_KB}kb`; // Add size parameter for server-side resizing
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'protection-overlay';
+                
+                item.append(img, overlay);
+                gallery.appendChild(item);
             }
         });
     </script>
