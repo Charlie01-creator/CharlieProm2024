@@ -108,11 +108,13 @@
                     img.src = LOW_RES_PLACEHOLDER;
                     img.alt = 'Image ' + i;
                     img.loading = 'lazy';
+                    
+                    // Modified to use "1.jpg" for the first image in test mode
                     img.dataset.src = TEST_MODE ? 
-                        `https://picsum.photos/300/400?random=${i}&blur=1` : 
+                        (i === 1 ? '1.jpg' : `https://picsum.photos/300/400?random=${i}&blur=1`) : 
                         `path/to/your/images/${i}-low.jpg`;
                     img.dataset.fullSrc = TEST_MODE ? 
-                        `https://picsum.photos/600/800?random=${i}` : 
+                        (i === 1 ? '1.jpg' : `https://picsum.photos/600/800?random=${i}`) : 
                         `path/to/your/images/${i}.webp`;
                     
                     const overlay = document.createElement('div');
@@ -171,7 +173,7 @@
             // Debugging help
             console.log('Optimized gallery initialized. Total images:', TOTAL_IMAGES);
             if (TEST_MODE) {
-                console.log('TEST MODE: Using placeholder images from picsum.photos');
+                console.log('TEST MODE: Using "1.jpg" for first image and placeholders for others');
             }
         });
     </script>
