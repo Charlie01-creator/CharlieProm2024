@@ -1,0 +1,36 @@
+name: Convert JPG to WebP
+on:
+  push:
+    branches: [ main ]  # Runs on pushes to main branch
+    paths:              # Only trigger when JPGs change
+      - '**.jpg'
+      - '**.jpeg'
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Install WebP tools
+      - name: Install WebP utilities
+        run: sudo apt-get install -y webp
+
+      # 3. Convert all JPGs to WebP
+      - name: Convert images
+        run: |
+          for file in $(find . -name '*.jpg' -o -name '*.jpeg'); do
+            cwebp -q 75 "$file" -o "${file%.*}.webp"
+            echo "Converted $file to WebP"
+          done
+
+      # 4. Commit the changes
+      - name: Commit WebP files
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "Auto-converted JPGs to WebP" || echo "No changes to commit"
+          git push
