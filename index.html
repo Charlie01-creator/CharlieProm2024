@@ -1,1025 +1,405 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Starlight Prom 2024 | Memories</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* ===== Global Styles ===== */
-        :root {
-            --primary: #6a4c93;
-            --secondary: #f8c537;
-            --dark: #1a1a2e;
-            --light: #f8f9fa;
-            --accent: #ff6b6b;
-            --text: #333;
-            --text-light: #6c757d;
-            --transition: all 0.3s ease;
-            --shadow: 0 10px 20px rgba(0,0,0,0.1);
-            --radius: 12px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.7;
-            color: var(--text);
-            background-color: var(--light);
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4 {
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-            font-size: 0.9rem;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 4px 15px rgba(106, 76, 147, 0.3);
-        }
-
-        .btn-primary:hover {
-            background: #5a3d7d;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(106, 76, 147, 0.4);
-        }
-
-        .btn-secondary {
-            background: var(--secondary);
-            color: var(--dark);
-            box-shadow: 0 4px 15px rgba(248, 197, 55, 0.3);
-        }
-
-        .btn-secondary:hover {
-            background: #e6b732;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(248, 197, 55, 0.4);
-        }
-
-        .section {
-            padding: 100px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .section-title p {
-            color: var(--text-light);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* ===== Header & Navigation ===== */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            transition: var(--transition);
-            padding: 20px 0;
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-        }
-
-        .logo i {
-            margin-right: 10px;
-            color: var(--secondary);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-left: 30px;
-        }
-
-        .nav-links a {
-            color: var(--dark);
-            font-weight: 600;
-            position: relative;
-            padding: 5px 0;
-            transition: var(--transition);
-        }
-
-        .nav-links a:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover:after,
-        .nav-links a.active:after {
-            width: 100%;
-        }
-
-        .nav-links a.active {
-            color: var(--primary);
-        }
-
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        .hamburger div {
-            width: 30px;
-            height: 3px;
-            background: var(--primary);
-            margin: 6px 0;
-            transition: var(--transition);
-        }
-
-        /* ===== Hero Section ===== */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, rgba(26,26,46,0.9) 0%, rgba(106,76,147,0.8) 100%);
-            color: white;
-        }
-
-        .hero:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80') no-repeat center center/cover;
-            z-index: -1;
-            opacity: 0.3;
-        }
-
-        .hero-content {
-            max-width: 800px;
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            line-height: 1.1;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
-
-        .hero-btns {
-            display: flex;
-            gap: 20px;
-        }
-
-        .hero-btns .btn {
-            padding: 15px 35px;
-        }
-
-        /* ===== Highlights Section ===== */
-        .highlights {
-            background: white;
-        }
-
-        .highlight-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .highlight-card {
-            background: white;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .highlight-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .card-img {
-            height: 250px;
-            overflow: hidden;
-        }
-
-        .card-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .highlight-card:hover .card-img img {
-            transform: scale(1.1);
-        }
-
-        .card-content {
-            padding: 25px;
-        }
-
-        .card-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-
-        .card-content p {
-            color: var(--text-light);
-            margin-bottom: 20px;
-        }
-
-        .card-stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        .card-stats span {
-            display: flex;
-            align-items: center;
-        }
-
-        .card-stats i {
-            margin-right: 5px;
-            color: var(--secondary);
-        }
-
-        /* ===== Gallery Preview Section ===== */
-        .gallery-preview {
-            background: #f5f5f8;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: 200px;
-            gap: 15px;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .gallery-item:nth-child(1) {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        .gallery-item:nth-child(6) {
-            grid-column: span 2;
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
-            display: flex;
-            align-items: flex-end;
-            padding: 20px;
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-
-        .gallery-overlay span {
-            color: white;
-            font-weight: 600;
-        }
-
-        /* ===== Testimonials Section ===== */
-        .testimonials {
-            background: white;
-        }
-
-        .testimonial-slider {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .testimonial {
-            background: white;
-            padding: 40px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            text-align: center;
-            display: none;
-        }
-
-        .testimonial.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .testimonial-text {
-            font-size: 1.2rem;
-            font-style: italic;
-            color: var(--text);
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .testimonial-text:before,
-        .testimonial-text:after {
-            content: '"';
-            font-size: 3rem;
-            color: var(--secondary);
-            opacity: 0.3;
-            position: absolute;
-        }
-
-        .testimonial-text:before {
-            top: -20px;
-            left: -15px;
-        }
-
-        .testimonial-text:after {
-            bottom: -40px;
-            right: -15px;
-        }
-
-        .testimonial-author {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .author-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-bottom: 15px;
-            border: 3px solid var(--secondary);
-        }
-
-        .author-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .author-info h4 {
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-
-        .author-info p {
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        .slider-controls {
-            display: flex;
-            justify-content: center;
-            margin-top: 30px;
-            gap: 10px;
-        }
-
-        .slider-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #ddd;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .slider-dot.active {
-            background: var(--primary);
-            transform: scale(1.2);
-        }
-
-        /* ===== Footer ===== */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 60px 0 20px;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            color: var(--secondary);
-        }
-
-        .footer-column p {
-            margin-bottom: 15px;
-            opacity: 0.8;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.1);
-            color: white;
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            background: var(--secondary);
-            color: var(--dark);
-            transform: translateY(-3px);
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-            list-style: none;
-        }
-
-        .footer-links a {
-            opacity: 0.8;
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            opacity: 1;
-            color: var(--secondary);
-            padding-left: 5px;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-
-        /* ===== Responsive Styles ===== */
-        @media (max-width: 992px) {
-            .section {
-                padding: 80px 0;
-            }
-
-            .hero-content h1 {
-                font-size: 3rem;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 70%;
-                height: 100vh;
-                background: white;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transition: var(--transition);
-                box-shadow: -5px 0 20px rgba(0,0,0,0.1);
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .nav-links li {
-                margin: 15px 0;
-                margin-left: 0;
-            }
-
-            .nav-links a {
-                color: var(--dark);
-                font-size: 1.2rem;
-            }
-
-            .hamburger {
-                display: block;
-            }
-
-            .hamburger.active div:nth-child(1) {
-                transform: rotate(-45deg) translate(-5px, 6px);
-            }
-
-            .hamburger.active div:nth-child(2) {
-                opacity: 0;
-            }
-
-            .hamburger.active div:nth-child(3) {
-                transform: rotate(45deg) translate(-5px, -6px);
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-btns {
-                flex-direction: column;
-            }
-
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 576px) {
-            .section {
-                padding: 60px 0;
-            }
-
-            .section-title h2 {
-                font-size: 2rem;
-            }
-
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .gallery-item:nth-child(1),
-            .gallery-item:nth-child(6) {
-                grid-column: span 1;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Central College Mityana — Prom 2024 Photos</title>
+  <meta name="description" content="Central College Mityana Prom 2024 — browse, download, and share watermarked photos" />
+  <meta property="og:title" content="Central College Mityana — Prom 2024 Photos" />
+  <meta property="og:description" content="Browse, download, and share watermarked photos" />
+  <meta property="og:type" content="website" />
+  <style>
+    :root {
+      --bg:#0b0d0f; --panel:#0f1316; --muted:#93a2ad; --text:#e8eef2; --accent:#6cd4ff; --accent-2:#a0ffcf;
+      --card:#12181d; --ring:#20303b; --ok:#22c55e; --warn:#f59e0b; --err:#ef4444;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    a{color:var(--accent)}
+    header{position:sticky;top:0;z-index:40;background:rgba(11,13,15,.75);backdrop-filter:blur(8px);border-bottom:1px solid var(--ring)}
+    .wrap{max-width:1100px;margin:0 auto;padding:14px 16px}
+    .row{display:flex;align-items:center;gap:12px}
+    .grow{flex:1}
+    .brand{font-weight:800;letter-spacing:.2px}
+    .badge{font-size:.72rem;padding:2px 8px;border:1px solid var(--ring);border-radius:999px;color:var(--muted)}
+    .cta{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#041216;font-weight:700;border:none;border-radius:10px;padding:10px 14px;cursor:pointer}
+    .ghost{background:transparent;border:1px solid var(--ring);color:var(--text);border-radius:10px;padding:9px 12px}
+    main{padding:18px 0}
+
+    /* Banner */
+    .hero{background:radial-gradient(1200px 400px at 10% -10%,#164e63 0%,transparent 50%),radial-gradient(900px 300px at 100% 0%,#3730a3 0%,transparent 50%);border-bottom:1px solid var(--ring)}
+    .hero .inner{padding:28px 16px 16px}
+    .hero h1{margin:0 0 6px;font-size:clamp(20px,4vw,34px)}
+    .hero p{margin:0;color:var(--muted)}
+
+    /* Controls */
+    .controls{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+    .chip{border:1px solid var(--ring);padding:6px 10px;border-radius:999px;color:var(--muted);cursor:pointer}
+    .chip.active{border-color:var(--accent);color:var(--text)}
+
+    /* Gallery grid — 2 / 3 / 4 columns */
+    .grid{display:grid;gap:8px}
+    @media (max-width: 640px){ .grid{grid-template-columns: repeat(2, 1fr);} }
+    @media (min-width: 641px) and (max-width: 1024px){ .grid{grid-template-columns: repeat(3, 1fr);} }
+    @media (min-width: 1025px){ .grid{grid-template-columns: repeat(4, 1fr);} }
+
+    .card{position:relative;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--ring)}
+    .card img{width:100%;height:100%;display:block;object-fit:cover;aspect-ratio:1/1}
+    .card .shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),transparent 40%)}
+    .card .btns{position:absolute;left:8px;bottom:8px;display:flex;gap:6px}
+    .sm{font-size:.82rem;padding:6px 8px;border-radius:8px;border:1px solid var(--ring);background:rgba(15,19,22,.7);backdrop-filter:blur(6px);color:var(--text)}
+    .sm[disabled]{opacity:.5;cursor:not-allowed}
+
+    /* Lightbox */
+    dialog{border:none;border-radius:14px;background:#0b0d0fbf;backdrop-filter:blur(10px);width:100%;max-width:min(96vw,1100px)}
+    .lb{display:grid;grid-template-columns: 1fr;gap:8px;padding:0}
+    .lb .media{background:#000;border-radius:12px;overflow:hidden;border:1px solid var(--ring)}
+    .lb .media img{width:100%;display:block;max-height:70vh;object-fit:contain}
+    .lb .tools{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;background:var(--panel);padding:10px;border-radius:12px;border:1px solid var(--ring)}
+    .muted{color:var(--muted)}
+
+    /* Auth modal */
+    .modal{border:1px solid var(--ring);padding:0}
+    .panel{padding:16px;background:var(--panel);border-radius:12px}
+    .input{width:100%;padding:10px 12px;border-radius:10px;background:#0d1216;border:1px solid var(--ring);color:var(--text)}
+    .row-gap{display:grid;gap:10px}
+
+    /* Footer */
+    footer{border-top:1px solid var(--ring);color:var(--muted);padding:30px 16px;margin-top:24px}
+
+    /* Misc */
+    .hide{display:none}
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header id="header">
-        <div class="container header-container">
-            <a href="#" class="logo"><i class="fas fa-star"></i> Starlight Prom</a>
-            
-            <div class="hamburger">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            
-            <ul class="nav-links">
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="#memories.html">Memories</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </div>
-    </header>
+  <header>
+    <div class="wrap row">
+      <div class="brand">Central College Mityana • Prom 2024 <span class="badge">Official Photos</span></div>
+      <div class="grow"></div>
+      <button id="signinBtn" class="ghost">Sign in</button>
+      <button id="adminBtn" class="ghost">Admin</button>
+    </div>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Starlight Prom 2024</h1>
-                <p>Relive the magical night through our photo gallery. Dancing, laughter, and memories that will last a lifetime.</p>
-                <div class="hero-btns">
-                    <a href="gallery.html" class="btn btn-primary">View Gallery</a>
-                    <a href="contact.html" class="btn btn-secondary">Order Photos</a>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section class="hero">
+    <div class="wrap inner">
+      <h1>Relive Prom 2024 🎉</h1>
+      <p>Browse the gallery. Sign in to download or share watermarked photos.<br>
+         Watermark: <strong>charlie02056@gmail.com / 0700955563</strong></p>
+      <div class="controls">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="pre">Pre‑Prom</button>
+        <button class="chip" data-filter="night">Prom Night</button>
+        <button class="chip" data-filter="after">After Party</button>
+      </div>
+    </div>
+  </section>
 
-    <!-- Highlights Section -->
-    <section class="section highlights">
-        <div class="container">
-            <div class="section-title">
-                <h2>Night Highlights</h2>
-                <p>Experience the magic of Starlight Prom through these unforgettable moments</p>
-            </div>
-            
-            <div class="highlight-cards">
-                <div class="highlight-card">
-                    <div class="card-img">
-                        <img src="8.html" alt="Red Carpet">
-                    </div>
-                    <div class="card-content">
-                        <h3>Red Carpet Arrivals</h3>
-                        <p>Our students made their grand entrance in stunning outfits, walking the red carpet like celebrities.</p>
-                        <div class="card-stats">
-                            <span><i class="fas fa-images"></i> 120+ Photos</span>
-                            <span><i class="fas fa-heart"></i> 450 Likes</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="highlight-card">
-                    <div class="card-img">
-                        <img src="10.html" alt="Dance Floor">
-                    </div>
-                    <div class="card-content">
-                        <h3>Dance Floor Energy</h3>
-                        <p>The dance floor came alive with music, lights, and non-stop dancing throughout the night.</p>
-                        <div class="card-stats">
-                            <span><i class="fas fa-images"></i> 85+ Photos</span>
-                            <span><i class="fas fa-heart"></i> 520 Likes</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="highlight-card">
-                    <div class="card-img">
-                        <img src="6.html" alt="Award Ceremony">
-                    </div>
-                    <div class="card-content">
-                        <h3>Award Ceremony</h3>
-                        <p>We celebrated our students with special awards and recognitions for their achievements.</p>
-                        <div class="card-stats">
-                            <span><i class="fas fa-images"></i> 65+ Photos</span>
-                            <span><i class="fas fa-heart"></i> 380 Likes</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <main class="wrap">
+    <div id="gallery" class="grid" aria-live="polite"></div>
+  </main>
 
-    <!-- Gallery Preview Section -->
-    <section class="section gallery-preview">
-        <div class="container">
-            <div class="section-title">
-                <h2>Gallery Preview</h2>
-                <p>A glimpse of the magical moments captured at Starlight Prom</p>
-            </div>
-            
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1547153760-18fc86324498?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Prom Photo 1">
-                    <div class="gallery-overlay">
-                        <span>Prom King & Queen</span>
-                    </div>L
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-153174072545-7a4b6ad7a6a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Prom Photo 2">
-                    <div class="gallery-overlay">
-                        <span>Group Photo</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Prom Photo 3">
-                    <div class="gallery-overlay">
-                        <span>Dancing</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Prom Photo 4">
-                    <div class="gallery-overlay">
-                        <span>Red Carpet</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Prom Photo 5">
-                    <div class="gallery-overlay">
-                        <span>Party</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Prom Photo 6">
-                    <div class="gallery-overlay">
-                        <span>Awards</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1473&q=80" alt="Prom Photo 7">
-                    <div class="gallery-overlay">
-                        <span>Couples</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="#" class="btn btn-primary">View Full Gallery</a>
-            </div>
-        </div>
-    </section>
+  <footer class="wrap">
+    Prom 2024 • Central College Mityana • For issues: <a href="mailto:charlie02056@gmail.com">charlie02056@gmail.com</a> • <span>0700955563</span>
+  </footer>
 
-    <!-- Testimonials Section -->
-    <section class="section testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>Memories That Last</h2>
-                <p>Hear what our students say about their prom experience</p>
-            </div>
-            
-            <div class="testimonial-slider">
-                <div class="testimonial active">
-                    <div class="testimonial-text">
-                        Prom night was absolutely magical! The decorations, music, and atmosphere were perfect. It was the best way to celebrate our graduation with friends.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson">
-                        </div>
-                        <div class="author-info">
-                            <h4>Sarah Johnson</h4>
-                            <p>Class of 2024</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial">
-                    <div class="testimonial-text">
-                        I'll never forget dancing the night away with my friends. The photo booth was amazing and we got so many great pictures to remember the night.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
-                        </div>
-                        <div class="author-info">
-                            <h4>Michael Chen</h4>
-                            <p>Class of 2024</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial">
-                    <div class="testimonial-text">
-                        Being crowned Prom Queen was such a surprise! The whole night felt like a fairy tale. Thank you to everyone who made it so special.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-img">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma Rodriguez">
-                        </div>
-                        <div class="author-info">
-                            <h4>Emma Rodriguez</h4>
-                            <p>Class of 2024</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="slider-controls">
-                    <div class="slider-dot active" data-index="0"></div>
-                    <div class="slider-dot" data-index="1"></div>
-                    <div class="slider-dot" data-index="2"></div>
-                </div>
-            </div>
+  <!-- Lightbox -->
+  <dialog id="lightbox">
+    <div class="lb wrap">
+      <div class="media"><img id="lbImg" alt="Selected photo" /></div>
+      <div class="tools">
+        <div class="muted" id="lbMeta">Watermark applied on export</div>
+        <div class="row" style="gap:8px">
+          <button id="dlBtn" class="cta">Download (Watermarked)</button>
+          <button id="shareBtn" class="ghost">Share</button>
+          <button id="closeLb" class="ghost">Close</button>
         </div>
-    </section>
+      </div>
+    </div>
+  </dialog>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Starlight Prom 2024</h3>
-                    <p>Creating unforgettable memories for our students since 1995. Each year we strive to make prom night more magical than the last.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#" class="active">Home</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="#">Memories</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i>  School Street, Mityana</p>
-                    <p><i class="fas fa-phone"></i> (256) 781-915680</p>
-                    <p><i class="fas fa-envelope"></i> prom@school.edu</p>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 Starlight Prom. All Rights Reserved. Designed with <i class="fas fa-heart" style="color: var(--accent);"></i> by Prom Committee</p>
-            </div>
+  <!-- Auth Modal -->
+  <dialog id="auth" class="modal">
+    <div class="panel wrap" style="max-width:420px">
+      <h2 style="margin:0 0 8px">Sign in to Continue</h2>
+      <p class="muted" style="margin:0 0 12px">Email + password only. (Demo: stored locally for now.)</p>
+      <div class="row-gap">
+        <input id="authEmail" class="input" type="email" placeholder="your@email.com" />
+        <input id="authPass" class="input" type="password" placeholder="Password" />
+        <div class="row" style="gap:8px">
+          <button id="doSignin" class="cta">Sign in</button>
+          <button id="doSignup" class="ghost">Create account</button>
+          <button id="closeAuth" class="ghost">Close</button>
         </div>
-    </footer>
+        <div id="authMsg" class="muted"></div>
+      </div>
+    </div>
+  </dialog>
 
-    <script>
-        // Mobile Navigation
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        const navItems = document.querySelectorAll('.nav-links li');
-        
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            
-            // Toggle body scroll when menu is open
-            if (navLinks.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
-        });
-        
-        // Close menu when clicking a link
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-        
-        // Smooth Scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Testimonial Slider
-        const testimonials = document.querySelectorAll('.testimonial');
-        const dots = document.querySelectorAll('.slider-dot');
-        let currentTestimonial = 0;
-        
-        function showTestimonial(index) {
-            testimonials.forEach(testimonial => testimonial.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-            
-            testimonials[index].classList.add('active');
-            dots[index].classList.add('active');
-            currentTestimonial = index;
-        }
-        
-        dots.forEach(dot => {
-            dot.addEventListener('click', function() {
-                showTestimonial(parseInt(this.dataset.index));
-            });
-        });
-        
-        // Auto-rotate testimonials every 5 seconds
-        setInterval(() => {
-            let nextIndex = (currentTestimonial + 1) % testimonials.length;
-            showTestimonial(nextIndex);
-        }, 5000);
-        
-        // Prevent image downloading
-        document.addEventListener('contextmenu', function(e) {
-            if (e.target.tagName === 'IMG') {
-                e.preventDefault();
-                alert('Right-click is disabled to protect our photos');
-            }
-        });
-        
-        document.addEventListener('keydown', function(e) {
-            // Disable PrintScreen key
-            if (e.key === 'PrintScreen') {
-                e.preventDefault();
-                return false;
-            }
-            
-            // Disable F12 (dev tools)
-            if (e.key === 'F12') {
-                e.preventDefault();
-                return false;
-            }
-            
-            // Disable Ctrl+Shift+I (dev tools)
-            if (e.ctrlKey && e.shiftKey && e.key === 'I') {
-                e.preventDefault();
-                return false;
-            }
-            
-            // Disable Ctrl+Shift+J (dev tools)
-            if (e.ctrlKey && e.shiftKey && e.key === 'J') {
-                e.preventDefault();
-                return false;
-            }
-            
-            // Disable Ctrl+U (view source)
-            if (e.ctrlKey && e.key === 'u') {
-                e.preventDefault();
-                return false;
-            }
-        });
-    </script>
+  <!-- Admin Modal (client‑only uploader + compression) -->
+  <dialog id="admin" class="modal">
+    <div class="panel wrap" style="max-width:560px">
+      <h2 style="margin:0 0 8px">Admin Upload</h2>
+      <p class="muted" style="margin:0 0 12px">Bulk add images (compressed to WebP thumbnails). Local‑only in this demo.</p>
+      <div class="row-gap">
+        <input id="adminPin" class="input" placeholder="Enter admin PIN (demo: 2024)" />
+        <input id="filePick" class="input" type="file" accept="image/*" multiple />
+        <progress id="prog" max="100" value="0" class="hide"></progress>
+        <div class="row" style="gap:8px">
+          <button id="ingest" class="cta">Add to Gallery</button>
+          <button id="wipe" class="ghost">Clear Local Photos</button>
+          <button id="closeAdmin" class="ghost">Close</button>
+        </div>
+        <div class="muted">Tip: We generate tiny thumbnails (≤ 12 KB each) to keep total under 10 MB for 800+ items. Full‑size is created only during export.</div>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+  // =========================
+  // Auth (client‑only demo)
+  // =========================
+  const auth = {
+    get user(){ try{return JSON.parse(localStorage.getItem('ccm_user')||'null')}catch{return null} },
+    save(u){ localStorage.setItem('ccm_user', JSON.stringify(u)); },
+    clear(){ localStorage.removeItem('ccm_user'); }
+  };
+  const authDlg = document.getElementById('auth');
+  document.getElementById('signinBtn').onclick = () => authDlg.showModal();
+  document.getElementById('closeAuth').onclick = () => authDlg.close();
+  document.getElementById('doSignup').onclick = () => {
+    const email = document.getElementById('authEmail').value.trim();
+    const pass = document.getElementById('authPass').value.trim();
+    if(!email||!pass) return msg('Enter email and password');
+    auth.save({email});
+    msg('Account created. You are signed in.');
+    setTimeout(()=>authDlg.close(),600);
+  };
+  document.getElementById('doSignin').onclick = () => {
+    const email = document.getElementById('authEmail').value.trim();
+    const pass = document.getElementById('authPass').value.trim();
+    if(!email||!pass) return msg('Enter email and password');
+    auth.save({email});
+    msg('Signed in successfully.');
+    setTimeout(()=>authDlg.close(),600);
+  };
+  function msg(t){ document.getElementById('authMsg').textContent = t; }
+
+  function requireAuth(){
+    if(!auth.user){ authDlg.showModal(); return false; }
+    return true;
+  }
+
+  // =========================
+  // Ultra‑light placeholder thumbnail (SVG) — ~300 bytes
+  // =========================
+  const tinyThumb = `data:image/svg+xml;base64,${btoa(`<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'>\n  <defs>\n    <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>\n      <stop offset='0%' stop-color='#1f2937'/>\n      <stop offset='100%' stop-color='#0f172a'/>\n    </linearGradient>\n  </defs>\n  <rect width='100%' height='100%' fill='url(#g)'/>\n  <text x='50%' y='55%' text-anchor='middle' font-family='Inter,Arial' font-size='28' fill='rgba(255,255,255,0.85)'>PROM 2024</text>\n</svg>`)}`;
+
+  // Seed 800+ items with categories. Real images can be uploaded via Admin.
+  const SEED_COUNT = 810; // ≥800
+  const CATS = ['pre','night','after'];
+  let items = Array.from({length: SEED_COUNT}, (_,i)=>({
+    id: i+1,
+    cat: CATS[i % CATS.length],
+    thumb: tinyThumb,    // ultra small – keeps initial load tiny
+    full: tinyThumb      // replaced by real photo during admin upload or backend
+  }));
+
+  // Persist local admin uploads across reloads
+  const stored = localStorage.getItem('ccm_photos');
+  if(stored){
+    try { const extra = JSON.parse(stored); if(Array.isArray(extra) && extra.length){
+      // Place uploaded items first
+      items = extra.concat(items.slice(0, Math.max(0, SEED_COUNT - extra.length)));
+    }} catch{}
+  }
+
+  // =========================
+  // Render gallery with lazy loading
+  // =========================
+  const gal = document.getElementById('gallery');
+  function render(list){
+    gal.innerHTML = '';
+    const frag = document.createDocumentFragment();
+    list.forEach(obj=>{
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.dataset.cat = obj.cat;
+      const img = document.createElement('img');
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.src = obj.thumb; // tiny preview
+      img.alt = `Prom 2024 photo #${obj.id}`;
+      img.addEventListener('click',()=>openLightbox(obj));
+      const shade = document.createElement('div'); shade.className='shade';
+      const btns = document.createElement('div'); btns.className='btns';
+      const v = document.createElement('button'); v.className='sm'; v.textContent='Open';
+      v.onclick = ()=>openLightbox(obj);
+      btns.appendChild(v);
+      card.append(img, shade, btns);
+      frag.appendChild(card);
+    });
+    gal.appendChild(frag);
+  }
+  render(items);
+
+  // Filtering
+  document.querySelectorAll('.chip').forEach(c=>{
+    c.addEventListener('click',()=>{
+      document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+      c.classList.add('active');
+      const f = c.dataset.filter;
+      const list = (f==='all') ? items : items.filter(x=>x.cat===f);
+      render(list);
+    });
+  });
+
+  // =========================
+  // Lightbox + watermark export
+  // =========================
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lbImg');
+  let current = null;
+
+  function openLightbox(obj){
+    current = obj;
+    lbImg.src = obj.full || obj.thumb;
+    lb.showModal();
+  }
+  document.getElementById('closeLb').onclick = ()=>lb.close();
+
+  async function drawWatermark(src){
+    const img = await loadImage(src);
+    const maxSide = 1600; // reasonable export size
+    const scale = Math.min(maxSide / img.width, maxSide / img.height, 1);
+    const w = Math.round(img.width * scale); const h = Math.round(img.height * scale);
+    const c = document.createElement('canvas'); c.width = w; c.height = h;
+    const ctx = c.getContext('2d');
+    ctx.drawImage(img, 0, 0, w, h);
+
+    // watermark text
+    const wmText = 'Central College Mityana — Prom 2024  |  charlie02056@gmail.com / 0700955563';
+    ctx.globalAlpha = 0.55;
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, h - 56, w, 56);
+    ctx.globalAlpha = 0.8;
+    ctx.font = '16px Inter, Arial';
+    ctx.fillStyle = '#fff';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(wmText, 12, h - 28);
+
+    // optional diagonal repeats for extra protection
+    ctx.globalAlpha = 0.13;
+    ctx.translate(w/2, h/2); ctx.rotate(-Math.PI/6); ctx.translate(-w/2, -h/2);
+    ctx.font = '28px Inter, Arial';
+    for(let y=-200; y<h+200; y+=180){
+      for(let x=-200; x<w+200; x+=420){
+        ctx.fillText('CCM PROM 2024', x, y);
+      }
+    }
+
+    return c;
+  }
+
+  function loadImage(src){
+    return new Promise((res,rej)=>{ const i=new Image(); i.crossOrigin='anonymous'; i.onload=()=>res(i); i.onerror=rej; i.src=src; });
+  }
+
+  async function ensureAuthThen(fn){
+    if(!requireAuth()) return;
+    try{ await fn(); }catch(e){ alert('Error: '+e.message); }
+  }
+
+  document.getElementById('dlBtn').onclick = ()=>ensureAuthThen(async ()=>{
+    const can = await drawWatermark(current.full || current.thumb);
+    const a = document.createElement('a');
+    a.download = `ccm-prom-2024-${current.id}.webp`;
+    a.href = can.toDataURL('image/webp', 0.92);
+    a.click();
+  });
+
+  document.getElementById('shareBtn').onclick = ()=>ensureAuthThen(async ()=>{
+    const can = await drawWatermark(current.full || current.thumb);
+    const blob = await new Promise(r=>can.toBlob(r, 'image/webp', 0.92));
+    if(navigator.canShare && navigator.canShare({ files: [new File([blob], 'photo.webp', {type:'image/webp'})] })){
+      await navigator.share({
+        title: 'CCM Prom 2024',
+        text: 'Central College Mityana — Prom 2024 (watermarked)',
+        files: [new File([blob], `ccm-prom-2024-${current.id}.webp`, {type:'image/webp'})]
+      });
+    } else {
+      // Fallback: open in new tab
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank');
+      setTimeout(()=>URL.revokeObjectURL(url), 5000);
+    }
+  });
+
+  // =========================
+  // Admin (client‑only demo): compress to tiny thumbnails, store in localStorage
+  // =========================
+  const adminDlg = document.getElementById('admin');
+  document.getElementById('adminBtn').onclick = ()=>adminDlg.showModal();
+  document.getElementById('closeAdmin').onclick = ()=>adminDlg.close();
+
+  document.getElementById('ingest').onclick = async ()=>{
+    const pin = (document.getElementById('adminPin').value||'').trim();
+    if(pin !== '2024'){ return alert('Wrong PIN'); }
+    const files = Array.from(document.getElementById('filePick').files||[]);
+    if(!files.length) return alert('Pick some images');
+    const prog = document.getElementById('prog'); prog.classList.remove('hide');
+
+    const added = [];
+    let k=0;
+    for(const f of files){
+      const img = await fileToImage(f);
+      const thumbUrl = await toThumb(img, 420); // small grid thumb
+      const fullUrl = await toFull(img, 1600); // full shown in lightbox (export still re-draws)
+      added.push({id: Date.now()+Math.random(), cat: CATS[k++%CATS.length], thumb: thumbUrl, full: fullUrl});
+      prog.value = Math.round((added.length/files.length)*100);
+    }
+
+    // Keep local storage small: store only compressed data URLs
+    const prev = JSON.parse(localStorage.getItem('ccm_photos')||'[]');
+    const merged = added.concat(prev).slice(0, 1200); // cap
+    localStorage.setItem('ccm_photos', JSON.stringify(merged));
+
+    // Prepend to items and re-render
+    items = merged.concat(items).slice(0, Math.max(SEED_COUNT, merged.length));
+    render(items);
+    alert('Uploaded! (Local only)');
+    prog.classList.add('hide'); prog.value=0;
+  };
+
+  document.getElementById('wipe').onclick = ()=>{
+    if(confirm('Clear locally stored photos?')){
+      localStorage.removeItem('ccm_photos');
+      location.reload();
+    }
+  };
+
+  function fileToImage(file){
+    return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>{ const i=new Image(); i.onload=()=>res(i); i.onerror=rej; i.src=r.result; }; r.onerror=rej; r.readAsDataURL(file); });
+  }
+  function toThumb(img, max){ return scaleTo(img, max, 'image/webp', 0.6); } // ~≤12KB typical
+  function toFull(img, max){ return scaleTo(img, max, 'image/webp', 0.85); }
+  function scaleTo(img, max, type, q){
+    const s = Math.min(max/img.width, max/img.height, 1);
+    const w = Math.round(img.width*s), h=Math.round(img.height*s);
+    const c=document.createElement('canvas'); c.width=w; c.height=h; const ctx=c.getContext('2d');
+    ctx.drawImage(img,0,0,w,h);
+    return c.toDataURL(type, q);
+  }
+
+  // =========================
+  // Non‑functional protections
+  // =========================
+  // Disable right‑click on gallery images
+  document.addEventListener('contextmenu', (e)=>{
+    if(e.target.closest('.card, .lb')) e.preventDefault();
+  });
+
+  </script>
 </body>
 </html>
