@@ -1,990 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Central College Mityana Prom 2024 | Relive the Magic</title>
-    <style>
-        /* Base Styles */
-        :root {
-            --gold: #D4AF37;
-            --dark-gold: #B38F2B;
-            --black: #000000;
-            --dark-gray: #111111;
-            --medium-gray: #222222;
-            --light-gray: #CCCCCC;
-            --white: #FFFFFF;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--black);
-            color: var(--white);
-            line-height: 1.7;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        section {
-            padding: 100px 0;
-        }
-        
-        /* Navigation */
-        nav {
-            background-color: rgba(0, 0, 0, 0.95);
-            padding: 25px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-            backdrop-filter: blur(10px);
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--gold);
-            text-decoration: none;
-            letter-spacing: 1px;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-        
-        .nav-links li {
-            margin-left: 35px;
-        }
-        
-        .nav-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.05rem;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .nav-links a:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--gold);
-            bottom: -5px;
-            left: 0;
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links a:hover {
-            color: var(--gold);
-        }
-        
-        .nav-links a:hover:after {
-            width: 100%;
-        }
-        
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            min-height: 800px;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('prom-hero.jpg') no-repeat center center;
-            background-size: cover;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            position: relative;
-        }
-        
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero h1 {
-            font-size: 4.2rem;
-            margin-bottom: 25px;
-            color: var(--gold);
-            font-weight: 700;
-            line-height: 1.2;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            animation: fadeInUp 1s ease-out;
-        }
-        
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
-            color: var(--light-gray);
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeInUp 1s ease-out 0.2s forwards;
-            opacity: 0;
-        }
-        
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            animation: fadeInUp 1s ease-out 0.4s forwards;
-            opacity: 0;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 15px 35px;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-            letter-spacing: 0.5px;
-        }
-        
-        .btn-primary {
-            background-color: var(--gold);
-            color: var(--black);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--dark-gold);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--gold);
-            border: 2px solid var(--gold);
-        }
-        
-        .btn-secondary:hover {
-            background-color: rgba(212, 175, 55, 0.1);
-            transform: translateY(-3px);
-        }
-        
-        .scroll-down {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--gold);
-            font-size: 1.5rem;
-            animation: bounce 2s infinite;
-            cursor: pointer;
-        }
-        
-        /* About Section */
-        .about {
-            background-color: var(--dark-gray);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .about:before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            left: -50px;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
-            z-index: 1;
-        }
-        
-        .about:after {
-            content: '';
-            position: absolute;
-            bottom: -50px;
-            right: -50px;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
-            z-index: 1;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 70px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .section-header h2 {
-            font-size: 2.8rem;
-            color: var(--gold);
-            margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-header h2:after {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 3px;
-            background: var(--gold);
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .section-header p {
-            max-width: 700px;
-            margin: 0 auto;
-            color: var(--light-gray);
-            font-size: 1.1rem;
-        }
-        
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .about-text {
-            flex: 1;
-        }
-        
-        .about-text h3 {
-            font-size: 1.8rem;
-            color: var(--gold);
-            margin-bottom: 20px;
-        }
-        
-        .about-text p {
-            margin-bottom: 25px;
-            color: var(--light-gray);
-        }
-        
-        .about-image {
-            flex: 1;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-        
-        .about-image:hover img {
-            transform: scale(1.05);
-        }
-        
-        /* Gallery Section */
-        .gallery {
-            background-color: var(--black);
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
-        }
-        
-        .gallery-item {
-            height: 300px;
-            overflow: hidden;
-            position: relative;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-        
-        .gallery-item .overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .gallery-item:hover .overlay {
-            opacity: 1;
-        }
-        
-        .gallery-item .overlay h3 {
-            color: var(--gold);
-            margin-bottom: 5px;
-        }
-        
-        .gallery-item .overlay p {
-            color: var(--white);
-            font-size: 0.9rem;
-        }
-        
-        .cta-center {
-            text-align: center;
-        }
-        
-        /* Memories Section */
-        .memories {
-            background-color: var(--dark-gray);
-            position: relative;
-        }
-        
-        .memories-container {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-        }
-        
-        .memories-image {
-            flex: 1;
-            position: relative;
-        }
-        
-        .memories-image .main-image {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .memories-image .main-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .memories-image .decoration {
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            border: 5px solid var(--gold);
-            z-index: -1;
-        }
-        
-        .memories-image .decoration-1 {
-            top: -30px;
-            left: -30px;
-        }
-        
-        .memories-image .decoration-2 {
-            bottom: -30px;
-            right: -30px;
-        }
-        
-        .memories-content {
-            flex: 1;
-        }
-        
-        .memories-content h2 {
-            font-size: 2.5rem;
-            color: var(--gold);
-            margin-bottom: 25px;
-        }
-        
-        .memories-content p {
-            color: var(--light-gray);
-            margin-bottom: 30px;
-        }
-        
-        .features {
-            margin-top: 40px;
-        }
-        
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 25px;
-        }
-        
-        .feature-icon {
-            color: var(--gold);
-            font-size: 1.5rem;
-            margin-right: 20px;
-            margin-top: 5px;
-        }
-        
-        .feature-text h3 {
-            margin-bottom: 5px;
-            color: var(--white);
-        }
-        
-        .feature-text p {
-            color: var(--light-gray);
-            margin: 0;
-            font-size: 0.95rem;
-        }
-        
-        /* Testimonials */
-        .testimonials {
-            background-color: var(--black);
-        }
-        
-        .testimonial-slider {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-        
-        .testimonial {
-            background-color: var(--medium-gray);
-            padding: 40px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .testimonial-text {
-            font-size: 1.2rem;
-            font-style: italic;
-            color: var(--light-gray);
-            margin-bottom: 30px;
-            position: relative;
-        }
-        
-        .testimonial-text:before,
-        .testimonial-text:after {
-            content: '"';
-            color: var(--gold);
-            font-size: 2rem;
-            position: absolute;
-        }
-        
-        .testimonial-text:before {
-            top: -15px;
-            left: -25px;
-        }
-        
-        .testimonial-text:after {
-            bottom: -40px;
-            right: -25px;
-        }
-        
-        .testimonial-author {
-            color: var(--gold);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-        
-        /* CTA Section */
-        .cta {
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('prom-cta.jpg') no-repeat center center;
-            background-size: cover;
-            text-align: center;
-        }
-        
-        .cta h2 {
-            font-size: 2.8rem;
-            color: var(--gold);
-            margin-bottom: 25px;
-        }
-        
-        .cta p {
-            max-width: 700px;
-            margin: 0 auto 40px;
-            color: var(--light-gray);
-            font-size: 1.1rem;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--dark-gray);
-            padding: 80px 0 30px;
-            position: relative;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-        
-        .footer-column h3 {
-            color: var(--gold);
-            font-size: 1.3rem;
-            margin-bottom: 25px;
-            position: relative;
-            padding-bottom: 15px;
-        }
-        
-        .footer-column h3:after {
-            content: '';
-            position: absolute;
-            width: 40px;
-            height: 2px;
-            background: var(--gold);
-            bottom: 0;
-            left: 0;
-        }
-        
-        .footer-column p {
-            color: var(--light-gray);
-            margin-bottom: 20px;
-        }
-        
-        .footer-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-        
-        .footer-links a {
-            color: var(--light-gray);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: var(--gold);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: var(--medium-gray);
-            color: var(--gold);
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            background-color: var(--gold);
-            color: var(--black);
-            transform: translateY(-3px);
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid var(--medium-gray);
-            color: var(--light-gray);
-            font-size: 0.9rem;
-        }
-        
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0) translateX(-50%);
-            }
-            40% {
-                transform: translateY(-20px) translateX(-50%);
-            }
-            60% {
-                transform: translateY(-10px) translateX(-50%);
-            }
-        }
-        
-        /* Responsive */
-        @media (max-width: 992px) {
-            .about-content,
-            .memories-container {
-                flex-direction: column;
-            }
-            
-            .about-image,
-            .memories-image {
-                margin-bottom: 40px;
-                width: 100%;
-            }
-            
-            .hero h1 {
-                font-size: 3.5rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            section {
-                padding: 70px 0;
-            }
-            
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            .btn-group {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .section-header h2 {
-                font-size: 2.3rem;
-            }
-            
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 2.3rem;
-            }
-            
-            .section-header h2 {
-                font-size: 2rem;
-            }
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Central College Mityana Prom 2024</title>
+<style>
+  /* ===== GLOBAL STYLES ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+  body { background-color: #0b0b0b; color: #f5d042; line-height: 1.6; }
+  a { color: #f5d042; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ===== NAVIGATION ===== */
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background: #0a0a0a; position: sticky; top: 0; z-index: 1000; }
+  nav .logo { font-size: 1.8rem; font-weight: bold; }
+  nav ul { display: flex; list-style: none; gap: 30px; }
+  nav ul li { font-size: 1rem; font-weight: 500; }
+
+  /* ===== HERO BANNER ===== */
+  .hero { position: relative; height: 90vh; background: url('https://source.unsplash.com/1600x900/?prom,students') center/cover no-repeat; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .hero h1 { font-size: 3rem; max-width: 800px; background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px; }
+
+  /* ===== INTRO SECTION ===== */
+  .intro { padding: 80px 50px; text-align: center; max-width: 900px; margin: 0 auto; }
+  .intro p { font-size: 1.2rem; color: #e0c15c; }
+
+  /* ===== FEATURED GALLERY PREVIEW ===== */
+  .gallery-preview { padding: 50px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
+  .gallery-preview img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; transition: transform 0.3s ease; }
+  .gallery-preview img:hover { transform: scale(1.05); }
+  .view-gallery { display: block; text-align: center; margin: 30px 0; font-size: 1.2rem; padding: 10px 30px; border: 2px solid #f5d042; border-radius: 5px; transition: all 0.3s ease; }
+  .view-gallery:hover { background: #f5d042; color: #0b0b0b; }
+
+  /* ===== PROM HIGHLIGHTS SECTION ===== */
+  .highlights { background: #0f0f0f; padding: 80px 50px; text-align: center; }
+  .highlights h2 { margin-bottom: 40px; font-size: 2rem; }
+  .highlights .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+  .highlights .card { background: #1a1a1a; padding: 20px; border-radius: 10px; transition: transform 0.3s ease; }
+  .highlights .card:hover { transform: translateY(-10px); }
+  .highlights .card h3 { margin-bottom: 15px; }
+  .highlights .card p { color: #e0c15c; }
+
+  /* ===== FOOTER ===== */
+  footer { background: #0a0a0a; padding: 40px 50px; text-align: center; font-size: 0.9rem; color: #888; }
+  footer p { margin-bottom: 5px; }
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="container nav-container">
-            <a href="#" class="logo">CCM Prom '24</a>
-            <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Gallery</a></li>
-                <li><a href="#">Events</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-    
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Relive the Magic of Prom Night</h1>
-                <p>Experience your unforgettable Central College Mityana Prom 2024 memories through stunning high-resolution photographs that capture every special moment.</p>
-                <div class="btn-group">
-                    <a href="#" class="btn btn-primary">View Gallery</a>
-                    <a href="#" class="btn btn-secondary">Share Memories</a>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-down" onclick="document.querySelector('.about').scrollIntoView({ behavior: 'smooth' })">
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </section>
-    
-    <!-- About Section -->
-    <section class="about">
-        <div class="container">
-            <div class="section-header">
-                <h2>Our Prom Story</h2>
-                <p>Central College Mityana's annual prom is a celebration of achievement, friendship, and the beginning of new journeys.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>A Night to Remember</h3>
-                    <p>The 2024 prom was our most spectacular event yet, with over 300 students attending the gala evening at the Grand Imperial Ballroom. The black and gold theme created an atmosphere of elegance and sophistication that our students will remember for years to come.</p>
-                    <p>From the red carpet arrivals to the crowning of prom royalty, every moment was captured by our team of professional photographers. We're proud to present these memories in stunning high-resolution quality.</p>
-                    <a href="#" class="btn btn-primary">Learn More About Prom</a>
-                </div>
-                <div class="about-image">
-                    <img src="prom-about.jpg" alt="Students at prom">
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Gallery Section -->
-    <section class="gallery">
-        <div class="container">
-            <div class="section-header">
-                <h2>Gallery Highlights</h2>
-                <p>Each photograph tells a unique story from our incredible prom night. Browse our curated collection of moments.</p>
-            </div>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="prom-gallery-1.jpg" alt="Prom photo 1">
-                    <div class="overlay">
-                        <h3>Grand Entrance</h3>
-                        <p>Students arriving in style</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="prom-gallery-2.jpg" alt="Prom photo 2">
-                    <div class="overlay">
-                        <h3>Dinner Time</h3>
-                        <p>Gourmet dining experience</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="prom-gallery-3.jpg" alt="Prom photo 3">
-                    <div class="overlay">
-                        <h3>Dance Floor</h3>
-                        <p>Students showing their moves</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="prom-gallery-4.jpg" alt="Prom photo 4">
-                    <div class="overlay">
-                        <h3>Prom Royalty</h3>
-                        <p>King and Queen coronation</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="prom-gallery-5.jpg" alt="Prom photo 5">
-                    <div class="overlay">
-                        <h3>Group Photos</h3>
-                        <p>Friendships that last forever</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="prom-gallery-6.jpg" alt="Prom photo 6">
-                    <div class="overlay">
-                        <h3>Final Dance</h3>
-                        <p>Ending the night in style</p>
-                    </div>
-                </div>
-            </div>
-            <div class="cta-center">
-                <a href="#" class="btn btn-primary">View Full Gallery</a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Memories Section -->
-    <section class="memories">
-        <div class="container memories-container">
-            <div class="memories-image">
-                <div class="main-image">
-                    <img src="prom-memories.jpg" alt="Featured prom memory">
-                </div>
-                <div class="decoration decoration-1"></div>
-                <div class="decoration decoration-2"></div>
-            </div>
-            <div class="memories-content">
-                <h2>High-Resolution Memories</h2>
-                <p>Every photograph from our prom night is available in stunning high-resolution quality, ensuring you can relive each moment with perfect clarity. Our professional photographers captured every detail, from the elegant decor to the joyful expressions.</p>
-                
-                <div class="features">
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-camera"></i>
-                        </div>
-                        <div class="feature-text">
-                            <h3>Professional Quality</h3>
-                            <p>Captured with high-end equipment by experienced photographers</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-download"></i>
-                        </div>
-                        <div class="feature-text">
-                            <h3>Instant Downloads</h3>
-                            <p>Get your photos immediately in multiple resolutions</p>
-                        </div>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-share-alt"></i>
-                        </div>
-                        <div class="feature-text">
-                            <h3>Easy Sharing</h3>
-                            <p>Share your favorite moments directly to social media</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <a href="#" class="btn btn-secondary">How to Download Photos</a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <h2>What They Say</h2>
-                <p>Hear from students and parents about their prom night experience</p>
-            </div>
-            <div class="testimonial-slider">
-                <div class="testimonial">
-                    <p class="testimonial-text">The photographs perfectly captured the magic of prom night. I can't stop looking through them and reliving every special moment with my friends.</p>
-                    <p class="testimonial-author">- Sarah K., Student</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- CTA Section -->
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Relive Your Prom Memories?</h2>
-            <p>Browse our complete gallery of high-resolution photographs from Central College Mityana Prom 2024. Download your favorites, share with friends, and preserve these special memories forever.</p>
-            <div class="btn-group">
-                <a href="#" class="btn btn-primary">View Full Gallery</a>
-                <a href="#" class="btn btn-secondary">Contact Us</a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>About CCM Prom</h3>
-                    <p>Central College Mityana's annual prom celebrates student achievements and creates unforgettable memories through photography and shared experiences.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Gallery</a></li>
-                        <li><a href="#">Events</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Photo Services</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Browse Photos</a></li>
-                        <li><a href="#">Download Photos</a></li>
-                        <li><a href="#">Order Prints</a></li>
-                        <li><a href="#">Photo Packages</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-envelope"></i> prom@ccmityana.ac.ug</p>
-                    <p><i class="fas fa-phone"></i> +256 752 123 456</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Central College Mityana</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Central College Mityana Prom. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: #d4af37;"></i> for our students</p>
-            </div>
-        </div>
-    </footer>
-    
-    <script>
-        // Simple testimonial slider
-        const testimonials = [
-            {
-                text: "The photographs perfectly captured the magic of prom night. I can't stop looking through them and reliving every special moment with my friends.",
-                author: "- Sarah K., Student"
-            },
-            {
-                text: "As a parent, I was so impressed with how professional the photos turned out. They truly captured the joy and excitement of the evening.",
-                author: "- Mr. Mugisha, Parent"
-            },
-            {
-                text: "Being able to download high-resolution versions of all the photos means I can print my favorites and keep them forever. Thank you!",
-                author: "- David L., Student"
-            }
-        ];
-        
-        let currentTestimonial = 0;
-        const testimonialElement = document.querySelector('.testimonial');
-        const testimonialText = document.querySelector('.testimonial-text');
-        const testimonialAuthor = document.querySelector('.testimonial-author');
-        
-        function showTestimonial(index) {
-            testimonialText.style.opacity = 0;
-            testimonialAuthor.style.opacity = 0;
-            
-            setTimeout(() => {
-                testimonialText.textContent = testimonials[index].text;
-                testimonialAuthor.textContent = testimonials[index].author;
-                
-                testimonialText.style.opacity = 1;
-                testimonialAuthor.style.opacity = 1;
-            }, 500);
-        }
-        
-        function nextTestimonial() {
-            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-            showTestimonial(currentTestimonial);
-        }
-        
-        // Initialize
-        showTestimonial(0);
-        setInterval(nextTestimonial, 5000);
-        
-        // Smooth scrolling for navigation
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                document.querySelector(targetId).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="logo">CCM Prom 2024</div>
+  <ul>
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Events</a></li>
+    <li><a href="#">Gallery</a></li>
+    <li><a href="#">About</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO BANNER -->
+<section class="hero">
+  <h1>Central College Mityana Prom 2024 – A Night to Remember</h1>
+</section>
+
+<!-- INTRO SECTION -->
+<section class="intro">
+  <p>Join us for an unforgettable night of elegance, music, and celebration at the Central College Mityana Prom 2024. Experience magical moments with your friends, dazzling performances, and a glamorous evening you will cherish forever.</p>
+</section>
+
+<!-- FEATURED GALLERY PREVIEW -->
+<section class="gallery-preview">
+  <img src="https://source.unsplash.com/400x300/?prom,dance" alt="Prom Highlights">
+  <img src="https://source.unsplash.com/400x300/?prom,students" alt="Prom Highlights">
+  <img src="https://source.unsplash.com/400x300/?prom,party" alt="Prom Highlights">
+  <img src="https://source.unsplash.com/400x300/?prom,celebration" alt="Prom Highlights">
+</section>
+<a href="#" class="view-gallery">View Full Gallery</a>
+
+<!-- PROM HIGHLIGHTS SECTION -->
+<section class="highlights">
+  <h2>Evening Highlights</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Red Carpet Entrance</h3>
+      <p>Walk the red carpet and capture the perfect memories with friends in your elegant attire.</p>
+    </div>
+    <div class="card">
+      <h3>Live Performances</h3>
+      <p>Enjoy breathtaking performances by talented students and guest artists throughout the night.</p>
+    </div>
+    <div class="card">
+      <h3>Photo Opportunities</h3>
+      <p>Our themed photo booths and professional photographers ensure your moments are timeless.</p>
+    </div>
+    <div class="card">
+      <h3>After Party</h3>
+      <p>Dance the night away with our DJ and special light shows that keep the energy alive.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Email: charlie02056@gmail.com</p>
+  <p>Phone: 0700955563</p>
+  <p>&copy; 2024 Central College Mityana Prom</p>
+</footer>
+
 </body>
 </html>
