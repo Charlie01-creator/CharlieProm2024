@@ -4,56 +4,68 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Central College Mityana Prom 2024</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-  /* ===== GLOBAL STYLES ===== */
-  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-  body { background-color: #fdfaf6; color: #333; line-height: 1.6; }
-  a { color: #d78c4c; text-decoration: none; }
-  a:hover { text-decoration: underline; }
+/* ===== GLOBAL STYLES ===== */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Montserrat', sans-serif; }
+body { background: #fff; color: #333; scroll-behavior: smooth; }
+a { color:#f5a623; text-decoration:none; transition:0.3s; }
+a:hover { color:#ffbf47; }
 
-  /* ===== NAVIGATION ===== */
-  nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; background: #fff; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-  nav .logo { font-size: 1.8rem; font-weight: bold; color: #d78c4c; }
-  nav ul { display: flex; list-style: none; gap: 25px; }
-  nav ul li { font-size: 1rem; font-weight: 500; }
+/* ===== NAVIGATION ===== */
+nav { position: fixed; top:0; width:100%; display:flex; justify-content:space-between; align-items:center; padding:20px 40px; background: rgba(255,255,255,0.95); box-shadow:0 4px 10px rgba(0,0,0,0.05); z-index:1000; }
+nav .logo { font-weight:800; font-size:1.8rem; color:#f5a623; letter-spacing:1px; }
+nav ul { display:flex; list-style:none; gap:30px; }
+nav ul li { font-weight:600; font-size:1rem; }
+.hamburger { display:none; flex-direction:column; cursor:pointer; gap:5px; }
+.hamburger div { width:28px; height:3px; background:#f5a623; border-radius:2px; transition: all 0.3s ease; }
 
-  /* Hamburger */
-  .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
-  .hamburger div { width: 28px; height: 3px; background: #d78c4c; border-radius: 2px; transition: all 0.3s; }
+/* Hamburger active for mobile */
+@media(max-width:768px){
+  nav ul { display:none; position:absolute; top:70px; left:0; width:100%; background:#fff; flex-direction:column; text-align:center; padding:20px 0; box-shadow:0 4px 10px rgba(0,0,0,0.05); }
+  nav ul.active { display:flex; }
+  .hamburger { display:flex; }
+}
 
-  @media (max-width: 768px) {
-    nav ul { display: none; flex-direction: column; width: 100%; text-align: center; background: #fff; position: absolute; top: 70px; left: 0; padding: 20px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    nav ul.active { display: flex; }
-    .hamburger { display: flex; }
-  }
+/* ===== HERO ===== */
+.hero { height:100vh; display:flex; justify-content:center; align-items:center; text-align:center; background: url('https://source.unsplash.com/1600x900/?prom,luxury') center/cover no-repeat; position:relative; }
+.hero::after { content:""; position:absolute; top:0; left:0; width:100%; height:100%; background: rgba(255,255,255,0.2); }
+.hero h1 { position:relative; font-size:3.5rem; font-weight:800; color:#fff; text-shadow:0 3px 10px rgba(0,0,0,0.3); max-width:800px; margin:0 20px; }
+.hero button { position:relative; margin-top:30px; padding:15px 35px; font-size:1.2rem; font-weight:600; border:none; border-radius:50px; background:#f5a623; color:#fff; cursor:pointer; transition:0.3s; }
+.hero button:hover { background:#ffbf47; }
 
-  /* ===== HERO BANNER ===== */
-  .hero { position: relative; height: 90vh; background: url('https://source.unsplash.com/1600x900/?prom,students') center/cover no-repeat; display: flex; align-items: center; justify-content: center; text-align: center; }
-  .hero h1 { font-size: 3rem; max-width: 800px; background: rgba(255,255,255,0.85); padding: 25px; border-radius: 12px; color: #d78c4c; }
+/* ===== SECTIONS ===== */
+section { padding:80px 40px; }
+.section-title { text-align:center; font-size:2.5rem; font-weight:800; color:#f5a623; margin-bottom:50px; }
 
-  /* ===== INTRO SECTION ===== */
-  .intro { padding: 80px 30px; text-align: center; max-width: 900px; margin: 0 auto; }
-  .intro p { font-size: 1.2rem; color: #555; }
+/* ===== GALLERY ===== */
+.gallery { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:20px; }
+.gallery img { width:100%; height:250px; object-fit:cover; border-radius:15px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.gallery img:hover { transform:scale(1.05); box-shadow:0 10px 20px rgba(0,0,0,0.2); }
 
-  /* ===== FEATURED GALLERY PREVIEW ===== */
-  .gallery-preview { padding: 50px 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
-  .gallery-preview img { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; transition: transform 0.3s ease; }
-  .gallery-preview img:hover { transform: scale(1.05); }
-  .view-gallery { display: block; text-align: center; margin: 30px 0; font-size: 1.2rem; padding: 12px 35px; border: 2px solid #d78c4c; border-radius: 6px; transition: all 0.3s ease; }
-  .view-gallery:hover { background: #d78c4c; color: #fff; }
+/* ===== HIGHLIGHTS ===== */
+.highlights { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:30px; }
+.highlights .card { background:#fff; padding:25px; border-radius:15px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.05); transition:0.3s; }
+.highlights .card:hover { transform: translateY(-10px); }
+.highlights .card h3 { font-weight:700; font-size:1.4rem; color:#f5a623; margin-bottom:15px; }
 
-  /* ===== PROM HIGHLIGHTS SECTION ===== */
-  .highlights { background: #fdfaf6; padding: 80px 30px; text-align: center; }
-  .highlights h2 { margin-bottom: 40px; font-size: 2rem; color: #d78c4c; }
-  .highlights .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
-  .highlights .card { background: #fff; padding: 25px; border-radius: 12px; border: 1px solid #eee; transition: transform 0.3s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-  .highlights .card:hover { transform: translateY(-8px); }
-  .highlights .card h3 { margin-bottom: 15px; color: #d78c4c; }
-  .highlights .card p { color: #555; }
+/* ===== COUNTDOWN ===== */
+.countdown { display:flex; justify-content:center; gap:40px; margin-top:50px; font-weight:700; font-size:1.5rem; color:#333; }
+.countdown div { background:#fff4e6; padding:20px 25px; border-radius:15px; box-shadow:0 4px 15px rgba(0,0,0,0.05); }
 
-  /* ===== FOOTER ===== */
-  footer { background: #fff; padding: 40px 30px; text-align: center; font-size: 0.9rem; color: #888; border-top: 1px solid #eee; }
-  footer p { margin-bottom: 5px; }
+/* ===== TESTIMONIALS ===== */
+.testimonials { display:grid; grid-template-columns: repeat(auto-fit, minmax(250px,1fr)); gap:30px; }
+.testimonial { background:#fff; padding:25px; border-radius:15px; box-shadow:0 4px 15px rgba(0,0,0,0.05); text-align:center; }
+.testimonial p { font-style:italic; color:#555; margin-bottom:15px; }
+.testimonial h4 { font-weight:700; color:#f5a623; }
+
+/* ===== FOOTER ===== */
+footer { background:#fff; padding:50px 40px; text-align:center; color:#888; border-top:1px solid #eee; }
+footer p { margin-bottom:10px; }
+
+/* BUTTONS */
+.btn { display:inline-block; padding:12px 35px; font-weight:600; border-radius:50px; background:#f5a623; color:#fff; text-decoration:none; transition:0.3s; }
+.btn:hover { background:#ffbf47; }
 
 </style>
 </head>
@@ -68,67 +80,103 @@
     <div></div>
   </div>
   <ul id="nav-links">
-    <li><a href="#">Home</a></li>
-    <li><a href="#">Events</a></li>
-    <li><a href="#">Gallery</a></li>
-    <li><a href="#">About</a></li>
-    <li><a href="#">Contact</a></li>
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#highlights">Highlights</a></li>
+    <li><a href="#countdown">Countdown</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
-<!-- HERO BANNER -->
-<section class="hero">
-  <h1>Central College Mityana Prom 2024 – A Night to Remember</h1>
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div>
+    <h1>Central College Mityana Prom 2024 – A Night to Remember</h1>
+    <button>Reserve Your Spot</button>
+  </div>
 </section>
 
-<!-- INTRO SECTION -->
-<section class="intro">
-  <p>Celebrate an unforgettable evening of elegance, music, and laughter. Central College Mityana Prom 2024 is where memories are made, friendships shine, and a magical night awaits you. Dress to impress and get ready for a night full of joy and excitement.</p>
+<!-- GALLERY -->
+<section id="gallery">
+  <h2 class="section-title">Gallery Highlights</h2>
+  <div class="gallery">
+    <img src="https://source.unsplash.com/400x300/?prom,dance" alt="">
+    <img src="https://source.unsplash.com/400x300/?prom,students" alt="">
+    <img src="https://source.unsplash.com/400x300/?prom,party" alt="">
+    <img src="https://source.unsplash.com/400x300/?prom,celebration" alt="">
+  </div>
+  <div style="text-align:center; margin-top:30px;">
+    <a href="#" class="btn">View Full Gallery</a>
+  </div>
 </section>
 
-<!-- FEATURED GALLERY PREVIEW -->
-<section class="gallery-preview">
-  <img src="https://source.unsplash.com/400x300/?prom,dance" alt="Prom Highlights">
-  <img src="https://source.unsplash.com/400x300/?prom,students" alt="Prom Highlights">
-  <img src="https://source.unsplash.com/400x300/?prom,party" alt="Prom Highlights">
-  <img src="https://source.unsplash.com/400x300/?prom,celebration" alt="Prom Highlights">
+<!-- HIGHLIGHTS -->
+<section id="highlights">
+  <h2 class="section-title">Evening Highlights</h2>
+  <div class="highlights">
+    <div class="card"><h3>Red Carpet Entrance</h3><p>Walk in style and capture unforgettable photos.</p></div>
+    <div class="card"><h3>Live Performances</h3><p>Experience dazzling performances by top students and artists.</p></div>
+    <div class="card"><h3>Photo Booths</h3><p>Fun themed photo booths to make memories last forever.</p></div>
+    <div class="card"><h3>After Party</h3><p>Dance the night away with our DJ and light show.</p></div>
+  </div>
 </section>
-<a href="#" class="view-gallery">View Full Gallery</a>
 
-<!-- PROM HIGHLIGHTS SECTION -->
-<section class="highlights">
-  <h2>Evening Highlights</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>Red Carpet Entrance</h3>
-      <p>Walk the red carpet and capture perfect memories with friends in your elegant attire.</p>
-    </div>
-    <div class="card">
-      <h3>Live Performances</h3>
-      <p>Enjoy breathtaking performances by talented students and special guest artists throughout the night.</p>
-    </div>
-    <div class="card">
-      <h3>Photo Opportunities</h3>
-      <p>Our themed photo booths and professional photographers ensure your moments are timeless.</p>
-    </div>
-    <div class="card">
-      <h3>After Party</h3>
-      <p>Dance the night away with our DJ and special light shows that keep the energy alive.</p>
-    </div>
+<!-- COUNTDOWN -->
+<section id="countdown">
+  <h2 class="section-title">Countdown to Prom</h2>
+  <div class="countdown" id="timer">
+    <div><span id="days">0</span>Days</div>
+    <div><span id="hours">0</span>Hours</div>
+    <div><span id="minutes">0</span>Minutes</div>
+    <div><span id="seconds">0</span>Seconds</div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <h2 class="section-title">What Students Say</h2>
+  <div class="testimonials">
+    <div class="testimonial"><p>"This prom was the most luxurious and fun night of our lives!"</p><h4>Jane M.</h4></div>
+    <div class="testimonial"><p>"From the red carpet to the dance floor, everything was perfect!"</p><h4>Mark L.</h4></div>
+    <div class="testimonial"><p>"An unforgettable night with friends and memories to last forever."</p><h4>Lily T.</h4></div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
+<footer id="contact">
   <p>Email: charlie02056@gmail.com</p>
   <p>Phone: 0700955563</p>
   <p>&copy; 2024 Central College Mityana Prom</p>
 </footer>
 
 <script>
-  function toggleMenu() {
-    document.getElementById('nav-links').classList.toggle('active');
-  }
+// Hamburger toggle
+function toggleMenu() {
+  document.getElementById('nav-links').classList.toggle('active');
+}
+
+// Countdown
+const targetDate = new Date("Dec 15, 2024 18:00:00").getTime();
+const daysEl = document.getElementById("days");
+const hoursEl = document.getElementById("hours");
+const minutesEl = document.getElementById("minutes");
+const secondsEl = document.getElementById("seconds");
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const diff = targetDate - now;
+
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+  const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+  const seconds = Math.floor((diff % (1000*60)) / 1000);
+
+  daysEl.innerText = days;
+  hoursEl.innerText = hours;
+  minutesEl.innerText = minutes;
+  secondsEl.innerText = seconds;
+}, 1000);
 </script>
 
 </body>
