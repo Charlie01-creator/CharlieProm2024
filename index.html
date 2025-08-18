@@ -6,176 +6,109 @@
   <title>Central College Mityana Prom 2024</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    body { background: #fff; color: #333; }
+    body { background: #fafafa; color: #333; line-height: 1.6; }
 
     /* HEADER */
     header {
       width: 100%;
-      position: fixed;
-      top: 0; left: 0;
+      position: fixed; top: 0; left: 0;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 15px 30px;
-      background: #ffffff;
+      padding: 18px 40px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
       z-index: 1000;
-    }
-
-    .logo {
-      font-weight: 700;
-      font-size: 1.4rem;
-      color: #e91e63;
-    }
-
-    nav {
-      display: flex; gap: 25px;
-    }
-    nav a {
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    nav a:hover { color: #e91e63; }
-
-    /* HAMBURGER */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      gap: 6px;
-    }
-    .hamburger span {
-      height: 3px; width: 28px;
-      background: #333; border-radius: 5px;
       transition: 0.3s;
     }
+    .logo { font-weight: 700; font-size: 1.5rem; color: #e91e63; letter-spacing: 1px; }
+    nav { display: flex; gap: 28px; }
+    nav a {
+      text-decoration: none; color: #333; font-weight: 500;
+      transition: 0.3s;
+    }
+    nav a:hover { color: #e91e63; transform: translateY(-2px); }
 
-    /* Mobile menu */
+    /* HAMBURGER */
+    .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 6px; }
+    .hamburger span { height: 3px; width: 28px; background: #333; border-radius: 5px; transition: 0.3s; }
     .mobile-nav {
-      display: none;
-      position: absolute;
-      top: 65px; right: 20px;
-      background: #fff;
-      flex-direction: column;
-      width: 220px;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: none; position: absolute; top: 70px; right: 20px;
+      background: #fff; flex-direction: column; width: 220px; padding: 20px;
+      border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       animation: slideDown 0.4s ease;
     }
-    .mobile-nav a {
-      margin: 10px 0;
-      color: #333;
-      text-decoration: none;
-      font-weight: 500;
-    }
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media(max-width: 768px) {
-      nav { display: none; }
-      .hamburger { display: flex; }
-      .mobile-nav.active { display: flex; }
-    }
+    .mobile-nav a { margin: 12px 0; color: #333; text-decoration: none; font-weight: 500; }
+    .mobile-nav.active { display: flex; }
+    @keyframes slideDown { from {opacity:0;transform:translateY(-20px);} to {opacity:1;transform:translateY(0);} }
+    @media(max-width: 768px) { nav { display: none; } .hamburger { display: flex; } }
 
     /* HERO */
     .hero {
       margin-top: 80px;
-      background: url('https://images.unsplash.com/photo-1521334884684-d80222895322') center/cover no-repeat;
-      color: #fff;
-      text-align: center;
-      padding: 150px 20px;
+      background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
+                  url('https://images.unsplash.com/photo-1521334884684-d80222895322') center/cover no-repeat;
+      color: #fff; text-align: center;
+      padding: 170px 20px;
       position: relative;
+      animation: fadeIn 1.5s ease;
     }
-    .hero::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.45);
-    }
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
     .hero h1 { font-size: 3rem; margin-bottom: 15px; }
-    .hero p { font-size: 1.3rem; margin-bottom: 25px; }
+    .hero p { font-size: 1.4rem; margin-bottom: 25px; }
     .btn {
-      padding: 12px 25px;
-      border-radius: 30px;
-      border: none;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: 0.3s;
+      padding: 14px 30px; border-radius: 40px; border: none; cursor: pointer;
+      font-size: 1rem; font-weight: 600; transition: 0.3s;
     }
-    .btn-primary { background: #e91e63; color: #fff; }
-    .btn-primary:hover { background: #d81b60; }
+    .btn-primary {
+      background: linear-gradient(45deg,#e91e63,#ff4081); color: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .btn-primary:hover { transform: translateY(-3px); }
+
+    /* SECTION TITLES */
+    section h2 { font-size: 2.2rem; margin-bottom: 20px; color: #e91e63; text-align: center; }
 
     /* ABOUT */
-    .about {
-      padding: 70px 20px;
-      text-align: center;
-      max-width: 900px; margin: auto;
-    }
-    .about h2 { font-size: 2.2rem; margin-bottom: 20px; color: #e91e63; }
-    .about p { font-size: 1.1rem; color: #555; }
+    .about { padding: 80px 20px; max-width: 950px; margin: auto; text-align: center; }
+    .about p { font-size: 1.15rem; color: #555; }
 
     /* HIGHLIGHTS */
-    .highlights {
-      padding: 70px 20px;
-      background: #f9f9f9;
-      text-align: center;
-    }
-    .highlights h2 { color: #e91e63; margin-bottom: 40px; }
+    .highlights { padding: 80px 20px; background: #fff; }
     .highlight-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      max-width: 1000px; margin: auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px; max-width: 1100px; margin: auto;
     }
     .highlight {
-      background: #fff;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-      transition: 0.3s;
+      background: #fdfdfd; padding: 35px; border-radius: 15px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+      transition: 0.3s; font-size: 1.1rem;
     }
-    .highlight:hover { transform: translateY(-5px); }
+    .highlight:hover { transform: translateY(-8px) scale(1.02); background: #ffe6f0; }
 
     /* GALLERY */
-    .gallery {
-      padding: 70px 20px;
-      text-align: center;
-    }
-    .gallery h2 { color: #e91e63; margin-bottom: 30px; }
+    .gallery { padding: 80px 20px; background: #fafafa; }
     .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-      max-width: 1000px; margin: auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px; max-width: 1100px; margin: auto;
     }
     .gallery-grid img {
-      width: 100%; border-radius: 12px;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      width: 100%; border-radius: 14px; cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
     }
+    .gallery-grid img:hover { transform: scale(1.05); box-shadow: 0 6px 14px rgba(0,0,0,0.2); }
 
     /* CONTACT */
-    .contact {
-      padding: 60px 20px;
-      background: #f2f2f2;
-      text-align: center;
-    }
-    .contact h2 { margin-bottom: 15px; color: #e91e63; }
-    .contact p { font-size: 1rem; }
+    .contact { padding: 80px 20px; text-align: center; background: linear-gradient(135deg,#ff4081,#e91e63); color: #fff; }
+    .contact h2 { color: #fff; }
+    .contact p { font-size: 1.1rem; margin-top: 10px; }
 
     /* FOOTER */
     footer {
-      background: #111; color: #eee;
-      text-align: center;
-      padding: 15px;
-      font-size: 0.9rem;
+      background: #111; color: #eee; text-align: center;
+      padding: 20px; font-size: 0.9rem;
     }
+    footer a { color: #e91e63; margin: 0 8px; text-decoration: none; transition: 0.3s; }
+    footer a:hover { color: #fff; }
   </style>
 </head>
 <body>
@@ -207,17 +140,14 @@
     <div class="hero-content">
       <h1>Central College Mityana Prom 2024</h1>
       <p>A Night to Remember ✨</p>
-      <button class="btn btn-primary">View Gallery</button>
+      <button class="btn btn-primary" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">View Gallery</button>
     </div>
   </section>
 
   <!-- ABOUT -->
   <section class="about" id="about">
     <h2>About the Prom</h2>
-    <p>
-      Prom 2024 at Central College Mityana was a night filled with joy, elegance, and unforgettable memories.  
-      From the red carpet to the dance floor, every moment was designed to celebrate friendship and achievements.
-    </p>
+    <p>Prom 2024 at Central College Mityana was a night filled with joy, elegance, and unforgettable memories. From the red carpet to the dance floor, every moment was designed to celebrate friendship and achievements.</p>
   </section>
 
   <!-- HIGHLIGHTS -->
@@ -250,7 +180,8 @@
 
   <!-- FOOTER -->
   <footer>
-    © 2024 Central College Mityana Prom. All Rights Reserved.
+    © 2024 Central College Mityana Prom | Follow us: 
+    <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Twitter</a>
   </footer>
 
   <script>
@@ -261,4 +192,3 @@
 
 </body>
 </html>
-
