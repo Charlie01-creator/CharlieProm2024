@@ -6,7 +6,7 @@
   <title>Central College Mityana Prom 2024</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    body { background: #fafafa; color: #333; line-height: 1.6; }
+    body { background: #fafafa; color: #333; line-height: 1.6; overflow-x: hidden; }
 
     /* HEADER */
     header {
@@ -109,6 +109,17 @@
     }
     footer a { color: #e91e63; margin: 0 8px; text-decoration: none; transition: 0.3s; }
     footer a:hover { color: #fff; }
+
+    /* ANIMATIONS ON SCROLL */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -137,7 +148,7 @@
 
   <!-- HERO -->
   <section class="hero" id="hero">
-    <div class="hero-content">
+    <div class="hero-content reveal">
       <h1>Central College Mityana Prom 2024</h1>
       <p>A Night to Remember ✨</p>
       <button class="btn btn-primary" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">View Gallery</button>
@@ -145,13 +156,13 @@
   </section>
 
   <!-- ABOUT -->
-  <section class="about" id="about">
+  <section class="about reveal" id="about">
     <h2>About the Prom</h2>
     <p>Prom 2024 at Central College Mityana was a night filled with joy, elegance, and unforgettable memories. From the red carpet to the dance floor, every moment was designed to celebrate friendship and achievements.</p>
   </section>
 
   <!-- HIGHLIGHTS -->
-  <section class="highlights" id="highlights">
+  <section class="highlights reveal" id="highlights">
     <h2>Highlights</h2>
     <div class="highlight-grid">
       <div class="highlight">✨ Red Carpet Experience</div>
@@ -162,7 +173,7 @@
   </section>
 
   <!-- GALLERY -->
-  <section class="gallery" id="gallery">
+  <section class="gallery reveal" id="gallery">
     <h2>Memories</h2>
     <div class="gallery-grid">
       <img src="https://images.unsplash.com/photo-1519744792095-2f2205e87b6f" alt="Prom 1">
@@ -173,13 +184,13 @@
   </section>
 
   <!-- CONTACT -->
-  <section class="contact" id="contact">
+  <section class="contact reveal" id="contact">
     <h2>Contact Us</h2>
     <p>Email: charlie02056@gmail.com | Phone: 0700955563</p>
   </section>
 
   <!-- FOOTER -->
-  <footer>
+  <footer class="reveal">
     © 2024 Central College Mityana Prom | Follow us: 
     <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Twitter</a>
   </footer>
@@ -188,6 +199,18 @@
     function toggleMenu() {
       document.getElementById("mobileNav").classList.toggle("active");
     }
+
+    // Scroll reveal effect
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("active");
+        }
+      });
+    }, { threshold: 0.2 });
+
+    reveals.forEach(el => observer.observe(el));
   </script>
 
 </body>
