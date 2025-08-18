@@ -125,7 +125,7 @@
       header { padding: 18px 20px; }
     }
 
-    /* HERO WITH INTRODUCTORY DESIGN */
+    /* HERO SECTION */
     .hero {
       margin-top: 80px;
       background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
@@ -220,16 +220,30 @@
       margin: 0 auto;
     }
 
-    /* MERGED HIGHLIGHTS & GALLERY SECTION */
-    .highlights { background: #fff; }
-    .highlight-grid {
+    /* GALLERY SECTION */
+    .gallery { background: #fff; }
+    .gallery-header {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 40px;
+    }
+    .gallery-header h3 {
+      color: #e91e63;
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+    }
+    .gallery-header p {
+      color: #666;
+      font-size: 1.05rem;
+    }
+    .gallery-grid {
       display: grid; 
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 30px; 
       max-width: 1100px; 
       margin: auto;
     }
-    .highlight-item {
+    .gallery-item {
       background: #fdfdfd; 
       border-radius: 15px;
       box-shadow: 0 6px 14px rgba(0,0,0,0.08);
@@ -237,26 +251,26 @@
       overflow: hidden;
       border: 1px solid #f0f0f0;
     }
-    .highlight-item:hover { 
+    .gallery-item:hover { 
       transform: translateY(-8px); 
       box-shadow: 0 12px 20px rgba(0,0,0,0.12);
     }
-    .highlight-img {
+    .gallery-img {
       width: 100%;
-      height: 200px;
+      height: 250px;
       object-fit: cover;
       display: block;
     }
-    .highlight-content {
+    .gallery-caption {
       padding: 20px;
       text-align: center;
     }
-    .highlight-content h3 {
+    .gallery-caption h3 {
       color: #e91e63;
       margin-bottom: 10px;
       font-size: 1.2rem;
     }
-    .highlight-content p {
+    .gallery-caption p {
       color: #666;
       font-size: 0.95rem;
     }
@@ -271,11 +285,13 @@
     .contact h2::after {
       background: rgba(255,255,255,0.5);
     }
-    .contact p { 
-      font-size: 1.1rem; 
-      margin-top: 10px; 
+    .contact-info {
       max-width: 600px;
-      margin: 15px auto 0;
+      margin: 0 auto;
+    }
+    .contact-info p { 
+      font-size: 1.1rem; 
+      margin-top: 10px;
     }
     .social-links {
       display: flex;
@@ -299,15 +315,24 @@
       color: #eee; 
       text-align: center;
       padding: 25px 20px; 
-      font-size: 0.9rem;
     }
-    footer a { 
+    .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    .footer-links a { 
       color: #e91e63; 
-      margin: 0 8px; 
       text-decoration: none; 
       transition: 0.3s; 
     }
-    footer a:hover { 
+    .footer-links a:hover { 
       color: #fff; 
       text-decoration: underline;
     }
@@ -315,6 +340,11 @@
       margin-top: 15px;
       color: #aaa;
       font-size: 0.85rem;
+    }
+    .prom-credit {
+      font-style: italic;
+      margin-top: 10px;
+      color: #888;
     }
 
     /* ANIMATIONS */
@@ -334,7 +364,7 @@
     <nav>
       <a href="#hero">Home</a>
       <a href="#about">About</a>
-      <a href="#highlights">Highlights</a>
+      <a href="#gallery">Gallery</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="hamburger" onclick="toggleMenu()">
@@ -343,19 +373,19 @@
     <div class="mobile-nav" id="mobileNav">
       <a href="#hero" onclick="toggleMenu()">Home</a>
       <a href="#about" onclick="toggleMenu()">About</a>
-      <a href="#highlights" onclick="toggleMenu()">Highlights</a>
+      <a href="#gallery" onclick="toggleMenu()">Gallery</a>
       <a href="#contact" onclick="toggleMenu()">Contact</a>
     </div>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
   </header>
 
-  <!-- HERO WITH INTRODUCTORY DESIGN -->
+  <!-- HERO -->
   <section class="hero" id="hero">
     <div class="hero-content reveal">
-      <h1>Relive the Magic: Your Unforgettable Prom Night Memories</h1>
-      <p>Welcome to our prom photo gallery! Here, you can relive all the unforgettable moments, share memories with friends, and download your favorite high-resolution photos.</p>
+      <h1>Relive Your Prom Night Memories!</h1>
+      <p>Relive the magic and share your favorite memories with friends and family.</p>
       <div class="hero-buttons">
-        <button class="btn btn-primary" onclick="document.getElementById('highlights').scrollIntoView({behavior:'smooth'})">
+        <button class="btn btn-primary" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">
           <span>View Gallery</span>
         </button>
         <button class="btn btn-outline">
@@ -367,59 +397,62 @@
 
   <!-- ABOUT -->
   <section class="about reveal" id="about">
-    <h2>About the Prom</h2>
-    <p>Prom 2024 at Central College Mityana was a spectacular evening filled with joy, elegance, and unforgettable memories. From the glamorous red carpet entrance to the energetic dance floor, every moment was carefully crafted to celebrate our students' friendships, achievements, and bright futures ahead.</p>
+    <h2>About Our Prom</h2>
+    <p>Prom 2024 at Central College Mityana was a night filled with joy, elegance, and unforgettable memories. From the red carpet to the dance floor, every moment was designed to celebrate friendship and achievements.</p>
   </section>
 
-  <!-- MERGED HIGHLIGHTS & GALLERY SECTION -->
-  <section class="highlights reveal" id="highlights">
-    <h2>Event Highlights</h2>
-    <div class="highlight-grid">
-      <div class="highlight-item">
-        <img src="https://images.unsplash.com/photo-1519744792095-2f2205e87b6f" alt="Red carpet entrance" class="highlight-img">
-        <div class="highlight-content">
+  <!-- GALLERY -->
+  <section class="gallery reveal" id="gallery">
+    <div class="gallery-header">
+      <h3>New Photo Gallery Features</h3>
+      <p>Browse through our collection of professional photos from the magical evening. Download and share your favorites with friends and family.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1519744792095-2f2205e87b6f" alt="Red carpet entrance" class="gallery-img">
+        <div class="gallery-caption">
           <h3>Red Carpet Arrival</h3>
-          <p>Students made their grand entrance on our signature red carpet with professional photography</p>
+          <p>Students arriving in style at our signature red carpet</p>
         </div>
       </div>
       
-      <div class="highlight-item">
-        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="Couple dancing" class="highlight-img">
-        <div class="highlight-content">
-          <h3>Dance Competition</h3>
-          <p>Students showed off their best moves in our dance-off competition</p>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="Couple dancing" class="gallery-img">
+        <div class="gallery-caption">
+          <h3>Dance Floor</h3>
+          <p>Students showing off their best dance moves</p>
         </div>
       </div>
       
-      <div class="highlight-item">
-        <img src="https://images.unsplash.com/photo-1529634895741-b5b1d1b1f0c6" alt="Group photo" class="highlight-img">
-        <div class="highlight-content">
-          <h3>Group Photos</h3>
-          <p>Friends gathered for memorable group pictures at our themed photo stations</p>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1529634895741-b5b1d1b1f0c6" alt="Group photo" class="gallery-img">
+        <div class="gallery-caption">
+          <h3>Friend Groups</h3>
+          <p>Memorable moments with classmates</p>
         </div>
       </div>
       
-      <div class="highlight-item">
-        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322" alt="Decorations" class="highlight-img">
-        <div class="highlight-content">
-          <h3>Stunning Decor</h3>
-          <p>Our "Starry Night" theme transformed the venue into a magical space</p>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322" alt="Decorations" class="gallery-img">
+        <div class="gallery-caption">
+          <h3>Venue Decor</h3>
+          <p>Our beautifully decorated prom venue</p>
         </div>
       </div>
       
-      <div class="highlight-item">
-        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87" alt="Students laughing" class="highlight-img">
-        <div class="highlight-content">
-          <h3>Student Performances</h3>
-          <p>Talented students showcased their singing and dancing skills</p>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87" alt="Students laughing" class="gallery-img">
+        <div class="gallery-caption">
+          <h3>Candid Moments</h3>
+          <p>Natural, joyful interactions throughout the night</p>
         </div>
       </div>
       
-      <div class="highlight-item">
-        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d" alt="Award ceremony" class="highlight-img">
-        <div class="highlight-content">
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d" alt="Award ceremony" class="gallery-img">
+        <div class="gallery-caption">
           <h3>Prom Royalty</h3>
-          <p>Crowning of our Prom King and Queen for 2024</p>
+          <p>Crowning of our Prom King and Queen</p>
         </div>
       </div>
     </div>
@@ -428,21 +461,31 @@
   <!-- CONTACT -->
   <section class="contact reveal" id="contact">
     <h2>Contact Us</h2>
-    <p>For more information about the event or photo inquiries, please contact:</p>
-    <p>Email: charlie02056@gmail.com<br>Phone: 0700955563</p>
-    <div class="social-links">
-      <a href="#" aria-label="Facebook">📘</a>
-      <a href="#" aria-label="Instagram">📷</a>
-      <a href="#" aria-label="Twitter">🐦</a>
-      <a href="#" aria-label="YouTube">▶️</a>
+    <div class="contact-info">
+      <p>For photo inquiries or more information about the event:</p>
+      <p>Email: photos@promgallery.com</p>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="#" aria-label="Instagram">📷</a>
+        <a href="#" aria-label="Twitter">🐦</a>
+        <a href="#" aria-label="YouTube">▶️</a>
+      </div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer class="reveal">
-    © 2024 Central College Mityana Prom Committee | Follow us: 
-    <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Twitter</a>
-    <div class="copyright">All rights reserved. Photos may not be used without permission.</div>
+    <div class="footer-content">
+      <div class="prom-credit">Central College Mityana Prom Memories</div>
+      <div class="footer-links">
+        <a href="#">Home</a>
+        <a href="#">Gallery</a>
+        <a href="#">About</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+      <div class="copyright">COPYRIGHT © 2024 CENTRAL COLLEGE MITYANA PROM. ALL RIGHTS RESERVED.</div>
+    </div>
   </footer>
 
   <script>
