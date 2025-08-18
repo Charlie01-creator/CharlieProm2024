@@ -9,7 +9,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
     body { background: #fafafa; color: #333; line-height: 1.6; overflow-x: hidden; }
 
-    /* HEADER IMPROVED */
+    /* HEADER */
     header {
       width: 100%;
       position: fixed; top: 0; left: 0;
@@ -58,7 +58,7 @@
     nav a:hover::after { width: 100%; }
     nav a:hover { color: #e91e63; }
 
-    /* HAMBURGER IMPROVED */
+    /* HAMBURGER */
     .hamburger { 
       display: none; 
       flex-direction: column; 
@@ -125,7 +125,7 @@
       header { padding: 18px 20px; }
     }
 
-    /* HERO IMPROVED */
+    /* HERO */
     .hero {
       margin-top: 80px;
       background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
@@ -186,7 +186,7 @@
       z-index: 1;
     }
 
-    /* SECTION TITLES IMPROVED */
+    /* SECTION TITLES */
     section { padding: 80px 20px; }
     section h2 { 
       font-size: clamp(1.8rem, 4vw, 2.2rem); 
@@ -207,7 +207,7 @@
       border-radius: 3px;
     }
 
-    /* ABOUT IMPROVED */
+    /* ABOUT */
     .about { 
       max-width: 950px; 
       margin: auto; 
@@ -220,87 +220,48 @@
       margin: 0 auto;
     }
 
-    /* HIGHLIGHTS IMPROVED */
+    /* MERGED HIGHLIGHTS & GALLERY SECTION */
     .highlights { background: #fff; }
     .highlight-grid {
       display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px; 
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px; 
       max-width: 1100px; 
       margin: auto;
     }
-    .highlight {
+    .highlight-item {
       background: #fdfdfd; 
-      padding: 35px 25px; 
       border-radius: 15px;
       box-shadow: 0 6px 14px rgba(0,0,0,0.08);
       transition: 0.3s; 
-      font-size: 1.1rem;
-      text-align: center;
+      overflow: hidden;
       border: 1px solid #f0f0f0;
     }
-    .highlight:hover { 
+    .highlight-item:hover { 
       transform: translateY(-8px); 
-      background: #ffe6f0; 
       box-shadow: 0 12px 20px rgba(0,0,0,0.12);
     }
-
-    /* GALLERY IMPROVED */
-    .gallery { background: #fafafa; }
-    .gallery-grid {
-      display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px; 
-      max-width: 1100px; 
-      margin: auto;
-    }
-    .gallery-grid img {
-      width: 100%; 
-      height: 220px;
+    .highlight-img {
+      width: 100%;
+      height: 200px;
       object-fit: cover;
-      border-radius: 14px; 
-      cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
+      display: block;
     }
-    .gallery-grid img:hover { 
-      transform: scale(1.05); 
-      box-shadow: 0 6px 14px rgba(0,0,0,0.2); 
+    .highlight-content {
+      padding: 20px;
+      text-align: center;
+    }
+    .highlight-content h3 {
+      color: #e91e63;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+    .highlight-content p {
+      color: #666;
+      font-size: 0.95rem;
     }
 
-    /* LIGHTBOX IMPROVED */
-    .lightbox {
-      display: none; 
-      position: fixed; 
-      top: 0; 
-      left: 0; 
-      width: 100%; 
-      height: 100%;
-      background: rgba(0,0,0,0.9); 
-      justify-content: center; 
-      align-items: center;
-      z-index: 2000;
-    }
-    .lightbox img {
-      max-width: 90%; 
-      max-height: 80%; 
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-      animation: zoomIn 0.4s ease;
-    }
-    @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    .lightbox span {
-      position: absolute; 
-      top: 20px; 
-      right: 30px;
-      font-size: 2.5rem; 
-      color: #fff; 
-      cursor: pointer; 
-      font-weight: bold;
-      transition: 0.3s;
-    }
-    .lightbox span:hover { color: #e91e63; }
-
-    /* CONTACT IMPROVED */
+    /* CONTACT */
     .contact { 
       background: linear-gradient(135deg,#ff4081,#e91e63); 
       color: #fff; 
@@ -332,7 +293,7 @@
       color: #ffeb3b;
     }
 
-    /* FOOTER IMPROVED */
+    /* FOOTER */
     footer {
       background: #111; 
       color: #eee; 
@@ -356,7 +317,7 @@
       font-size: 0.85rem;
     }
 
-    /* ANIMATIONS ON SCROLL IMPROVED */
+    /* ANIMATIONS */
     .reveal { 
       opacity: 0; 
       transform: translateY(40px); 
@@ -374,7 +335,6 @@
       <a href="#hero">Home</a>
       <a href="#about">About</a>
       <a href="#highlights">Highlights</a>
-      <a href="#gallery">Gallery</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="hamburger" onclick="toggleMenu()">
@@ -384,7 +344,6 @@
       <a href="#hero" onclick="toggleMenu()">Home</a>
       <a href="#about" onclick="toggleMenu()">About</a>
       <a href="#highlights" onclick="toggleMenu()">Highlights</a>
-      <a href="#gallery" onclick="toggleMenu()">Gallery</a>
       <a href="#contact" onclick="toggleMenu()">Contact</a>
     </div>
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
@@ -395,8 +354,8 @@
     <div class="hero-content reveal">
       <h1>Central College Mityana Prom 2024</h1>
       <p>A Night to Remember ✨</p>
-      <button class="btn btn-primary" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'})">
-        <span>View Gallery</span>
+      <button class="btn btn-primary" onclick="document.getElementById('highlights').scrollIntoView({behavior:'smooth'})">
+        <span>View Highlights</span>
       </button>
     </div>
   </section>
@@ -407,29 +366,57 @@
     <p>Prom 2024 at Central College Mityana was a spectacular evening filled with joy, elegance, and unforgettable memories. From the glamorous red carpet entrance to the energetic dance floor, every moment was carefully crafted to celebrate our students' friendships, achievements, and bright futures ahead.</p>
   </section>
 
-  <!-- HIGHLIGHTS -->
+  <!-- MERGED HIGHLIGHTS & GALLERY SECTION -->
   <section class="highlights reveal" id="highlights">
     <h2>Event Highlights</h2>
     <div class="highlight-grid">
-      <div class="highlight">✨ Red Carpet Experience with Professional Photography</div>
-      <div class="highlight">🎶 Live Band Performance & Dance Competition</div>
-      <div class="highlight">📸 Photo Booth with Fun Props and Backdrops</div>
-      <div class="highlight">🏆 Crowning of Prom King & Queen</div>
-      <div class="highlight">🍽️ Gourmet Dinner Buffet</div>
-      <div class="highlight">🎤 Student Performances & Talent Showcase</div>
-    </div>
-  </section>
-
-  <!-- GALLERY -->
-  <section class="gallery reveal" id="gallery">
-    <h2>Memories Gallery</h2>
-    <div class="gallery-grid">
-      <img src="https://images.unsplash.com/photo-1519744792095-2f2205e87b6f" alt="Students arriving on red carpet">
-      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="Prom couple dancing">
-      <img src="https://images.unsplash.com/photo-1529634895741-b5b1d1b1f0c6" alt="Group photo at prom">
-      <img src="https://images.unsplash.com/photo-1521334884684-d80222895322" alt="Prom decorations">
-      <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87" alt="Students laughing">
-      <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d" alt="Award ceremony">
+      <div class="highlight-item">
+        <img src="https://images.unsplash.com/photo-1519744792095-2f2205e87b6f" alt="Red carpet entrance" class="highlight-img">
+        <div class="highlight-content">
+          <h3>Red Carpet Arrival</h3>
+          <p>Students made their grand entrance on our signature red carpet with professional photography</p>
+        </div>
+      </div>
+      
+      <div class="highlight-item">
+        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e" alt="Couple dancing" class="highlight-img">
+        <div class="highlight-content">
+          <h3>Dance Competition</h3>
+          <p>Students showed off their best moves in our dance-off competition</p>
+        </div>
+      </div>
+      
+      <div class="highlight-item">
+        <img src="https://images.unsplash.com/photo-1529634895741-b5b1d1b1f0c6" alt="Group photo" class="highlight-img">
+        <div class="highlight-content">
+          <h3>Group Photos</h3>
+          <p>Friends gathered for memorable group pictures at our themed photo stations</p>
+        </div>
+      </div>
+      
+      <div class="highlight-item">
+        <img src="https://images.unsplash.com/photo-1521334884684-d80222895322" alt="Decorations" class="highlight-img">
+        <div class="highlight-content">
+          <h3>Stunning Decor</h3>
+          <p>Our "Starry Night" theme transformed the venue into a magical space</p>
+        </div>
+      </div>
+      
+      <div class="highlight-item">
+        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87" alt="Students laughing" class="highlight-img">
+        <div class="highlight-content">
+          <h3>Student Performances</h3>
+          <p>Talented students showcased their singing and dancing skills</p>
+        </div>
+      </div>
+      
+      <div class="highlight-item">
+        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d" alt="Award ceremony" class="highlight-img">
+        <div class="highlight-content">
+          <h3>Prom Royalty</h3>
+          <p>Crowning of our Prom King and Queen for 2024</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -452,12 +439,6 @@
     <a href="#">Facebook</a> | <a href="#">Instagram</a> | <a href="#">Twitter</a>
     <div class="copyright">All rights reserved. Photos may not be used without permission.</div>
   </footer>
-
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox">
-    <span onclick="closeLightbox()">&times;</span>
-    <img id="lightboxImg" src="" alt="Expanded view">
-  </div>
 
   <script>
     // Mobile menu toggle
@@ -497,39 +478,6 @@
       });
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
-
-    // Lightbox functionality
-    const galleryImages = document.querySelectorAll(".gallery-grid img");
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightboxImg");
-
-    galleryImages.forEach(img => {
-      img.addEventListener("click", () => {
-        lightbox.style.display = "flex";
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
-        document.body.style.overflow = "hidden";
-      });
-    });
-
-    function closeLightbox() {
-      lightbox.style.display = "none";
-      document.body.style.overflow = "auto";
-    }
-
-    // Close lightbox when clicking outside image
-    lightbox.addEventListener('click', function(e) {
-      if (e.target === lightbox) {
-        closeLightbox();
-      }
-    });
-
-    // Close lightbox with ESC key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === "Escape" && lightbox.style.display === "flex") {
-        closeLightbox();
-      }
-    });
   </script>
 
 </body>
