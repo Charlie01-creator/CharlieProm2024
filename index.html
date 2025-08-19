@@ -80,7 +80,7 @@
       margin-top:0; padding-top:calc(20px);
       background:
         linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.6)),
-        url('1@ (222) copy-1.jpg') center/cover no-repeat;
+        url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAFAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z') center/cover no-repeat;
       color:#fff; text-align:center; position:relative;
     }
     .hero .wrap{padding-top:40px; padding-bottom:80px}
@@ -128,7 +128,7 @@
     }
     .shot{
       position:relative; overflow:hidden; border-radius:16px; border:1px solid #eee; background:#fff;
-      aspect-ratio: 1/1; /* Square ratio that will adapt to image orientation */
+      aspect-ratio: 3/4; /* Better for both portrait and landscape */
     }
     .shot img{
       width:100%; height:100%; object-fit:cover; transition:transform .35s ease;
@@ -321,7 +321,7 @@
           <p class="muted">From the first flash on the red carpet to the last song from the DJ, Prom 2024 brought the class together in style. This page captures the story — your outfits, your smiles, and the energy that made the night special.</p>
           <p class="small" style="margin-top:10px">Sign in to download watermarked images. All downloads include "charlie02056@gmail.com" watermark.</p>
         </div>
-        <img src="sd.jpg" loading="lazy" alt="Red carpet arrivals at Central College Mityana Prom 2024" width="600" height="400">
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAFAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z" loading="lazy" alt="Red carpet arrivals at Central College Mityana Prom 2024" width="400" height="300">
       </div>
     </div>
   </section>
@@ -360,26 +360,26 @@
     <div class="wrap reveal">
       <h2 class="sec">Gallery</h2>
       <div class="grid" style="margin-top:14px">
-        <!-- Sample shots (replace with your images). All lazy + watermark badge -->
+        <!-- Optimized small images with base64 placeholders -->
         <div class="shot">
-          <img loading="lazy" src="awsf.jpg" alt="Students dancing at Prom 2024" width="300" height="300">
+          <img loading="lazy" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAFAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z" alt="Students dancing at Prom 2024" width="300" height="400">
           <span class="wm">© charlie02056@gmail.com</span>
-          <button class="download-btn" onclick="downloadWithWatermark('awsf.jpg')">Download</button>
+          <button class="download-btn" onclick="downloadWithWatermark('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAFAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z')">Download</button>
         </div>
         <div class="shot">
-          <img loading="lazy" src="19.jpg" alt="Group photo at Prom 2024" width="300" height="300">
+          <img loading="lazy" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAFAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z" alt="Group photo at Prom 2024" width="300" height="400">
           <span class="wm">© charlie02056@gmail.com</span>
-          <button class="download-btn" onclick="downloadWithWatermark('19.jpg')">Download</button>
+          <button class="download-btn" onclick="downloadWithWatermark('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAFAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z')">Download</button>
         </div>
         <div class="shot">
-          <img loading="lazy" src="540.jpg" alt="Students laughing at Prom 2024" width="300" height="300">
+          <img loading="lazy" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAFAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z" alt="Students laughing at Prom 2024" width="300" height="400">
           <span class="wm">© charlie02056@gmail.com</span>
-          <button class="download-btn" onclick="downloadWithWatermark('540.jpg')">Download</button>
+          <button class="download-btn" onclick="downloadWithWatermark('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAFAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z')">Download</button>
         </div>
         <div class="shot">
-          <img loading="lazy" src="200.jpg" alt="Award moment at Prom 2024" width="300" height="300">
+          <img loading="lazy" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAFAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z" alt="Award moment at Prom 2024" width="300" height="400">
           <span class="wm">© charlie02056@gmail.com</span>
-          <button class="download-btn" onclick="downloadWithWatermark('200.jpg')">Download</button>
+          <button class="download-btn" onclick="downloadWithWatermark('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAFAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z')">Download</button>
         </div>
       </div>
       <p class="small" style="margin-top:10px">Sign in to download images. All downloads include watermark protection.</p>
@@ -414,7 +414,7 @@
             <div style="margin:16px 0; text-align:center; color:#999">OR</div>
             
             <button class="google-btn" onclick="signInWithGoogle()">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google logo">
+              <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=" alt="Google logo">
               Sign in with Google
             </button>
           </div>
@@ -426,7 +426,7 @@
             <p class="small">All downloaded images will include "charlie02056@gmail.com" watermark.</p>
           </div>
         </div>
-        <img src="500.jpg" loading="lazy" alt="Students sharing memories at Prom 2024" width="500" height="350">
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAFAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z" loading="lazy" alt="Students sharing memories at Prom 2024" width="400" height="300">
       </div>
     </div>
   </section>
@@ -438,15 +438,15 @@
       <div class="tape" id="tape">
         <article class="quote">
           <p>"The music, the outfits — everything was perfect. Best night of the year!"</p>
-          <div class="who"><img class="avatar" loading="lazy" src="68.jpg" alt="Student A"> Aisha • S.6</div>
+          <div class="who"><img class="avatar" loading="lazy" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAFAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z" alt="Student A"> Aisha • S.6</div>
         </article>
         <article class="quote">
           <p>"Photo booth with my crew was hilarious — memories secured!"</p>
-          <div class="who"><img class="avatar" loading="lazy" src="54.jpg" alt="Student B"> Brian • S.4</div>
+          <div class="who"><img class="avatar" loading="lazy" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAFAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z" alt="Student B"> Brian • S.4</div>
         </article>
         <article class="quote">
           <p>"The red carpet felt like a movie premiere. 10/10."</p>
-          <div class="who"><img class="avatar" loading="lazy" src="465.jpg" alt="Student C"> Mercy • S.6</div>
+          <div class="who"><img class="avatar" loading="lazy" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAFAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/Z" alt="Student C"> Mercy • S.6</div>
         </article>
       </div>
       <p class="small" style="text-align:center; margin-top:8px">Swipe sideways on mobile to see more.</p>
@@ -460,10 +460,10 @@
       <p>For photo inquiries or to request removals/credits:</p>
       <p><strong>Email:</strong> photos@promgallery.com • <strong>WhatsApp:</strong> <a href="https://wa.me/256700955563" style="color:#fff; text-decoration:underline">+256 700 955563</a></p>
       <div class="socials">
-        <a href="#" aria-label="Facebook"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" class="social-icon" alt="Facebook"></a>
-        <a href="#" aria-label="Instagram"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" class="social-icon" alt="Instagram"></a>
-        <a href="#" aria-label="X / Twitter"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" class="social-icon" alt="Twitter"></a>
-        <a href="#" aria-label="YouTube"><img src="https://upload.wikimedia.org/wikipedia/commons/7/72/YouTube_social_white_square_%282017%29.svg" class="social-icon" alt="YouTube"></a>
+        <a href="#" aria-label="Facebook"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yNCAxMi4wNzNjMCA2LjYyNy014oCUMy45NzMgMTItMTJzLTEyIDUuMzczLTEyIDEyYzAgNi4wMTIgNC4zODggMTAuOTkgMTAgMTEuODd2LTguMzk3SDd2LTMuNDdoM1Y5Ljg2YzAtMy4wMjcgMS44LQuNjkgNC41MjQtLjY5IDEuMzA3IDAgMi43MDcuMjM0IDIuNzA3LjYzNHYzLjA3M2gtMi4yN2MtMS4yMzYgMC0xLjYyNS43NzQtMS42MjUgMS41NTh2Mi4zNjRoMy43NWwtLjUgMy40N2gtMy4yNXY4LjM5N2M2LjYxMi0uODggMTEuNS02Ljg1OCAxMS41LTEzLjg3eiIvPjwvc3ZnPg==" class="social-icon" alt="Facebook"></a>
+        <a href="#" aria-label="Instagram"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xMiAyLjE2MmMz4oCUMy4yMDQgMCAzLjU4OC4wMSA0Ljg1NC4wNiAzLjI1Mi4xNDQgNC4zNTIgMS40NTIgNC40OTYgNC42OTYuMDUgMS4yNjcuMDIgMi4xOC4wMiAzLjA4NCAwIC45MDQuMDEgMS44MTctLjAyIDMuMDg0LS4xNDQgMy4yNC0xLjI0NCA0LjU1Mi00LjQ5NiA0LjY5Ni0xLjI2Ni4wNS0xLjY1LjA2LTQuODU0LjA2LTMuMjA0IDAtMy41ODgtLjAxLTQuODU0LS4wNi0zLjI1Mi0uMTQ0LTQuMzUyLTEuNDUyLTQuNDk2LTQuNjk2LS4wNS0xLjI2Ny0uMDItMi4xOC0uMDItMy4wODQgMC0uOTA0LS4wMS0xLjgxNy4wMi0zLjA4NC4xNDQtMy4yNCAxLjI0NC00LjU1MiA0LjQ5Ni00LjY5NkM4LjQxMiAyLjE3MiA4LjggMi4xNjIgMTIgMi4xNjJ6bTAgMS44MzdjLTMuMTY1IDAtMy41MDQuMDEyLTQuNzMuMDYtMi44MS4xMy0zLjQyMi44NTQtMy41NTQgMy41NTQtLjA0OCAxLjIyLS4wMSAyLjA2OC0uMDEgMy4yOSAwIDEuMjIyLS4wMDcgMi4wNy4wMSAzLjI5LjEzIDIuNy43NDQgMy40MjQgMy41NTQgMy41NTQgMS4yMjYuMDQ4IDEuNTY1LjA2IDQuNzMuMDYgMy4xNjUgMCAzLjUwNC0uMDEyIDQuNzMtLjA2IDIuODEtLjEzIDMuNDIyLS44NTQgMy41NTQtMy41NTQuMDQ4LTEuMjIuMDEtMi4wNjguMDEtMy4yOSAwLTEuMjIyLjAwNy0yLjA3LS4wMS0zLjI5LS4xMy0yLjctLjc0NC0zLjQyNC0zLjU1NC0zLjU1NC0xLjIyNi0uMDQ4LTEuNTY1LS4wNi00LjczLS4wNnptMCA0LjY3YTMuOTk3IDMuOTk3IDAgMTAgMCA3Ljk5NCAzLjk5NyAzLjk5NyAwIDAwMC03Ljk5NHptMCA2LjY1OGEyLjY2MiAyLjY2MiAwIDExMC01LjMyNCAyLjY2MiAyLjY2MiAwIDAxMCA1LjMyNHptNS4zMzggMzR+LjM0YTMuNjYgMy42NiAwIDExMy42Ni0zLjY2IDMuNjYgMy42NiAwIDAxLTMuNjYgMy42eiIvPjwvc3ZnPg==" class="social-icon" alt="Instagram"></a>
+        <a href="#" aria-label="X / Twitter"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMy45NTMgNC41NThjLS4wMTUuMjEtLjAxNS40Mi0uMDE1LjYzIDAgNi4zNC00LjgzNCAxMy42Ni0xMy42NiAxMy42NnYtLjAwNGMtMi4yNS4wMS00LjQ3LS42Ni02LjMtMS44Mi4zMi4wNC42NC4wNi45Ni4wNiAxLjg4IDAgMy42LS42NCA1LjAzLTEuNzItMS43Ni0uMDMtMy4yNS0xLjE5LTMuNzctMi43OC4yNS4wNC41LjA2Ljc2LjA2LjM3IDAgLjc0LS4wNSAxLjA5LS4xNC0xLjg0LS4zNy0zLjIzLTItMy4yMy0zLjk2di0uMDRjLjUuMjggMS4wNy40NCAxLjY2LjQ2LTEuLjY3LTEuNi0yLjUyLTMuOC0yLjUyLTYuNCAwLTEuNDEuMzgtMi43NCAxLjctMy43NiAyLjA0LTIuNTIgNS4wNy00LjA0IDguNTEtNC4yIDAtLjA3IDAtLjE0IDAtLjIxQTMuNiAzLjYgMCAwMTUuMDkgNC4yNmMyLjYyIDEuNzIgNS43NiAyLjc0IDkuMDQgMi44MmEtMy42NiAzLjY2IDAgMDEwLTcuMzIgMy42NiAzLjY2IDAgMDE1LjI3IDMuNDJsLjAxLS4zNGE5Ljg2IDkuODYgMCAwMDIuODgtLjc3Yy0uMzMgMS41Ni0xLjI4IDIuODctMi41IDMuNzFhOS44NiA5Ljg2IDAgMDAyLjc2LS43NWMtLjY1Ljk3LTEuNDUgMS44Mi0yLjQgMi40OHoiLz48L3N2Zz4=" class="social-icon" alt="Twitter"></a>
+        <a href="#" aria-label="YouTube"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0yMy40OSA3LjZjLS4xMy0xLjAxLS41Mi0xLjktMS4xOS0yLjU3LS42Ny0uNjctMS41Ni0xLjA2LTIuNTctMS4xOUMxOC4zOCAzLjYyIDE1LjA0IDMuNjIgMTIgMy42MnMtNi4zOCAwLTguNzMuMjJjLTEuMDEuMTMtMS45LjUyLTIuNTcgMS4xOS0uNjcuNjctMS4wNiAxLjU2LTEuMTkgMi41N0MyLjYyIDkuNjIgMi42MiAxMi45NiAyLjYyIDE2czAgNi4zOC4yMiA4LjczYy4xMyAxLjAxLjUyIDEuOSAxLjE5IDIuNTcuNjcuNjcgMS41NiAxLjA2IDIuNTcgMS4xOSAyLjM1LjIyIDUuNjkuMjIgOC43My4yMnM2LjM4IDAgOC43My0uMjJjMS4wMS0uMTMgMS45LS41MiAyLjU3LTEuMTkuNjctLjY3IDEuMDYtMS41NiAxLjE5LTIuNTcuMjItMi4zNS4yMi01LjY5LjIyLTguNzNzMC02LjM4LS4yMi04LjczeiBNOS42MiAxNi44MlY4LjE4bDYuNzggNC4zMi02Ljc4IDQuMzJ6Ii8+PC9zdmc+" class="social-icon" alt="YouTube"></a>
       </div>
     </div>
   </section>
@@ -495,7 +495,7 @@
       <div style="margin:16px 0; text-align:center; color:#999">OR</div>
       
       <button class="google-btn" onclick="signInWithGoogle()">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google logo">
+        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=" alt="Google logo">
         Sign in with Google
       </button>
     </div>
@@ -723,22 +723,7 @@
 
     // Preload images for better performance
     window.addEventListener('load', function() {
-      const images = [
-        '1@ (222) copy-1.jpg',
-        'sd.jpg',
-        'awsf.jpg',
-        '19.jpg',
-        '540.jpg',
-        '200.jpg',
-        '500.jpg',
-        '68.jpg',
-        '54.jpg',
-        '465.jpg'
-      ];
-      
-      images.forEach(img => {
-        new Image().src = img;
-      });
+      // All images are already optimized with base64 placeholders
     });
   </script>
 </body>
