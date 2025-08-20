@@ -45,56 +45,13 @@
     a {text-decoration: none;color: inherit;}
      /* Header / Navbar */
     header {position: sticky;top: 0;z-index: 1000;background: rgba(255,255,255,.95);backdrop-filter: saturate(140%) blur(8px);border-bottom: 1px solid #eee;}
-    
-    .nav {
-      max-width: 1200px;
-      margin: 0 auto;
-      height: var(--header-h);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-    }
-    
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 800;
-      letter-spacing: .3px;
-      color: var(--brand);
-      font-size: 1.15rem;
-    }
-    
-    .logo svg {
-      width: 30px;
-      height: 30px;
-    }
-    
-    .links {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-    
-    .links a {
-      padding: 10px 6px;
-      position: relative;
-      font-weight: 500;
-      color: #333;
-    }
-    
+    .nav {max-width: 1200px;margin: 0 auto;height: var(--header-h);display: flex;align-items: center;justify-content: space-between;padding: 0 20px;}
+    .logo {display: flex;align-items: center;gap: 10px;font-weight: 800;letter-spacing: .3px;color: var(--brand);font-size: 1.15rem;}
+    .logo svg {width: 30px;height: 30px;}
+    .links {display: flex;align-items: center;gap: 22px;}
+    .links a {padding: 10px 6px;position: relative;font-weight: 500;color: #333;}
     .links a.active::after,
-    .links a:hover::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 4px;
-      height: 2px;
-      width: 100%;
-      background: linear-gradient(90deg, var(--brand), var(--brand2));
-      border-radius: 2px;
-    }
+    .links a:hover::after {content: "";position: absolute;left: 0;bottom: 4px;height: 2px;width: 100%;background: linear-gradient(90deg, var(--brand), var(--brand2));border-radius: 2px;}
     .cta-sign {margin-left: 6px;border: 0;padding: 10px 16px;border-radius: 999px;cursor: pointer;background: linear-gradient(45deg, var(--brand), var(--brand2));color: #fff;font-weight: 700;box-shadow: 0 6px 14px rgba(233,30,99,.2);transition: transform 0.2s, box-shadow 0.2s;}
     .cta-sign:hover {
       transform: translateY(-2px);
@@ -1067,4 +1024,5 @@
   </script>
 </body>
 </html>
+
 
