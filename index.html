@@ -254,17 +254,6 @@
       padding: 18px;
       box-shadow: var(--shadow);
       transition: transform .25s ease, box-shadow .25s ease;}
-   .styled-image {
-  width: 100%;              /* Make image responsive (fit container width) */
-  max-width: 600px;         /* Optional: set a maximum size */
-  border-radius: 20px;      /* Removes sharp edges → gives smooth rounded corners */
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);  /* Adds shadow for depth */
-  display: block;           /* Removes inline spacing */
-  margin: 20px auto;        /* Centers the image */
-}
-
-    
-    
     .card:hover {
       transform: translateY(-6px);
       box-shadow: 0 16px 30px rgba(0,0,0,.12);
@@ -306,8 +295,15 @@
     .shot img {
       height: 200px; /* Reduced height */
       width: 100%;
-      object-fit: cover;
-      transition: transform .35s ease;
+      transition: transform .35s ease;      /* Make image responsive (fit container width) */
+  max-width: 600px;         /* Optional: set a maximum size */
+  border-radius: 20px;      /* Removes sharp edges → gives smooth rounded corners */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);  /* Adds shadow for depth */
+  display: block;           /* Removes inline spacing */
+  margin: 20px auto;    
+      object-fit: cover/* Centers the image */
+}
+
     }
     
     .shot:hover img {
@@ -1066,5 +1062,6 @@
   </script>
 </body>
 </html>
+
 
 
