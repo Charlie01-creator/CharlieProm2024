@@ -253,8 +253,17 @@
       border-radius: 18px;
       padding: 18px;
       box-shadow: var(--shadow);
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
+      transition: transform .25s ease, box-shadow .25s ease;}
+   .styled-image {
+  width: 100%;              /* Make image responsive (fit container width) */
+  max-width: 600px;         /* Optional: set a maximum size */
+  border-radius: 20px;      /* Removes sharp edges → gives smooth rounded corners */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);  /* Adds shadow for depth */
+  display: block;           /* Removes inline spacing */
+  margin: 20px auto;        /* Centers the image */
+}
+
+    
     
     .card:hover {
       transform: translateY(-6px);
@@ -546,9 +555,13 @@
     
     /* Image optimization styles */
     .optimized-img {
-      max-width: 100%;
-      height: auto;
-      padding: 20px; /* Added padding */
+  width: 100%;              /* Make image responsive (fit container width) */
+  max-width: 600px;         /* Optional: set a maximum size */
+  border-radius: 20px;      /* Removes sharp edges → gives smooth rounded corners */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);  /* Adds shadow for depth */
+  display: block;           /* Removes inline spacing */
+  margin: 20px auto;        /* Centers the image */
+}
     }
     
     /* About section image */
@@ -1053,3 +1066,4 @@
   </script>
 </body>
 </html>
+
