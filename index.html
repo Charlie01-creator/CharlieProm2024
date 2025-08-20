@@ -291,10 +291,11 @@
       border-radius: 16px;
       border: 1px solid #eee;
       background: #fff;
+      padding: 20px; /* Added padding */
     }
     
     .shot img {
-      height: 240px;
+      height: 200px; /* Reduced height */
       width: 100%;
       object-fit: cover;
       transition: transform .35s ease;
@@ -306,8 +307,8 @@
     
     .wm {
       position: absolute;
-      right: 10px;
-      bottom: 10px;
+      right: 30px; /* Adjusted for padding */
+      bottom: 30px; /* Adjusted for padding */
       font-size: .8rem;
       color: #fff;
       background: rgba(0,0,0,.4);
@@ -456,6 +457,7 @@
       height: 36px;
       border-radius: 50%;
       object-fit: cover;
+      padding: 20px; /* Added padding */
     }
     
     /* Contact */
@@ -541,6 +543,27 @@
     .fade-in {
       animation: fadeIn 1s ease forwards;
     }
+    
+    /* Image optimization styles */
+    .optimized-img {
+      max-width: 100%;
+      height: auto;
+      padding: 20px; /* Added padding */
+    }
+    
+    /* About section image */
+    .about img {
+      max-width: 100%;
+      height: auto;
+      padding: 20px; /* Added padding */
+    }
+    
+    /* Share section image */
+    .share img {
+      max-width: 100%;
+      height: auto;
+      padding: 20px; /* Added padding */
+    }
   </style>
 </head>
 <body>
@@ -612,7 +635,7 @@
           <p class="muted">From the first flash on the red carpet to the last song from the DJ, Prom 2024 brought the class together in style. This page captures the story — your outfits, your smiles, and the energy that made the night special.</p>
           <p class="small" style="margin-top:10px">Tip: Tap any image to view it large. Uploads are watermarked to protect your memories.</p>
         </div>
-        <img src="sd.jpg" loading="lazy" alt="Red carpet arrivals at Central College Mityana Prom 2024">
+        <img src="sd.jpg" loading="lazy" alt="Red carpet arrivals at Central College Mityana Prom 2024" class="optimized-img">
       </div>
     </div>
   </section>
@@ -653,19 +676,19 @@
       <div class="grid" style="margin-top:14px">
         <!-- Sample shots with compressed WebP images -->
         <a href="#" class="shot" data-big="70.jpg" onclick="openLightbox(event)">
-          <img loading="lazy" src="70.jpg" alt="Dance floor at Central College Mityana Prom 2024">
+          <img loading="lazy" src="70.jpg" alt="Dance floor at Central College Mityana Prom 2024" class="optimized-img">
           <span class="wm">© Prom 2024</span>
         </a>
         <a href="#" class="shot" data-big="13.jpg" onclick="openLightbox(event)">
-          <img loading="lazy" src="13.jpg" alt="Group photo at Central College Mityana Prom 2024">
+          <img loading="lazy" src="13.jpg" alt="Group photo at Central College Mityana Prom 2024" class="optimized-img">
           <span class="wm">© Prom 2024</span>
         </a>
         <a href="#" class="shot" data-big="9.jpg" onclick="openLightbox(event)">
-          <img loading="lazy" src="9.jpg" alt="Students laughing at Central College Mityana Prom 2024">
+          <img loading="lazy" src="9.jpg" alt="Students laughing at Central College Mityana Prom 2024" class="optimized-img">
           <span class="wm">© Prom 2024</span>
         </a>
         <a href="#" class="shot" data-big="534.jpg" onclick="openLightbox(event)">
-          <img loading="lazy" src="534.jpg" alt="Award moment at Central College Mityana Prom 2024">
+          <img loading="lazy" src="534.jpg" alt="Award moment at Central College Mityana Prom 2024" class="optimized-img">
           <span class="wm">© Prom 2024</span>
         </a>
       </div>
@@ -710,7 +733,7 @@
             </div>
           </div>
         </div>
-        <img src="7.jpg" loading="lazy" alt="Sharing memories from Central College Mityana Prom 2024">
+        <img src="7.jpg" loading="lazy" alt="Sharing memories from Central College Mityana Prom 2024" class="optimized-img">
       </div>
     </div>
   </section>
@@ -1020,9 +1043,13 @@
       document.querySelectorAll('img:not([loading])').forEach(img => {
         img.setAttribute('loading', 'lazy');
       });
+      
+      // Preload critical images
+      const criticalImages = document.querySelectorAll('.hero, .logo');
+      criticalImages.forEach(img => {
+        img.removeAttribute('loading');
+      });
     });
   </script>
 </body>
 </html>
-
-
