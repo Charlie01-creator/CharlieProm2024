@@ -80,7 +80,7 @@
       margin-top:0; padding-top:calc(20px);
       background:
         linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.6)),
-        url('1@(222) copy-1.jpg') center/cover no-repeat;
+        url('1@ (222) copy-1.jpg') center/cover no-repeat;
       color:#fff; text-align:center; position:relative;
     }
     .hero .wrap{padding-top:40px; padding-bottom:80px}
@@ -123,7 +123,27 @@
     @media (max-width: 560px){ .highlights .cards{grid-template-columns:1fr} }
 
     /* Gallery */
-    .gallery .grid{
+<style>
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    justify-items: center;
+  }
+
+  .gallery-grid img {
+    width: 100%;
+    max-width: 160px;
+    max-height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-grid img:hover {
+    transform: scale(1.05);
+  }
+.gallery .grid{
       display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:14px;
     }
     .shot{
@@ -218,7 +238,6 @@
       </div>
     </div>
   </header>
-
   <!-- Mobile drawer -->
   <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
     <a href="#home" onclick="closeDrawer()">Home</a>
@@ -244,6 +263,7 @@
       </div>
     </div>
   </section>
+  
 
   <!-- About -->
   <section id="about">
@@ -299,15 +319,15 @@
           <img loading="lazy" src="awsf.jpg" alt="Dance floor">
           <span class="wm">© charlie02056@gmail.com</span>
         </a>
-        <a href="#" class="shot" data-big="400.jpg=80&w=1600&auto=format&fit=crop" onclick="openLightbox(event)">
+        <a href="#" class="shot" data-big="400.jpg" onclick="openLightbox(event)">
           <img loading="lazy" src="19.jpg" alt="Group photo">
           <span class="wm">© 0700955563</span>
         </a>
-        <a href="#" class="shot" data-big="sd.jpg=40&w=800&auto=format&fit=crop" onclick="openLightbox(event)">
+        <a href="#" class="shot" data-big="sd.jpg" onclick="openLightbox(event)">
           <img loading="lazy" src="540.jpg" alt="Laughing candid">
           <span class="wm">© Central College</span>
         </a>
-        <a href="#" class="shot" data-big="24.jpg=crop" onclick="openLightbox(event)">
+        <a href="#" class="shot" data-big="24.jpg" onclick="openLightbox(event)">
           <img loading="lazy" src="200.jpg" alt="Award moment">
           <span class="wm">© Prom 2024</span>
         </a>
@@ -354,7 +374,7 @@
             </div>
           </div>
         </div>
-        <img src="500.jpg" loading="lazy" alt="Sharing memories">
+        <img src="457.jpg" loading="lazy" alt="Sharing memories">
       </div>
     </div>
   </section>
@@ -570,5 +590,6 @@
   </script>
 </body>
 </html>
+
 
 
