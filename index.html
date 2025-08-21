@@ -24,7 +24,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Preload critical resources -->
-  <link rel="preload" as="image" href="1@ 222 copy-1.jpg">
+  <link rel="preload" as="image" href="1@ 222 copy.html">
   
   <style>
     :root {
@@ -133,7 +133,7 @@
       padding-top: 20px;
       background: 
         linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.6)), 
-        url('1@ (222) copy-1.jpg') center/cover no-repeat;
+        url('images/hero-small.webp') center/cover no-repeat;
       color: #fff;
       text-align: center;
       position: relative;
@@ -253,7 +253,9 @@
       border-radius: 18px;
       padding: 18px;
       box-shadow: var(--shadow);
-      transition: transform .25s ease, box-shadow .25s ease;}
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    
     .card:hover {
       transform: translateY(-6px);
       box-shadow: 0 16px 30px rgba(0,0,0,.12);
@@ -295,15 +297,8 @@
     .shot img {
       height: 200px; /* Reduced height */
       width: 100%;
-      transition: transform .35s ease;      /* Make image responsive (fit container width) */
-  max-width: 600px;         /* Optional: set a maximum size */
-  border-radius: 20px;      /* Removes sharp edges → gives smooth rounded corners */
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);  /* Adds shadow for depth */
-  display: block;           /* Removes inline spacing */
-  margin: 20px auto;    
-      object-fit: cover/* Centers the image */
-}
-
+      object-fit: cover;
+      transition: transform .35s ease;
     }
     
     .shot:hover img {
@@ -551,13 +546,9 @@
     
     /* Image optimization styles */
     .optimized-img {
-  width: 100%;              /* Make image responsive (fit container width) */
-  max-width: 600px;         /* Optional: set a maximum size */
-  border-radius: 20px;      /* Removes sharp edges → gives smooth rounded corners */
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);  /* Adds shadow for depth */
-  display: block;           /* Removes inline spacing */
-  margin: 20px auto;        /* Centers the image */
-}
+      max-width: 100%;
+      height: auto;
+      padding: 20px; /* Added padding */
     }
     
     /* About section image */
@@ -572,6 +563,17 @@
       max-width: 100%;
       height: auto;
       padding: 20px; /* Added padding */
+    }
+    
+    /* Low-quality image placeholders (LQIP) */
+    .lazyload,
+    .lazyloading {
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .lazyloaded {
+      opacity: 1;
     }
   </style>
 </head>
@@ -644,7 +646,7 @@
           <p class="muted">From the first flash on the red carpet to the last song from the DJ, Prom 2024 brought the class together in style. This page captures the story — your outfits, your smiles, and the energy that made the night special.</p>
           <p class="small" style="margin-top:10px">Tip: Tap any image to view it large. Uploads are watermarked to protect your memories.</p>
         </div>
-        <img src="sd.jpg" loading="lazy" alt="Red carpet arrivals at Central College Mityana Prom 2024" class="optimized-img">
+        <img src="sd.jpg" loading="lazy" alt="Red carpet arrivals at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
       </div>
     </div>
   </section>
@@ -685,19 +687,19 @@
       <div class="grid" style="margin-top:14px">
         <!-- Sample shots with compressed WebP images -->
         <a href="#" class="shot" data-big="70.jpg" onclick="openLightbox(event)">
-          <img loading="lazy" src="70.jpg" alt="Dance floor at Central College Mityana Prom 2024" class="optimized-img">
+          <img loading="lazy" src="70.jpg" alt="Dance floor at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
           <span class="wm">© Prom 2024</span>
         </a>
         <a href="#" class="shot" data-big="13.jpg" onclick="openLightbox(event)">
-          <img loading="lazy" src="13.jpg" alt="Group photo at Central College Mityana Prom 2024" class="optimized-img">
+          <img loading="lazy" src="13.jpg" alt="Group photo at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
           <span class="wm">© Prom 2024</span>
         </a>
         <a href="#" class="shot" data-big="9.jpg" onclick="openLightbox(event)">
-          <img loading="lazy" src="9.jpg" alt="Students laughing at Central College Mityana Prom 2024" class="optimized-img">
+          <img loading="lazy" src="9.jpg" alt="Students laughing at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
           <span class="wm">© Prom 2024</span>
         </a>
         <a href="#" class="shot" data-big="534.jpg" onclick="openLightbox(event)">
-          <img loading="lazy" src="534.jpg" alt="Award moment at Central College Mityana Prom 2024" class="optimized-img">
+          <img loading="lazy" src="534.jpg" alt="Award moment at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
           <span class="wm">© Prom 2024</span>
         </a>
       </div>
@@ -742,7 +744,7 @@
             </div>
           </div>
         </div>
-        <img src="7.jpg" loading="lazy" alt="Sharing memories from Central College Mityana Prom 2024" class="optimized-img">
+        <img src="7.jpg" loading="lazy" alt="Sharing memories from Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
       </div>
     </div>
   </section>
@@ -754,15 +756,15 @@
       <div class="tape" id="tape">
         <article class="quote">
           <p>"The music, the outfits — everything was perfect. Best night of the year!"</p>
-          <div class="who"><img class="avatar" loading="lazy" src="68.jpg" alt="Aisha, S.6 student"> Aisha • S.6</div>
+          <div class="who"><img class="avatar" loading="lazy" src="68.jpg" alt="Aisha, S.6 student" width="40" height="40"> Aisha • S.6</div>
         </article>
         <article class="quote">
           <p>"Photo booth with my crew was hilarious — memories secured!"</p>
-          <div class="who"><img class="avatar" loading="lazy" src="47.jpg" alt="Brian, S.4 student"> Brian • S.4</div>
+          <div class="who"><img class="avatar" loading="lazy" src="47.jpg" alt="Brian, S.4 student" width="40" height="40"> Brian • S.4</div>
         </article>
         <article class="quote">
           <p>"The red carpet felt like a movie premiere. 10/10."</p>
-          <div class="who"><img class="avatar" loading="lazy" src="104.jpg" alt="Mercy, S.6 student"> Mercy • S.6</div>
+          <div class="who"><img class="avatar" loading="lazy" src="104.jpg" alt="Mercy, S.6 student" width="40" height="40"> Mercy • S.6</div>
         </article>
       </div>
       <p class="small" style="text-align:center; margin-top:8px">Swipe sideways on mobile to see more.</p>
@@ -1058,12 +1060,16 @@
       criticalImages.forEach(img => {
         img.removeAttribute('loading');
       });
+      
+      // Add width and height attributes to prevent layout shifts
+      document.querySelectorAll('img').forEach(img => {
+        if (!img.hasAttribute('width') && !img.hasAttribute('height')) {
+          // Set default dimensions if not specified
+          img.setAttribute('width', '300');
+          img.setAttribute('height', '200');
+        }
+      });
     });
   </script>
 </body>
 </html>
-
-
-
-
-
