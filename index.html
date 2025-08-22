@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Central College Mityana — Prom 2024</title>
   
   <!-- SEO & Social Meta Tags -->
@@ -23,14 +23,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
+  <!-- Preload critical resources -->
+  <link rel="preload" as="image" href="1@ 222 copy.html">
+  
   <style>
-    /* Disable zooming */
-    html, body {
-      touch-action: manipulation;
-      -webkit-text-size-adjust: 100%;
-      text-size-adjust: 100%;
-    }
-    
     :root {
       --brand: #e91e63;
       --brand2: #ff4081;
@@ -137,7 +133,7 @@
       padding-top: 20px;
       background: 
         linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.6)), 
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300"><rect width="400" height="300" fill="%23e91e63"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Arial" font-size="20" fill="white">Hero Image</text></svg>') center/cover no-repeat;
+        url('images/hero-small.webp') center/cover no-repeat;
       color: #fff;
       text-align: center;
       position: relative;
@@ -306,8 +302,8 @@
     }
     
     .shot img {
+      height: 240px;
       width: 100%;
-      height: 300px; /* Fixed height */
       object-fit: cover;
       transition: transform .5s ease;
     }
@@ -423,27 +419,6 @@
       font-size: 1.1rem;
       max-width: 600px;
       padding: 0 20px;
-    }
-    
-    /* Loading indicator for lightbox */
-    .lightbox-loader {
-      display: none;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 50px;
-      height: 50px;
-      border: 5px solid rgba(255,255,255,0.2);
-      border-radius: 50%;
-      border-top: 5px solid #fff;
-      animation: spin 1s linear infinite;
-      z-index: 1202;
-    }
-    
-    @keyframes spin {
-      0% { transform: translate(-50%, -50%) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) rotate(360deg); }
     }
     
     /* Share / Upload */
@@ -738,28 +713,6 @@
       background: var(--brand);
       color: white;
     }
-    
-    /* Form validation styles */
-    .error {
-      color: #d32f2f;
-      font-size: 0.85rem;
-      margin-top: 5px;
-      display: none;
-    }
-    
-    input.error-border {
-      border-color: #d32f2f;
-    }
-    
-    /* Placeholder image styling */
-    .placeholder-img {
-      background: linear-gradient(45deg, #e91e63, #ff4081);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: bold;
-    }
   </style>
 </head>
 <body>
@@ -831,9 +784,7 @@
           <p class="muted">From the first flash on the red carpet to the last song from the DJ, Prom 2024 brought the class together in style. This page captures the story — your outfits, your smiles, and the energy that made the night special.</p>
           <p class="small" style="margin-top:10px">Tip: Tap any image to view it large. Uploads are watermarked to protect your memories.</p>
         </div>
-        <div class="placeholder-img" style="width:400px;height:300px;border-radius:12px;">
-          About Prom Image
-        </div>
+        <img src="sd.jpg" loading="lazy" alt="Red carpet arrivals at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
       </div>
     </div>
   </section>
@@ -880,11 +831,9 @@
         </div>
       </div>
       <div class="grid" style="margin-top:20px">
-        <!-- Sample shots with placeholder images -->
-        <a href="#" class="shot" data-big="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23e91e63'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='20' fill='white'>Dance Floor Image</text></svg>" onclick="openLightbox(event)" data-category="dance">
-          <div class="placeholder-img" style="width:100%;height:300px;">
-            Dance Floor Image
-          </div>
+        <!-- Sample shots with compressed WebP images -->
+        <a href="#" class="shot" data-big="70.jpg" onclick="openLightbox(event)" data-category="dance">
+          <img loading="lazy" src="70.jpg" alt="Dance floor at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
           <div class="shot-info">
             <h3 class="shot-title">Dance Floor Energy</h3>
             <p class="shot-desc">Students showing off their best moves to the DJ's beats</p>
@@ -894,10 +843,8 @@
             </div>
           </div>
         </a>
-        <a href="#" class="shot" data-big="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23ff4081'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='20' fill='white'>Group Photo</text></svg>" onclick="openLightbox(event)" data-category="group">
-          <div class="placeholder-img" style="width:100%;height:300px;">
-            Group Photo
-          </div>
+        <a href="#" class="shot" data-big="13.jpg" onclick="openLightbox(event)" data-category="group">
+          <img loading="lazy" src="13.jpg" alt="Group photo at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
           <div class="shot-info">
             <h3 class="shot-title">Friends Forever</h3>
             <p class="shot-desc">Class of 2024 showing their strong bond</p>
@@ -907,10 +854,8 @@
             </div>
           </div>
         </a>
-        <a href="#" class="shot" data-big="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%239c27b0'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='20' fill='white'>Red Carpet Photo</text></svg>" onclick="openLightbox(event)" data-category="red-carpet">
-          <div class="placeholder-img" style="width:100%;height:300px;">
-            Red Carpet Photo
-          </div>
+        <a href="#" class="shot" data-big="9.jpg" onclick="openLightbox(event)" data-category="red-carpet">
+          <img loading="lazy" src="9.jpg" alt="Students laughing at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
           <div class="shot-info">
             <h3 class="shot-title">Red Carpet Moments</h3>
             <p class="shot-desc">Stylish arrivals making a statement</p>
@@ -920,10 +865,8 @@
             </div>
           </div>
         </a>
-        <a href="#" class="shot" data-big="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%23673ab7'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='20' fill='white'>Award Celebration</text></svg>" onclick="openLightbox(event)" data-category="dance">
-          <div class="placeholder-img" style="width:100%;height:300px;">
-            Award Celebration
-          </div>
+        <a href="#" class="shot" data-big="534.jpg" onclick="openLightbox(event)" data-category="dance">
+          <img loading="lazy" src="534.jpg" alt="Award moment at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
           <div class="shot-info">
             <h3 class="shot-title">Award Celebration</h3>
             <p class="shot-desc">Recognizing outstanding students of the year</p>
@@ -934,10 +877,8 @@
           </div>
         </a>
         <!-- Additional gallery items -->
-        <a href="#" class="shot" data-big="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%233f51b5'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='20' fill='white'>Best Friends Photo</text></svg>" onclick="openLightbox(event)" data-category="group">
-          <div class="placeholder-img" style="width:100%;height:300px;">
-            Best Friends Photo
-          </div>
+        <a href="#" class="shot" data-big="47.jpg" onclick="openLightbox(event)" data-category="group">
+          <img loading="lazy" src="47.jpg" alt="Students posing at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
           <div class="shot-info">
             <h3 class="shot-title">Best Friends</h3>
             <p class="shot-desc">Creating memories that will last a lifetime</p>
@@ -947,10 +888,8 @@
             </div>
           </div>
         </a>
-        <a href="#" class="shot" data-big="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%232196f3'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='20' fill='white'>Elegant Style Photo</text></svg>" onclick="openLightbox(event)" data-category="red-carpet">
-          <div class="placeholder-img" style="width:100%;height:300px;">
-            Elegant Style Photo
-          </div>
+        <a href="#" class="shot" data-big="68.jpg" onclick="openLightbox(event)" data-category="red-carpet">
+          <img loading="lazy" src="68.jpg" alt="Elegant dress at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
           <div class="shot-info">
             <h3 class="shot-title">Elegant Style</h3>
             <p class="shot-desc">Showcasing fashion and sophistication</p>
@@ -967,10 +906,9 @@
 
   <!-- Lightbox - UPDATED -->
   <div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
-    <div class="lightbox-loader" id="lightboxLoader"></div>
     <button class="close" onclick="closeLightbox()">✕ Close</button>
     <div class="lightbox-content">
-      <img alt="Preview image from Central College Mityana Prom 2024" onload="hideLightboxLoader()">
+      <img alt="Preview image from Central College Mityana Prom 2024">
     </div>
     <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>
@@ -987,7 +925,6 @@
               <input type="email" id="email" placeholder="Your email (e.g. charlie02056@gmail.com)" autocomplete="email">
               <button class="cta-sign" onclick="fakeSignIn()">Sign In</button>
             </div>
-            <div id="email-error" class="error">Please enter a valid email address</div>
             <p id="signin-status" class="small" style="margin:8px 0 0"></p>
           </div>
           <div id="uploadArea" style="display:none; margin-top:14px">
@@ -996,9 +933,8 @@
             </div>
             <div class="inline">
               <input type="file" id="fileInput" accept="image/*">
-              <button class="btn primary" onclick="applyEnhancedWatermark()">Apply Watermark</button>
+              <button class="btn primary" onclick="applyWatermark()">Apply Watermark</button>
             </div>
-            <div id="file-error" class="error">Please select an image file</div>
             <p class="small">After processing, right-click or long-press the preview to save, or use the Download button.</p>
             <div id="previewWrap" style="margin-top:10px; display:none">
               <canvas id="canvas" style="max-width:100%; border:1px solid #eee; border-radius:10px"></canvas>
@@ -1008,9 +944,7 @@
             </div>
           </div>
         </div>
-        <div class="placeholder-img" style="width:400px;height:300px;border-radius:12px;">
-          Share Memories Image
-        </div>
+        <img src="7.jpg" loading="lazy" alt="Sharing memories from Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
       </div>
     </div>
   </section>
@@ -1026,7 +960,7 @@
         <article class="quote">
           <p class="quote-text">"The music, the outfits — everything was perfect. Best night of the year! I'll never forget dancing with my friends until we couldn't stand anymore."</p>
           <div class="who">
-            <div class="avatar placeholder-img" style="width:50px;height:50px;">A</div>
+            <img class="avatar" loading="lazy" src="68.jpg" alt="Aisha, S.6 student" width="40" height="40">
             <div class="who-details">
               <span class="who-name">Aisha M.</span>
               <span class="who-role">S.6 Student</span>
@@ -1037,7 +971,7 @@
         <article class="quote">
           <p class="quote-text">"Photo booth with my crew was hilarious — memories secured! We must have taken like 50 different photos with all the silly props they had."</p>
           <div class="who">
-            <div class="avatar placeholder-img" style="width:50px;height:50px;">B</div>
+            <img class="avatar" loading="lazy" src="47.jpg" alt="Brian, S.4 student" width="40" height="40">
             <div class="who-details">
               <span class="who-name">Brian K.</span>
               <span class="who-role">S.4 Student</span>
@@ -1048,7 +982,7 @@
         <article class="quote">
           <p class="quote-text">"The red carpet felt like a movie premiere. 10/10 experience. I felt like a celebrity with all the cameras flashing as I walked in with my date."</p>
           <div class="who">
-            <div class="avatar placeholder-img" style="width:50px;height:50px;">M</div>
+            <img class="avatar" loading="lazy" src="104.jpg" alt="Mercy, S.6 student" width="40" height="40">
             <div class="who-details">
               <span class="who-name">Mercy N.</span>
               <span class="who-role">S.6 Student</span>
@@ -1059,7 +993,7 @@
         <article class="quote">
           <p class="quote-text">"The food was amazing and the decorations transformed our hall into something magical. Huge thanks to the organizing committee!"</p>
           <div class="who">
-            <div class="avatar placeholder-img" style="width:50px;height:50px;">D</div>
+            <img class="avatar" loading="lazy" src="9.jpg" alt="David, S.5 student" width="40" height="40">
             <div class="who-details">
               <span class="who-name">David T.</span>
               <span class="who-role">S.5 Student</span>
@@ -1108,7 +1042,6 @@
       <div class="form-row">
         <input type="email" id="emailModal" placeholder="you@example.com">
       </div>
-      <div id="modal-email-error" class="error">Please enter a valid email address</div>
       <div class="inline" style="margin-top:12px">
         <button class="cta-sign" onclick="applyModalSign()">Continue</button>
         <button class="btn" onclick="closeSign()">Cancel</button>
@@ -1200,15 +1133,6 @@
     /* ======= Lightbox - UPDATED ======= */
     const lb = document.getElementById('lightbox');
     const lbCaption = document.getElementById('lightbox-caption');
-    const lbLoader = document.getElementById('lightboxLoader');
-    
-    function showLightboxLoader() {
-      lbLoader.style.display = 'block';
-    }
-    
-    function hideLightboxLoader() {
-      lbLoader.style.display = 'none';
-    }
     
     function openLightbox(e) {
       e.preventDefault();
@@ -1217,7 +1141,6 @@
       const title = link.querySelector('.shot-title')?.textContent || '';
       const desc = link.querySelector('.shot-desc')?.textContent || '';
       
-      showLightboxLoader();
       lb.querySelector('img').src = big;
       lbCaption.textContent = `${title} - ${desc}`;
       lb.classList.add('active');
@@ -1233,14 +1156,6 @@
     
     lb.addEventListener('click', (e) => {
       if (e.target === lb) closeLightbox();
-    });
-    
-    // Keyboard navigation for lightbox
-    document.addEventListener('keydown', (e) => {
-      if (lb.classList.contains('active')) {
-        if (e.key === 'Escape') closeLightbox();
-        // Add arrow key navigation if you implement multiple image navigation
-      }
     });
     
     /* ======= Gallery Filtering ======= */
@@ -1266,11 +1181,6 @@
     /* ======= Sign-in modal ======= */
     const modal = document.getElementById('signinModal');
     
-    function validateEmail(email) {
-      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return re.test(email);
-    }
-    
     function openSign() {
       if (typeof modal.showModal === 'function') {
         modal.showModal();
@@ -1285,22 +1195,14 @@
       } else {
         modal.removeAttribute('open');
       }
-      // Clear errors
-      document.getElementById('modal-email-error').style.display = 'none';
-      document.getElementById('emailModal').classList.remove('error-border');
     }
     
     function applyModalSign() {
-      const emailInput = document.getElementById('emailModal');
-      const v = emailInput.value.trim();
-      const errorElement = document.getElementById('modal-email-error');
-      
-      if (!v || !validateEmail(v)) {
-        errorElement.style.display = 'block';
-        emailInput.classList.add('error-border');
+      const v = document.getElementById('emailModal').value.trim();
+      if (!v) {
+        alert('Enter a valid email');
         return;
       }
-      
       document.getElementById('email').value = v;
       document.getElementById('signin-status').textContent = 'Signed in as ' + v;
       document.getElementById('uploadArea').style.display = 'block';
@@ -1308,38 +1210,26 @@
     }
     
     function fakeSignIn() {
-      const emailInput = document.getElementById('email');
-      const v = emailInput.value.trim();
-      const errorElement = document.getElementById('email-error');
-      
-      if (!v || !validateEmail(v)) {
-        errorElement.style.display = 'block';
-        emailInput.classList.add('error-border');
+      const v = document.getElementById('email').value.trim();
+      if (!v) {
         openSign();
         return;
       }
-      
       document.getElementById('signin-status').textContent = 'Signed in as ' + v;
       document.getElementById('uploadArea').style.display = 'block';
     }
     
-    /* ======= Enhanced Client-side watermarking (Canvas) ======= */
+    /* ======= Client-side watermarking (Canvas) ======= */
     const fileInput = document.getElementById('fileInput');
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     
-    function applyEnhancedWatermark() {
+    function applyWatermark() {
       const file = fileInput.files?.[0];
-      const errorElement = document.getElementById('file-error');
-      
       if (!file) {
-        errorElement.style.display = 'block';
-        fileInput.classList.add('error-border');
+        alert('Choose an image file first');
         return;
       }
-      
-      errorElement.style.display = 'none';
-      fileInput.classList.remove('error-border');
       
       const reader = new FileReader();
       reader.onload = (ev) => {
@@ -1358,36 +1248,28 @@
           const wmInput = document.getElementById('wmText').value.trim();
           const wm = wmInput || email || 'Central College Mityana • Prom 2024';
           
-          // Watermark styling options
+          // Draw watermark (bottom-right)
+          const pad = Math.max(12, Math.round(canvas.width * 0.012));
           const fontSize = Math.max(16, Math.round(canvas.width * 0.025));
-          const padding = Math.max(12, Math.round(canvas.width * 0.012));
-          const opacity = 0.85;
           
           ctx.font = `700 ${fontSize}px Poppins, Arial`;
           ctx.textBaseline = 'bottom';
           
-          // Calculate text width for positioning
-          const textWidth = ctx.measureText(wm).width;
+          // Shadow box for contrast
+          const textW = ctx.measureText(wm).width;
+          const textH = fontSize + 6;
           
-          // Watermark position (bottom right with padding)
-          const x = canvas.width - textWidth - padding;
-          const y = canvas.height - padding;
+          ctx.fillStyle = 'rgba(0,0,0,.35)';
+          ctx.fillRect(
+            canvas.width - textW - pad * 1.5, 
+            canvas.height - textH - pad, 
+            textW + pad, 
+            textH + pad/2
+          );
           
-          // Draw text shadow for better visibility on various backgrounds
-          ctx.shadowColor = 'rgba(0, 0, 0, 0.8)';
-          ctx.shadowBlur = 4;
-          ctx.shadowOffsetX = 2;
-          ctx.shadowOffsetY = 2;
-          
-          // Draw the watermark text
-          ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
-          ctx.fillText(wm, x, y);
-          
-          // Reset shadow
-          ctx.shadowColor = 'transparent';
-          ctx.shadowBlur = 0;
-          ctx.shadowOffsetX = 0;
-          ctx.shadowOffsetY = 0;
+          // Text
+          ctx.fillStyle = 'rgba(255,255,255,.92)';
+          ctx.fillText(wm, canvas.width - textW - pad, canvas.height - pad);
           
           document.getElementById('previewWrap').style.display = 'block';
           
@@ -1458,26 +1340,10 @@
       document.querySelectorAll('img').forEach(img => {
         if (!img.hasAttribute('width') && !img.hasAttribute('height')) {
           // Set default dimensions if not specified
-          img.setAttribute('width', '400');
-          img.setAttribute('height', '300');
+          img.setAttribute('width', '300');
+          img.setAttribute('height', '200');
         }
       });
-      
-      // Prevent zooming on mobile devices
-      document.addEventListener('touchmove', function (event) {
-        if (event.scale !== 1) {
-          event.preventDefault();
-        }
-      }, { passive: false });
-      
-      let lastTouchEnd = 0;
-      document.addEventListener('touchend', function (event) {
-        const now = (new Date()).getTime();
-        if (now - lastTouchEnd <= 300) {
-          event.preventDefault();
-        }
-        lastTouchEnd = now;
-      }, false);
     });
   </script>
 </body>
