@@ -278,11 +278,11 @@
       font-size: .85rem;
     }
     
-    /* Gallery - UPDATED */
+    /* Gallery */
     .gallery .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px; /* Increased gap for better spacing */
+      gap: 14px;
     }
     
     .shot {
@@ -292,33 +292,23 @@
       border: 1px solid #eee;
       background: #fff;
       padding: 20px; /* Added padding */
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 280px; /* Minimum height for consistency */
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     
     .shot img {
+      height: 200px; /* Reduced height */
       width: 100%;
-      height: 240px;
-      object-fit: contain; /* Changed from 'cover' to 'contain' to prevent cropping */
+      object-fit: cover;
       transition: transform .35s ease;
     }
     
-    .shot:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 25px rgba(0,0,0,.15);
-    }
-    
     .shot:hover img {
-      transform: scale(1.02);
+      transform: scale(1.04);
     }
     
     .wm {
       position: absolute;
-      right: 20px; /* Adjusted for new padding */
-      bottom: 20px; /* Adjusted for new padding */
+      right: 30px; /* Adjusted for padding */
+      bottom: 30px; /* Adjusted for padding */
       font-size: .8rem;
       color: #fff;
       background: rgba(0,0,0,.4);
@@ -345,7 +335,7 @@
       max-width: 92vw;
       max-height: 82vh;
       border-radius: 12px;
-      object-fit: contain; /* Ensure full image is visible in lightbox */
+      object-fit: contain;
     }
     
     .lightbox .close {
@@ -467,6 +457,7 @@
       height: 36px;
       border-radius: 50%;
       object-fit: cover;
+      padding: 20px; /* Added padding */
     }
     
     /* Contact */
@@ -552,6 +543,38 @@
     .fade-in {
       animation: fadeIn 1s ease forwards;
     }
+    
+    /* Image optimization styles */
+    .optimized-img {
+      max-width: 100%;
+      height: auto;
+      padding: 20px; /* Added padding */
+    }
+    
+    /* About section image */
+    .about img {
+      max-width: 100%;
+      height: auto;
+      padding: 20px; /* Added padding */
+    }
+    
+    /* Share section image */
+    .share img {
+      max-width: 100%;
+      height: auto;
+      padding: 20px; /* Added padding */
+    }
+    
+    /* Low-quality image placeholders (LQIP) */
+    .lazyload,
+    .lazyloading {
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .lazyloaded {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -623,7 +646,7 @@
           <p class="muted">From the first flash on the red carpet to the last song from the DJ, Prom 2024 brought the class together in style. This page captures the story — your outfits, your smiles, and the energy that made the night special.</p>
           <p class="small" style="margin-top:10px">Tip: Tap any image to view it large. Uploads are watermarked to protect your memories.</p>
         </div>
-        <img src="sd.jpg" loading="lazy" alt="Red carpet arrivals at Central College Mityana Prom 2024" style="padding:20px; max-height:400px; object-fit:contain;">
+        <img src="sd.jpg" loading="lazy" alt="Red carpet arrivals at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
       </div>
     </div>
   </section>
@@ -657,26 +680,26 @@
     </div>
   </section>
 
-  <!-- Gallery - UPDATED -->
+  <!-- Gallery -->
   <section id="gallery">
     <div class="wrap reveal">
       <h2 class="sec">Gallery</h2>
       <div class="grid" style="margin-top:14px">
         <!-- Sample shots with compressed WebP images -->
         <a href="#" class="shot" data-big="70.jpg" onclick="openLightbox(event)">
-          <img loading="lazy" src="70.jpg" alt="Dance floor at Central College Mityana Prom 2024">
+          <img loading="lazy" src="70.jpg" alt="Dance floor at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
           <span class="wm">© Prom 2024</span>
         </a>
         <a href="#" class="shot" data-big="13.jpg" onclick="openLightbox(event)">
-          <img loading="lazy" src="13.jpg" alt="Group photo at Central College Mityana Prom 2024">
+          <img loading="lazy" src="13.jpg" alt="Group photo at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
           <span class="wm">© Prom 2024</span>
         </a>
         <a href="#" class="shot" data-big="9.jpg" onclick="openLightbox(event)">
-          <img loading="lazy" src="9.jpg" alt="Students laughing at Central College Mityana Prom 2024">
+          <img loading="lazy" src="9.jpg" alt="Students laughing at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
           <span class="wm">© Prom 2024</span>
         </a>
         <a href="#" class="shot" data-big="534.jpg" onclick="openLightbox(event)">
-          <img loading="lazy" src="534.jpg" alt="Award moment at Central College Mityana Prom 2024">
+          <img loading="lazy" src="534.jpg" alt="Award moment at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
           <span class="wm">© Prom 2024</span>
         </a>
       </div>
@@ -721,7 +744,7 @@
             </div>
           </div>
         </div>
-        <img src="7.jpg" loading="lazy" alt="Sharing memories from Central College Mityana Prom 2024" style="padding:20px; max-height:400px; object-fit:contain;">
+        <img src="7.jpg" loading="lazy" alt="Sharing memories from Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
       </div>
     </div>
   </section>
@@ -733,15 +756,15 @@
       <div class="tape" id="tape">
         <article class="quote">
           <p>"The music, the outfits — everything was perfect. Best night of the year!"</p>
-          <div class="who"><img class="avatar" loading="lazy" src="68.jpg" alt="Aisha, S.6 student"> Aisha • S.6</div>
+          <div class="who"><img class="avatar" loading="lazy" src="68.jpg" alt="Aisha, S.6 student" width="40" height="40"> Aisha • S.6</div>
         </article>
         <article class="quote">
           <p>"Photo booth with my crew was hilarious — memories secured!"</p>
-          <div class="who"><img class="avatar" loading="lazy" src="47.jpg" alt="Brian, S.4 student"> Brian • S.4</div>
+          <div class="who"><img class="avatar" loading="lazy" src="47.jpg" alt="Brian, S.4 student" width="40" height="40"> Brian • S.4</div>
         </article>
         <article class="quote">
           <p>"The red carpet felt like a movie premiere. 10/10."</p>
-          <div class="who"><img class="avatar" loading="lazy" src="104.jpg" alt="Mercy, S.6 student"> Mercy • S.6</div>
+          <div class="who"><img class="avatar" loading="lazy" src="104.jpg" alt="Mercy, S.6 student" width="40" height="40"> Mercy • S.6</div>
         </article>
       </div>
       <p class="small" style="text-align:center; margin-top:8px">Swipe sideways on mobile to see more.</p>
@@ -1030,6 +1053,21 @@
       // Add loading="lazy" to all images that don't have it
       document.querySelectorAll('img:not([loading])').forEach(img => {
         img.setAttribute('loading', 'lazy');
+      });
+      
+      // Preload critical images
+      const criticalImages = document.querySelectorAll('.hero, .logo');
+      criticalImages.forEach(img => {
+        img.removeAttribute('loading');
+      });
+      
+      // Add width and height attributes to prevent layout shifts
+      document.querySelectorAll('img').forEach(img => {
+        if (!img.hasAttribute('width') && !img.hasAttribute('height')) {
+          // Set default dimensions if not specified
+          img.setAttribute('width', '300');
+          img.setAttribute('height', '200');
+        }
       });
     });
   </script>
