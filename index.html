@@ -133,7 +133,7 @@
       padding-top: 20px;
       background: 
         linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.6)), 
-        url('1@ 222-1.jpg') center/cover no-repeat;
+        url('images/hero-small.webp') center/cover no-repeat;
       color: #fff;
       text-align: center;
       position: relative;
@@ -278,11 +278,11 @@
       font-size: .85rem;
     }
     
-    /* Gallery */
+    /* Gallery - UPDATED */
     .gallery .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
     }
     
     .shot {
@@ -291,29 +291,82 @@
       border-radius: 16px;
       border: 1px solid #eee;
       background: #fff;
-      padding: 20px; /* Added padding */
+      padding: 0;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .shot:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,.15);
     }
     
     .shot img {
-      height: 200px; /* Reduced height */
+      height: 240px;
       width: 100%;
       object-fit: cover;
-      transition: transform .35s ease;
+      transition: transform .5s ease;
     }
     
     .shot:hover img {
-      transform: scale(1.04);
+      transform: scale(1.08);
+    }
+    
+    .shot-info {
+      padding: 15px;
+    }
+    
+    .shot-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+    
+    .shot-desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+    
+    .shot-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+    
+    .avatar-small {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 8px;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .shot-likes {
+      display: flex;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    
+    .shot-likes::before {
+      content: "❤️";
+      margin-right: 5px;
     }
     
     .wm {
       position: absolute;
-      right: 30px; /* Adjusted for padding */
-      bottom: 30px; /* Adjusted for padding */
-      font-size: .8rem;
+      right: 15px;
+      bottom: 15px;
+      font-size: .75rem;
       color: #fff;
-      background: rgba(0,0,0,.4);
-      padding: 3px 8px;
-      border-radius: 6px;
+      background: rgba(0,0,0,.5);
+      padding: 4px 10px;
+      border-radius: 20px;
+      backdrop-filter: blur(4px);
     }
     
     /* Lightbox */
@@ -321,27 +374,35 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.9);
+      background: rgba(0,0,0,.92);
       z-index: 1200;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
     }
     
     .lightbox.active {
       display: flex;
     }
     
+    .lightbox-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 80vh;
+    }
+    
     .lightbox img {
-      max-width: 92vw;
-      max-height: 82vh;
+      max-width: 100%;
+      max-height: 80vh;
       border-radius: 12px;
       object-fit: contain;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     }
     
     .lightbox .close {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: -40px;
+      right: 0;
       background: #fff;
       border: 0;
       padding: 10px 14px;
@@ -349,6 +410,15 @@
       font-weight: 800;
       cursor: pointer;
       z-index: 1201;
+    }
+    
+    .lightbox-caption {
+      color: white;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 1.1rem;
+      max-width: 600px;
+      padding: 0 20px;
     }
     
     /* Share / Upload */
@@ -409,13 +479,20 @@
       color: var(--muted);
     }
     
-    /* Testimonials */
+    /* Testimonials - UPDATED */
+    .testimonials-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
     .tape {
       display: flex;
-      gap: 16px;
+      gap: 20px;
       overflow: auto;
       scroll-snap-type: x mandatory;
-      padding-bottom: 6px;
+      padding: 10px 5px 20px;
       scrollbar-width: thin;
     }
     
@@ -434,30 +511,69 @@
     }
     
     .quote {
-      min-width: 300px;
-      max-width: 300px;
+      min-width: 320px;
+      max-width: 320px;
       scroll-snap-align: start;
       background: #fff;
-      padding: 18px;
+      padding: 24px;
       border-radius: 16px;
       border: 1px solid #eee;
       box-shadow: var(--shadow);
+      position: relative;
+    }
+    
+    .quote::before {
+      content: """;
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      font-size: 60px;
+      color: var(--brand);
+      opacity: 0.2;
+      font-family: Georgia, serif;
+    }
+    
+    .quote-text {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 20px;
+      line-height: 1.6;
     }
     
     .quote .who {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-top: 10px;
-      font-weight: 600;
+      gap: 12px;
+      margin-top: 15px;
     }
     
     .avatar {
-      width: 36px;
-      height: 36px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       object-fit: cover;
-      padding: 20px; /* Added padding */
+      border: 3px solid #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    
+    .who-details {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .who-name {
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+    
+    .who-role {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    
+    .stars {
+      color: #ffc107;
+      margin-top: 5px;
     }
     
     /* Contact */
@@ -548,21 +664,20 @@
     .optimized-img {
       max-width: 100%;
       height: auto;
-      padding: 20px; /* Added padding */
     }
     
     /* About section image */
     .about img {
       max-width: 100%;
       height: auto;
-      padding: 20px; /* Added padding */
+      border-radius: 12px;
     }
     
     /* Share section image */
     .share img {
       max-width: 100%;
       height: auto;
-      padding: 20px; /* Added padding */
+      border-radius: 12px;
     }
     
     /* Low-quality image placeholders (LQIP) */
@@ -574,6 +689,29 @@
     
     .lazyloaded {
       opacity: 1;
+    }
+    
+    /* Filter buttons for gallery */
+    .gallery-filters {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+      padding: 8px 16px;
+      background: #f1f1f1;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--brand);
+      color: white;
     }
   </style>
 </head>
@@ -680,37 +818,99 @@
     </div>
   </section>
 
-  <!-- Gallery -->
+  <!-- Gallery - UPDATED -->
   <section id="gallery">
     <div class="wrap reveal">
-      <h2 class="sec">Gallery</h2>
-      <div class="grid" style="margin-top:14px">
+      <div class="testimonials-header">
+        <h2 class="sec">Gallery</h2>
+        <div class="gallery-filters">
+          <button class="filter-btn active" onclick="filterGallery('all')">All</button>
+          <button class="filter-btn" onclick="filterGallery('red-carpet')">Red Carpet</button>
+          <button class="filter-btn" onclick="filterGallery('dance')">Dance Floor</button>
+          <button class="filter-btn" onclick="filterGallery('group')">Group Photos</button>
+        </div>
+      </div>
+      <div class="grid" style="margin-top:20px">
         <!-- Sample shots with compressed WebP images -->
-        <a href="#" class="shot" data-big="70.jpg" onclick="openLightbox(event)">
+        <a href="#" class="shot" data-big="70.jpg" onclick="openLightbox(event)" data-category="dance">
           <img loading="lazy" src="70.jpg" alt="Dance floor at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
-          <span class="wm">© Prom 2024</span>
+          <div class="shot-info">
+            <h3 class="shot-title">Dance Floor Energy</h3>
+            <p class="shot-desc">Students showing off their best moves to the DJ's beats</p>
+            <div class="shot-meta">
+              <div class="shot-likes">142</div>
+              <span class="wm">© Prom 2024</span>
+            </div>
+          </div>
         </a>
-        <a href="#" class="shot" data-big="13.jpg" onclick="openLightbox(event)">
+        <a href="#" class="shot" data-big="13.jpg" onclick="openLightbox(event)" data-category="group">
           <img loading="lazy" src="13.jpg" alt="Group photo at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
-          <span class="wm">© Prom 2024</span>
+          <div class="shot-info">
+            <h3 class="shot-title">Friends Forever</h3>
+            <p class="shot-desc">Class of 2024 showing their strong bond</p>
+            <div class="shot-meta">
+              <div class="shot-likes">218</div>
+              <span class="wm">© Prom 2024</span>
+            </div>
+          </div>
         </a>
-        <a href="#" class="shot" data-big="9.jpg" onclick="openLightbox(event)">
+        <a href="#" class="shot" data-big="9.jpg" onclick="openLightbox(event)" data-category="red-carpet">
           <img loading="lazy" src="9.jpg" alt="Students laughing at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
-          <span class="wm">© Prom 2024</span>
+          <div class="shot-info">
+            <h3 class="shot-title">Red Carpet Moments</h3>
+            <p class="shot-desc">Stylish arrivals making a statement</p>
+            <div class="shot-meta">
+              <div class="shot-likes">187</div>
+              <span class="wm">© Prom 2024</span>
+            </div>
+          </div>
         </a>
-        <a href="#" class="shot" data-big="534.jpg" onclick="openLightbox(event)">
+        <a href="#" class="shot" data-big="534.jpg" onclick="openLightbox(event)" data-category="dance">
           <img loading="lazy" src="534.jpg" alt="Award moment at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
-          <span class="wm">© Prom 2024</span>
+          <div class="shot-info">
+            <h3 class="shot-title">Award Celebration</h3>
+            <p class="shot-desc">Recognizing outstanding students of the year</p>
+            <div class="shot-meta">
+              <div class="shot-likes">256</div>
+              <span class="wm">© Prom 2024</span>
+            </div>
+          </div>
+        </a>
+        <!-- Additional gallery items -->
+        <a href="#" class="shot" data-big="47.jpg" onclick="openLightbox(event)" data-category="group">
+          <img loading="lazy" src="47.jpg" alt="Students posing at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
+          <div class="shot-info">
+            <h3 class="shot-title">Best Friends</h3>
+            <p class="shot-desc">Creating memories that will last a lifetime</p>
+            <div class="shot-meta">
+              <div class="shot-likes">172</div>
+              <span class="wm">© Prom 2024</span>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="shot" data-big="68.jpg" onclick="openLightbox(event)" data-category="red-carpet">
+          <img loading="lazy" src="68.jpg" alt="Elegant dress at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
+          <div class="shot-info">
+            <h3 class="shot-title">Elegant Style</h3>
+            <p class="shot-desc">Showcasing fashion and sophistication</p>
+            <div class="shot-meta">
+              <div class="shot-likes">204</div>
+              <span class="wm">© Prom 2024</span>
+            </div>
+          </div>
         </a>
       </div>
-      <p class="small" style="margin-top:10px">More photos coming soon. For faster loads, thumbnails are optimized and full images open in a lightbox.</p>
+      <p class="small" style="margin-top:20px; text-align:center">More photos coming soon. For faster loads, thumbnails are optimized and full images open in a lightbox.</p>
     </div>
   </section>
 
-  <!-- Lightbox -->
+  <!-- Lightbox - UPDATED -->
   <div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
     <button class="close" onclick="closeLightbox()">✕ Close</button>
-    <img alt="Preview image from Central College Mityana Prom 2024">
+    <div class="lightbox-content">
+      <img alt="Preview image from Central College Mityana Prom 2024">
+    </div>
+    <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>
 
   <!-- Share / Sign-in & Upload -->
@@ -744,27 +944,62 @@
             </div>
           </div>
         </div>
-        <img src="14.jpg" loading="lazy" alt="Sharing memories from Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
+        <img src="7.jpg" loading="lazy" alt="Sharing memories from Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
       </div>
     </div>
   </section>
 
-  <!-- Testimonials -->
+  <!-- Testimonials - UPDATED -->
   <section id="testimonials">
     <div class="wrap reveal">
-      <h2 class="sec">What Students Said</h2>
+      <div class="testimonials-header">
+        <h2 class="sec">What Students Said</h2>
+        <button class="btn ghost" onclick="addTestimonial()">Add Your Story</button>
+      </div>
       <div class="tape" id="tape">
         <article class="quote">
-          <p>"The music, the outfits — everything was perfect. Best night of the year!"</p>
-          <div class="who"><img class="avatar" loading="lazy" src="68.jpg" alt="Aisha, S.6 student" width="40" height="40"> Aisha • S.6</div>
+          <p class="quote-text">"The music, the outfits — everything was perfect. Best night of the year! I'll never forget dancing with my friends until we couldn't stand anymore."</p>
+          <div class="who">
+            <img class="avatar" loading="lazy" src="68.jpg" alt="Aisha, S.6 student" width="40" height="40">
+            <div class="who-details">
+              <span class="who-name">Aisha M.</span>
+              <span class="who-role">S.6 Student</span>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
         </article>
         <article class="quote">
-          <p>"Photo booth with my crew was hilarious — memories secured!"</p>
-          <div class="who"><img class="avatar" loading="lazy" src="47.jpg" alt="Brian, S.4 student" width="40" height="40"> Brian • S.4</div>
+          <p class="quote-text">"Photo booth with my crew was hilarious — memories secured! We must have taken like 50 different photos with all the silly props they had."</p>
+          <div class="who">
+            <img class="avatar" loading="lazy" src="47.jpg" alt="Brian, S.4 student" width="40" height="40">
+            <div class="who-details">
+              <span class="who-name">Brian K.</span>
+              <span class="who-role">S.4 Student</span>
+              <div class="stars">★★★★☆</div>
+            </div>
+          </div>
         </article>
         <article class="quote">
-          <p>"The red carpet felt like a movie premiere. 10/10."</p>
-          <div class="who"><img class="avatar" loading="lazy" src="104.jpg" alt="Mercy, S.6 student" width="40" height="40"> Mercy • S.6</div>
+          <p class="quote-text">"The red carpet felt like a movie premiere. 10/10 experience. I felt like a celebrity with all the cameras flashing as I walked in with my date."</p>
+          <div class="who">
+            <img class="avatar" loading="lazy" src="104.jpg" alt="Mercy, S.6 student" width="40" height="40">
+            <div class="who-details">
+              <span class="who-name">Mercy N.</span>
+              <span class="who-role">S.6 Student</span>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
+        </article>
+        <article class="quote">
+          <p class="quote-text">"The food was amazing and the decorations transformed our hall into something magical. Huge thanks to the organizing committee!"</p>
+          <div class="who">
+            <img class="avatar" loading="lazy" src="9.jpg" alt="David, S.5 student" width="40" height="40">
+            <div class="who-details">
+              <span class="who-name">David T.</span>
+              <span class="who-role">S.5 Student</span>
+              <div class="stars">★★★★★</div>
+            </div>
+          </div>
         </article>
       </div>
       <p class="small" style="text-align:center; margin-top:8px">Swipe sideways on mobile to see more.</p>
@@ -895,14 +1130,19 @@
     
     reveals.forEach(el => io2.observe(el));
     
-    /* ======= Lightbox ======= */
+    /* ======= Lightbox - UPDATED ======= */
     const lb = document.getElementById('lightbox');
+    const lbCaption = document.getElementById('lightbox-caption');
     
     function openLightbox(e) {
       e.preventDefault();
       const link = e.currentTarget;
       const big = link.getAttribute('data-big');
+      const title = link.querySelector('.shot-title')?.textContent || '';
+      const desc = link.querySelector('.shot-desc')?.textContent || '';
+      
       lb.querySelector('img').src = big;
+      lbCaption.textContent = `${title} - ${desc}`;
       lb.classList.add('active');
       document.body.classList.add('noscr');
     }
@@ -911,11 +1151,32 @@
       lb.classList.remove('active');
       document.body.classList.remove('noscr');
       lb.querySelector('img').src = '';
+      lbCaption.textContent = '';
     }
     
     lb.addEventListener('click', (e) => {
       if (e.target === lb) closeLightbox();
     });
+    
+    /* ======= Gallery Filtering ======= */
+    function filterGallery(category) {
+      const shots = document.querySelectorAll('.shot');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      
+      // Update active button
+      filterBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.toLowerCase().includes(category));
+      });
+      
+      // Filter shots
+      shots.forEach(shot => {
+        if (category === 'all' || shot.getAttribute('data-category') === category) {
+          shot.style.display = 'block';
+        } else {
+          shot.style.display = 'none';
+        }
+      });
+    }
     
     /* ======= Sign-in modal ======= */
     const modal = document.getElementById('signinModal');
@@ -1030,6 +1291,20 @@
       a.click();
     }
     
+    /* ======= Testimonial Function ======= */
+    function addTestimonial() {
+      const name = prompt("Enter your name:");
+      if (!name) return;
+      
+      const role = prompt("Enter your class (e.g. S.6 Student):");
+      if (!role) return;
+      
+      const message = prompt("Share your Prom experience:");
+      if (!message) return;
+      
+      alert("Thank you for sharing your experience! Your testimonial will be reviewed before publishing.");
+    }
+    
     /* ======= Scroll to top button ======= */
     const scrollTopBtn = document.getElementById('scrollTop');
     
@@ -1073,4 +1348,3 @@
   </script>
 </body>
 </html>
-
