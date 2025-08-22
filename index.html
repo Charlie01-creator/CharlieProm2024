@@ -15,16 +15,10 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#e91e63" />
   
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
-  
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Preload critical resources -->
-  <link rel="preload" as="image" href="1@ 222 copy.html">
   
   <style>
     :root {
@@ -133,7 +127,7 @@
       padding-top: 20px;
       background: 
         linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.6)), 
-        url('1@ (222) copy-1.jpg') center/cover no-repeat;
+        url('images/hero-small.webp') center/cover no-repeat;
       color: #fff;
       text-align: center;
       position: relative;
@@ -278,7 +272,7 @@
       font-size: .85rem;
     }
     
-    /* Gallery - UPDATED */
+    /* Gallery - UPDATED WITH TALLER IMAGES */
     .gallery .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -301,8 +295,9 @@
       box-shadow: 0 15px 30px rgba(0,0,0,.15);
     }
     
+    /* INCREASED IMAGE HEIGHT FROM 200px TO 300px */
     .shot img {
-      height: 240px;
+      height: 300px; /* Increased from 200px */
       width: 100%;
       object-fit: cover;
       transition: transform .5s ease;
@@ -663,8 +658,7 @@
     /* Image optimization styles */
     .optimized-img {
       max-width: 100%;
-      height: 300px;
-      max-height: 600px;
+      height: auto;
     }
     
     /* About section image */
@@ -819,7 +813,7 @@
     </div>
   </section>
 
-  <!-- Gallery - UPDATED -->
+  <!-- Gallery - UPDATED WITH TALLER IMAGES -->
   <section id="gallery">
     <div class="wrap reveal">
       <div class="testimonials-header">
@@ -834,7 +828,7 @@
       <div class="grid" style="margin-top:20px">
         <!-- Sample shots with compressed WebP images -->
         <a href="#" class="shot" data-big="70.jpg" onclick="openLightbox(event)" data-category="dance">
-          <img loading="lazy" src="70.jpg" alt="Dance floor at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
+          <img loading="lazy" src="70.jpg" alt="Dance floor at Central College Mityana Prom 2024" class="optimized-img" width="300" height="300">
           <div class="shot-info">
             <h3 class="shot-title">Dance Floor Energy</h3>
             <p class="shot-desc">Students showing off their best moves to the DJ's beats</p>
@@ -845,7 +839,7 @@
           </div>
         </a>
         <a href="#" class="shot" data-big="13.jpg" onclick="openLightbox(event)" data-category="group">
-          <img loading="lazy" src="13.jpg" alt="Group photo at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
+          <img loading="lazy" src="13.jpg" alt="Group photo at Central College Mityana Prom 2024" class="optimized-img" width="300" height="300">
           <div class="shot-info">
             <h3 class="shot-title">Friends Forever</h3>
             <p class="shot-desc">Class of 2024 showing their strong bond</p>
@@ -856,7 +850,7 @@
           </div>
         </a>
         <a href="#" class="shot" data-big="9.jpg" onclick="openLightbox(event)" data-category="red-carpet">
-          <img loading="lazy" src="9.jpg" alt="Students laughing at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
+          <img loading="lazy" src="9.jpg" alt="Students laughing at Central College Mityana Prom 2024" class="optimized-img" width="300" height="300">
           <div class="shot-info">
             <h3 class="shot-title">Red Carpet Moments</h3>
             <p class="shot-desc">Stylish arrivals making a statement</p>
@@ -867,7 +861,7 @@
           </div>
         </a>
         <a href="#" class="shot" data-big="534.jpg" onclick="openLightbox(event)" data-category="dance">
-          <img loading="lazy" src="534.jpg" alt="Award moment at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
+          <img loading="lazy" src="534.jpg" alt="Award moment at Central College Mityana Prom 2024" class="optimized-img" width="300" height="300">
           <div class="shot-info">
             <h3 class="shot-title">Award Celebration</h3>
             <p class="shot-desc">Recognizing outstanding students of the year</p>
@@ -879,7 +873,7 @@
         </a>
         <!-- Additional gallery items -->
         <a href="#" class="shot" data-big="47.jpg" onclick="openLightbox(event)" data-category="group">
-          <img loading="lazy" src="47.jpg" alt="Students posing at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
+          <img loading="lazy" src="47.jpg" alt="Students posing at Central College Mityana Prom 2024" class="optimized-img" width="300" height="300">
           <div class="shot-info">
             <h3 class="shot-title">Best Friends</h3>
             <p class="shot-desc">Creating memories that will last a lifetime</p>
@@ -890,7 +884,7 @@
           </div>
         </a>
         <a href="#" class="shot" data-big="68.jpg" onclick="openLightbox(event)" data-category="red-carpet">
-          <img loading="lazy" src="68.jpg" alt="Elegant dress at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
+          <img loading="lazy" src="68.jpg" alt="Elegant dress at Central College Mityana Prom 2024" class="optimized-img" width="300" height="300">
           <div class="shot-info">
             <h3 class="shot-title">Elegant Style</h3>
             <p class="shot-desc">Showcasing fashion and sophistication</p>
@@ -1315,7 +1309,7 @@
       } else {
         scrollTopBtn.style.display = 'none';
       }
-    });
+    }
     
     scrollTopBtn.addEventListener('click', () => {
       window.scrollTo({
@@ -1342,12 +1336,10 @@
         if (!img.hasAttribute('width') && !img.hasAttribute('height')) {
           // Set default dimensions if not specified
           img.setAttribute('width', '300');
-          img.setAttribute('height', '200');
+          img.setAttribute('height', '300');
         }
       });
     });
   </script>
 </body>
 </html>
-
-
