@@ -56,32 +56,9 @@
     /* Mobile */
     .burger {display: none;flex-direction: column;gap: 5px;cursor: pointer;background: none;border: none;padding: 5px;}
     .burger span {width: 26px;height: 3px;background: #333;border-radius: 3px;transition: .25s;}
-    .drawer {
-      display: none;
-      position: fixed;
-      inset: 0 0 0 auto;
-      width: min(78vw, 320px);
-      height: 100vh;
-      background: #fff;
-      padding: 90px 24px 24px;
-      box-shadow: -12px 0 30px rgba(0,0,0,.12);
-      z-index: 1001;
-    }
-    
-    .drawer a {
-      display: block;
-      padding: 14px 0;
-      border-bottom: 1px solid #eee;
-    }
-    
-    .scrim {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.45);
-      z-index: 1000;
-    }
-    
+    .drawer {display: none;position: fixed;inset: 0 0 0 auto;width: min(78vw, 320px);height: 100vh;background: #fff;padding: 90px 24px 24px;box-shadow: -12px 0 30px rgba(0,0,0,.12);z-index: 1001;}
+    .drawer a {display: block;padding: 14px 0;border-bottom: 1px solid #eee;}
+    .scrim {display: none;position: fixed;inset: 0;background: rgba(0,0,0,.45);z-index: 1000;}
     .noscr {
       overflow: hidden;
     }
@@ -812,7 +789,7 @@
       <div class="grid" style="margin-top:20px">
         <!-- Sample shots with compressed WebP images -->
         <a href="#" class="shot" data-big="70.jpg" onclick="openLightbox(event)" data-category="dance">
-          <img loading="lazy" src="70.jpg" alt="Dance floor at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
+          <img loading="lazy" src="70.jpg" alt="Dance floor at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
           <div class="shot-info">
             <h3 class="shot-title">Dance Floor Energy</h3>
             <p class="shot-desc">Students showing off their best moves to the DJ's beats</p>
@@ -823,7 +800,7 @@
           </div>
         </a>
         <a href="#" class="shot" data-big="13.jpg" onclick="openLightbox(event)" data-category="group">
-          <img loading="lazy" src="13.jpg" alt="Group photo at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
+          <img loading="lazy" src="13.jpg" alt="Group photo at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
           <div class="shot-info">
             <h3 class="shot-title">Friends Forever</h3>
             <p class="shot-desc">Class of 2024 showing their strong bond</p>
@@ -834,7 +811,7 @@
           </div>
         </a>
         <a href="#" class="shot" data-big="9.jpg" onclick="openLightbox(event)" data-category="red-carpet">
-          <img loading="lazy" src="9.jpg" alt="Students laughing at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
+          <img loading="lazy" src="9.jpg" alt="Students laughing at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
           <div class="shot-info">
             <h3 class="shot-title">Red Carpet Moments</h3>
             <p class="shot-desc">Stylish arrivals making a statement</p>
@@ -845,7 +822,7 @@
           </div>
         </a>
         <a href="#" class="shot" data-big="534.jpg" onclick="openLightbox(event)" data-category="dance">
-          <img loading="lazy" src="534.jpg" alt="Award moment at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
+          <img loading="lazy" src="534.jpg" alt="Award moment at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
           <div class="shot-info">
             <h3 class="shot-title">Award Celebration</h3>
             <p class="shot-desc">Recognizing outstanding students of the year</p>
@@ -857,7 +834,7 @@
         </a>
         <!-- Additional gallery items -->
         <a href="#" class="shot" data-big="47.jpg" onclick="openLightbox(event)" data-category="group">
-          <img loading="lazy" src="47.jpg" alt="Students posing at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
+          <img loading="lazy" src="47.jpg" alt="Students posing at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
           <div class="shot-info">
             <h3 class="shot-title">Best Friends</h3>
             <p class="shot-desc">Creating memories that will last a lifetime</p>
@@ -867,8 +844,8 @@
             </div>
           </div>
         </a>
-        <a href="#" class="shot" data-big="68.jpg" onclick="openLightbox(event)" data-category="red-carpet">
-          <img loading="lazy" src="68.jpg" alt="Elegant dress at Central College Mityana Prom 2024" class="optimized-img" width="300" height="200">
+        <a href="#" class="shot" data-big="608.jpg" onclick="openLightbox(event)" data-category="red-carpet">
+          <img loading="lazy" src="68.jpg" alt="Elegant dress at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
           <div class="shot-info">
             <h3 class="shot-title">Elegant Style</h3>
             <p class="shot-desc">Showcasing fashion and sophistication</p>
@@ -923,7 +900,7 @@
             </div>
           </div>
         </div>
-        <img src="7.jpg" loading="lazy" alt="Sharing memories from Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
+        <img src="77.jpg" loading="lazy" alt="Sharing memories from Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
       </div>
     </div>
   </section>
@@ -939,7 +916,7 @@
         <article class="quote">
           <p class="quote-text">"The music, the outfits — everything was perfect. Best night of the year! I'll never forget dancing with my friends until we couldn't stand anymore."</p>
           <div class="who">
-            <img class="avatar" loading="lazy" src="68.jpg" alt="Aisha, S.6 student" width="40" height="40">
+            <img class="avatar" loading="lazy" src="608.jpg" alt="Aisha, S.6 student" width="40" height="40">
             <div class="who-details">
               <span class="who-name">Aisha M.</span>
               <span class="who-role">S.6 Student</span>
@@ -950,7 +927,7 @@
         <article class="quote">
           <p class="quote-text">"Photo booth with my crew was hilarious — memories secured! We must have taken like 50 different photos with all the silly props they had."</p>
           <div class="who">
-            <img class="avatar" loading="lazy" src="47.jpg" alt="Brian, S.4 student" width="40" height="40">
+            <img class="avatar" loading="lazy" src="470.jpg" alt="Brian, S.4 student" width="40" height="40">
             <div class="who-details">
               <span class="who-name">Brian K.</span>
               <span class="who-role">S.4 Student</span>
@@ -972,7 +949,7 @@
         <article class="quote">
           <p class="quote-text">"The food was amazing and the decorations transformed our hall into something magical. Huge thanks to the organizing committee!"</p>
           <div class="who">
-            <img class="avatar" loading="lazy" src="9.jpg" alt="David, S.5 student" width="40" height="40">
+            <img class="avatar" loading="lazy" src="67.jpg" alt="David, S.5 student" width="40" height="40">
             <div class="who-details">
               <span class="who-name">David T.</span>
               <span class="who-role">S.5 Student</span>
@@ -1327,6 +1304,7 @@
   </script>
 </body>
 </html>
+
 
 
 
