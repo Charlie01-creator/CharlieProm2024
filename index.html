@@ -590,65 +590,22 @@
       transform: translateY(-3px);
       background: var(--brand2);
     }
-    
     /* Loading animation */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .fade-in {
-      animation: fadeIn 1s ease forwards;
-    }
-    
+    @keyframes fadeIn {from { opacity: 0; transform: translateY(20px); }to { opacity: 1; transform: translateY(0); }}
+    .fade-in {animation: fadeIn 1s ease forwards;}
     /* Image optimization styles */
-    .optimized-img {
-      width: 400px;
-      height: 300px;
-      max-height: 600px    }
-    
+    .optimized-img {width: 400px;height: 300px;max-height: 600px    }
     /* About section image */
-    .about img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-    }
-    
+    .about img {max-width: 100%;height: auto;border-radius: 12px;}
     /* Share section image */
-    .share img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-    }
-    
+    .share img {max-width: 100%;height: auto;border-radius: 12px;}
     /* Low-quality image placeholders (LQIP) */
     .lazyload,
-    .lazyloading {
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    
-    .lazyloaded {
-      opacity: 1;
-    }
-    
+    .lazyloading {opacity: 0.2;ransition: opacity 0.3s;}
+    .lazyloaded {opacity: 1;}
     /* Filter buttons for gallery */
-    .gallery-filters {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    
-    .filter-btn {
-      padding: 8px 16px;
-      background: #f1f1f1;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    
+    .gallery-filters {display: flex;gap: 10px;margin-bottom: 20px;flex-wrap: wrap;}
+    .filter-btn {padding: 8px 16px;background: #f1f1f1;border: none;border-radius: 20px;cursor: pointer;transition: all 0.2s ease;}
     .filter-btn.active,
     .filter-btn:hover {
       background: var(--brand);
@@ -709,7 +666,7 @@
       <h1 class="title fade-in">Relive the Magic of <span style="background:linear-gradient(45deg,#fff,#ffecf3); -webkit-background-clip:text; background-clip:text; color:transparent;">Prom Night 2024</span></h1>
       <p class="subtitle fade-in">Red carpet arrivals, sparkling decor, epic dance floor moments, and memories we'll keep forever.</p>
       <div class="btns">
-        <a class="btn primary" href="#gallery">View Gallery</a>
+        <a class="btn primary" href="gallery.html">View Gallery</a>
         <button class="btn ghost" onclick="openSign()">Share Memories</button>
       </div>
     </div>
@@ -1289,6 +1246,7 @@
   </script>
 </body>
 </html>
+
 
 
 
