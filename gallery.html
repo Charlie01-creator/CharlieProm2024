@@ -2,117 +2,146 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Gallery</title>
+    <title>Prom 2024 Gallery</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            padding: 20px;
-        }
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .gallery-column {
-            flex: 1;
-            min-width: calc(33.33% - 7px);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .gallery-item {
-            width: 100%;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.3s;
-        }
-        .gallery-item img:hover {
-            transform: scale(1.02);
-        }
-        .loading {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; }
+
+        /* Header */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: #222; color: #fff; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 1.5em; font-weight: bold; }
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 4px; }
+        .hamburger div { width: 25px; height: 3px; background: #fff; }
+        nav { display: flex; gap: 15px; align-items: center; }
+        nav a, nav button { color: #fff; text-decoration: none; padding: 8px 12px; border: none; background: #444; cursor: pointer; border-radius: 4px; }
+        nav button:hover, nav a:hover { background: #666; }
+        @media (max-width: 768px) { nav { display: none; flex-direction: column; background: #222; position: absolute; top: 60px; right: 0; width: 200px; padding: 10px; } nav.active { display: flex; } .hamburger { display: flex; } }
+
+        .gallery { display: flex; flex-wrap: wrap; gap: 10px; }
+        .gallery-column { flex: 1; min-width: calc(33.33% - 7px); display: flex; flex-direction: column; gap: 10px; }
+        .gallery-item { width: 100%; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .gallery-item img { width: 100%; height: auto; display: block; transition: transform 0.3s; cursor: pointer; }
+        .gallery-item img:hover { transform: scale(1.02); }
+
+        /* Lightbox */
+        .lightbox { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 2000; }
+        .lightbox img { max-width: 90%; max-height: 90%; border-radius: 8px; }
+        .lightbox .close { position: absolute; top: 20px; right: 30px; font-size: 2em; color: #fff; cursor: pointer; }
+
+        /* Footer */
+        footer { text-align: center; padding: 20px; background: #222; color: #fff; margin-top: 30px; }
+        footer p { margin: 5px 0; }
+        footer a { color: #fff; text-decoration: underline; }
     </style>
 </head>
 <body>
-    <div class="gallery" id="gallery-container">
-        <!-- Images will be inserted here by JavaScript -->
-    </div>
-    <div id="loading" class="loading">Loading images...</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Configuration
-            const TOTAL_IMAGES = 20; // Start with 20 for testing, change to 845 later
-            const IMAGES_PER_LOAD = 9;
-            const COLUMN_COUNT = 3;
-            
-            const gallery = document.getElementById('gallery-container');
-            const loadingElement = document.getElementById('loading');
-            let loadedCount = 0;
-            
-            // Create columns
-            const columns = [];
-            for (let i = 0; i < COLUMN_COUNT; i++) {
-                const column = document.createElement('div');
-                column.className = 'gallery-column';
-                gallery.appendChild(column);
-                columns.push(column);
-            }
-            
-            // Load initial set of images
-            function loadImages(count) {
-                const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
-                
-                for (let i = loadedCount + 1; i <= endIndex; i++) {
-                    const img = document.createElement('img');
-                    img.src = i + '.jpg';
-                    img.alt = 'Image ' + i;
-                    img.loading = 'lazy';
-                    
-                    const item = document.createElement('div');
-                    item.className = 'gallery-item';
-                    item.appendChild(img);
-                    
-                    // Distribute evenly across columns
-                    columns[(i-1) % COLUMN_COUNT].appendChild(item);
-                }
-                
-                loadedCount = endIndex;
-                
-                // Hide loading message if all images are loaded
-                if (loadedCount >= TOTAL_IMAGES) {
-                    loadingElement.style.display = 'none';
-                }
-            }
-            
-            // Load more images when scrolling to bottom
-            window.addEventListener('scroll', function() {
-                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
-                    if (loadedCount < TOTAL_IMAGES) {
-                        loadImages(IMAGES_PER_LOAD);
-                    }
-                }
+<header>
+    <div class="logo">Central College Prom 2024</div>
+    <div class="hamburger" id="hamburger"><div></div><div></div><div></div></div>
+    <nav id="navMenu">
+        <a href="index.html">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="updates.html">Updates</a>
+        <a href="contact.html">Contact</a>
+        <button id="registerBtn">Register</button>
+        <button id="signInBtn">Sign In</button>
+    </nav>
+</header>
+
+<div class="gallery" id="gallery-container"></div>
+<div id="loading" class="loading">Loading images...</div>
+
+<div class="lightbox" id="lightbox">
+    <span class="close" id="lightboxClose">&times;</span>
+    <img src="1.jpg" alt=""><img src="2.jpg" alt="">
+    <img src="3.jpg" alt=""><img src="4.jpg" alt="">
+    <img src="11.jpg" alt=""><img src="5.jpg" alt="">
+    <img src="6.jpg" alt=""><img src="7.jpg" alt="">
+    <img src="8.jpg" alt=""><img src="9.jpg" alt="">
+    <img src="10.jpg" alt=""><img src="12.jpg" alt="">
+</div>
+
+<footer>
+    <p>Central College, Uganda</p>
+    <p>Phone: 0700955563 | Email: info@centralcollege.ug</p>
+    <p>&copy; 2024 Central College Prom</p>
+    <a href="index.html">⬅ Back to Home Page</a>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const TOTAL
+
+    
+        _IMAGES = 900; // Can be adjusted
+    const IMAGES_PER_LOAD = 9;
+    const COLUMN_COUNT = 3;
+    const gallery = document.getElementById('gallery-container');
+    const loadingElement = document.getElementById('loading');
+    let loadedCount = 0;
+
+    // Create columns
+    const columns = [];
+    for (let i = 0; i < COLUMN_COUNT; i++) {
+        const column = document.createElement('div');
+        column.className = 'gallery-column';
+        gallery.appendChild(column);
+        columns.push(column);
+    }
+
+    function loadImages(count) {
+        const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
+        for (let i = loadedCount + 1; i <= endIndex; i++) {
+            const img = document.createElement('img');
+            img.src = i + '.jpg';
+            img.alt = 'Image ' + i;
+            img.loading = 'lazy';
+
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.appendChild(img);
+
+            columns[(i-1) % COLUMN_COUNT].appendChild(item);
+
+            // Lightbox
+            img.addEventListener('click', () => {
+                lightbox.style.display = 'flex';
+                lightboxImg.src = img.src;
             });
-            
-            // Initial load
-            loadImages(IMAGES_PER_LOAD);
-        });
-    </script>
+
+            // Download protection
+            img.addEventListener('contextmenu', (e) => { e.preventDefault(); alert('Please Register or Sign In to download images'); });
+            img.addEventListener('touchstart', (e) => {
+                let timer = setTimeout(() => { alert('Please Register or Sign In to download images'); }, 600);
+                img.addEventListener('touchend', () => clearTimeout(timer), { once: true });
+            });
+        }
+        loadedCount = endIndex;
+        if (loadedCount >= TOTAL_IMAGES) loadingElement.style.display = 'none';
+    }
+
+    window.addEventListener('scroll', function() {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+            if (loadedCount < TOTAL_IMAGES) loadImages(IMAGES_PER_LOAD);
+        }
+    });
+
+    loadImages(IMAGES_PER_LOAD);
+
+    // Hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', () => { navMenu.classList.toggle('active'); });
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const lightboxClose = document.getElementById('lightboxClose');
+    lightboxClose.addEventListener('click', () => { lightbox.style.display = 'none'; });
+    lightbox.addEventListener('click', (e) => { if(e.target === lightbox) lightbox.style.display = 'none'; });
+});
+</script>
+
 </body>
 </html>
