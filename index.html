@@ -59,19 +59,10 @@
     .drawer {display: none;position: fixed;inset: 0 0 0 auto;width: min(78vw, 320px);height: 100vh;background: #fff;padding: 90px 24px 24px;box-shadow: -12px 0 30px rgba(0,0,0,.12);z-index: 1001;}
     .drawer a {display: block;padding: 14px 0;border-bottom: 1px solid #eee;}
     .scrim {display: none;position: fixed;inset: 0;background: rgba(0,0,0,.45);z-index: 1000;}
-    .noscr {
-      overflow: hidden;
-    }
-    
+    .noscr {overflow: hidden; }
     @media (max-width: 900px) {
-      .links {
-        display: none;
-      }
-      
-      .burger {
-        display: flex;
-      }
-    }
+      .links {display: none; }
+      .burger {display: flex;}}
     
     /* Sections */
     section {
@@ -259,8 +250,9 @@
     
     .shot img {
       height: 300px;
-      width: 400px;
-      object-fit: cover;
+      width: 100%;
+      object-fit: contain;
+      object-position: center;
       transition: transform .5s ease;
     }
     
@@ -1304,6 +1296,7 @@
   </script>
 </body>
 </html>
+
 
 
 
