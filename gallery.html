@@ -1,166 +1,103 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Gallery</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            padding: 20px;
-        }
-        /* Header / Navbar */
-    header {position: sticky;top: 0;z-index: 1000;background: rgba(255,255,255,.95);backdrop-filter: saturate(140%) blur(8px);border-bottom: 1px solid #eee;}
-    .nav {max-width: 1200px;margin: 0 auto;height: var(--header-h);display: flex;align-items: center;justify-content: space-between;padding: 0 20px;}
-    .logo {display: flex;align-items: center;gap: 10px;font-weight: 800;letter-spacing: .3px;color: var(--brand);font-size: 1.15rem;}
-    .logo svg {width: 30px;height: 30px;}
-    .links {display: flex;align-items: center;gap: 22px;}
-    .links a {padding: 10px 6px;position: relative;font-weight: 500;color: #333;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central College Mityana — Gallery</title>
+  <style>
+    :root {
+      --brand: #e91e63;
+      --brand2: #ff4081;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; background: #f5f5f5; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: saturate(140%) blur(8px);
+      border-bottom: 1px solid #eee;
+    }
+    .nav {
+      max-width: 1200px; margin: 0 auto; padding: 0 20px;
+      height: 60px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--brand); }
+    .links { display: flex; align-items: center; gap: 22px; }
+    .links a { padding: 10px 6px; font-weight: 500; color: #333; position: relative; text-decoration: none; }
     .links a.active::after,
-    .links a:hover::after {content: "";position: absolute;left: 0;bottom: 4px;height: 2px;width: 100%;background: linear-gradient(90deg, var(--brand), var(--brand2));border-radius: 2px;}
-    .cta-sign {margin-left: 6px;border: 0;padding: 10px 16px;border-radius: 999px;cursor: pointer;background: linear-gradient(45deg, var(--brand), var(--brand2));color: #fff;font-weight: 700;box-shadow: 0 6px 14px rgba(233,30,99,.2);transition: transform 0.2s, box-shadow 0.2s;}
-    .cta-sign:hover {transform: translateY(-2px);box-shadow: 0 8px 18px rgba(233,30,99,.3);}
-    /* Mobile */
-    .burger {display: none;flex-direction: column;gap: 5px;cursor: pointer;background: none;border: none;padding: 5px;}
-    .burger span {width: 26px;height: 3px;background: #333;border-radius: 3px;transition: .25s;}
-    .drawer {display: none;position: fixed;inset: 0 0 0 auto;width: min(78vw, 320px);height: 100vh;background: #fff;padding: 90px 24px 24px;box-shadow: -12px 0 30px rgba(0,0,0,.12);z-index: 1001;}
-    .drawer a {display: block;padding: 14px 0;border-bottom: 1px solid #eee;}
-    .scrim {display: none;position: fixed;inset: 0;background: rgba(0,0,0,.45);z-index: 1000;}
-    .noscr {overflow: hidden; }
-    @media (max-width: 900px) {
-      .links {display: none; }
-      .burger {display: flex;}}
-    /* Sections */
-    section { padding: clamp(60px, 6vw, 100px) 20px;}
-    .wrap {max-width: 1200px;margin: 0 auto; }
-    
-        .gallery {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .gallery-column {
-            flex: 1;
-            min-width: calc(33.33% - 7px);
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .gallery-item {
-            width: 100%;
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.3s;
-        }
-        
-        .gallery-item img:hover {
-            transform: scale(1.02);
-        }
-        
-        .loading {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-        }
-        /* Footer */
-    footer {
-      padding: 28px 20px;
-      text-align: center;
-      color: #888;
+    .links a:hover::after {
+      content: ""; position: absolute; left: 0; bottom: 4px; height: 2px; width: 100%;
+      background: linear-gradient(90deg, var(--brand), var(--brand2)); border-radius: 2px;
     }
-    
-    /* Reveal on scroll */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: all .7s ease;
+    .cta-sign {
+      margin-left: 6px; border: 0; padding: 10px 16px; border-radius: 999px;
+      cursor: pointer; background: linear-gradient(45deg, var(--brand), var(--brand2));
+      color: #fff; font-weight: 700; box-shadow: 0 6px 14px rgba(233,30,99,.2);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    
-    .reveal.show {
-      opacity: 1;
-      transform: none;
+    .cta-sign:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(233,30,99,.3); }
+
+    /* Mobile drawer */
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 5px; }
+    .burger span { width: 26px; height: 3px; background: #333; border-radius: 3px; transition: .25s; }
+    .drawer {
+      display: none; position: fixed; inset: 0 0 0 auto; width: min(78vw, 320px);
+      height: 100vh; background: #fff; padding: 90px 24px 24px; box-shadow: -12px 0 30px rgba(0,0,0,.12); z-index: 1001;
     }
-    
-    /* Scroll to top button */
+    .drawer a { display: block; padding: 14px 0; border-bottom: 1px solid #eee; color: #333; text-decoration: none; }
+    .scrim { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 1000; }
+    .noscr { overflow: hidden; }
+
+    @media (max-width:900px) {
+      .links { display: none; }
+      .burger { display: flex; }
+    }
+
+    /* Gallery */
+    .gallery { display: flex; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 40px auto; }
+    .gallery-column { flex: 1; min-width: calc(33.33% - 7px); display: flex; flex-direction: column; gap: 10px; }
+    .gallery-item { width: 100%; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,.1); cursor: pointer; }
+    .gallery-item img { width: 100%; height: auto; display: block; transition: transform 0.3s; }
+    .gallery-item img:hover { transform: scale(1.02); }
+
+    /* Loading */
+    .loading { text-align: center; padding: 20px; color: #666; }
+
+    /* Lightbox */
+    #lightbox {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85);
+      justify-content: center; align-items: center; z-index: 1002;
+    }
+    #lightbox.active { display: flex; }
+    #lightbox img { max-width: 90%; max-height: 80%; border-radius: 12px; }
+    #lightbox-caption { margin-top: 12px; color: #fff; font-size: 1rem; text-align: center; }
+
+    /* Footer */
+    footer { padding: 28px 20px; text-align: center; color: #888; background: #fff; }
+    footer a { color: #888; text-decoration: none; margin: 0 4px; }
+    footer a:hover { color: var(--brand); }
+
+    /* Scroll to top */
     #scrollTop {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      display: none;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      border: none;
-      background: var(--brand);
-      color: white;
-      font-size: 1.2rem;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,.2);
-      z-index: 999;
+      position: fixed; bottom: 24px; right: 24px; display: none; width: 50px; height: 50px; border-radius: 50%; border: none;
+      background: var(--brand); color: white; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.2); z-index: 999;
       transition: opacity 0.3s, transform 0.3s;
     }
-    
-    #scrollTop:hover {
-      transform: translateY(-3px);
-      background: var(--brand2);
-    }
-    /* Loading animation */
-    @keyframes fadeIn {from { opacity: 0; transform: translateY(20px); }to { opacity: 1; transform: translateY(0); }}
-    .fade-in {animation: fadeIn 1s ease forwards;}
-    /* Image optimization styles */
-    .optimized-img {width: 400px;height: 300px;max-height: 600px    }
-    /* About section image */
-    .about img {max-width: 100%;height: auto;border-radius: 12px;}
-    /* Share section image */
-    .share img {max-width: 100%;height: auto;border-radius: 12px;}
-    /* Low-quality image placeholders (LQIP) */
-    .lazyload,
-    .lazyloading {opacity: 0.2;ransition: opacity 0.3s;}
-    .lazyloaded {opacity: 1;}
-    /* Filter buttons for gallery */
-    .gallery-filters {display: flex;gap: 10px;margin-bottom: 20px;flex-wrap: wrap;}
-    .filter-btn {padding: 8px 16px;background: #f1f1f1;border: none;border-radius: 20px;cursor: pointer;transition: all 0.2s ease;}
-    .filter-btn.active,
-    .filter-btn:hover {
-      background: var(--brand);
-      color: white;
-        }
-    </style>
+    #scrollTop:hover { transform: translateY(-3px); background: var(--brand2); }
+
+  </style>
 </head>
 <body>
-    <header>
+  <header>
     <div class="nav">
       <a class="logo" href="#home" aria-label="Home">
-        <!-- Clean SVG cap logo -->
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 2L2 7l10 5 8-4.1V14h2V7L12 2Z" fill="url(#g)"/>
-          <path d="M6 10v4c0 2.2 4 4 6 4s6-1.8 6-4v-4" stroke="#e91e63" stroke-width="1.4" fill="none" />
-          <defs>
-            <linearGradient id="g" x1="0" y1="0" x2="24" y2="24">
-              <stop stop-color="#e91e63"/><stop offset="1" stop-color="#ff4081"/>
-            </linearGradient>
-          </defs>
-        </svg>
         Central College Mityana • Prom 2024
       </a>
-      <nav class="links" aria-label="Primary">
+      <nav class="links">
         <a href="#home" class="active">Home</a>
         <a href="#about">About</a>
         <a href="#highlights">Highlights</a>
@@ -170,200 +107,167 @@
         <a href="contact.html">Contact</a>
         <button class="cta-sign" onclick="openSign()">Sign In</button>
       </nav>
-      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" onclick="toggleDrawer()">
+      <button class="burger" id="burger" aria-label="Open menu" onclick="toggleDrawer()">
         <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
   <!-- Mobile drawer -->
-  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true">
     <a href="#home" onclick="closeDrawer()">Home</a>
     <a href="#about" onclick="closeDrawer()">About</a>
     <a href="#highlights" onclick="closeDrawer()">Highlights</a>
     <a href="gallery.html" onclick="closeDrawer()">Gallery</a>
     <a href="#share" onclick="closeDrawer()">Share</a>
-    <a href="support.html" onclick="closeDrawer()">support Us</a>
+    <a href="support.html" onclick="closeDrawer()">Support</a>
     <a href="contact.html" onclick="closeDrawer()">Contact</a>
     <button class="cta-sign" style="margin-top:16px" onclick="closeDrawer(); openSign()">Sign In</button>
   </aside>
   <div class="scrim" id="scrim" onclick="closeDrawer()"></div>
 
-    <div class="gallery" id="gallery-container">
-        <!-- Images will be inserted here by JavaScript -->
+  <!-- Gallery -->
+  <div class="gallery" id="gallery-container"></div>
+  <div id="loading" class="loading">Loading images...</div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" onclick="closeLightbox()">
+    <div>
+      <img src="" alt="Lightbox Image">
+      <div id="lightbox-caption"></div>
     </div>
-    
-    <div id="loading" class="loading">Loading images...</div>
-    
-      <footer>
-    <div class="wrap">
-      <div style="font-weight:700; color:#e91e63">Central College Mityana Prom Memories</div>
-      <div style="margin-top:10px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap">
-        <a href="#home">Home</a>•<a href="gallery.html">Gallery</a>•<a href="#about">About</a>•<a href="#">Terms</a>•<a href="#">Privacy</a>
-      </div>
-      <div style="margin-top:8px">© 2024 Central College Mityana Prom. All rights reserved.</div>
+  </div>
+
+  <!-- Scroll to top -->
+  <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <!-- Footer -->
+  <footer>
+    <div style="font-weight:700; color:#e91e63">Central College Mityana Prom Memories</div>
+    <div style="margin-top:10px;">
+      <a href="#home">Home</a>•
+      <a href="gallery.html">Gallery</a>•
+      <a href="#about">About</a>•
+      <a href="#">Terms</a>•
+      <a href="#">Privacy</a>
     </div>
+    <div style="margin-top:8px">© 2024 Central College Mityana Prom. All rights reserved.</div>
   </footer>
 
-  <!-- Scroll to top button -->
-  <button id="scrollTop" aria-label="Scroll to top">↑</button>
-
-  <!-- Sign-in Modal (lightweight) -->
+  <!-- Sign-in Modal -->
   <dialog id="signinModal" style="border:none; border-radius:16px; padding:0; max-width:420px; width:92vw;">
     <div style="padding:22px 22px 18px">
       <h3 style="margin:0 0 8px">Sign in to Share Images</h3>
-      <p class="small" style="margin:0 0 12px">Enter your email to continue.</p>
-      <div class="form-row">
-        <input type="email" id="emailModal" placeholder="you@example.com">
-      </div>
-      <div class="inline" style="margin-top:12px">
+      <p style="margin:0 0 12px">Enter your email to continue.</p>
+      <input type="email" id="emailModal" placeholder="you@example.com" style="width:100%; padding:8px; margin-bottom:12px;">
+      <div style="display:flex; gap:8px;">
         <button class="cta-sign" onclick="applyModalSign()">Continue</button>
-        <button class="btn" onclick="closeSign()">Cancel</button>
+        <button class="cta-sign" style="background:#aaa;" onclick="closeSign()">Cancel</button>
       </div>
     </div>
   </dialog>
 
-    <script>
-        
-              });
-    }, {rootMargin: '-40% 0px -55% 0px', threshold: 0});
-    
-    sections.forEach(s => io.observe(s));
-    
-    /* ======= Reveal on scroll ======= */
-    const reveals = document.querySelectorAll('.reveal');
-    const io2 = new IntersectionObserver((ents) => {
-      ents.forEach(ent => {
-        if (ent.isIntersecting) {
-          ent.target.classList.add('show');
-          io2.unobserve(ent.target);
+  <script>
+    // Header drawer
+    const drawer = document.getElementById('drawer');
+    const scrim = document.getElementById('scrim');
+    function toggleDrawer() {
+      drawer.style.display = 'block';
+      scrim.style.display = 'block';
+      document.body.classList.add('noscr');
+    }
+    function closeDrawer() {
+      drawer.style.display = 'none';
+      scrim.style.display = 'none';
+      document.body.classList.remove('noscr');
+    }
+
+    // Sign modal
+    const modal = document.getElementById('signinModal');
+    function openSign() { modal.showModal(); }
+    function closeSign() { modal.close(); }
+    function applyModalSign() { alert('Email submitted: '+document.getElementById('emailModal').value); closeSign(); }
+
+    // Scroll to top button
+    window.addEventListener('scroll', () => {
+      const scrollBtn = document.getElementById('scrollTop');
+      scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+
+    // Gallery
+    const TOTAL_IMAGES = 18;
+    const IMAGES_PER_LOAD = 6;
+    const COLUMN_COUNT = 3;
+    const gallery = document.getElementById('gallery-container');
+    const loadingElement = document.getElementById('loading');
+    let loadedCount = 0;
+    const columns = [];
+
+    function createGalleryColumns() {
+      for (let i = 0; i < COLUMN_COUNT; i++) {
+        const column = document.createElement('div');
+        column.className = 'gallery-column';
+        gallery.appendChild(column);
+        columns.push(column);
+      }
+    }
+
+    function createImageElement(number) {
+      const img = document.createElement('img');
+      img.src = `images/${number}.jpg`;
+      img.alt = 'Image ' + number;
+      img.loading = 'lazy';
+
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.appendChild(img);
+      item.addEventListener('click', () => openLightbox(img));
+
+      columns[(number - 1) % COLUMN_COUNT].appendChild(item);
+    }
+
+    function loadImages(count) {
+      const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
+      for (let i = loadedCount + 1; i <= endIndex; i++) {
+        createImageElement(i);
+      }
+      loadedCount = endIndex;
+      if (loadedCount >= TOTAL_IMAGES) loadingElement.style.display = 'none';
+    }
+
+    function setupScrollListener() {
+      window.addEventListener('scroll', () => {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+          if (loadedCount < TOTAL_IMAGES) loadImages(IMAGES_PER_LOAD);
         }
       });
-    }, {threshold: .12});
-    
-    reveals.forEach(el => io2.observe(el));
-    
-    /* ======= Lightbox - UPDATED ======= */
+    }
+
+    // Lightbox
     const lb = document.getElementById('lightbox');
+    const lbImg = lb.querySelector('img');
     const lbCaption = document.getElementById('lightbox-caption');
-    
-    function openLightbox(e) {
-      e.preventDefault();
-      const link = e.currentTarget;
-      const big = link.getAttribute('data-big');
-      const title = link.querySelector('.shot-title')?.textContent || '';
-      const desc = link.querySelector('.shot-desc')?.textContent || '';
-      
-      lb.querySelector('img').src = big;
-      lbCaption.textContent = `${title} - ${desc}`;
+    function openLightbox(img) {
+      lbImg.src = img.src;
+      lbCaption.textContent = img.alt;
       lb.classList.add('active');
       document.body.classList.add('noscr');
     }
-    
     function closeLightbox() {
       lb.classList.remove('active');
       document.body.classList.remove('noscr');
-      lb.querySelector('img').src = '';
+      lbImg.src = '';
       lbCaption.textContent = '';
     }
-    
-    lb.addEventListener('click', (e) => {
-      if (e.target === lb) closeLightbox();
+
+    // Initialize gallery
+    document.addEventListener('DOMContentLoaded', () => {
+      createGalleryColumns();
+      loadImages(IMAGES_PER_LOAD);
+      setupScrollListener();
     });
-        // Configuration constants
-        const TOTAL_IMAGES = 18; // Start with 20 for testing, change to 845 later
-        const IMAGES_PER_LOAD = 18;
-        const COLUMN_COUNT = 3;
-        
-        // DOM elements
-        const gallery = document.getElementById('gallery-container');
-        const loadingElement = document.getElementById('loading');
-        
-        // State variables
-        let loadedCount = 0;
-        const columns = [];
-        
-        // Initialize the gallery when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            createGalleryColumns();
-            loadImages(IMAGES_PER_LOAD);
-            setupScrollListener();
-        });
-        
-        // Create columns for the gallery
-        function createGalleryColumns() {
-            for (let i = 0; i < COLUMN_COUNT; i++) {
-                const column = document.createElement('div');
-                column.className = 'gallery-column';
-                gallery.appendChild(column);
-                columns.push(column);
-            }
-        }
-        
-        // Load a batch of images
-        function loadImages(count) {
-            const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
-            
-            for (let i = loadedCount + 1; i <= endIndex; i++) {
-                createImageElement(i);
-            }
-            
-            loadedCount = endIndex;
-            
-            // Hide loading message if all images are loaded
-            if (loadedCount >= TOTAL_IMAGES) {
-                loadingElement.style.display = 'none';
-            }
-        }
-        
-    // Function to remove multiple images by numbers (pass as an array)
-    function removeImages(imageNumbers) {
-        const images = document.querySelectorAll('.gallery-item img');
-
-        images.forEach(img => {
-            const num = parseInt(img.alt.replace("Image ", ""));
-            if (imageNumbers.includes(num)) {
-                img.parentElement.remove();
-                loadedCount--; // update the loaded image counter
-            }
-        });
-    }
-
-    // Example usage: remove images 6, 9, 59, and 600
-    removeImages([, , , ]);
-
-        // Create and append an image element
-        function createImageElement(imageNumber) {
-            const img = document.createElement('img');
-            img.src = imageNumber + '.jpg';
-            img.alt = 'Image ' + imageNumber;
-            img.loading = 'lazy';
-            
-            const item = document.createElement('div');
-            item.className = 'gallery-item';
-            item.appendChild(img);
-            
-            // Distribute evenly across columns
-            columns[(imageNumber - 1) % COLUMN_COUNT].appendChild(item);
-        }
-        
-        // Set up scroll event listener for infinite scrolling
-        function setupScrollListener() {
-            window.addEventListener('scroll', function() {
-                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
-                    if (loadedCount < TOTAL_IMAGES) {
-                        loadImages(IMAGES_PER_LOAD);
-                    }
-                }
-            });
-        }
-    </script>
+  </script>
 </body>
 </html>
-
-
-
-
-
 
 
