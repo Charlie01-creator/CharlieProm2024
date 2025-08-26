@@ -16,7 +16,31 @@
             background: #f5f5f5;
             padding: 20px;
         }
-        
+        /* Header / Navbar */
+    header {position: sticky;top: 0;z-index: 1000;background: rgba(255,255,255,.95);backdrop-filter: saturate(140%) blur(8px);border-bottom: 1px solid #eee;}
+    .nav {max-width: 1200px;margin: 0 auto;height: var(--header-h);display: flex;align-items: center;justify-content: space-between;padding: 0 20px;}
+    .logo {display: flex;align-items: center;gap: 10px;font-weight: 800;letter-spacing: .3px;color: var(--brand);font-size: 1.15rem;}
+    .logo svg {width: 30px;height: 30px;}
+    .links {display: flex;align-items: center;gap: 22px;}
+    .links a {padding: 10px 6px;position: relative;font-weight: 500;color: #333;}
+    .links a.active::after,
+    .links a:hover::after {content: "";position: absolute;left: 0;bottom: 4px;height: 2px;width: 100%;background: linear-gradient(90deg, var(--brand), var(--brand2));border-radius: 2px;}
+    .cta-sign {margin-left: 6px;border: 0;padding: 10px 16px;border-radius: 999px;cursor: pointer;background: linear-gradient(45deg, var(--brand), var(--brand2));color: #fff;font-weight: 700;box-shadow: 0 6px 14px rgba(233,30,99,.2);transition: transform 0.2s, box-shadow 0.2s;}
+    .cta-sign:hover {transform: translateY(-2px);box-shadow: 0 8px 18px rgba(233,30,99,.3);}
+    /* Mobile */
+    .burger {display: none;flex-direction: column;gap: 5px;cursor: pointer;background: none;border: none;padding: 5px;}
+    .burger span {width: 26px;height: 3px;background: #333;border-radius: 3px;transition: .25s;}
+    .drawer {display: none;position: fixed;inset: 0 0 0 auto;width: min(78vw, 320px);height: 100vh;background: #fff;padding: 90px 24px 24px;box-shadow: -12px 0 30px rgba(0,0,0,.12);z-index: 1001;}
+    .drawer a {display: block;padding: 14px 0;border-bottom: 1px solid #eee;}
+    .scrim {display: none;position: fixed;inset: 0;background: rgba(0,0,0,.45);z-index: 1000;}
+    .noscr {overflow: hidden; }
+    @media (max-width: 900px) {
+      .links {display: none; }
+      .burger {display: flex;}}
+    /* Sections */
+    section { padding: clamp(60px, 6vw, 100px) 20px;}
+    .wrap {max-width: 1200px;margin: 0 auto; }
+    
         .gallery {
             display: flex;
             flex-wrap: wrap;
@@ -58,12 +82,84 @@
     </style>
 </head>
 <body>
+    <header>
+    <div class="nav">
+      <a class="logo" href="#home" aria-label="Home">
+        <!-- Clean SVG cap logo -->
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2L2 7l10 5 8-4.1V14h2V7L12 2Z" fill="url(#g)"/>
+          <path d="M6 10v4c0 2.2 4 4 6 4s6-1.8 6-4v-4" stroke="#e91e63" stroke-width="1.4" fill="none" />
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="24" y2="24">
+              <stop stop-color="#e91e63"/><stop offset="1" stop-color="#ff4081"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        Central College Mityana • Prom 2024
+      </a>
+      <nav class="links" aria-label="Primary">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#highlights">Highlights</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="#share">Share</a>
+        <a href="support.html">Support</a>
+        <a href="contact.html">Contact</a>
+        <button class="cta-sign" onclick="openSign()">Sign In</button>
+      </nav>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" onclick="toggleDrawer()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile drawer -->
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+    <a href="#home" onclick="closeDrawer()">Home</a>
+    <a href="#about" onclick="closeDrawer()">About</a>
+    <a href="#highlights" onclick="closeDrawer()">Highlights</a>
+    <a href="gallery.html" onclick="closeDrawer()">Gallery</a>
+    <a href="#share" onclick="closeDrawer()">Share</a>
+    <a href="support.html" onclick="closeDrawer()">support Us</a>
+    <a href="contact.html" onclick="closeDrawer()">Contact</a>
+    <button class="cta-sign" style="margin-top:16px" onclick="closeDrawer(); openSign()">Sign In</button>
+  </aside>
+  <div class="scrim" id="scrim" onclick="closeDrawer()"></div>
+
     <div class="gallery" id="gallery-container">
         <!-- Images will be inserted here by JavaScript -->
     </div>
     
     <div id="loading" class="loading">Loading images...</div>
     
+      <footer>
+    <div class="wrap">
+      <div style="font-weight:700; color:#e91e63">Central College Mityana Prom Memories</div>
+      <div style="margin-top:10px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap">
+        <a href="#home">Home</a>•<a href="gallery.html">Gallery</a>•<a href="#about">About</a>•<a href="#">Terms</a>•<a href="#">Privacy</a>
+      </div>
+      <div style="margin-top:8px">© 2024 Central College Mityana Prom. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- Scroll to top button -->
+  <button id="scrollTop" aria-label="Scroll to top">↑</button>
+
+  <!-- Sign-in Modal (lightweight) -->
+  <dialog id="signinModal" style="border:none; border-radius:16px; padding:0; max-width:420px; width:92vw;">
+    <div style="padding:22px 22px 18px">
+      <h3 style="margin:0 0 8px">Sign in to Share Images</h3>
+      <p class="small" style="margin:0 0 12px">Enter your email to continue.</p>
+      <div class="form-row">
+        <input type="email" id="emailModal" placeholder="you@example.com">
+      </div>
+      <div class="inline" style="margin-top:12px">
+        <button class="cta-sign" onclick="applyModalSign()">Continue</button>
+        <button class="btn" onclick="closeSign()">Cancel</button>
+      </div>
+    </div>
+  </dialog>
+
     <script>
         // Configuration constants
         const TOTAL_IMAGES = 18; // Start with 20 for testing, change to 845 later
@@ -155,5 +251,6 @@
     </script>
 </body>
 </html>
+
 
 
