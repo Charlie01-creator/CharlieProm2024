@@ -14,15 +14,14 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: #333;
-            line-height: 1.6;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #fff;
             padding: 20px;
             min-height: 100vh;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -30,121 +29,57 @@
             text-align: center;
             margin-bottom: 30px;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 15px;
-            color: #2c3e50;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .search-container {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            gap: 10px;
-        }
-
-        .search-box {
-            display: flex;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        #search-input {
-            flex: 1;
-            padding: 12px 20px;
-            border: 2px solid #ddd;
-            border-radius: 30px 0 0 30px;
-            font-size: 16px;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        #search-input:focus {
-            border-color: #3498db;
-        }
-
-        #search-btn {
-            padding: 12px 20px;
-            background: #3498db;
-            color: white;
-            border: none;
-            border-radius: 0 30px 30px 0;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        #search-btn:hover {
-            background: #2980b9;
-        }
-
-        .filter-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .filter-btn {
-            padding: 8px 16px;
-            background: white;
-            border: 2px solid #ddd;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        .filter-btn:hover {
-            background: #f8f9fa;
-        }
-
-        .filter-btn.active {
-            background: #3498db;
-            color: white;
-            border-color: #3498db;
-        }
-
-        .gallery-info {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            color: #555;
+        .description {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
         .gallery {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px;
+            justify-content: center;
             margin-bottom: 30px;
         }
 
         .gallery-column {
             flex: 1;
             min-width: 300px;
+            max-width: 400px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
 
         .gallery-item {
             width: 100%;
-            background: white;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             cursor: pointer;
         }
 
         .gallery-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
 
         .gallery-item img {
@@ -165,53 +100,35 @@
 
         .image-title {
             font-weight: 600;
-            margin-bottom: 5px;
-            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
         }
 
         .image-desc {
-            color: #7f8c8d;
+            color: rgba(255, 255, 255, 0.8);
             font-size: 0.9rem;
-        }
-
-        .image-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-top: 10px;
-        }
-
-        .tag {
-            background: #f1f8ff;
-            color: #3498db;
-            padding: 3px 8px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            line-height: 1.5;
         }
 
         .loading {
             text-align: center;
             padding: 30px;
-            color: #7f8c8d;
+            color: #fff;
             font-size: 1.2rem;
         }
 
-        .loading i {
-            margin-right: 10px;
-            animation: spin 1s linear infinite;
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin: 0 auto 20px;
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 40px;
-            color: #7f8c8d;
-            font-size: 1.2rem;
-            width: 100%;
+            to { transform: rotate(360deg); }
         }
 
         .lightbox {
@@ -236,60 +153,69 @@
             max-width: 100%;
             max-height: 80vh;
             border-radius: 8px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .lightbox-caption {
-            color: white;
-            text-align: center;
-            margin-top: 15px;
-            font-size: 1.2rem;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
         }
 
         .close-btn {
             position: absolute;
             top: 20px;
             right: 20px;
-            color: white;
             font-size: 30px;
+            color: #fff;
+            background: none;
+            border: none;
             cursor: pointer;
             transition: color 0.3s;
         }
 
         .close-btn:hover {
-            color: #e74c3c;
+            color: #fdbb2d;
         }
 
-        .load-more-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        #load-more {
-            padding: 12px 30px;
-            background: #3498db;
+        .image-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             color: white;
+            font-size: 1.2rem;
+        }
+
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
             border: none;
-            border-radius: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             cursor: pointer;
-            font-size: 1rem;
             transition: background 0.3s;
         }
 
-        #load-more:hover {
-            background: #2980b9;
+        .nav-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
         }
 
-        #load-more:disabled {
-            background: #bdc3c7;
-            cursor: not-allowed;
+        .prev-btn {
+            left: 20px;
+        }
+
+        .next-btn {
+            right: 20px;
         }
 
         footer {
             text-align: center;
-            margin-top: 40px;
             padding: 20px;
-            color: #7f8c8d;
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.7);
             font-size: 0.9rem;
         }
 
@@ -298,13 +224,18 @@
                 min-width: 100%;
             }
             
-            .search-box {
-                flex-direction: column;
+            h1 {
+                font-size: 2rem;
             }
             
-            #search-input, #search-btn {
-                border-radius: 30px;
-                margin-bottom: 10px;
+            .description {
+                font-size: 1rem;
+            }
+            
+            .nav-btn {
+                font-size: 30px;
+                width: 50px;
+                height: 50px;
             }
         }
     </style>
@@ -312,59 +243,37 @@
 <body>
     <div class="container">
         <header>
-            <h1>Enhanced Image Gallery</h1>
-            <p>Browse through our collection of beautiful images</p>
-            
-            <div class="search-container">
-                <div class="search-box">
-                    <input type="text" id="search-input" placeholder="Search images...">
-                    <button id="search-btn"><i class="fas fa-search"></i></button>
-                </div>
-            </div>
-            
-            <div class="filter-container">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="nature">Nature</button>
-                <button class="filter-btn" data-filter="animals">Animals</button>
-                <button class="filter-btn" data-filter="architecture">Architecture</button>
-                <button class="filter-btn" data-filter="travel">Travel</button>
-            </div>
+            <h1><i class="fas fa-camera-retro"></i> Modern Image Gallery</h1>
+            <p class="description">A responsive gallery with smooth animations and lightbox viewing. Scroll down to load more images.</p>
         </header>
-        
-        <div class="gallery-info">
-            Showing <span id="showing-count">0</span> of <span id="total-count">0</span> images
-        </div>
-        
+
         <div class="gallery" id="gallery-container">
-            <!-- Images will be inserted here by JavaScript -->
+            <!-- Columns will be created by JavaScript -->
         </div>
-        
+
         <div id="loading" class="loading">
-            <i class="fas fa-spinner"></i>Loading images...
+            <div class="spinner"></div>
+            <p>Loading more images...</p>
         </div>
-        
-        <div class="no-results" id="no-results" style="display: none;">
-            <i class="fas fa-search"></i>
-            <h3>No images found</h3>
-            <p>Try a different search term or filter</p>
-        </div>
-        
-        <div class="load-more-container">
-            <button id="load-more">Load More Images</button>
-        </div>
-        
+
         <div class="lightbox" id="lightbox">
-            <div class="close-btn" id="close-lightbox">
+            <button class="close-btn" id="close-btn">
                 <i class="fas fa-times"></i>
-            </div>
+            </button>
+            <button class="nav-btn prev-btn" id="prev-btn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-btn next-btn" id="next-btn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
             <div class="lightbox-content">
-                <img src="" alt="" id="lightbox-image">
-                <div class="lightbox-caption" id="lightbox-caption"></div>
+                <img id="lightbox-img" src="" alt="">
             </div>
+            <div class="image-counter" id="image-counter"></div>
         </div>
-        
+
         <footer>
-            <p>© 2023 Enhanced Image Gallery | Created with <i class="fas fa-heart" style="color: #e74c3c;"></i></p>
+            <p>Enhanced Image Gallery &copy; 2023 | Created with <i class="fas fa-heart" style="color: #e91e63;"></i></p>
         </footer>
     </div>
 
@@ -375,28 +284,19 @@
             const IMAGES_PER_LOAD = 9;
             const COLUMN_COUNT = 3;
             
-            // DOM elements
             const gallery = document.getElementById('gallery-container');
             const loadingElement = document.getElementById('loading');
-            const noResultsElement = document.getElementById('no-results');
-            const loadMoreButton = document.getElementById('load-more');
-            const searchInput = document.getElementById('search-input');
-            const searchBtn = document.getElementById('search-btn');
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const showingCountElement = document.getElementById('showing-count');
-            const totalCountElement = document.getElementById('total-count');
             const lightbox = document.getElementById('lightbox');
-            const lightboxImage = document.getElementById('lightbox-image');
-            const lightboxCaption = document.getElementById('lightbox-caption');
-            const closeLightbox = document.getElementById('close-lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const closeBtn = document.getElementById('close-btn');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const imageCounter = document.getElementById('image-counter');
             
-            // State variables
             let loadedCount = 0;
-            let allImages = [];
-            let filteredImages = [];
-            let activeFilter = 'all';
-            let searchTerm = '';
-            
+            let currentImageIndex = 0;
+            const images = [];
+
             // Create columns
             const columns = [];
             for (let i = 0; i < COLUMN_COUNT; i++) {
@@ -405,204 +305,121 @@
                 gallery.appendChild(column);
                 columns.push(column);
             }
-            
-            // Generate sample image data
-            function generateImageData() {
-                const categories = ['nature', 'animals', 'architecture', 'travel'];
-                const sampleTitles = [
-                    "Mountain Landscape", "Ocean View", "Forest Path", "City Skyline", 
-                    "Wildlife Portrait", "Historic Building", "Sunset Beach", "Mountain Lake",
-                    "Desert Dunes", "Tropical Paradise", "Winter Wonderland", "Autumn Colors",
-                    "Waterfall", "Starry Night", "Underwater World", "Colorful Streets",
-                    "Ancient Ruins", "Modern Architecture", "Bird", "Flower Garden"
-                ];
-                
-                const sampleDescriptions = [
-                    "A beautiful view of the landscape", "Captured during my travels", 
-                    "Nature at its finest", "An amazing sight to behold", 
-                    "A moment frozen in time", "The beauty of the natural world",
-                    "Architectural marvel", "Wildlife in its natural habitat"
-                ];
-                
-                for (let i = 1; i <= TOTAL_IMAGES; i++) {
-                    const category = categories[Math.floor(Math.random() * categories.length)];
-                    const title = sampleTitles[Math.floor(Math.random() * sampleTitles.length)];
-                    const description = sampleDescriptions[Math.floor(Math.random() * sampleDescriptions.length)];
-                    
-                    allImages.push({
-                        id: i,
-                        src: `https://picsum.photos/600/400?random=${i}`,
-                        title: title,
-                        description: description,
-                        category: category,
-                        tags: [category, 'image', 'photo']
-                    });
-                }
-                
-                totalCountElement.textContent = TOTAL_IMAGES;
-            }
-            
-            // Load images into gallery
-            function loadImages(imagesToLoad) {
-                // Clear no results message if it's shown
-                noResultsElement.style.display = 'none';
-                
-                const endIndex = Math.min(loadedCount + imagesToLoad, filteredImages.length);
-                
-                if (endIndex <= loadedCount) {
-                    // No more images to load
-                    if (filteredImages.length === 0 && loadedCount === 0) {
-                        loadingElement.style.display = 'none';
-                        noResultsElement.style.display = 'block';
-                    }
-                    return;
-                }
-                
-                for (let i = loadedCount; i < endIndex; i++) {
-                    const imageData = filteredImages[i];
+
+            // Load initial set of images
+            function loadImages(count) {
+                const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
+                for (let i = loadedCount + 1; i <= endIndex; i++) {
+                    const imgNumber = i % 20 + 1; // Use images 1-20 in a loop
+                    const img = document.createElement('img');
+                    img.src = `https://picsum.photos/600/400?random=${imgNumber}`;
+                    img.alt = `Nature Image ${i}`;
+                    img.loading = 'lazy';
                     
                     const item = document.createElement('div');
                     item.className = 'gallery-item';
-                    item.dataset.category = imageData.category;
                     
-                    const img = document.createElement('img');
-                    img.src = imageData.src;
-                    img.alt = imageData.title;
-                    img.loading = 'lazy';
+                    const imageInfo = document.createElement('div');
+                    imageInfo.className = 'image-info';
                     
-                    const infoDiv = document.createElement('div');
-                    infoDiv.className = 'image-info';
+                    const imageTitle = document.createElement('div');
+                    imageTitle.className = 'image-title';
+                    imageTitle.textContent = `Nature #${i}`;
                     
-                    const title = document.createElement('div');
-                    title.className = 'image-title';
-                    title.textContent = imageData.title;
+                    const imageDesc = document.createElement('div');
+                    imageDesc.className = 'image-desc';
+                    imageDesc.textContent = 'Beautiful nature scenery captured in high resolution';
                     
-                    const desc = document.createElement('div');
-                    desc.className = 'image-desc';
-                    desc.textContent = imageData.description;
-                    
-                    const tags = document.createElement('div');
-                    tags.className = 'image-tags';
-                    
-                    imageData.tags.forEach(tagText => {
-                        const tag = document.createElement('span');
-                        tag.className = 'tag';
-                        tag.textContent = tagText;
-                        tags.appendChild(tag);
-                    });
-                    
-                    infoDiv.appendChild(title);
-                    infoDiv.appendChild(desc);
-                    infoDiv.appendChild(tags);
+                    imageInfo.appendChild(imageTitle);
+                    imageInfo.appendChild(imageDesc);
                     
                     item.appendChild(img);
-                    item.appendChild(infoDiv);
+                    item.appendChild(imageInfo);
                     
                     // Add click event for lightbox
                     item.addEventListener('click', () => {
-                        lightboxImage.src = imageData.src;
-                        lightboxCaption.textContent = imageData.title;
-                        lightbox.style.display = 'flex';
+                        openLightbox(i - 1);
                     });
                     
                     // Distribute evenly across columns
-                    columns[i % COLUMN_COUNT].appendChild(item);
+                    columns[(i-1) % COLUMN_COUNT].appendChild(item);
+                    
+                    // Store image data for lightbox
+                    images.push({
+                        src: img.src,
+                        title: `Nature Image ${i}`,
+                        description: 'Beautiful nature scenery captured in high resolution'
+                    });
                 }
-                
                 loadedCount = endIndex;
-                showingCountElement.textContent = loadedCount;
                 
                 // Hide loading message if all images are loaded
-                if (loadedCount >= filteredImages.length) {
-                    loadingElement.style.display = 'none';
-                    
-                    if (filteredImages.length === 0) {
-                        noResultsElement.style.display = 'block';
-                    } else if (loadedCount >= TOTAL_IMAGES) {
-                        loadMoreButton.disabled = true;
-                        loadMoreButton.textContent = 'All Images Loaded';
-                    }
-                } else {
+                if (loadedCount >= TOTAL_IMAGES) {
                     loadingElement.style.display = 'none';
                 }
             }
-            
-            // Filter images based on active filter and search term
-            function filterImages() {
-                filteredImages = allImages.filter(image => {
-                    const matchesFilter = activeFilter === 'all' || image.category === activeFilter;
-                    const matchesSearch = searchTerm === '' || 
-                                        image.title.toLowerCase().includes(searchTerm) || 
-                                        image.description.toLowerCase().includes(searchTerm) ||
-                                        image.tags.some(tag => tag.toLowerCase().includes(searchTerm));
-                    return matchesFilter && matchesSearch;
-                });
-                
-                // Reset gallery
-                columns.forEach(column => {
-                    column.innerHTML = '';
-                });
-                loadedCount = 0;
-                
-                // Show loading state
-                loadingElement.style.display = 'block';
-                loadMoreButton.disabled = false;
-                loadMoreButton.textContent = 'Load More Images';
-                
-                // Load images after a short delay to show loading state
-                setTimeout(() => {
-                    loadImages(IMAGES_PER_LOAD);
-                }, 300);
+
+            // Open lightbox with selected image
+            function openLightbox(index) {
+                currentImageIndex = index;
+                lightboxImg.src = images[index].src;
+                imageCounter.textContent = `${index + 1} / ${images.length}`;
+                lightbox.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
             }
-            
-            // Initialize the gallery
-            function initGallery() {
-                generateImageData();
-                filteredImages = [...allImages];
-                loadImages(IMAGES_PER_LOAD);
-            }
-            
-            // Event listeners
-            loadMoreButton.addEventListener('click', () => {
-                loadingElement.style.display = 'block';
-                setTimeout(() => {
-                    loadImages(IMAGES_PER_LOAD);
-                }, 500);
-            });
-            
-            searchBtn.addEventListener('click', () => {
-                searchTerm = searchInput.value.trim().toLowerCase();
-                filterImages();
-            });
-            
-            searchInput.addEventListener('keyup', (e) => {
-                if (e.key === 'Enter') {
-                    searchTerm = searchInput.value.trim().toLowerCase();
-                    filterImages();
-                }
-            });
-            
-            filterButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    activeFilter = button.dataset.filter;
-                    filterImages();
-                });
-            });
-            
-            closeLightbox.addEventListener('click', () => {
+
+            // Close lightbox
+            function closeLightbox() {
                 lightbox.style.display = 'none';
-            });
+                document.body.style.overflow = 'auto'; // Enable scrolling
+            }
+
+            // Navigate to previous image
+            function prevImage() {
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                lightboxImg.src = images[currentImageIndex].src;
+                imageCounter.textContent = `${currentImageIndex + 1} / ${images.length}`;
+            }
+
+            // Navigate to next image
+            function nextImage() {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                lightboxImg.src = images[currentImageIndex].src;
+                imageCounter.textContent = `${currentImageIndex + 1} / ${images.length}`;
+            }
+
+            // Event listeners for lightbox
+            closeBtn.addEventListener('click', closeLightbox);
+            prevBtn.addEventListener('click', prevImage);
+            nextBtn.addEventListener('click', nextImage);
             
+            // Close lightbox when clicking outside the image
             lightbox.addEventListener('click', (e) => {
                 if (e.target === lightbox) {
-                    lightbox.style.display = 'none';
+                    closeLightbox();
                 }
             });
             
-            // Initialize the gallery
-            initGallery();
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (lightbox.style.display === 'flex') {
+                    if (e.key === 'Escape') closeLightbox();
+                    if (e.key === 'ArrowLeft') prevImage();
+                    if (e.key === 'ArrowRight') nextImage();
+                }
+            });
+
+            // Load more images when scrolling to bottom
+            window.addEventListener('scroll', function() {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+                    if (loadedCount < TOTAL_IMAGES) {
+                        loadImages(IMAGES_PER_LOAD);
+                    }
+                }
+            });
+
+            // Initial load
+            loadImages(IMAGES_PER_LOAD);
         });
     </script>
 </body>
