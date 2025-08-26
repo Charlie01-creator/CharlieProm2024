@@ -1,3 +1,141 @@
-<!DOCTYPE html> <html> <head> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Image Gallery</title> <style> * { margin: 0; padding: 0; box-sizing: border-box; } body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; } .gallery { display: flex; flex-wrap: wrap; gap: 10px;} .gallery-column { flex: 1; min-width: calc(33.33% - 7px); display: flex; flex-direction: column; gap: 10px; } .gallery-item { width: 100%; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); } .gallery-item img { width: 100%; height: auto; display: block; transition: transform 0.3s; } .gallery-item img:hover { transform: scale(1.02); } .loading {text-align: center; padding: 20px; color: #666; } </style> </head> <body> <div class="gallery" id="gallery-container"> <!-- Images will be inserted here by JavaScript --> </div> <div id="loading" class="loading">Loading images...</div> <script> document.addEventListener('DOMContentLoaded', function() { // Configuration const TOTAL_IMAGES = 20; // Start with 20 for testing, change to 845 later const IMAGES_PER_LOAD = 9; const COLUMN_COUNT =3; const gallery = document.getElementById('gallery-container'); const loadingElement = document.getElementById('loading'); let loadedCount = 0; // Create columns const columns = []; for (let i = 0; i < COLUMN_COUNT; i++) { const column = document.createElement('div'); column.className = 'gallery-column'; gallery.appendChild(column); columns.push(column); } // Load initial set of images function loadImages(count) { const endIndex =Math.min(loadedCount + count, TOTAL_IMAGES); for (let i = loadedCount + 1; i <= endIndex; i++) { const img = document.createElement('img'); img.src = i + '.jpg'; img.alt = 'Image ' + i; img.loading = 'lazy'; const item = document.createElement('div'); item.className = 'gallery-item'; item.appendChild(img); // Distribute evenly across columns columns[(i-1) % COLUMN_COUNT].appendChild(item); } loadedCount = endIndex;// Hide loading message if all images are loaded if (loadedCount >= TOTAL_IMAGES) { loadingElement.style.display = 'none'; } } // Load more images when scrolling to bottom window.addEventListener('scroll',
-
-function() { if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) { if (loadedCount < TOTAL_IMAGES) { loadImages(IMAGES_PER_LOAD);}); </script> </body>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .gallery-column {
+            flex: 1;
+            min-width: calc(33.33% - 7px);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .gallery-item {
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s;
+        }
+        
+        .gallery-item img:hover {
+            transform: scale(1.02);
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery" id="gallery-container">
+        <!-- Images will be inserted here by JavaScript -->
+    </div>
+    
+    <div id="loading" class="loading">Loading images...</div>
+    
+    <script>
+        // Configuration constants
+        const TOTAL_IMAGES = 20; // Start with 20 for testing, change to 845 later
+        const IMAGES_PER_LOAD = 9;
+        const COLUMN_COUNT = 3;
+        
+        // DOM elements
+        const gallery = document.getElementById('gallery-container');
+        const loadingElement = document.getElementById('loading');
+        
+        // State variables
+        let loadedCount = 0;
+        const columns = [];
+        
+        // Initialize the gallery when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            createGalleryColumns();
+            loadImages(IMAGES_PER_LOAD);
+            setupScrollListener();
+        });
+        
+        // Create columns for the gallery
+        function createGalleryColumns() {
+            for (let i = 0; i < COLUMN_COUNT; i++) {
+                const column = document.createElement('div');
+                column.className = 'gallery-column';
+                gallery.appendChild(column);
+                columns.push(column);
+            }
+        }
+        
+        // Load a batch of images
+        function loadImages(count) {
+            const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
+            
+            for (let i = loadedCount + 1; i <= endIndex; i++) {
+                createImageElement(i);
+            }
+            
+            loadedCount = endIndex;
+            
+            // Hide loading message if all images are loaded
+            if (loadedCount >= TOTAL_IMAGES) {
+                loadingElement.style.display = 'none';
+            }
+        }
+        
+        // Create and append an image element
+        function createImageElement(imageNumber) {
+            const img = document.createElement('img');
+            img.src = imageNumber + '.jpg';
+            img.alt = 'Image ' + imageNumber;
+            img.loading = 'lazy';
+            
+            const item = document.createElement('div');
+            item.className = 'gallery-item';
+            item.appendChild(img);
+            
+            // Distribute evenly across columns
+            columns[(imageNumber - 1) % COLUMN_COUNT].appendChild(item);
+        }
+        
+        // Set up scroll event listener for infinite scrolling
+        function setupScrollListener() {
+            window.addEventListener('scroll', function() {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+                    if (loadedCount < TOTAL_IMAGES) {
+                        loadImages(IMAGES_PER_LOAD);
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
