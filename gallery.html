@@ -111,6 +111,22 @@
             }
         }
         
+    // Function to remove multiple images by numbers (pass as an array)
+    function removeImages(imageNumbers) {
+        const images = document.querySelectorAll('.gallery-item img');
+
+        images.forEach(img => {
+            const num = parseInt(img.alt.replace("Image ", ""));
+            if (imageNumbers.includes(num)) {
+                img.parentElement.remove();
+                loadedCount--; // update the loaded image counter
+            }
+        });
+    }
+
+    // Example usage: remove images 6, 9, 59, and 600
+    removeImages([, , , ]);
+
         // Create and append an image element
         function createImageElement(imageNumber) {
             const img = document.createElement('img');
@@ -139,3 +155,4 @@
     </script>
 </body>
 </html>
+
