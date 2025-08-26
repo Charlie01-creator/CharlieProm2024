@@ -79,6 +79,69 @@
             padding: 20px;
             color: #666;
         }
+        /* Footer */
+    footer {
+      padding: 28px 20px;
+      text-align: center;
+      color: #888;
+    }
+    
+    /* Reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: all .7s ease;
+    }
+    
+    .reveal.show {
+      opacity: 1;
+      transform: none;
+    }
+    
+    /* Scroll to top button */
+    #scrollTop {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      display: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+      background: var(--brand);
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,.2);
+      z-index: 999;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    
+    #scrollTop:hover {
+      transform: translateY(-3px);
+      background: var(--brand2);
+    }
+    /* Loading animation */
+    @keyframes fadeIn {from { opacity: 0; transform: translateY(20px); }to { opacity: 1; transform: translateY(0); }}
+    .fade-in {animation: fadeIn 1s ease forwards;}
+    /* Image optimization styles */
+    .optimized-img {width: 400px;height: 300px;max-height: 600px    }
+    /* About section image */
+    .about img {max-width: 100%;height: auto;border-radius: 12px;}
+    /* Share section image */
+    .share img {max-width: 100%;height: auto;border-radius: 12px;}
+    /* Low-quality image placeholders (LQIP) */
+    .lazyload,
+    .lazyloading {opacity: 0.2;ransition: opacity 0.3s;}
+    .lazyloaded {opacity: 1;}
+    /* Filter buttons for gallery */
+    .gallery-filters {display: flex;gap: 10px;margin-bottom: 20px;flex-wrap: wrap;}
+    .filter-btn {padding: 8px 16px;background: #f1f1f1;border: none;border-radius: 20px;cursor: pointer;transition: all 0.2s ease;}
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--brand);
+      color: white;
+        }
     </style>
 </head>
 <body>
@@ -161,6 +224,52 @@
   </dialog>
 
     <script>
+        
+              });
+    }, {rootMargin: '-40% 0px -55% 0px', threshold: 0});
+    
+    sections.forEach(s => io.observe(s));
+    
+    /* ======= Reveal on scroll ======= */
+    const reveals = document.querySelectorAll('.reveal');
+    const io2 = new IntersectionObserver((ents) => {
+      ents.forEach(ent => {
+        if (ent.isIntersecting) {
+          ent.target.classList.add('show');
+          io2.unobserve(ent.target);
+        }
+      });
+    }, {threshold: .12});
+    
+    reveals.forEach(el => io2.observe(el));
+    
+    /* ======= Lightbox - UPDATED ======= */
+    const lb = document.getElementById('lightbox');
+    const lbCaption = document.getElementById('lightbox-caption');
+    
+    function openLightbox(e) {
+      e.preventDefault();
+      const link = e.currentTarget;
+      const big = link.getAttribute('data-big');
+      const title = link.querySelector('.shot-title')?.textContent || '';
+      const desc = link.querySelector('.shot-desc')?.textContent || '';
+      
+      lb.querySelector('img').src = big;
+      lbCaption.textContent = `${title} - ${desc}`;
+      lb.classList.add('active');
+      document.body.classList.add('noscr');
+    }
+    
+    function closeLightbox() {
+      lb.classList.remove('active');
+      document.body.classList.remove('noscr');
+      lb.querySelector('img').src = '';
+      lbCaption.textContent = '';
+    }
+    
+    lb.addEventListener('click', (e) => {
+      if (e.target === lb) closeLightbox();
+    });
         // Configuration constants
         const TOTAL_IMAGES = 18; // Start with 20 for testing, change to 845 later
         const IMAGES_PER_LOAD = 18;
@@ -251,6 +360,7 @@
     </script>
 </body>
 </html>
+
 
 
 
