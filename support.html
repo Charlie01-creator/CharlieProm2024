@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support Us - Central College Mityana</title>
+  <style>
+    :root {
+      --brand: #e91e63;
+      --brand2: #ff4081;
+      --dark: #333;
+      --light: #f5f5f5;
+      --text: #444;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; color: #444; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: saturate(140%) blur(8px);
+      border-bottom: 1px solid #eee;
+    }
+    .nav {
+      max-width: 1200px; margin: 0 auto; padding: 0 20px;
+      height: 60px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--brand); }
+    .links { display: flex; align-items: center; gap: 22px; }
+    .links a { padding: 10px 6px; font-weight: 500; color: #333; position: relative; text-decoration: none; }
+    .links a.active::after,
+    .links a:hover::after {
+      content: ""; position: absolute; left: 0; bottom: 4px; height: 2px; width: 100%;
+      background: linear-gradient(90deg, var(--brand), var(--brand2)); border-radius: 2px;
+    }
+    .cta-sign {
+      margin-left: 6px; border: 0; padding: 10px 16px; border-radius: 999px;
+      cursor: pointer; background: linear-gradient(45deg, var(--brand), var(--brand2));
+      color: #fff; font-weight: 700; box-shadow: 0 6px 14px rgba(233,30,99,.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-sign:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(233,30,99,.3); }
+
+    /* Mobile drawer */
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 5px; }
+    .burger span { width: 26px; height: 3px; background: #333; border-radius: 3px; transition: .25s; }
+    .drawer {
+      display: none; position: fixed; inset: 0 0 0 auto; width: min(78vw, 320px);
+      height: 100vh; background: #fff; padding: 90px 24px 24px; box-shadow: -12px 0 30px rgba(0,0,0,.12); z-index: 1001;
+    }
+    .drawer a { display: block; padding: 14px 0; border-bottom: 1px solid #eee; color: #333; text-decoration: none; }
+    .scrim { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 1000; }
+    .noscr { overflow: hidden; }
+
+    @media (max-width:900px) {
+      .links { display: none; }
+      .burger { display: flex; }
+    }
+
+    /* Support Page Styles */
+    .support-hero {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 100px 20px;
+      text-align: center;
+    }
+    
+    .support-hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    
+    .support-hero p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--brand);
+      font-size: 2.2rem;
+    }
+    
+    .support-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 60px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    
+    .payment-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 60px;
+    }
+    
+    .payment-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    
+    .payment-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .payment-header {
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    .payment-body {
+      padding: 30px;
+    }
+    
+    .payment-number {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--brand);
+      text-align: center;
+      margin: 20px 0;
+      padding: 15px;
+      background: var(--light);
+      border-radius: 8px;
+    }
+    
+    .payment-instructions {
+      margin-bottom: 20px;
+    }
+    
+    .payment-instructions ol {
+      padding-left: 20px;
+      margin-bottom: 20px;
+    }
+    
+    .payment-instructions li {
+      margin-bottom: 10px;
+    }
+    
+    .copy-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: var(--brand);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    
+    .copy-btn:hover {
+      background: var(--brand2);
+    }
+    
+    .impact-section {
+      background: white;
+      padding: 60px 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      margin-bottom: 60px;
+    }
+    
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    
+    .impact-card {
+      text-align: center;
+      padding: 30px;
+    }
+    
+    .impact-icon {
+      font-size: 3rem;
+      color: var(--brand);
+      margin-bottom: 20px;
+    }
+    
+    .impact-card h3 {
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+    
+    .faq-section {
+      margin-bottom: 60px;
+    }
+    
+    .faq-item {
+      background: white;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+    
+    .faq-question {
+      padding: 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+    }
+    
+    .faq-answer {
+      padding: 0 20px 20px;
+      color: var(--text);
+    }
+    
+    .contact-support {
+      background: var(--light);
+      padding: 60px 20px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .contact-support h2 {
+      color: var(--brand);
+      margin-bottom: 20px;
+    }
+    
+    .contact-support p {
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+    
+    /* Footer */
+    footer { padding: 28px 20px; text-align: center; color: #888; background: #fff; }
+    footer a { color: #888; text-decoration: none; margin: 0 4px; }
+    footer a:hover { color: var(--brand); }
+
+    /* Scroll to top */
+    #scrollTop {
+      position: fixed; bottom: 24px; right: 24px; display: none; width: 50px; height: 50px; border-radius: 50%; border: none;
+      background: var(--brand); color: white; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.2); z-index: 999;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    #scrollTop:hover { transform: translateY(-3px); background: var(--brand2); }
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a class="logo" href="home.html" aria-label="Home">
+        Central College Mityana • Prom 2024B
+      </a>
+      <nav class="links">
+        <a href="home.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="#highlights">Highlights</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="#share">Share</a>
+        <a href="support.html" class="active">Support</a>
+        <a href="contact.html">Contact</a>
+        <button class="cta-sign" onclick="openSign()">Sign In</button>
+      </nav>
+      <button class="burger" id="burger" aria-label="Open menu" onclick="toggleDrawer()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile drawer -->
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true">
+    <a href="home.html" onclick="closeDrawer()">Home</a>
+    <a href="about.html" onclick="closeDrawer()">About</a>
+    <a href="#highlights" onclick="closeDrawer()">Highlights</a>
+    <a href="gallery.html" onclick="closeDrawer()">Gallery</a>
+    <a href="#share" onclick="closeDrawer()">Share</a>
+    <a href="support.html" onclick="closeDrawer()">Support</a>
+    <a href="contact.html" onclick="closeDrawer()">Contact</a>
+    <button class="cta-sign" style="margin-top:16px" onclick="closeDrawer(); openSign()">Sign In</button>
+  </aside>
+  <div class="scrim" id="scrim" onclick="closeDrawer()"></div>
+
+  <!-- Hero Section -->
+  <section class="support-hero">
+    <h1>Support Our Prom</h1>
+    <p>Your generosity helps create unforgettable memories for our students</p>
+  </section>
+
+  <!-- Support Intro -->
+  <section class="container">
+    <div class="support-intro">
+      <p>The Central College Mityana Prom is a cherished tradition that creates lasting memories for our graduating students. Your support helps us provide a magical evening of celebration, recognition, and joy for our students. Every contribution, no matter the size, makes a significant difference.</p>
+    </div>
+  </section>
+
+  <!-- Payment Options -->
+  <section class="container">
+    <h2 class="section-title">Mobile Money Donation Options</h2>
+    <div class="payment-options">
+      <div class="payment-card">
+        <div class="payment-header">
+          <h3>MTN Mobile Money</h3>
+        </div>
+        <div class="payment-body">
+          <div class="payment-number" id="mtn-number">0700955563</div>
+          <div class="payment-instructions">
+            <h4>How to send:</h4>
+            <ol>
+              <li>Go to your MTN Mobile Money menu</li>
+              <li>Select "Send Money"</li>
+              <li>Enter the number: <strong>0700955563</strong></li>
+              <li>Enter the amount you wish to donate</li>
+              <li>Enter your PIN to confirm the transaction</li>
+            </ol>
+          </div>
+          <button class="copy-btn" onclick="copyNumber('0700955563')">Copy MTN Number</button>
+        </div>
+      </div>
+      
+      <div class="payment-card">
+        <div class="payment-header">
+          <h3>Airtel Money</h3>
+        </div>
+        <div class="payment-body">
+          <div class="payment-number" id="airtel-number">0781915680</div>
+          <div class="payment-instructions">
+            <h4>How to send:</h4>
+            <ol>
+              <li>Go to your Airtel Money menu</li>
+              <li>Select "Send Money"</li>
+              <li>Enter the number: <strong>0781915680</strong></li>
+              <li>Enter the amount you wish to donate</li>
+              <li>Enter your PIN to confirm the transaction</li>
+            </ol>
+          </div>
+          <button class="copy-btn" onclick="copyNumber('0781915680')">Copy Airtel Number</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Section -->
+  <section class="container">
+    <div class="impact-section">
+      <h2 class="section-title">How Your Support Helps</h2>
+      <div class="impact-grid">
+        <div class="impact-card">
+          <div class="impact-icon">🎭</div>
+          <h3>Venue Decoration</h3>
+          <p>Create a magical atmosphere with beautiful decorations and themes that make the night unforgettable.</p>
+        </div>
+        <div class="impact-card">
+          <div class="impact-icon">🍽️</div>
+          <h3>Catering Services</h3>
+          <p>Provide delicious meals and refreshments for our students to enjoy throughout the evening.</p>
+        </div>
+        <div class="impact-card">
+          <div class="impact-icon">📸</div>
+          <h3>Photography</h3>
+          <p>Capture precious memories with professional photography services for all attendees.</p>
+        </div>
+        <div class="impact-card">
+          <div class="impact-icon">🎁</div>
+          <h3>Prizes & Awards</h3>
+          <p>Recognize student achievements with awards and prizes for various categories.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="container">
+    <div class="faq-section">
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          How will my donation be used? <span>+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Your donation will directly support prom expenses including venue decoration, catering, photography, entertainment, and awards. We maintain transparency and will share a post-event financial report with all donors.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Is there a minimum donation amount? <span>+</span>
+        </div>
+        <div class="faq-answer">
+          <p>There is no minimum donation amount. Every contribution, no matter how small, helps us create a memorable experience for our students.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Will I receive a receipt for my donation? <span>+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes, if you would like a receipt, please send a screenshot of your transaction confirmation to our finance office, and we will provide you with an official donation receipt.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Can I donate items instead of money? <span>+</span>
+        </div>
+        <div class="faq-answer">
+          <p>Yes, we welcome in-kind donations such as decorations, gifts for students, or services. Please contact us to discuss what you would like to contribute.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Support -->
+  <section class="container">
+    <div class="contact-support">
+      <h2>Need Help With Your Donation?</h2>
+      <p>If you have any questions or need assistance with your donation, please don't hesitate to contact our support team.</p>
+      <button class="cta-sign">Contact Us</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div style="font-weight:700; color:#e91e63">Central College Mityana Prom Memories</div>
+    <div style="margin-top:10px;">
+      <a href="home.html">Home</a>•
+      <a href="gallery.html">Gallery</a>•
+      <a href="about.html">About</a>•
+      <a href="#">Terms</a>•
+      <a href="#">Privacy</a>
+    </div>
+    <div style="margin-top:8px">© 2024 Central College Mityana Prom. All rights reserved.</div>
+  </footer>
+
+  <!-- Scroll to top -->
+  <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+  <!-- Notification Toast -->
+  <div id="toast" style="position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--brand); color:white; padding:12px 24px; border-radius:999px; box-shadow:0 4px 12px rgba(0,0,0,0.15); display:none; z-index:1000;">
+    Phone number copied to clipboard!
+  </div>
+
+  <script>
+    // Header drawer
+    const drawer = document.getElementById('drawer');
+    const scrim = document.getElementById('scrim');
+    function toggleDrawer() {
+      drawer.style.display = 'block';
+      scrim.style.display = 'block';
+      document.body.classList.add('noscr');
+    }
+    function closeDrawer() {
+      drawer.style.display = 'none';
+      scrim.style.display = 'none';
+      document.body.classList.remove('noscr');
+    }
+
+    // Sign modal
+    const modal = document.getElementById('signinModal');
+    function openSign() { modal.showModal(); }
+    function closeSign() { modal.close(); }
+    function applyModalSign() { alert('Email submitted: '+document.getElementById('emailModal').value); closeSign(); }
+
+    // Scroll to top button
+    window.addEventListener('scroll', () => {
+      const scrollBtn = document.getElementById('scrollTop');
+      scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+
+    // Copy phone number function
+    function copyNumber(number) {
+      navigator.clipboard.writeText(number).then(() => {
+        const toast = document.getElementById('toast');
+        toast.style.display = 'block';
+        setTimeout(() => {
+          toast.style.display = 'none';
+        }, 3000);
+      });
+    }
+
+    // FAQ toggle function
+    function toggleFaq(element) {
+      const answer = element.nextElementSibling;
+      const plusSign = element.querySelector('span');
+      
+      if (answer.style.display === 'block') {
+        answer.style.display = 'none';
+        plusSign.textContent = '+';
+      } else {
+        answer.style.display = 'block';
+        plusSign.textContent = '-';
+      }
+    }
+  </script>
+</body>
+</html>
