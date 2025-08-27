@@ -195,7 +195,7 @@
     });
 
     // Gallery
-    const TOTAL_IMAGES = 18;
+    const TOTAL_IMAGES = 30;
     const IMAGES_PER_LOAD =10;
     const COLUMN_COUNT = 3;
     const gallery = document.getElementById('gallery-container');
@@ -261,6 +261,21 @@
       lbImg.src = '';
       lbCaption.textContent = '';
     }
+    // Function to remove multiple images by numbers (pass as an array)
+    function removeImages(imageNumbers) {
+        const images = document.querySelectorAll('.gallery-item img');
+
+        images.forEach(img => {
+            const num = parseInt(img.alt.replace("Image ", ""));
+            if (imageNumbers.includes(num)) {
+                img.parentElement.remove();
+                loadedCount--; // update the loaded image counter
+            }
+        });
+    }
+
+    // Example usage: remove images 6, 9, 59, and 600
+    removeImages([17, 18,,]);
 
     // Initialize gallery
     document.addEventListener('DOMContentLoaded', function() {
@@ -271,6 +286,7 @@
   </script>
 </body>
 </html>
+
 
 
 
