@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Support Us - Central College Mityana</title>
+  <title>Support Our Memories - Central College Mityana</title>
   <style>
     :root {
       --brand: #e91e63;
@@ -99,6 +99,20 @@
       margin: 0 auto 60px;
       font-size: 1.1rem;
       line-height: 1.6;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    
+    .year-notice {
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      color: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: bold;
     }
     
     .payment-options {
@@ -202,6 +216,36 @@
       color: var(--dark);
     }
     
+    .memories-section {
+      margin-bottom: 60px;
+      text-align: center;
+    }
+    
+    .memories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    
+    .memory-item {
+      border-radius: 10px;
+      overflow: hidden;
+      height: 200px;
+      position: relative;
+    }
+    
+    .memory-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    
+    .memory-item:hover img {
+      transform: scale(1.05);
+    }
+    
     .faq-section {
       margin-bottom: 60px;
     }
@@ -246,6 +290,19 @@
       margin: 0 auto 30px;
     }
     
+    .gratitude-section {
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      color: white;
+      padding: 60px 20px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .gratitude-section h2 {
+      margin-bottom: 20px;
+    }
+    
     /* Footer */
     footer { padding: 28px 20px; text-align: center; color: #888; background: #fff; }
     footer a { color: #888; text-decoration: none; margin: 0 4px; }
@@ -265,14 +322,13 @@
   <header>
     <div class="nav">
       <a class="logo" href="home.html" aria-label="Home">
-        Central College Mityana • Prom 2024B
+        Central College Mityana • Prom 2024
       </a>
       <nav class="links">
         <a href="home.html">Home</a>
         <a href="about.html">About</a>
         <a href="#highlights">Highlights</a>
         <a href="gallery.html">Gallery</a>
-        <a href="#share">Share</a>
         <a href="support.html" class="active">Support</a>
         <a href="contact.html">Contact</a>
         <button class="cta-sign" onclick="openSign()">Sign In</button>
@@ -289,7 +345,6 @@
     <a href="about.html" onclick="closeDrawer()">About</a>
     <a href="#highlights" onclick="closeDrawer()">Highlights</a>
     <a href="gallery.html" onclick="closeDrawer()">Gallery</a>
-    <a href="#share" onclick="closeDrawer()">Share</a>
     <a href="support.html" onclick="closeDrawer()">Support</a>
     <a href="contact.html" onclick="closeDrawer()">Contact</a>
     <button class="cta-sign" style="margin-top:16px" onclick="closeDrawer(); openSign()">Sign In</button>
@@ -298,38 +353,40 @@
 
   <!-- Hero Section -->
   <section class="support-hero">
-    <h1>Support Our Prom</h1>
-    <p>Your generosity helps create unforgettable memories for our students</p>
+    <h1>Preserve Our 2024 Prom Memories</h1>
+    <p>Help us maintain this digital archive of our unforgettable 2024 Prom night</p>
   </section>
 
   <!-- Support Intro -->
   <section class="container">
     <div class="support-intro">
-      <p>The Central College Mityana Prom is a cherished tradition that creates lasting memories for our graduating students. Your support helps us provide a magical evening of celebration, recognition, and joy for our students. Every contribution, no matter the size, makes a significant difference.</p>
+      <div class="year-notice">Now in 2025: Help us preserve the memories of our 2024 Prom</div>
+      <p>Although our spectacular 2024 Prom has passed, the memories live on through this website. Your support helps us maintain this digital archive, preserve photos, and ensure future generations can look back on this special event.</p>
+      <p>As we move forward in 2025, we're committed to keeping the spirit of the 2024 Prom alive. Your contributions help cover hosting costs, maintenance, and improvements to this memory platform.</p>
     </div>
   </section>
 
   <!-- Payment Options -->
   <section class="container">
-    <h2 class="section-title">Mobile Money Donation Options</h2>
+    <h2 class="section-title">Support Through Mobile Money</h2>
     <div class="payment-options">
       <div class="payment-card">
         <div class="payment-header">
           <h3>MTN Mobile Money</h3>
         </div>
         <div class="payment-body">
-          <div class="payment-number" id="mtn-number">0700955563</div>
+          <div class="payment-number" id="mtn-number">0781915680</div>
           <div class="payment-instructions">
             <h4>How to send:</h4>
             <ol>
               <li>Go to your MTN Mobile Money menu</li>
               <li>Select "Send Money"</li>
-              <li>Enter the number: <strong>0700955563</strong></li>
+              <li>Enter the number: <strong>0781915680</strong></li>
               <li>Enter the amount you wish to donate</li>
               <li>Enter your PIN to confirm the transaction</li>
             </ol>
           </div>
-          <button class="copy-btn" onclick="copyNumber('0700955563')">Copy MTN Number</button>
+          <button class="copy-btn" onclick="copyNumber('0781915680')">Copy MTN Number</button>
         </div>
       </div>
       
@@ -338,18 +395,18 @@
           <h3>Airtel Money</h3>
         </div>
         <div class="payment-body">
-          <div class="payment-number" id="airtel-number">0781915680</div>
+          <div class="payment-number" id="airtel-number">0700955563</div>
           <div class="payment-instructions">
             <h4>How to send:</h4>
             <ol>
               <li>Go to your Airtel Money menu</li>
               <li>Select "Send Money"</li>
-              <li>Enter the number: <strong>0781915680</strong></li>
+              <li>Enter the number: <strong>0700955563</strong></li>
               <li>Enter the amount you wish to donate</li>
               <li>Enter your PIN to confirm the transaction</li>
             </ol>
           </div>
-          <button class="copy-btn" onclick="copyNumber('0781915680')">Copy Airtel Number</button>
+          <button class="copy-btn" onclick="copyNumber('0700955563')">Copy Airtel Number</button>
         </div>
       </div>
     </div>
@@ -361,25 +418,45 @@
       <h2 class="section-title">How Your Support Helps</h2>
       <div class="impact-grid">
         <div class="impact-card">
-          <div class="impact-icon">🎭</div>
-          <h3>Venue Decoration</h3>
-          <p>Create a magical atmosphere with beautiful decorations and themes that make the night unforgettable.</p>
-        </div>
-        <div class="impact-card">
-          <div class="impact-icon">🍽️</div>
-          <h3>Catering Services</h3>
-          <p>Provide delicious meals and refreshments for our students to enjoy throughout the evening.</p>
+          <div class="impact-icon">🖥️</div>
+          <h3>Website Maintenance</h3>
+          <p>Keep our digital memory book online and accessible to all alumni and students.</p>
         </div>
         <div class="impact-card">
           <div class="impact-icon">📸</div>
-          <h3>Photography</h3>
-          <p>Capture precious memories with professional photography services for all attendees.</p>
+          <h3>Photo Preservation</h3>
+          <p>Maintain high-quality storage for all our prom photos.</p>
         </div>
         <div class="impact-card">
-          <div class="impact-icon">🎁</div>
-          <h3>Prizes & Awards</h3>
-          <p>Recognize student achievements with awards and prizes for various categories.</p>
+          <div class="impact-icon">🔄</div>
+          <h3>Future Updates</h3>
+          <p>Add new features and content to our memory archive over time.</p>
         </div>
+        <div class="impact-card">
+          <div class="impact-icon">🎓</div>
+          <h3>Alumni Network</h3>
+          <p>Support the development of our growing alumni community.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Memories Preview -->
+  <section class="container memories-section">
+    <h2 class="section-title">Memories We're Preserving</h2>
+    <p>Your support helps us maintain these precious moments from our 2024 Prom</p>
+    <div class="memories-grid">
+      <div class="memory-item">
+        <img src="132 (1).jpg" alt="Prom decoration">
+      </div>
+      <div class="memory-item">
+        <img src="570.jpg" alt="Group photo">
+      </div>
+      <div class="memory-item">
+        <img src="750.jpg" alt="Dancing">
+      </div>
+      <div class="memory-item">
+        <img src="815.jpg" alt="Award ceremony">
       </div>
     </div>
   </section>
@@ -390,10 +467,10 @@
       <h2 class="section-title">Frequently Asked Questions</h2>
       <div class="faq-item">
         <div class="faq-question" onclick="toggleFaq(this)">
-          How will my donation be used? <span>+</span>
+          Why are you still raising funds after the event? <span>+</span>
         </div>
         <div class="faq-answer">
-          <p>Your donation will directly support prom expenses including venue decoration, catering, photography, entertainment, and awards. We maintain transparency and will share a post-event financial report with all donors.</p>
+          <p>While the 2024 Prom has passed, maintaining this digital memory archive requires ongoing resources. Your support helps cover website hosting, storage costs, and future improvements to keep these memories alive.</p>
         </div>
       </div>
       
@@ -402,7 +479,7 @@
           Is there a minimum donation amount? <span>+</span>
         </div>
         <div class="faq-answer">
-          <p>There is no minimum donation amount. Every contribution, no matter how small, helps us create a memorable experience for our students.</p>
+          <p>There is no minimum donation amount. Every contribution, no matter how small, helps us preserve these precious memories.</p>
         </div>
       </div>
       
@@ -411,41 +488,50 @@
           Will I receive a receipt for my donation? <span>+</span>
         </div>
         <div class="faq-answer">
-          <p>Yes, if you would like a receipt, please send a screenshot of your transaction confirmation to our finance office, and we will provide you with an official donation receipt.</p>
+          <p>Yes, if you would like a receipt, please send a screenshot of your transaction confirmation to our support email, and we will provide you with an official donation receipt.</p>
         </div>
       </div>
       
       <div class="faq-item">
         <div class="faq-question" onclick="toggleFaq(this)">
-          Can I donate items instead of money? <span>+</span>
+          How long will this website remain active? <span>+</span>
         </div>
         <div class="faq-answer">
-          <p>Yes, we welcome in-kind donations such as decorations, gifts for students, or services. Please contact us to discuss what you would like to contribute.</p>
+          <p>With your support, we aim to keep this memory archive active indefinitely, allowing future generations to look back on this special event.</p>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- Gratitude Section -->
+  <section class="container">
+    <div class="gratitude-section">
+      <h2>Thank You for Your Support!</h2>
+      <p>Your generosity ensures that the memories of our 2024 Prom will be preserved for years to come. Each contribution, no matter the size, makes a difference in maintaining this digital archive.</p>
+      <p>Together, we're keeping the spirit of our unforgettable prom night alive!</p>
     </div>
   </section>
 
   <!-- Contact Support -->
   <section class="container">
     <div class="contact-support">
-      <h2>Need Help With Your Donation?</h2>
-      <p>If you have any questions or need assistance with your donation, please don't hesitate to contact our support team.</p>
-      <button class="cta-sign">Contact Us</button>
+      <h2>Questions About Supporting?</h2>
+      <p>If you have any questions about supporting our memory preservation efforts, please don't hesitate to contact us.</p>
+      <button class="cta-sign">Contact Our Team</button>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <div style="font-weight:700; color:#e91e63">Central College Mityana Prom Memories</div>
+    <div style="font-weight:700; color:#e91e63">Central College Mityana Prom 2024 Memories</div>
     <div style="margin-top:10px;">
       <a href="home.html">Home</a>•
       <a href="gallery.html">Gallery</a>•
       <a href="about.html">About</a>•
-      <a href="#">Terms</a>•
+      <a href="#">Support</a>•
       <a href="#">Privacy</a>
     </div>
-    <div style="margin-top:8px">© 2024 Central College Mityana Prom. All rights reserved.</div>
+    <div style="margin-top:8px">© 2025 Central College Mityana. All rights reserved.</div>
   </footer>
 
   <!-- Scroll to top -->
