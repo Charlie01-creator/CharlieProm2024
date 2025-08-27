@@ -11,7 +11,7 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; background: #f5f5f5; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; }
 
     /* Header */
     header {
@@ -211,10 +211,11 @@
       }
     }
 
-    function createImageElement(imagenumber) {
+    function createImageElement(imageNumber) {
       const img = document.createElement('img');
-      img.src = imageNumber+'.jpg';
-      img.alt = 'Image' + imageNumber;
+      // Fixed: Images are in the same folder, not a subfolder
+      img.src = imageNumber + '.jpg';
+      img.alt = 'Prom Image ' + imageNumber;
       img.loading = 'lazy';
 
       const item = document.createElement('div');
@@ -222,6 +223,7 @@
       item.appendChild(img);
       item.addEventListener('click', () => openLightbox(img));
 
+      // Distribute images evenly across columns
       columns[(imageNumber - 1) % COLUMN_COUNT].appendChild(item);
     }
 
@@ -268,10 +270,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
