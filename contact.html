@@ -1,85 +1,511 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultra-Light 1-100.jpg Gallery (5MB Total)</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            user-select: none;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            padding: 8px;
-        }
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-        }
-        .gallery-item {
-            aspect-ratio: 3/4;
-            background: #eee;
-            position: relative;
-            overflow: hidden;
-        }
-        .gallery-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background: #eee;
-        }
-        .protection-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central College Mityana — Gallery</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --brand: #e91e63;
+      --brand2: #ff4081;
+      --dark: #333;
+      --light: #f8f8f8;
+      --gray: #777;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; color: #333; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: saturate(140%) blur(20px);
+      border-bottom: 1px solid #eee;
+    }
+    .nav {
+      max-width: 1200px; margin: 0 auto; padding: 0 20px;
+      height: 60px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--brand); text-decoration: none; }
+    .logo img { height: 36px; }
+    .links { display: flex; align-items: center; gap: 22px; }
+    .links a { padding: 10px 6px; font-weight: 500; color: #333; position: relative; text-decoration: none; }
+    .links a.active::after,
+    .links a:hover::after {
+      content: ""; position: absolute; left: 0; bottom: 4px; height: 2px; width: 100%;
+      background: linear-gradient(90deg, var(--brand), var(--brand2)); border-radius: 2px;
+    }
+    .cta-sign {
+      margin-left: 6px; border: 0; padding: 10px 16px; border-radius: 999px;
+      cursor: pointer; background: linear-gradient(45deg, var(--brand), var(--brand2));
+      color: #fff; font-weight: 700; box-shadow: 0 6px 14px rgba(233,30,99,.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-sign:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(233,30,99,.3); }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3');
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      margin-bottom: 40px;
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      opacity: 0.9;
+    }
+
+    /* Mobile drawer */
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 5px; }
+    .burger span { width: 26px; height: 3px; background: #333; border-radius: 3px; transition: .25s; }
+    .drawer {
+      display: none; position: fixed; inset: 0 0 0 auto; width: min(78vw, 320px);
+      height: 100vh; background: #fff; padding: 90px 24px 24px; box-shadow: -12px 0 30px rgba(0,0,0,.12); z-index: 1001;
+      transform: translateX(100%); transition: transform 0.3s ease;
+    }
+    .drawer.show { display: block; transform: translateX(0); }
+    .drawer a { display: block; padding: 14px 0; border-bottom: 1px solid #eee; color: #333; text-decoration: none; font-weight: 500; }
+    .scrim { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 1000; }
+    .noscr { overflow: hidden; }
+
+    @media (max-width:900px) {
+      .links { display: none; }
+      .burger { display: flex; }
+    }
+
+    /* Gallery */
+    .gallery-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    .gallery { display: flex; flex-wrap: wrap; gap: 15px; margin: 40px auto; }
+    .gallery-column { flex: 1; min-width: calc(33.33% - 10px); display: flex; flex-direction: column; gap: 15px; }
+    .gallery-item { 
+      width: 100%; background: white; border-radius: 12px; overflow: hidden; 
+      box-shadow: 0 5px 15px rgba(0,0,0,.08); cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .gallery-item:hover { 
+      transform: translateY(-5px); 
+      box-shadow: 0 12px 25px rgba(0,0,0,.15);
+    }
+    .gallery-item img { 
+      width: 100%; height: auto; display: block; transition: transform 0.5s;
+      aspect-ratio: 3/4; object-fit: cover;
+    }
+    .gallery-item .img-placeholder {
+      width: 100%; 
+      aspect-ratio: 3/4;
+      background: linear-gradient(45deg, #f1f1f1, #e1e1e1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 3rem;
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    /* Loading */
+    .loading { text-align: center; padding: 40px; color: #666; display: flex; flex-direction: column; align-items: center; }
+    .spinner { width: 50px; height: 50px; border: 5px solid rgba(233,30,99,0.2); border-radius: 50%; border-top-color: var(--brand); animation: spin 1s ease-in-out infinite; margin-bottom: 15px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Lightbox */
+    #lightbox {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.92);
+      justify-content: center; align-items: center; z-index: 1002; flex-direction: column;
+    }
+    #lightbox.active { display: flex; }
+    #lightbox img { max-width: 90%; max-height: 70%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,.3); }
+    #lightbox-caption { margin-top: 18px; color: #fff; font-size: 1.1rem; text-align: center; }
+    .lightbox-nav { 
+      position: absolute; top: 50%; transform: translateY(-50%); 
+      background: rgba(255,255,255,0.1); width: 50px; height: 50px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+    .lightbox-close { 
+      position: absolute; top: 20px; right: 20px; 
+      background: rgba(255,255,255,0.1); width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-counter {
+      position: absolute; top: 20px; left: 20px; color: white; font-size: 1rem;
+      background: rgba(0,0,0,0.4); padding: 5px 15px; border-radius: 20px;
+    }
+
+    /* Filter buttons */
+    .gallery-filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0 40px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 8px 20px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover {
+      border-color: var(--brand);
+      color: var(--brand);
+    }
+    .filter-btn.active {
+      background: var(--brand);
+      color: white;
+      border-color: var(--brand);
+    }
+
+    /* Footer */
+    footer { padding: 40px 20px; text-align: center; color: #888; background: #fff; margin-top: 60px; }
+    footer a { color: #888; text-decoration: none; margin: 0 4px; transition: color 0.2s; }
+    footer a:hover { color: var(--brand); }
+    .social-links { margin: 20px 0; font-size: 1.5rem; }
+    .social-links a { margin: 0 10px; }
+
+    /* Scroll to top */
+    #scrollTop {
+      position: fixed; bottom: 24px; right: 24px; display: none; width: 50px; height: 50px; border-radius: 50%; border: none;
+      background: var(--brand); color: white; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.2); z-index: 999;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    #scrollTop:hover { transform: translateY(-3px); background: var(--brand2); }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+      .gallery-column { min-width: calc(50% - 10px); }
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { font-size: 1.1rem; }
+    }
+    @media (max-width: 600px) {
+      .gallery-column { min-width: 100%; }
+      .hero { padding: 60px 20px; }
+      .hero h1 { font-size: 1.8rem; }
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <div class="nav">
+      <a class="logo" href="index.html" aria-label="Home">
+        <i class="fas fa-school" style="font-size: 1.5rem;"></i>
+        Central College Mityana • Prom 2024
+      </a>
+      <nav class="links">
+        <a href="index.html">Home</a>
+        <a href="#about">About</a>
+        <a href="#highlights">Highlights</a>
+        <a href="gallery.html" class="active">Gallery</a>
+        <a href="#share">Share</a>
+        <a href="support.html">Support</a>
+        <a href="contact.html">Contact</a>
+        <button class="cta-sign" onclick="openSign()">Sign In</button>
+      </nav>
+      <button class="burger" id="burger" aria-label="Open menu" onclick="toggleDrawer()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile drawer -->
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true">
+    <a href="index.html" onclick="closeDrawer()">Home</a>
+    <a href="#about" onclick="closeDrawer()">About</a>
+    <a href="#highlights" onclick="closeDrawer()">Highlights</a>
+    <a href="gallery.html" onclick="closeDrawer()">Gallery</a>
+    <a href="#share" onclick="closeDrawer()">Share</a>
+    <a href="support.html" onclick="closeDrawer()">Support</a>
+    <a href="contact.html" onclick="closeDrawer()">Contact</a>
+    <button class="cta-sign" style="margin-top:16px; width: 100%" onclick="closeDrawer(); openSign()">Sign In</button>
+  </aside>
+  <div class="scrim" id="scrim" onclick="closeDrawer()"></div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Prom 2024 Gallery</h1>
+    <p>Relive the magical moments from our unforgettable prom night. Browse through our collection of photos capturing the joy, laughter, and celebration.</p>
+    <button class="cta-sign" onclick="openSign()"><i class="fas fa-share-alt"></i> Share Your Photos</button>
+  </section>
+
+  <!-- Gallery Filters -->
+  <div class="gallery-container">
+    <div class="gallery-filters">
+      <button class="filter-btn active" onclick="filterGallery('all')">All Photos</button>
+      <button class="filter-btn" onclick="filterGallery('group')">Group Photos</button>
+      <button class="filter-btn" onclick="filterGallery('candid')">Candid Moments</button>
+      <button class="filter-btn" onclick="filterGallery('dance')">Dance Floor</button>
+    </div>
+  </div>
+
+  <!-- Gallery -->
+  <div class="gallery-container">
     <div class="gallery" id="gallery-container"></div>
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <p>Loading more memories...</p>
+    </div>
+  </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Protection against downloading
-            document.addEventListener('contextmenu', function(e) {
-                e.preventDefault();
-            });
-            document.addEventListener('dragstart', function(e) {
-                if (e.target.classList.contains('gallery-img')) {
-                    e.preventDefault();
-                }
-            });
+  <!-- Lightbox -->
+  <div id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-close" onclick="closeLightbox(event)"><i class="fas fa-times"></i></div>
+    <div class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1, event)"><i class="fas fa-chevron-left"></i></div>
+    <div class="lightbox-nav lightbox-next" onclick="navigateLightbox(1, event)"><i class="fas fa-chevron-right"></i></div>
+    <div class="lightbox-counter" id="lightbox-counter"></div>
+    <div>
+      <img src="" alt="Lightbox Image">
+      <div id="lightbox-caption"></div>
+    </div>
+  </div>
 
-            const TOTAL_IMAGES = 100;
-            const TARGET_SIZE_KB = 50; // 50KB per image = 5MB total
-            const gallery = document.getElementById('gallery-container');
+  <!-- Scroll to top -->
+  <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-            // Create image elements with lazy loading
-            for (let i = 1; i <= TOTAL_IMAGES; i++) {
-                const item = document.createElement('div');
-                item.className = 'gallery-item';
-                
-                const img = document.createElement('img');
-                img.className = 'gallery-img';
-                img.loading = 'lazy';
-                img.alt = `${i}.jpg`;
-                img.src = `${i}.jpg?size=${TARGET_SIZE_KB}kb`; // Add size parameter for server-side resizing
-                
-                const overlay = document.createElement('div');
-                overlay.className = 'protection-overlay';
-                
-                item.append(img, overlay);
-                gallery.appendChild(item);
-            }
-        });
-    </script>
+  <!-- Footer -->
+  <footer>
+    <div style="font-weight:700; color:#e91e63; margin-bottom: 15px;">Central College Mityana Prom Memories</div>
+    <div class="social-links">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+    <div style="margin-top:10px;">
+      <a href="index.html">Home</a>•
+      <a href="gallery.html">Gallery</a>•
+      <a href="about.html">About</a>•
+      <a href="#">Terms</a>•
+      <a href="#">Privacy</a>
+    </div>
+    <div style="margin-top:15px">© 2024 Central College Mityana Prom. All rights reserved.</div>
+  </footer>
+
+  <!-- Sign-in Modal -->
+  <dialog id="signinModal" style="border:none; border-radius:16px; padding:0; max-width:420px; width:92vw; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+    <div style="padding:28px 26px 22px">
+      <h3 style="margin:0 0 12px; color: #333;">Sign in to Share Images</h3>
+      <p style="margin:0 0 20px; color: #666;">Enter your email to continue.</p>
+      <input type="email" id="emailModal" placeholder="you@example.com" style="width:100%; padding:12px; margin-bottom:20px; border: 1px solid #ddd; border-radius: 8px;">
+      <div style="display:flex; gap:12px; justify-content: flex-end;">
+        <button style="padding:10px 20px; background:#eee; border:none; border-radius:6px; cursor:pointer;" onclick="closeSign()">Cancel</button>
+        <button class="cta-sign" onclick="applyModalSign()">Continue</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    // Header drawer
+    const drawer = document.getElementById('drawer');
+    const scrim = document.getElementById('scrim');
+    function toggleDrawer() {
+      drawer.classList.add('show');
+      scrim.style.display = 'block';
+      document.body.classList.add('noscr');
+    }
+    function closeDrawer() {
+      drawer.classList.remove('show');
+      scrim.style.display = 'none';
+      document.body.classList.remove('noscr');
+    }
+
+    // Sign modal
+    const modal = document.getElementById('signinModal');
+    function openSign() { modal.showModal(); }
+    function closeSign() { modal.close(); }
+    function applyModalSign() { 
+      const email = document.getElementById('emailModal').value;
+      if (email) {
+        alert('Email submitted: ' + email); 
+        closeSign(); 
+      } else {
+        alert('Please enter your email address');
+      }
+    }
+
+    // Scroll to top button
+    window.addEventListener('scroll', () => {
+      const scrollBtn = document.getElementById('scrollTop');
+      scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+
+    // Gallery
+    const TOTAL_IMAGES = 3;
+    const IMAGES_PER_LOAD = 3;
+    const COLUMN_COUNT = 3;
+    const gallery = document.getElementById('gallery-container');
+    const loadingElement = document.getElementById('loading');
+    let loadedCount = 0;
+    const columns = [];
+    let allGalleryItems = [];
+    let currentLightboxIndex = 0;
+
+    // Images to remove
+    const IMAGES_TO_REMOVE = [17, 18];
+
+    function createGalleryColumns() {
+      for (let i = 0; i < COLUMN_COUNT; i++) {
+        const column = document.createElement('div');
+        column.className = 'gallery-column';
+        gallery.appendChild(column);
+        columns.push(column);
+      }
+    }
+
+    function createImageElement(imageNumber) {
+      // Skip images that should be removed
+      if (IMAGES_TO_REMOVE.includes(imageNumber)) {
+        return null;
+      }
+      
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.dataset.index = allGalleryItems.length;
+      
+      // Create placeholder
+      const placeholder = document.createElement('div');
+      placeholder.className = 'img-placeholder';
+      placeholder.innerHTML = '<i class="fas fa-image"></i>';
+      item.appendChild(placeholder);
+      
+      // Load image
+      const img = new Image();
+      img.src = imageNumber + '.jpg';
+      img.alt = 'Prom Image ' + imageNumber;
+      img.loading = 'lazy';
+      
+      img.onload = function() {
+        placeholder.replaceWith(img);
+      };
+      
+      img.onerror = function() {
+        placeholder.innerHTML = '<i class="fas fa-exclamation-triangle"></i><p>Image not found</p>';
+        placeholder.style.flexDirection = 'column';
+        placeholder.style.gap = '10px';
+      };
+
+      item.addEventListener('click', () => openLightbox(item.dataset.index));
+      
+      // Distribute images evenly across columns
+      columns[allGalleryItems.length % COLUMN_COUNT].appendChild(item);
+      
+      return item;
+    }
+
+    function loadImages(count) {
+      const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
+      for (let i = loadedCount + 1; i <= endIndex; i++) {
+        const item = createImageElement(i);
+        if (item) {
+          allGalleryItems.push(item);
+        }
+      }
+      loadedCount = endIndex;
+      if (loadedCount >= TOTAL_IMAGES) loadingElement.style.display = 'none';
+    }
+
+    function setupScrollListener() {
+      window.addEventListener('scroll', function() {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+          if (loadedCount < TOTAL_IMAGES) loadImages(IMAGES_PER_LOAD);
+        }
+      });
+    }
+
+    // Lightbox
+    const lb = document.getElementById('lightbox');
+    const lbImg = lb.querySelector('img');
+    const lbCaption = document.getElementById('lightbox-caption');
+    const lbCounter = document.getElementById('lightbox-counter');
+    
+    function openLightbox(index) {
+      currentLightboxIndex = parseInt(index);
+      const item = allGalleryItems[currentLightboxIndex];
+      const img = item.querySelector('img');
+      
+      if (img && img.src) {
+        lbImg.src = img.src;
+        lbCaption.textContent = img.alt;
+        lbCounter.textContent = `${currentLightboxIndex + 1} / ${allGalleryItems.length}`;
+        lb.classList.add('active');
+        document.body.classList.add('noscr');
+      }
+    }
+    
+    function navigateLightbox(direction, event) {
+      if (event) event.stopPropagation();
+      
+      let newIndex = currentLightboxIndex + direction;
+      if (newIndex < 0) newIndex = allGalleryItems.length - 1;
+      if (newIndex >= allGalleryItems.length) newIndex = 0;
+      
+      openLightbox(newIndex);
+    }
+    
+    function closeLightbox(event) {
+      if (event && event.target !== event.currentTarget) return;
+      lb.classList.remove('active');
+      document.body.classList.remove('noscr');
+      lbImg.src = '';
+      lbCaption.textContent = '';
+    }
+    
+    // Filter gallery (simple implementation)
+    function filterGallery(filter) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // This is a simple implementation - in a real scenario you would have
+      // actual categories for your images
+      const items = gallery.querySelectorAll('.gallery-item');
+      items.forEach((item, index) => {
+        if (filter === 'all') {
+          item.style.display = 'block';
+        } else {
+          // Simple pattern for demonstration
+          if (index % 3 === 0 && filter === 'group') {
+            item.style.display = 'block';
+          } else if (index % 3 === 1 && filter === 'candid') {
+            item.style.display = 'block';
+          } else if (index % 3 === 2 && filter === 'dance') {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        }
+      });
+    }
+
+    // Initialize gallery
+    document.addEventListener('DOMContentLoaded', function() {
+      createGalleryColumns();
+      loadImages(IMAGES_PER_LOAD);
+      setupScrollListener();
+      
+      // Add keyboard navigation for lightbox
+      document.addEventListener('keydown', function(e) {
+        if (lb.classList.contains('active')) {
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowLeft') navigateLightbox(-1);
+          if (e.key === 'ArrowRight') navigateLightbox(1);
+        }
+      });
+    });
+  </script>
 </body>
-</html>
+    </html
