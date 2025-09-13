@@ -239,154 +239,107 @@
       scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
     });
 
-    // Gallery
-    const TOTAL_IMAGES = 18;
-    const IMAGES_PER_LOAD = 9;
-    const COLUMN_COUNT = 3;
-    const gallery = document.getElementById('gallery-container');
-    const loadingElement = document.getElementById('loading');
-    let loadedCount = 0;
-    const columns = [];
-    let allImageElements = [];
-    let currentLightboxIndex = 0;
-
-    function createGalleryColumns() {
-      for (let i = 0; i < COLUMN_COUNT; i++) {
-        const column = document.createElement('div');
-        column.className = 'gallery-column';
-        gallery.appendChild(column);
-        columns.push(column);
-      }
-    }
-
-    function createImageElement(imageNumber) {
-      const img = document.createElement('img');
-      img.src = imageNumber + '.jpg';
-      img.alt = 'Prom Image ' + imageNumber;
-      img.loading = 'lazy';
-      img.dataset.number = imageNumber;
-
-      // Add error handling for missing images
-      img.onerror = function() {
-        this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="100%" height="100%" fill="%23f5f5f5"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" fill="%23ccc">Image ' + imageNumber + ' not found</text></svg>';
-        this.style.border = '1px solid #eee';
-      };
-
-      const numberBadge = document.createElement('div');
-      numberBadge.className = 'image-number';
-      numberBadge.textContent = '#' + imageNumber;
-
-      const item = document.createElement('div');
-      item.className = 'gallery-item';
-      item.appendChild(img);
-      item.appendChild(numberBadge);
-      item.addEventListener('click', () => openLightbox(img));
-
-      // Store reference to all image elements
-      allImageElements.push({
-        element: item,
-        number: imageNumber
-      });
-
-      // Distribute images evenly across columns
-      columns[(imageNumber - 1) % COLUMN_COUNT].appendChild(item);
-    }
-
-    function loadImages(count) {
-      const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
-      for (let i = loadedCount + 1; i <= endIndex; i++) {
-        createImageElement(i);
-      }
-      loadedCount = endIndex;
-      if (loadedCount >= TOTAL_IMAGES) loadingElement.style.display = 'none';
-    }
-
-    function setupScrollListener() {
-      window.addEventListener('scroll', function() {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
-          if (loadedCount < TOTAL_IMAGES) loadImages(IMAGES_PER_LOAD);
-        }
-      });
-    }
-
-    // Lightbox
-    const lb = document.getElementById('lightbox');
-    const lbImg = lb.querySelector('img');
-    const lbCaption = document.getElementById('lightbox-caption');
     
-    function openLightbox(img) {
-      const imageNumber = parseInt(img.dataset.number);
-      currentLightboxIndex = imageNumber - 1;
-      
-      lbImg.src = img.src;
-      lbCaption.textContent = img.alt;
-      lb.classList.add('active');
-      document.body.classList.add('noscr');
+      // Gallery
+const TOTAL_IMAGES = 30; // Keep this as your highest possible number
+const IMAGES_PER_LOAD = 9;
+const COLUMN_COUNT = 3;
+const gallery = document.getElementById('gallery-container');
+const loadingElement = document.getElementById('loading');
+let loadedCount = 0;
+const columns = [];
+let allImageElements = [];
+let currentLightboxIndex = 0;
+
+// Function to check if an image exists before trying to display it
+function checkImageExists(imageNumber, callback) {
+  const img = new Image();
+  img.onload = function() {
+    callback(true); // Image exists
+  };
+  img.onerror = function() {
+    callback(false); // Image does not exist
+  };
+  img.src = imageNumber + '.jpg';
+}
+
+function createGalleryColumns() {
+  for (let i = 0; i < COLUMN_COUNT; i++) {
+    const column = document.createElement('div');
+    column.className = 'gallery-column';
+    gallery.appendChild(column);
+    columns.push(column);
+  }
+}
+
+function createImageElement(imageNumber) {
+  checkImageExists(imageNumber, function(exists) {
+    if (!exists) {
+      console.log('Image ' + imageNumber + ' not found, skipping');
+      loadedCount++; // Important: mark this as "processed"
+      checkIfAllLoaded();
+      return; // Exit if image doesn't exist
     }
     
-    function closeLightbox(event) {
-      // Only close if clicking on background, not on image or buttons
-      if (event && event.target === lb) {
-        lb.classList.remove('active');
-        document.body.classList.remove('noscr');
-      } else if (!event) {
-        lb.classList.remove('active');
-        document.body.classList.remove('noscr');
-      }
-    }
-    
-    function navigateLightbox(direction) {
-      currentLightboxIndex += direction;
-      
-      // Wrap around if at beginning or end
-      if (currentLightboxIndex < 0) currentLightboxIndex = allImageElements.length - 1;
-      if (currentLightboxIndex >= allImageElements.length) currentLightboxIndex = 0;
-      
-      const nextImage = allImageElements[currentLightboxIndex].element.querySelector('img');
-      lbImg.src = nextImage.src;
-      lbCaption.textContent = nextImage.alt;
-    }
+    // Only create the element if the image exists
+    const img = document.createElement('img');
+    img.src = imageNumber + '.jpg';
+    img.alt = 'Prom Image ' + imageNumber;
+    img.loading = 'lazy';
+    img.dataset.number = imageNumber;
 
-    // Function to remove multiple images by numbers
-    function removeImages(imageNumbers) {
-      // Filter out any invalid numbers
-      const numbersToRemove = imageNumbers.filter(num => 
-        num !== undefined && num !== null && !isNaN(num) && num > 0 && num <= TOTAL_IMAGES
-      );
-      
-      numbersToRemove.forEach(num => {
-        const index = allImageElements.findIndex(img => img.number === num);
-        if (index !== -1) {
-          allImageElements[index].element.remove();
-          allImageElements.splice(index, 1);
-          loadedCount--;
-        }
-      });
-    }
+    const numberBadge = document.createElement('div');
+    numberBadge.className = 'image-number';
+    numberBadge.textContent = '#' + imageNumber;
 
-    // Filter images based on search input
-    function filterImages() {
-      const searchText = document.getElementById('searchBox').value.toLowerCase();
-      
-      allImageElements.forEach(item => {
-        const shouldShow = searchText === '' || 
-                          item.number.toString().includes(searchText) || 
-                          item.element.querySelector('img').alt.toLowerCase().includes(searchText);
-        
-        item.element.style.display = shouldShow ? 'block' : 'none';
-      });
-    }
+    const item = document.createElement('div');
+    item.className = 'gallery-item';
+    item.appendChild(img);
+    item.appendChild(numberBadge);
+    item.addEventListener('click', () => openLightbox(img));
 
-    // Initialize gallery
-    document.addEventListener('DOMContentLoaded', function() {
-      createGalleryColumns();
-      loadImages(IMAGES_PER_LOAD);
-      setupScrollListener();
-      
-      // Remove specific images after gallery is loaded
-      setTimeout(() => removeImages([17, 18]), 100);
+    // Store reference to all image elements
+    allImageElements.push({
+      element: item,
+      number: imageNumber
     });
+
+    // Distribute images evenly across columns
+    columns[(imageNumber - 1) % COLUMN_COUNT].appendChild(item);
+    loadedCount++; // Mark as processed
+    checkIfAllLoaded();
+  });
+}
+
+function checkIfAllLoaded() {
+  // Only hide loading if we've processed all images (even missing ones)
+  if (loadedCount >= TOTAL_IMAGES) {
+    loadingElement.style.display = 'none';
+    
+    // If ALL images are missing, show a message
+    if (allImageElements.length === 0) {
+      gallery.innerHTML = '<div style="text-align:center; padding:40px; color:#666;">No images found in the gallery.</div>';
+    }
+  }
+}
+
+function loadImages(count) {
+  const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
+  for (let i = loadedCount + 1; i <= endIndex; i++) {
+    createImageElement(i);
+  }
+}
+
+// ... keep the rest of your functions unchanged (lightbox, filter, etc.) ...
+
+// Initialize gallery - REMOVE THE setTimeout LINE!
+document.addEventListener('DOMContentLoaded', function() {
+  createGalleryColumns();
+  loadImages(IMAGES_PER_LOAD);
+  setupScrollListener();
+});
   </script>
 </body>
 </html>
+
 
