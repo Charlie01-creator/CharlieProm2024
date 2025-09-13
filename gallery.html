@@ -60,9 +60,13 @@
     /* Gallery */
     .gallery { display: flex; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 40px auto; }
     .gallery-column { flex: 1; min-width: calc(33.33% - 7px); display: flex; flex-direction: column; gap: 10px; }
-    .gallery-item { width: 100%; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,.1); cursor: pointer; }
+    .gallery-item { width: 100%; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,.1); cursor: pointer; position: relative; }
     .gallery-item img { width: 100%; height: auto; display: block; transition: transform 0.3s; }
     .gallery-item img:hover { transform: scale(1.02); }
+    .gallery-item .image-number {
+      position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6);
+      color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;
+    }
 
     /* Loading */
     .loading { text-align: center; padding: 20px; color: #666; }
@@ -75,6 +79,20 @@
     #lightbox.active { display: flex; }
     #lightbox img { max-width: 90%; max-height: 80%; border-radius: 12px; }
     #lightbox-caption { margin-top: 12px; color: #fff; font-size: 1rem; text-align: center; }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.2); color: white; border: none;
+      width: 50px; height: 50px; border-radius: 50%; font-size: 24px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 20px;
+      background: rgba(255,255,255,0.2); color: white; border: none;
+      width: 40px; height: 40px; border-radius: 50%; font-size: 20px;
+      cursor: pointer;
+    }
 
     /* Footer */
     footer { padding: 28px 20px; text-align: center; color: #888; background: #fff; }
@@ -89,6 +107,16 @@
     }
     #scrollTop:hover { transform: translateY(-3px); background: var(--brand2); }
 
+    /* Filter controls */
+    .gallery-controls {
+      max-width: 1200px; margin: 20px auto 0; padding: 0 20px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .search-box {
+      padding: 10px 16px; border: 1px solid #ddd; border-radius: 24px;
+      width: 250px; font-size: 14px;
+    }
+
   </style>
 </head>
 <body>
@@ -98,10 +126,10 @@
         Central College Mityana • Prom 2024
       </a>
       <nav class="links">
-        <a href="index.html" class="active">Home</a>
+        <a href="index.html">Home</a>
         <a href="#about">About</a>
         <a href="#highlights">Highlights</a>
-        <a href="gallery.html">Gallery</a>
+        <a href="gallery.html" class="active">Gallery</a>
         <a href="#share">Share</a>
         <a href="support.html">Support</a>
         <a href="contact.html">Contact</a>
@@ -126,16 +154,25 @@
   </aside>
   <div class="scrim" id="scrim" onclick="closeDrawer()"></div>
 
+  <!-- Gallery Controls -->
+  <div class="gallery-controls">
+    <h1 style="color: var(--brand);">Prom Gallery</h1>
+    <input type="text" class="search-box" id="searchBox" placeholder="Search images..." oninput="filterImages()">
+  </div>
+
   <!-- Gallery -->
   <div class="gallery" id="gallery-container"></div>
   <div id="loading" class="loading">Loading images...</div>
 
   <!-- Lightbox -->
-  <div id="lightbox" onclick="closeLightbox()">
+  <div id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox()">×</button>
+    <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">❮</button>
     <div>
       <img src="" alt="Lightbox Image">
       <div id="lightbox-caption"></div>
     </div>
+    <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">❯</button>
   </div>
 
   <!-- Scroll to top -->
@@ -186,7 +223,15 @@
     const modal = document.getElementById('signinModal');
     function openSign() { modal.showModal(); }
     function closeSign() { modal.close(); }
-    function applyModalSign() { alert('Email submitted: '+document.getElementById('emailModal').value); closeSign(); }
+    function applyModalSign() { 
+      const email = document.getElementById('emailModal').value;
+      if (email) {
+        alert('Email submitted: ' + email); 
+        closeSign(); 
+      } else {
+        alert('Please enter your email address');
+      }
+    }
 
     // Scroll to top button
     window.addEventListener('scroll', () => {
@@ -196,12 +241,14 @@
 
     // Gallery
     const TOTAL_IMAGES = 18;
-    const IMAGES_PER_LOAD =9;
+    const IMAGES_PER_LOAD = 9;
     const COLUMN_COUNT = 3;
     const gallery = document.getElementById('gallery-container');
     const loadingElement = document.getElementById('loading');
     let loadedCount = 0;
     const columns = [];
+    let allImageElements = [];
+    let currentLightboxIndex = 0;
 
     function createGalleryColumns() {
       for (let i = 0; i < COLUMN_COUNT; i++) {
@@ -214,15 +261,32 @@
 
     function createImageElement(imageNumber) {
       const img = document.createElement('img');
-      // Fixed: Images are in the same folder, not a subfolder
       img.src = imageNumber + '.jpg';
       img.alt = 'Prom Image ' + imageNumber;
       img.loading = 'lazy';
+      img.dataset.number = imageNumber;
+
+      // Add error handling for missing images
+      img.onerror = function() {
+        this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="100%" height="100%" fill="%23f5f5f5"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" fill="%23ccc">Image ' + imageNumber + ' not found</text></svg>';
+        this.style.border = '1px solid #eee';
+      };
+
+      const numberBadge = document.createElement('div');
+      numberBadge.className = 'image-number';
+      numberBadge.textContent = '#' + imageNumber;
 
       const item = document.createElement('div');
       item.className = 'gallery-item';
       item.appendChild(img);
+      item.appendChild(numberBadge);
       item.addEventListener('click', () => openLightbox(img));
+
+      // Store reference to all image elements
+      allImageElements.push({
+        element: item,
+        number: imageNumber
+      });
 
       // Distribute images evenly across columns
       columns[(imageNumber - 1) % COLUMN_COUNT].appendChild(item);
@@ -249,41 +313,79 @@
     const lb = document.getElementById('lightbox');
     const lbImg = lb.querySelector('img');
     const lbCaption = document.getElementById('lightbox-caption');
+    
     function openLightbox(img) {
+      const imageNumber = parseInt(img.dataset.number);
+      currentLightboxIndex = imageNumber - 1;
+      
       lbImg.src = img.src;
       lbCaption.textContent = img.alt;
       lb.classList.add('active');
       document.body.classList.add('noscr');
     }
-    function closeLightbox() {
-      lb.classList.remove('active');
-      document.body.classList.remove('noscr');
-      lbImg.src = '';
-      lbCaption.textContent = '';
+    
+    function closeLightbox(event) {
+      // Only close if clicking on background, not on image or buttons
+      if (event && event.target === lb) {
+        lb.classList.remove('active');
+        document.body.classList.remove('noscr');
+      } else if (!event) {
+        lb.classList.remove('active');
+        document.body.classList.remove('noscr');
+      }
     }
-    // Function to remove multiple images by numbers (pass as an array)
+    
+    function navigateLightbox(direction) {
+      currentLightboxIndex += direction;
+      
+      // Wrap around if at beginning or end
+      if (currentLightboxIndex < 0) currentLightboxIndex = allImageElements.length - 1;
+      if (currentLightboxIndex >= allImageElements.length) currentLightboxIndex = 0;
+      
+      const nextImage = allImageElements[currentLightboxIndex].element.querySelector('img');
+      lbImg.src = nextImage.src;
+      lbCaption.textContent = nextImage.alt;
+    }
+
+    // Function to remove multiple images by numbers
     function removeImages(imageNumbers) {
-        const images = document.querySelectorAll('.gallery-item img');
-
-        images.forEach(img => {
-            const num = parseInt(img.alt.replace("Image ", ""));
-            if (imageNumbers.includes(num)) {
-                img.parentElement.remove();
-                loadedCount--; // update the loaded image counter
-            }
-        });
+      // Filter out any invalid numbers
+      const numbersToRemove = imageNumbers.filter(num => 
+        num !== undefined && num !== null && !isNaN(num) && num > 0 && num <= TOTAL_IMAGES
+      );
+      
+      numbersToRemove.forEach(num => {
+        const index = allImageElements.findIndex(img => img.number === num);
+        if (index !== -1) {
+          allImageElements[index].element.remove();
+          allImageElements.splice(index, 1);
+          loadedCount--;
+        }
+      });
     }
 
-    // Example usage: remove images 6, 9, 59, and 600
-    removeImages([17, 18,,]);
+    // Filter images based on search input
+    function filterImages() {
+      const searchText = document.getElementById('searchBox').value.toLowerCase();
+      
+      allImageElements.forEach(item => {
+        const shouldShow = searchText === '' || 
+                          item.number.toString().includes(searchText) || 
+                          item.element.querySelector('img').alt.toLowerCase().includes(searchText);
+        
+        item.element.style.display = shouldShow ? 'block' : 'none';
+      });
+    }
 
     // Initialize gallery
     document.addEventListener('DOMContentLoaded', function() {
       createGalleryColumns();
       loadImages(IMAGES_PER_LOAD);
       setupScrollListener();
+      
+      // Remove specific images after gallery is loaded
+      setTimeout(() => removeImages([17, 18]), 100);
     });
   </script>
 </body>
 </html>
-
