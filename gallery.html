@@ -1,281 +1,23 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery Management System</title>
+  <title>Central College Mityana — Gallery</title>
   <style>
     :root {
       --brand: #e91e63;
       --brand2: #ff4081;
-      --dark: #333;
-      --light: #f5f5f5;
-      --gray: #888;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--light); color: var(--dark); }
-
-    /* Header */
-    header {
-      position: sticky; top: 0; z-index: 1000;
-      background: rgba(255,255,255,.95);
-      backdrop-filter: saturate(140%) blur(20px);
-      border-bottom: 1px solid #eee;
-    }
-    .nav {
-      max-width: 1200px; margin: 0 auto; padding: 0 20px;
-      height: 60px; display: flex; align-items: center; justify-content: space-between;
-    }
-    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--brand); }
-    .links { display: flex; align-items: center; gap: 22px; }
-    .links a { padding: 10px 6px; font-weight: 500; color: var(--dark); position: relative; text-decoration: none; }
-    .links a.active::after,
-    .links a:hover::after {
-      content: ""; position: absolute; left: 0; bottom: 4px; height: 2px; width: 100%;
-      background: linear-gradient(90deg, var(--brand), var(--brand2)); border-radius: 2px;
-    }
-    .cta-sign {
-      margin-left: 6px; border: 0; padding: 10px 16px; border-radius: 999px;
-      cursor: pointer; background: linear-gradient(45deg, var(--brand), var(--brand2));
-      color: #fff; font-weight: 700; box-shadow: 0 6px 14px rgba(233,30,99,.2);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .cta-sign:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(233,30,99,.3); }
-
-    /* Main content */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    /* Gallery Controls */
-    .gallery-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    .search-box {
-      padding: 10px 16px;
-      border: 1px solid #ddd;
-      border-radius: 24px;
-      width: 250px;
-      font-size: 14px;
-    }
-    .filter-section {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-    .filter-title {
-      color: var(--brand);
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .filter-title svg {
-      width: 20px;
-      height: 20px;
-    }
-    .exclusion-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 15px 0;
-    }
-    .exclusion-item {
-      background: #f0f0f0;
-      padding: 8px 15px;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .exclusion-item button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #999;
-      font-size: 16px;
-    }
-    .exclusion-item button:hover {
-      color: var(--brand);
-    }
-    .exclusion-input {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .exclusion-input input {
-      padding: 8px 12px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      width: 120px;
-    }
-    .stats {
-      color: var(--gray);
-      font-size: 14px;
-      margin-top: 10px;
-    }
-
-    /* Gallery */
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-    .gallery-item {
-      width: calc(33.33% - 10px);
-      background: white;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 5px rgba(0,0,0,.1);
-      cursor: pointer;
-      position: relative;
-      transition: transform 0.3s;
-    }
-    .gallery-item:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0,0,0,.1);
-    }
-    .gallery-item img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      display: block;
-    }
-    .gallery-item .image-number {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: rgba(0,0,0,0.6);
-      color: white;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-    }
-    .gallery-item .image-info {
-      padding: 10px;
-    }
-    .gallery-item .image-title {
-      font-weight: 500;
-      margin-bottom: 5px;
-    }
-    .gallery-item .image-desc {
-      color: var(--gray);
-      font-size: 13px;
-    }
-
-    /* Lightbox */
-    #lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.85);
-      justify-content: center;
-      align-items: center;
-      z-index: 1002;
-    }
-    #lightbox.active { display: flex; }
-    #lightbox img {
-      max-width: 90%;
-      max-height: 80%;
-      border-radius: 12px;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.5);
-    }
-    #lightbox-caption {
-      margin-top: 12px;
-      color: #fff;
-      font-size: 1rem;
-      text-align: center;
-    }
-    .lightbox-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255,255,255,0.2);
-      color: white;
-      border: none;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      font-size: 24px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.3s;
-    }
-    .lightbox-nav:hover {
-      background: rgba(255,255,255,0.3);
-    }
-    .lightbox-prev { left: 20px; }
-    .lightbox-next { right: 20px; }
-    .lightbox-close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: rgba(255,255,255,0.2);
-      color: white;
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      font-size: 20px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .lightbox-close:hover {
-      background: rgba(255,255,255,0.3);
-    }
-
-    /* Footer */
-    footer {
-      padding: 28px 20px;
-      text-align: center;
-      color: var(--gray);
-      background: #fff;
-      margin-top: 40px;
-    }
-    footer a {
-      color: var(--gray);
-      text-decoration: none;
-      margin: 0 4px;
-    }
-    footer a:hover {
-      color: var(--brand);
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .gallery-item {
-        width: calc(50% - 10px);
-      }
-      .gallery-controls {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .gallery-item {
-        width: 100%;
-      }
-    }
   </style>
 </head>
 <body>
   <header>
     <div class="nav">
       <a class="logo" href="#home" aria-label="Home">
-        📸 Central College Mityana • Prom 2024
+        Central College Mityana • Prom 2024
       </a>
       <nav class="links">
         <a href="index.html">Home</a>
@@ -287,46 +29,40 @@
         <a href="contact.html">Contact</a>
         <button class="cta-sign" onclick="openSign()">Sign In</button>
       </nav>
+      <button class="burger" id="burger" aria-label="Open menu" onclick="toggleDrawer()">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
 
-  <div class="container">
-    <div class="gallery-controls">
-      <h1 style="color: var(--brand);">Prom Gallery</h1>
-      <input type="text" class="search-box" id="searchBox" placeholder="Search images..." oninput="filterImages()">
-    </div>
+  <!-- Mobile drawer -->
 
-    <div class="filter-section">
-      <h2 class="filter-title">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
-        Image Exclusion Management
-      </h2>
-      <p>Exclude specific images from the gallery by adding their numbers below:</p>
-      
-      <div class="exclusion-list" id="exclusionList">
-        <!-- Exclusion items will be added here -->
-      </div>
-      
-      <div class="exclusion-input">
-        <input type="number" id="excludeInput" placeholder="Image number" min="1" max="800">
-        <button class="cta-sign" onclick="addExclusion()">Exclude Image</button>
-        <button class="cta-sign" style="background: #4CAF50;" onclick="loadGallery()">Apply Filters</button>
-        <button class="cta-sign" style="background: #9e9e9e;" onclick="clearAllExclusions()">Clear All</button>
-      </div>
-      
-      <div class="stats" id="galleryStats">
-        Showing 0 of 0 images (0 excluded)
-      </div>
-    </div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true">
+    <a href="index.html" onclick="closeDrawer()">Home</a>
+    <a href="#about" onclick="closeDrawer()">About</a>
+    <a href="#highlights" onclick="closeDrawer()">Highlights</a>
+    <a href="gallery.html" onclick="closeDrawer()">Gallery</a>
+    <a href="#share" onclick="closeDrawer()">Share</a>
+    <a href="support.html" onclick="closeDrawer()">Support</a>
+    <a href="contact.html" onclick="closeDrawer()">Contact</a>
+    <button class="cta-sign" style="margin-top:16px" onclick="closeDrawer(); openSign()">Sign In</button>
+  </aside>
+  <div class="scrim" id="scrim" onclick="closeDrawer()"></div>
 
-    <div class="gallery" id="gallery-container">
-      <!-- Gallery items will be generated here -->
-    </div>
+  <!-- Gallery Controls -->
+
+  <div class="gallery-controls">
+    <h1 style="color: var(--brand);">Prom Gallery</h1>
+    <input type="text" class="search-box" id="searchBox" placeholder="Search images..." oninput="filterImages()">
   </div>
 
+  <!-- Gallery -->
+
+  <div class="gallery" id="gallery-container"></div>
+  <div id="loading" class="loading">Loading images...</div>
+
   <!-- Lightbox -->
+
   <div id="lightbox" onclick="closeLightbox(event)">
     <button class="lightbox-close" onclick="closeLightbox()">×</button>
     <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">❮</button>
@@ -337,7 +73,12 @@
     <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">❯</button>
   </div>
 
+  <!-- Scroll to top -->
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
   <!-- Footer -->
+
   <footer>
     <div style="font-weight:700; color:#e91e63">Central College Mityana Prom Memories</div>
     <div style="margin-top:10px;">
@@ -350,173 +91,148 @@
     <div style="margin-top:8px">© 2024 Central College Mityana Prom. All rights reserved.</div>
   </footer>
 
-  <script>
-    // Configuration
-    const TOTAL_IMAGES = 30; // Reduced for demo purposes
-    const EXCLUDED_IMAGES = [17, 18, 25, 30, 42]; // Default exclusions
-    let userExclusions = [...EXCLUDED_IMAGES];
-    let allImageElements = [];
-    let currentLightboxIndex = 0;
-    let filteredImages = [];
+  <!-- Sign-in Modal -->
 
-    // Initialize the gallery
-    document.addEventListener('DOMContentLoaded', function() {
-      loadGallery();
-      updateExclusionList();
-      updateGalleryStats();
+  <dialog id="signinModal" style="border:none; border-radius:16px; padding:0; max-width:420px; width:92vw;">
+    <div style="padding:22px 22px 18px">
+      <h3 style="margin:0 0 8px">Sign in to Share Images</h3>
+      <p style="margin:0 0 12px">Enter your email to continue.</p>
+      <input type="email" id="emailModal" placeholder="you@example.com" style="width:100%; padding:8px; margin-bottom:12px;">
+      <div style="display:flex; gap:8px;">
+        <button class="cta-sign" onclick="applyModalSign()">Continue</button>
+        <button class="cta-sign" style="background:#aaa;" onclick="closeSign()">Cancel</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    // Header drawer
+    const drawer = document.getElementById('drawer');
+    const scrim = document.getElementById('scrim');
+    function toggleDrawer() {
+      drawer.style.display = 'block';
+      scrim.style.display = 'block';
+      document.body.classList.add('noscr');
+    }
+    function closeDrawer() {
+      drawer.style.display = 'none';
+      scrim.style.display = 'none';
+      document.body.classList.remove('noscr');
+    }
+
+    // Sign modal
+    const modal = document.getElementById('signinModal');
+    function openSign() { modal.showModal(); }
+    function closeSign() { modal.close(); }
+    function applyModalSign() { 
+      const email = document.getElementById('emailModal').value;
+      if (email) {
+        alert('Email submitted: ' + email); 
+        closeSign(); 
+      } else {
+        alert('Please enter your email address');
+      }
+    }
+
+    // Scroll to top button
+    window.addEventListener('scroll', () => {
+      const scrollBtn = document.getElementById('scrollTop');
+      scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
     });
 
-    // Load gallery with current filters
-    function loadGallery() {
-      const gallery = document.getElementById('gallery-container');
-      gallery.innerHTML = '';
-      allImageElements = [];
-      
-      for (let i = 1; i <= TOTAL_IMAGES; i++) {
-        // Skip excluded images
-        if (userExclusions.includes(i)) continue;
-        
-        createImageElement(i, gallery);
+    // Gallery
+    const TOTAL_IMAGES = 18;
+    const IMAGES_PER_LOAD = 9;
+    const COLUMN_COUNT = 3;
+    const gallery = document.getElementById('gallery-container');
+    const loadingElement = document.getElementById('loading');
+    let loadedCount = 0;
+    const columns = [];
+    let allImageElements = [];
+    let currentLightboxIndex = 0;
+
+    function createGalleryColumns() {
+      for (let i = 0; i < COLUMN_COUNT; i++) {
+        const column = document.createElement('div');
+        column.className = 'gallery-column';
+        gallery.appendChild(column);
+        columns.push(column);
       }
-      
-      filteredImages = [...allImageElements];
-      updateGalleryStats();
     }
-    
-    // Create a gallery image element
-    function createImageElement(number, container) {
-      const item = document.createElement('div');
-      item.className = 'gallery-item';
-      item.dataset.number = number;
-      
+
+    function createImageElement(imageNumber) {
       const img = document.createElement('img');
-      // Using placeholder images for demo
-      img.src = `https://picsum.photos/400/200?random=${number}`;
-      img.alt = `Prom Image ${number}`;
+      img.src = imageNumber + '.jpg';
+      img.alt = 'Prom Image ' + imageNumber;
       img.loading = 'lazy';
-      
+      img.dataset.number = imageNumber;
+
+      // Add error handling for missing images
+      img.onerror = function() {
+        this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="100%" height="100%" fill="%23f5f5f5"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" fill="%23ccc">Image ' + imageNumber + ' not found</text></svg>';
+        this.style.border = '1px solid #eee';
+      };
+
       const numberBadge = document.createElement('div');
       numberBadge.className = 'image-number';
-      numberBadge.textContent = '#' + number;
-      
-      const infoDiv = document.createElement('div');
-      infoDiv.className = 'image-info';
-      
-      const title = document.createElement('div');
-      title.className = 'image-title';
-      title.textContent = `Prom Night ${number}`;
-      
-      const desc = document.createElement('div');
-      desc.className = 'image-desc';
-      desc.textContent = `Beautiful memory from our prom night`;
-      
-      infoDiv.appendChild(title);
-      infoDiv.appendChild(desc);
-      
+      numberBadge.textContent = '#' + imageNumber;
+
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
       item.appendChild(img);
       item.appendChild(numberBadge);
-      item.appendChild(infoDiv);
-      
-      item.addEventListener('click', () => openLightbox(item));
-      container.appendChild(item);
-      
-      // Store reference
+      item.addEventListener('click', () => openLightbox(img));
+
+      // Store reference to all image elements
       allImageElements.push({
         element: item,
-        number: number
+        number: imageNumber
       });
+
+      // Distribute images evenly across columns
+      columns[(imageNumber - 1) % COLUMN_COUNT].appendChild(item);
     }
-    
-    // Update the exclusion list UI
-    function updateExclusionList() {
-      const list = document.getElementById('exclusionList');
-      list.innerHTML = '';
-      
-      userExclusions.sort((a, b) => a - b).forEach(num => {
-        const item = document.createElement('div');
-        item.className = 'exclusion-item';
-        item.innerHTML = `
-          Image #${num}
-          <button onclick="removeExclusion(${num})">×</button>
-        `;
-        list.appendChild(item);
-      });
-    }
-    
-    // Add an image to exclusion list
-    function addExclusion() {
-      const input = document.getElementById('excludeInput');
-      const num = parseInt(input.value);
-      
-      if (isNaN(num) || num < 1 || num > TOTAL_IMAGES) {
-        alert('Please enter a valid image number between 1 and ' + TOTAL_IMAGES);
-        return;
+
+    function loadImages(count) {
+      const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
+      for (let i = loadedCount + 1; i <= endIndex; i++) {
+        createImageElement(i);
       }
-      
-      if (!userExclusions.includes(num)) {
-        userExclusions.push(num);
-        updateExclusionList();
-        input.value = '';
-      } else {
-        alert(`Image #${num} is already excluded`);
-      }
+      loadedCount = endIndex;
+      if (loadedCount >= TOTAL_IMAGES) loadingElement.style.display = 'none';
     }
-    
-    // Remove an image from exclusion list
-    function removeExclusion(num) {
-      userExclusions = userExclusions.filter(n => n !== num);
-      updateExclusionList();
-    }
-    
-    // Clear all exclusions
-    function clearAllExclusions() {
-      userExclusions = [];
-      updateExclusionList();
-    }
-    
-    // Update gallery statistics
-    function updateGalleryStats() {
-      const stats = document.getElementById('galleryStats');
-      stats.textContent = `Showing ${allImageElements.length} of ${TOTAL_IMAGES} images (${userExclusions.length} excluded)`;
-    }
-    
-    // Filter images based on search input
-    function filterImages() {
-      const searchText = document.getElementById('searchBox').value.toLowerCase();
-      
-      allImageElements.forEach(item => {
-        const shouldShow = searchText === '' || 
-                          item.number.toString().includes(searchText) || 
-                          item.element.querySelector('.image-title').textContent.toLowerCase().includes(searchText);
-        
-        item.element.style.display = shouldShow ? 'block' : 'none';
+
+    function setupScrollListener() {
+      window.addEventListener('scroll', function() {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+          if (loadedCount < TOTAL_IMAGES) loadImages(IMAGES_PER_LOAD);
+        }
       });
     }
 
-    // Lightbox functionality
+    // Lightbox
     const lb = document.getElementById('lightbox');
     const lbImg = lb.querySelector('img');
     const lbCaption = document.getElementById('lightbox-caption');
     
-    function openLightbox(item) {
-      const imageNumber = parseInt(item.dataset.number);
+    function openLightbox(img) {
+      const imageNumber = parseInt(img.dataset.number);
+      currentLightboxIndex = imageNumber - 1;
       
-      // Find the index of the clicked image
-      currentLightboxIndex = allImageElements.findIndex(img => img.number === imageNumber);
-      
-      lbImg.src = item.querySelector('img').src;
-      lbCaption.textContent = `Prom Image ${imageNumber}`;
+      lbImg.src = img.src;
+      lbCaption.textContent = img.alt;
       lb.classList.add('active');
-      document.body.style.overflow = 'hidden';
+      document.body.classList.add('noscr');
     }
     
     function closeLightbox(event) {
+      // Only close if clicking on background, not on image or buttons
       if (event && event.target === lb) {
         lb.classList.remove('active');
-        document.body.style.overflow = 'auto';
+        document.body.classList.remove('noscr');
       } else if (!event) {
         lb.classList.remove('active');
-        document.body.style.overflow = 'auto';
+        document.body.classList.remove('noscr');
       }
     }
     
@@ -528,16 +244,52 @@
       if (currentLightboxIndex >= allImageElements.length) currentLightboxIndex = 0;
       
       const nextImage = allImageElements[currentLightboxIndex].element.querySelector('img');
-      const nextNumber = allImageElements[currentLightboxIndex].number;
-      
       lbImg.src = nextImage.src;
-      lbCaption.textContent = `Prom Image ${nextNumber}`;
+      lbCaption.textContent = nextImage.alt;
     }
 
-    // Sign modal (placeholder)
-    function openSign() { 
-      alert('Sign-in functionality would be implemented here'); 
+    // Function to remove multiple images by numbers
+    function removeImages(imageNumbers) {
+      // Filter out any invalid numbers
+      const numbersToRemove = imageNumbers.filter(num => 
+        num !== undefined && num !== null && !isNaN(num) && num > 0 && num <= TOTAL_IMAGES
+      );
+      
+      numbersToRemove.forEach(num => {
+        const index = allImageElements.findIndex(img => img.number === num);
+        if (index !== -1) {
+          allImageElements[index].element.remove();
+          allImageElements.splice(index, 1);
+          loadedCount--;
+        }
+      });
     }
+
+    // Filter images based on search input
+    function filterImages() {
+      const searchText = document.getElementById('searchBox').value.toLowerCase();
+      
+      allImageElements.forEach(item => {
+        const shouldShow = searchText === '' || 
+                          item.number.toString().includes(searchText) || 
+                          item.element.querySelector('img').alt.toLowerCase().includes(searchText);
+        
+        item.element.style.display = shouldShow ? 'block' : 'none';
+      });
+    }
+
+
+  // Initialize gallery
+  document.addEventListener('DOMContentLoaded', function() {
+    createGalleryColumns();
+    loadImages(IMAGES_PER_LOAD);
+    setupScrollListener();
+    
+    // Remove specific images after gallery is loaded
+    setTimeout(() => removeImages([12, 17, 18]), 100); // Added 12 to the exclusion list
+  });
+</script>
   </script>
+
 </body>
 </html>
