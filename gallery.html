@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,6 +8,113 @@
     :root {
       --brand: #e91e63;
       --brand2: #ff4081;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: saturate(140%) blur(20px);
+      border-bottom: 1px solid #eee;
+    }
+    .nav {
+      max-width: 1200px; margin: 0 auto; padding: 0 20px;
+      height: 60px; display: flex; align-items: center; justify-content: space-between;
+    border-radius: 20px;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--brand); }
+    .links { display: flex; align-items: center; gap: 22px; }
+    .links a { padding: 10px 6px; font-weight: 500; color: #333; position: relative; text-decoration: none; }
+    .links a.active::after,
+    .links a:hover::after {
+      content: ""; position: absolute; left: 0; bottom: 4px; height: 2px; width: 100%;
+      background: linear-gradient(90deg, var(--brand), var(--brand2)); border-radius: 2px;
+    }
+    .cta-sign {
+      margin-left: 6px; border: 0; padding: 10px 16px; border-radius: 999px;
+      cursor: pointer; background: linear-gradient(45deg, var(--brand), var(--brand2));
+      color: #fff; font-weight: 700; box-shadow: 0 6px 14px rgba(233,30,99,.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-sign:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(233,30,99,.3); }
+
+    /* Mobile drawer */
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 5px; }
+    .burger span { width: 26px; height: 3px; background: #333; border-radius: 3px; transition: .25s; }
+    .drawer {
+      display: none; position: fixed; inset: 0 0 0 auto; width: min(78vw, 320px);
+      height: 100vh; background: #fff; padding: 90px 24px 24px; box-shadow: -12px 0 30px rgba(0,0,0,.12); z-index: 1001;
+    }
+    .drawer a { display: block; padding: 14px 0; border-bottom: 1px solid #eee; color: #333; text-decoration: none; }
+    .scrim { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 1000; }
+    .noscr { overflow: hidden; }
+
+    @media (max-width:900px) {
+      .links { display: none; }
+      .burger { display: flex; }
+    }
+
+    /* Gallery */
+    .gallery { display: flex; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 40px auto; }
+    .gallery-column { flex: 1; min-width: calc(33.33% - 7px); display: flex; flex-direction: column; gap: 10px; }
+    .gallery-item { width: 100%; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,.1); cursor: pointer; position: relative; }
+    .gallery-item img { width: 100%; height: auto; display: block; transition: transform 0.3s; }
+    .gallery-item img:hover { transform: scale(1.02); }
+    .gallery-item .image-number {
+      position: absolute; top: 8px; right: 8px; background: rgba(0,0,0,0.6);
+      color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px;
+    }
+
+    /* Loading */
+    .loading { text-align: center; padding: 20px; color: #666; }
+
+    /* Lightbox */
+    #lightbox {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85);
+      justify-content: center; align-items: center; z-index: 1002;
+    }
+    #lightbox.active { display: flex; }
+    #lightbox img { max-width: 90%; max-height: 80%; border-radius: 12px; }
+    #lightbox-caption { margin-top: 12px; color: #fff; font-size: 1rem; text-align: center; }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.2); color: white; border: none;
+      width: 50px; height: 50px; border-radius: 50%; font-size: 24px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
+    .lightbox-close {
+      position: absolute; top: 20px; right: 20px;
+      background: rgba(255,255,255,0.2); color: white; border: none;
+      width: 40px; height: 40px; border-radius: 50%; font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Footer */
+    footer { padding: 28px 20px; text-align: center; color: #888; background: #fff; }
+    footer a { color: #888; text-decoration: none; margin: 0 4px; }
+    footer a:hover { color: var(--brand); }
+
+    /* Scroll to top */
+    #scrollTop {
+      position: fixed; bottom: 24px; right: 24px; display: none; width: 50px; height: 50px; border-radius: 50%; border: none;
+      background: var(--brand); color: white; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.2); z-index: 999;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    #scrollTop:hover { transform: translateY(-3px); background: var(--brand2); }
+
+    /* Filter controls */
+    .gallery-controls {
+      max-width: 1200px; margin: 20px auto 0; padding: 0 20px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .search-box {
+      padding: 10px 16px; border: 1px solid #ddd; border-radius: 24px;
+      width: 250px; font-size: 14px;
     }
 
   </style>
@@ -36,7 +142,6 @@
   </header>
 
   <!-- Mobile drawer -->
-
   <aside class="drawer" id="drawer" role="dialog" aria-modal="true">
     <a href="index.html" onclick="closeDrawer()">Home</a>
     <a href="#about" onclick="closeDrawer()">About</a>
@@ -50,19 +155,16 @@
   <div class="scrim" id="scrim" onclick="closeDrawer()"></div>
 
   <!-- Gallery Controls -->
-
   <div class="gallery-controls">
     <h1 style="color: var(--brand);">Prom Gallery</h1>
     <input type="text" class="search-box" id="searchBox" placeholder="Search images..." oninput="filterImages()">
   </div>
 
   <!-- Gallery -->
-
   <div class="gallery" id="gallery-container"></div>
   <div id="loading" class="loading">Loading images...</div>
 
   <!-- Lightbox -->
-
   <div id="lightbox" onclick="closeLightbox(event)">
     <button class="lightbox-close" onclick="closeLightbox()">×</button>
     <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">❮</button>
@@ -74,11 +176,9 @@
   </div>
 
   <!-- Scroll to top -->
-
-<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+  <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
   <!-- Footer -->
-
   <footer>
     <div style="font-weight:700; color:#e91e63">Central College Mityana Prom Memories</div>
     <div style="margin-top:10px;">
@@ -92,7 +192,6 @@
   </footer>
 
   <!-- Sign-in Modal -->
-
   <dialog id="signinModal" style="border:none; border-radius:16px; padding:0; max-width:420px; width:92vw;">
     <div style="padding:22px 22px 18px">
       <h3 style="margin:0 0 8px">Sign in to Share Images</h3>
@@ -278,6 +377,8 @@
       });
     }
 
+    <script>
+  // ... existing code ...
 
   // Initialize gallery
   document.addEventListener('DOMContentLoaded', function() {
@@ -290,6 +391,5 @@
   });
 </script>
   </script>
-
 </body>
 </html>
