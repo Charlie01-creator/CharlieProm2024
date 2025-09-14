@@ -8,392 +8,87 @@
     :root {
       --brand: #e91e63;
       --brand2: #ff4081;
-      --light-gray: #f5f5f5;
-      --medium-gray: #e0e0e0;
-      --dark-gray: #9e9e9e;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background-color: #fff;
-    }
-
-    /* Header Styles */
+    /* Header */
     header {
-      background: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      position: sticky; top: 0; z-index: 1000;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: saturate(140%) blur(20px);
+      border-bottom: 1px solid #eee;
     }
-
     .nav {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      max-width: 1200px; margin: 0 auto; padding: 0 20px;
+      height: 60px; display: flex; align-items: center; justify-content: space-between;
+    border-radius: 20px;
     }
-
-    .logo {
-      font-weight: 800;
-      color: var(--brand);
-      text-decoration: none;
-      font-size: 1.2rem;
-    }
-
-    .links {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-    }
-
-    .links a {
-      padding: 10px 6px;
-      font-weight: 500;
-      color: #333;
-      position: relative;
-      text-decoration: none;
-    }
-
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--brand); }
+    .links { display: flex; align-items: center; gap: 22px; }
+    .links a { padding: 10px 6px; font-weight: 500; color: #333; position: relative; text-decoration: none; }
     .links a.active::after,
     .links a:hover::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 4px;
-      height: 2px;
-      width: 100%;
-      background: linear-gradient(90deg, var(--brand), var(--brand2));
-      border-radius: 2px;
+      content: ""; position: absolute; left: 0; bottom: 4px; height: 2px; width: 100%;
+      background: linear-gradient(90deg, var(--brand), var(--brand2)); border-radius: 2px;
     }
-
     .cta-sign {
-      margin-left: 6px;
-      border: 0;
-      padding: 10px 16px;
-      border-radius: 999px;
-      cursor: pointer;
-      background: linear-gradient(45deg, var(--brand), var(--brand2));
-      color: #fff;
-      font-weight: 700;
-      box-shadow: 0 6px 14px rgba(233,30,99,.2);
+      margin-left: 6px; border: 0; padding: 10px 16px; border-radius: 999px;
+      cursor: pointer; background: linear-gradient(45deg, var(--brand), var(--brand2));
+      color: #fff; font-weight: 700; box-shadow: 0 6px 14px rgba(233,30,99,.2);
       transition: transform 0.2s, box-shadow 0.2s;
     }
+    .cta-sign:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(233,30,99,.3); }
 
-    .cta-sign:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 18px rgba(233,30,99,.3);
-    }
-
-    /* Mobile Navigation */
-    .burger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 5px;
-    }
-
-    .burger span {
-      width: 26px;
-      height: 3px;
-      background: #333;
-      border-radius: 3px;
-      transition: .25s;
-    }
-
+    /* Mobile drawer */
+    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 5px; }
+    .burger span { width: 26px; height: 3px; background: #333; border-radius: 3px; transition: .25s; }
     .drawer {
-      display: none;
-      position: fixed;
-      inset: 0 0 0 auto;
-      width: min(78vw, 320px);
-      height: 100vh;
-      background: #fff;
-      padding: 90px 24px 24px;
-      box-shadow: -12px 0 30px rgba(0,0,0,.12);
-      z-index: 1001;
+      display: none; position: fixed; inset: 0 0 0 auto; width: min(78vw, 320px);
+      height: 100vh; background: #fff; padding: 90px 24px 24px; box-shadow: -12px 0 30px rgba(0,0,0,.12); z-index: 1001;
+    }
+    .drawer a { display: block; padding: 14px 0; border-bottom: 1px solid #eee; color: #333; text-decoration: none; }
+    .scrim { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 1000; }
+    .noscr { overflow: hidden; }
+
+    @media (max-width:900px) {
+      .links { display: none; }
+      .burger { display: flex; }
     }
 
-    .drawer a {
-      display: block;
-      padding: 14px 0;
-      border-bottom: 1px solid #eee;
-      color: #333;
-      text-decoration: none;
-    }
+    /* Gallery */
+    .gallery { display: flex; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 40px auto; }
+    .gallery-column { flex: 1; min-width: calc(33.33% - 7px); display: flex; flex-direction: column; gap: 10px; }
+    .gallery-item { width: 100%; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,.1); cursor: pointer; }
+    .gallery-item img { width: 100%; height: auto; display: block; transition: transform 0.3s; }
+    .gallery-item img:hover { transform: scale(1.02); }
 
-    .scrim {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.45);
-      z-index: 1000;
-    }
+    /* Loading */
+    .loading { text-align: center; padding: 20px; color: #666; }
 
-    .noscr {
-      overflow: hidden;
-    }
-
-    @media (max-width: 900px) {
-      .links {
-        display: none;
-      }
-      
-      .burger {
-        display: flex;
-      }
-    }
-
-    /* Gallery Styles */
-    .gallery-controls {
-      max-width: 1200px;
-      margin: 30px auto 20px;
-      padding: 0 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .gallery-controls h1 {
-      color: var(--brand);
-      font-size: 2rem;
-    }
-
-    .search-box {
-      padding: 10px 16px;
-      border: 1px solid #ddd;
-      border-radius: 24px;
-      width: 250px;
-      font-size: 14px;
-    }
-
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      max-width: 1200px;
-      margin: 0 auto 40px;
-      padding: 0 20px;
-    }
-
-    .gallery-column {
-      flex: 1;
-      min-width: calc(33.33% - 7px);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .gallery-item {
-      width: 100%;
-      background: white;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 5px rgba(0,0,0,.1);
-      cursor: pointer;
-      position: relative;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: transform 0.3s;
-    }
-
-    .gallery-item img:hover {
-      transform: scale(1.02);
-    }
-
-    .gallery-item .image-number {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: rgba(0,0,0,0.6);
-      color: white;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-    }
-
-    /* Image Loading States */
-    .image-placeholder {
-      width: 100%;
-      padding-bottom: 75%; /* 4:3 aspect ratio */
-      background: var(--light-gray);
-      position: relative;
-    }
-
-    .image-placeholder::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 40px;
-      height: 40px;
-      border: 3px solid var(--medium-gray);
-      border-top: 3px solid var(--brand);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: translate(-50%, -50%) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-
-    .loading {
-      text-align: center;
-      padding: 30px;
-      color: #666;
-    }
-
-    /* Lightbox Styles */
+    /* Lightbox */
     #lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.85);
-      justify-content: center;
-      align-items: center;
-      z-index: 1002;
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85);
+      justify-content: center; align-items: center; z-index: 1002;
     }
+    #lightbox.active { display: flex; }
+    #lightbox img { max-width: 90%; max-height: 80%; border-radius: 12px; }
+    #lightbox-caption { margin-top: 12px; color: #fff; font-size: 1rem; text-align: center; }
 
-    #lightbox.active {
-      display: flex;
-    }
+    /* Footer */
+    footer { padding: 28px 20px; text-align: center; color: #888; background: #fff; }
+    footer a { color: #888; text-decoration: none; margin: 0 4px; }
+    footer a:hover { color: var(--brand); }
 
-    #lightbox img {
-      max-width: 90%;
-      max-height: 80%;
-      border-radius: 12px;
-    }
-
-    #lightbox-caption {
-      margin-top: 12px;
-      color: #fff;
-      font-size: 1rem;
-      text-align: center;
-    }
-
-    .lightbox-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255,255,255,0.2);
-      color: white;
-      border: none;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      font-size: 24px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .lightbox-prev {
-      left: 20px;
-    }
-
-    .lightbox-next {
-      right: 20px;
-    }
-
-    .lightbox-close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: rgba(255,255,255,0.2);
-      color: white;
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      font-size: 20px;
-      cursor: pointer;
-    }
-
-    /* Footer Styles */
-    footer {
-      padding: 28px 20px;
-      text-align: center;
-      color: #888;
-      background: #fff;
-      border-top: 1px solid #eee;
-    }
-
-    footer a {
-      color: #888;
-      text-decoration: none;
-      margin: 0 4px;
-    }
-
-    footer a:hover {
-      color: var(--brand);
-    }
-
-    /* Scroll to Top Button */
+    /* Scroll to top */
     #scrollTop {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      display: none;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      border: none;
-      background: var(--brand);
-      color: white;
-      font-size: 1.2rem;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,.2);
-      z-index: 999;
+      position: fixed; bottom: 24px; right: 24px; display: none; width: 50px; height: 50px; border-radius: 50%; border: none;
+      background: var(--brand); color: white; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.2); z-index: 999;
       transition: opacity 0.3s, transform 0.3s;
     }
+    #scrollTop:hover { transform: translateY(-3px); background: var(--brand2); }
 
-    #scrollTop:hover {
-      transform: translateY(-3px);
-      background: var(--brand2);
-    }
-
-    /* Responsive Adjustments */
-    @media (max-width: 900px) {
-      .gallery-column {
-        min-width: calc(50% - 5px);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .gallery-column {
-        min-width: 100%;
-      }
-      
-      .gallery-controls {
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
-      }
-      
-      .search-box {
-        width: 100%;
-      }
-    }
   </style>
 </head>
 <body>
@@ -403,10 +98,10 @@
         Central College Mityana • Prom 2024
       </a>
       <nav class="links">
-        <a href="index.html">Home</a>
+        <a href="index.html" class="active">Home</a>
         <a href="#about">About</a>
         <a href="#highlights">Highlights</a>
-        <a href="gallery.html" class="active">Gallery</a>
+        <a href="gallery.html">Gallery</a>
         <a href="#share">Share</a>
         <a href="support.html">Support</a>
         <a href="contact.html">Contact</a>
@@ -431,25 +126,16 @@
   </aside>
   <div class="scrim" id="scrim" onclick="closeDrawer()"></div>
 
-  <!-- Gallery Controls -->
-  <div class="gallery-controls">
-    <h1>Prom Gallery</h1>
-    <input type="text" class="search-box" id="searchBox" placeholder="Search images..." oninput="filterImages()">
-  </div>
-
   <!-- Gallery -->
   <div class="gallery" id="gallery-container"></div>
   <div id="loading" class="loading">Loading images...</div>
 
   <!-- Lightbox -->
-  <div id="lightbox" onclick="closeLightbox(event)">
-    <button class="lightbox-close" onclick="closeLightbox()">×</button>
-    <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">❮</button>
+  <div id="lightbox" onclick="closeLightbox()">
     <div>
       <img src="" alt="Lightbox Image">
       <div id="lightbox-caption"></div>
     </div>
-    <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">❯</button>
   </div>
 
   <!-- Scroll to top -->
@@ -500,15 +186,7 @@
     const modal = document.getElementById('signinModal');
     function openSign() { modal.showModal(); }
     function closeSign() { modal.close(); }
-    function applyModalSign() { 
-      const email = document.getElementById('emailModal').value;
-      if (email) {
-        alert('Email submitted: ' + email); 
-        closeSign(); 
-      } else {
-        alert('Please enter your email address');
-      }
-    }
+    function applyModalSign() { alert('Email submitted: '+document.getElementById('emailModal').value); closeSign(); }
 
     // Scroll to top button
     window.addEventListener('scroll', () => {
@@ -518,15 +196,12 @@
 
     // Gallery
     const TOTAL_IMAGES = 18;
-    const IMAGES_PER_LOAD = 9;
+    const IMAGES_PER_LOAD =9;
     const COLUMN_COUNT = 3;
     const gallery = document.getElementById('gallery-container');
     const loadingElement = document.getElementById('loading');
     let loadedCount = 0;
     const columns = [];
-    let allImageElements = [];
-    let currentLightboxIndex = 0;
-    const EXCLUDED_IMAGES = [12, 17, 18]; // Images to exclude
 
     function createGalleryColumns() {
       for (let i = 0; i < COLUMN_COUNT; i++) {
@@ -538,60 +213,19 @@
     }
 
     function createImageElement(imageNumber) {
-      // Skip excluded images
-      if (EXCLUDED_IMAGES.includes(imageNumber)) {
-        return;
-      }
+      const img = document.createElement('img');
+      // Fixed: Images are in the same folder, not a subfolder
+      img.src = imageNumber + '.jpg';
+      img.alt = 'Prom Image ' + imageNumber;
+      img.loading = 'lazy';
 
       const item = document.createElement('div');
       item.className = 'gallery-item';
-      item.dataset.number = imageNumber;
-
-      // Create placeholder
-      const placeholder = document.createElement('div');
-      placeholder.className = 'image-placeholder';
-      item.appendChild(placeholder);
-
-      const numberBadge = document.createElement('div');
-      numberBadge.className = 'image-number';
-      numberBadge.textContent = '#' + imageNumber;
-      item.appendChild(numberBadge);
-
-      // Create image (will load later)
-      const img = document.createElement('img');
-      img.src = ''; // Start with empty src
-      img.alt = 'Prom Image ' + imageNumber;
-      img.dataset.src = imageNumber + '.jpg'; // Store real source in data attribute
-      img.dataset.number = imageNumber;
-      img.style.display = 'none'; // Hide initially
-
-      // Add error handling for missing images
-      img.onerror = function() {
-        this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="100%" height="100%" fill="%23f5f5f5"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" fill="%23ccc">Image ' + imageNumber + ' not found</text></svg>';
-        this.style.border = '1px solid #eee';
-        placeholder.style.display = 'none';
-        this.style.display = 'block';
-      };
-
-      img.onload = function() {
-        placeholder.style.display = 'none';
-        this.style.display = 'block';
-      };
-
       item.appendChild(img);
       item.addEventListener('click', () => openLightbox(img));
 
-      // Store reference to all image elements
-      allImageElements.push({
-        element: item,
-        number: imageNumber,
-        imgElement: img
-      });
-
       // Distribute images evenly across columns
       columns[(imageNumber - 1) % COLUMN_COUNT].appendChild(item);
-      
-      return item;
     }
 
     function loadImages(count) {
@@ -600,48 +234,13 @@
         createImageElement(i);
       }
       loadedCount = endIndex;
-      
-      // Load images that are in viewport
-      lazyLoadImages();
-      
       if (loadedCount >= TOTAL_IMAGES) loadingElement.style.display = 'none';
     }
 
-    function lazyLoadImages() {
-      allImageElements.forEach(item => {
-        const img = item.imgElement;
-        // If image hasn't been loaded yet and is in viewport
-        if (img.src === '' && isInViewport(img.parentElement)) {
-          img.src = img.dataset.src;
-        }
-      });
-    }
-
-    function isInViewport(element) {
-      const rect = element.getBoundingClientRect();
-      return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) * 1.5 &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-      );
-    }
-
     function setupScrollListener() {
-      let ticking = false;
-      
       window.addEventListener('scroll', function() {
-        if (!ticking) {
-          window.requestAnimationFrame(function() {
-            lazyLoadImages();
-            ticking = false;
-            
-            // Load more images if needed
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
-              if (loadedCount < TOTAL_IMAGES) loadImages(IMAGES_PER_LOAD);
-            }
-          });
-          ticking = true;
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
+          if (loadedCount < TOTAL_IMAGES) loadImages(IMAGES_PER_LOAD);
         }
       });
     }
@@ -650,52 +249,30 @@
     const lb = document.getElementById('lightbox');
     const lbImg = lb.querySelector('img');
     const lbCaption = document.getElementById('lightbox-caption');
-    
     function openLightbox(img) {
-      const imageNumber = parseInt(img.dataset.number);
-      currentLightboxIndex = allImageElements.findIndex(item => item.number === imageNumber);
-      
-      // Make sure we have the full resolution image for lightbox
-      lbImg.src = img.dataset.src;
+      lbImg.src = img.src;
       lbCaption.textContent = img.alt;
       lb.classList.add('active');
       document.body.classList.add('noscr');
     }
-    
-    function closeLightbox(event) {
-      // Only close if clicking on background, not on image or buttons
-      if (event && event.target === lb) {
-        lb.classList.remove('active');
-        document.body.classList.remove('noscr');
-      } else if (!event) {
-        lb.classList.remove('active');
-        document.body.classList.remove('noscr');
-      }
+    function closeLightbox() {
+      lb.classList.remove('active');
+      document.body.classList.remove('noscr');
+      lbImg.src = '';
+      lbCaption.textContent = '';
     }
     
-    function navigateLightbox(direction) {
-      currentLightboxIndex += direction;
-      
-      // Wrap around if at beginning or end
-      if (currentLightboxIndex < 0) currentLightboxIndex = allImageElements.length - 1;
-      if (currentLightboxIndex >= allImageElements.length) currentLightboxIndex = 0;
-      
-      const nextImage = allImageElements[currentLightboxIndex].imgElement;
-      lbImg.src = nextImage.dataset.src;
-      lbCaption.textContent = nextImage.alt;
-    }
+    // Function to remove multiple images by numbers (pass as an array)
+    function removeImages(imageNumbers) {
+        const images = document.querySelectorAll('.gallery-item img');
 
-    // Filter images based on search input
-    function filterImages() {
-      const searchText = document.getElementById('searchBox').value.toLowerCase();
-      
-      allImageElements.forEach(item => {
-        const shouldShow = searchText === '' || 
-                          item.number.toString().includes(searchText) || 
-                          item.imgElement.alt.toLowerCase().includes(searchText);
-        
-        item.element.style.display = shouldShow ? 'block' : 'none';
-      });
+        images.forEach(img => {
+            const num = parseInt(img.alt.replace("Prom Image ", ""));
+            if (imageNumbers.includes(num)) {
+                img.parentElement.remove();
+                loadedCount--; // update the loaded image counter
+            }
+        });
     }
 
     // Initialize gallery
@@ -703,6 +280,12 @@
       createGalleryColumns();
       loadImages(IMAGES_PER_LOAD);
       setupScrollListener();
+      
+      // Remove specific images after a short delay to ensure DOM is ready
+      setTimeout(() => {
+        // Fixed: Pass only valid numbers in the array
+        removeImages([17, 18]);
+      }, 100);
     });
   </script>
 </body>
