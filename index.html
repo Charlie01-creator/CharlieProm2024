@@ -14,119 +14,389 @@
   <meta property="og:url" content="https://yourdomain.com/prom2024">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#e91e63" />
+  
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
   
   <!-- Preload critical resources -->
-  <link rel="preload" as="image" href="1@ 222 copy.html">
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80">
   
   <style>
     :root {
       --brand: #e91e63;
       --brand2: #ff4081;
+      --brand-dark: #c2185b;
       --ink: #222;
       --muted: #666;
+      --light: #f8f9fa;
       --bg: #fafafa;
       --panel: #fff;
       --radius: 16px;
+      --radius-lg: 24px;
       --shadow: 0 10px 24px rgba(0,0,0,.08);
-      --header-h: 74px;
+      --shadow-lg: 0 20px 40px rgba(0,0,0,.12);
+      --header-h: 80px;
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0;}
     
-    html, body {scroll-behavior: smooth;font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: var(--bg);color: var(--ink);line-height: 1.6;}
-    img {max-width: 100%;display: block;height: auto;}
-    a {text-decoration: none;color: inherit;}
-     /* Header / Navbar */
-    header {position: sticky;top: 0;z-index: 1000;background: rgba(255,255,255,.95);backdrop-filter: saturate(140%) blur(8px);border-bottom: 1px solid #eee;}
-    .nav {max-width: 1200px;margin: 0 auto;height: var(--header-h);display: flex;align-items: center;justify-content: space-between;padding: 0 20px;}
-    .logo {display: flex;align-items: center;gap: 10px;font-weight: 800;letter-spacing: .3px;color: var(--brand);font-size: 1.15rem;}
-    .logo svg {width: 30px;height: 30px;}
-    .links {display: flex;align-items: center;gap: 22px;}
-    .links a {padding: 10px 6px;position: relative;font-weight: 500;color: #333;}
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0;
+    }
+    
+    html, body {
+      scroll-behavior: smooth;
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    
+    img {
+      max-width: 100%;
+      display: block;
+      height: auto;
+    }
+    
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: var(--transition);
+    }
+    
+    /* Header / Navbar */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,.8);
+      transition: var(--transition);
+    }
+    
+    header.scrolled {
+      background: rgba(255,255,255,.98);
+      box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    }
+    
+    .nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: .3px;
+      color: var(--brand);
+      font-size: 1.25rem;
+    }
+    
+    .logo svg {
+      width: 36px;
+      height: 36px;
+      transition: var(--transition);
+    }
+    
+    .logo:hover svg {
+      transform: rotate(-10deg) scale(1.1);
+    }
+    
+    .links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+    
+    .links a {
+      padding: 10px 6px;
+      position: relative;
+      font-weight: 500;
+      color: #333;
+      transition: var(--transition);
+    }
+    
+    .links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 4px;
+      height: 2px;
+      width: 0;
+      background: linear-gradient(90deg, var(--brand), var(--brand2));
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    
     .links a.active::after,
-    .links a:hover::after {content: "";position: absolute;left: 0;bottom: 4px;height: 2px;width: 100%;background: linear-gradient(90deg, var(--brand), var(--brand2));border-radius: 2px;}
-    .cta-sign {margin-left: 6px;border: 0;padding: 10px 16px;border-radius: 999px;cursor: pointer;background: linear-gradient(45deg, var(--brand), var(--brand2));color: #fff;font-weight: 700;box-shadow: 0 6px 14px rgba(233,30,99,.2);transition: transform 0.2s, box-shadow 0.2s;}
-    .cta-sign:hover {transform: translateY(-2px);box-shadow: 0 8px 18px rgba(233,30,99,.3);}
-    /* Mobile */
-    .burger {display: none;flex-direction: column;gap: 5px;cursor: pointer;background: none;border: none;padding: 5px;}
-    .burger span {width: 26px;height: 3px;background: #333;border-radius: 3px;transition: .25s;}
-    .drawer {display: none;position: fixed;inset: 0 0 0 auto;width: min(78vw, 320px);height: 100vh;background: #fff;padding: 90px 24px 24px;box-shadow: -12px 0 30px rgba(0,0,0,.12);z-index: 1001;}
-    .drawer a {display: block;padding: 14px 0;border-bottom: 1px solid #eee;}
-    .scrim {display: none;position: fixed;inset: 0;background: rgba(0,0,0,.45);z-index: 1000;}
-    .noscr {overflow: hidden; }
-    @media (max-width: 900px) {
-      .links {display: none; }
-      .burger {display: flex;}}
-    /* Sections */
-    section { padding: clamp(60px, 6vw, 100px) 20px;}
-    .wrap {max-width: 1200px;margin: 0 auto; }
+    .links a:hover::after {
+      width: 100%;
+    }
     
-    /* Hero */
-    .hero {
-      margin-top: 0;
-      padding-top: 20px;
-      background: 
-        linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.6)), 
-        url('1@ (222) copy-1.jpg') center/cover no-repeat;
+    .cta-sign {
+      margin-left: 6px;
+      border: 0;
+      padding: 12px 24px;
+      border-radius: 999px;
+      cursor: pointer;
+      background: linear-gradient(45deg, var(--brand), var(--brand2));
       color: #fff;
-      text-align: center;
+      font-weight: 700;
+      box-shadow: 0 6px 14px rgba(233,30,99,.2);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta-sign::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: 0.5s;
+    }
+    
+    .cta-sign:hover::before {
+      left: 100%;
+    }
+    
+    .cta-sign:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(233,30,99,.3);
+    }
+    
+    /* Mobile Navigation */
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 8px;
+      z-index: 1002;
       position: relative;
     }
     
-    .hero .wrap {
-      padding-top: 40px;
-      padding-bottom: 80px;
+    .burger span {
+      width: 26px;
+      height: 3px;
+      background: #333;
+      border-radius: 3px;
+      transition: var(--transition);
+      transform-origin: center;
+    }
+    
+    .burger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+    
+    .burger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .burger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+    
+    .drawer {
+      display: none;
+      position: fixed;
+      inset: 0 0 0 auto;
+      width: min(85vw, 380px);
+      height: 100vh;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      padding: 100px 30px 40px;
+      box-shadow: -12px 0 40px rgba(0,0,0,.15);
+      z-index: 1001;
+      transform: translateX(100%);
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    
+    .drawer.active {
+      transform: translateX(0);
+    }
+    
+    .drawer a {
+      display: block;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0,0,0,.08);
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+    
+    .drawer a:hover {
+      color: var(--brand);
+      padding-left: 10px;
+    }
+    
+    .scrim {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .scrim.active {
+      opacity: 1;
+    }
+    
+    .noscr {
+      overflow: hidden;
+    }
+    
+    @media (max-width: 1024px) {
+      .links {
+        display: none;
+      }
+      .burger {
+        display: flex;
+      }
+    }
+    
+    /* Sections */
+    section {
+      padding: clamp(80px, 8vw, 140px) 20px;
+      position: relative;
+    }
+    
+    .wrap {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    /* Hero */
+    .hero {
+      margin-top: var(--header-h);
+      padding-top: 60px;
+      padding-bottom: 100px;
+      background: 
+        linear-gradient(135deg, rgba(233,30,99,0.85), rgba(255,64,129,0.7)), 
+        url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+      color: #fff;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+      opacity: 0.3;
+    }
+    
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
     
     .eyebrow {
       font-weight: 700;
       letter-spacing: .2em;
-      font-size: .8rem;
+      font-size: .85rem;
       opacity: .9;
       text-transform: uppercase;
+      margin-bottom: 20px;
+      display: inline-block;
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 30px;
+      backdrop-filter: blur(10px);
     }
     
     .title {
-      font-size: clamp(2rem, 4.8vw, 3.2rem);
-      line-height: 1.15;
-      margin: .6rem 0 1rem;
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+      line-height: 1.1;
+      margin: .6rem 0 1.5rem;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
     
     .subtitle {
-      max-width: 820px;
-      margin: 0 auto 24px;
-      font-size: clamp(1rem, 2.4vw, 1.2rem);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
       opacity: .95;
+      font-weight: 300;
     }
     
     .btns {
       display: flex;
       justify-content: center;
-      gap: 14px;
+      gap: 18px;
       flex-wrap: wrap;
     }
     
     .btn {
       border: 0;
-      padding: 14px 24px;
+      padding: 16px 32px;
       border-radius: 999px;
       font-weight: 700;
       cursor: pointer;
       background: #fff;
       color: #111;
       box-shadow: var(--shadow);
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: 0.5s;
+    }
+    
+    .btn:hover::before {
+      left: 100%;
     }
     
     .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 20px rgba(0,0,0,.15);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 25px rgba(0,0,0,.15);
     }
     
     .btn.primary {
@@ -142,130 +412,220 @@
     }
     
     .btn.ghost:hover {
-      background: rgba(255,255,255,.1);
+      background: rgba(255,255,255,.15);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 20px rgba(0,0,0,.1);
+    }
+    
+    /* Floating elements */
+    .floating {
+      position: absolute;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .floating-1 {
+      top: 20%;
+      left: 5%;
+      width: 60px;
+      height: 60px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      animation-delay: 0s;
+    }
+    
+    .floating-2 {
+      top: 60%;
+      right: 8%;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      animation-delay: 2s;
+    }
+    
+    .floating-3 {
+      bottom: 20%;
+      left: 10%;
+      width: 30px;
+      height: 30px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      animation-delay: 4s;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(10deg);
+      }
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
     }
     
     /* About */
     .about {
       background: var(--panel);
-      border-radius: var(--radius);
+      border-radius: var(--radius-lg);
       box-shadow: var(--shadow);
+      overflow: hidden;
     }
     
     .grid-2 {
       display: grid;
       grid-template-columns: 1.1fr .9fr;
-      gap: 30px;
+      gap: 50px;
       align-items: center;
     }
     
     .kicker {
       color: var(--brand);
       font-weight: 800;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
     
     h2.sec {
-      font-size: clamp(1.6rem, 3.4vw, 2.2rem);
-      margin: .2rem 0 .8rem;
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin: .2rem 0 1.2rem;
     }
     
     .muted {
       color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1.7;
     }
     
-    @media (max-width: 900px) {
+    .about-img {
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      transition: var(--transition);
+      overflow: hidden;
+    }
+    
+    .about-img:hover {
+      transform: scale(1.02);
+    }
+    
+    @media (max-width: 1024px) {
       .grid-2 {
         grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .about-img {
+        order: -1;
       }
     }
     
     /* Highlights */
     .highlights .cards {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
     }
     
     .card {
       background: #fff;
       border: 1px solid #eee;
-      border-radius: 18px;
-      padding: 18px;
+      border-radius: var(--radius-lg);
+      padding: 30px 24px;
       box-shadow: var(--shadow);
-      transition: transform .25s ease, box-shadow .25s ease;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--brand), var(--brand2));
+      transition: var(--transition);
     }
     
     .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 30px rgba(0,0,0,.12);
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .card:hover::before {
+      width: 8px;
     }
     
     .card .icon {
-      font-size: 28px;
+      font-size: 40px;
+      margin-bottom: 16px;
     }
     
     .card h3 {
-      margin: 10px 0 6px;
-      font-size: 1.05rem;
+      margin: 10px 0 12px;
+      font-size: 1.3rem;
     }
     
     .pill {
       display: inline-block;
-      padding: 6px 10px;
+      padding: 8px 16px;
       border-radius: 999px;
-      background: #f7f7f7;
+      background: rgba(233,30,99,0.1);
       font-size: .85rem;
+      font-weight: 600;
+      color: var(--brand);
     }
     
-    /* Gallery - UPDATED */
+    /* Gallery */
     .gallery .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
     }
     
     .shot {
       position: relative;
       overflow: hidden;
-      border-radius: 16px;
-      border: 1px solid #eee;
+      border-radius: var(--radius);
       background: #fff;
-      padding: 0;
       box-shadow: var(--shadow);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: var(--transition);
+      cursor: pointer;
     }
     
     .shot:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 30px rgba(0,0,0,.15);
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
     }
     
     .shot img {
-      height: 300px;
+      height: 260px;
       width: 100%;
-      object-fit: contain;
-      object-position: center;
-      transition: transform .5s ease;
+      object-fit: cover;
+      transition: transform .6s ease;
     }
     
     .shot:hover img {
-      transform: scale(1.08);
+      transform: scale(1.1);
     }
     
     .shot-info {
-      padding: 15px;
+      padding: 20px;
     }
     
     .shot-title {
       font-weight: 600;
       margin-bottom: 8px;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
     }
     
     .shot-desc {
       color: var(--muted);
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       margin-bottom: 12px;
     }
     
@@ -277,8 +637,8 @@
     }
     
     .avatar-small {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       object-fit: cover;
       margin-right: 8px;
@@ -290,7 +650,7 @@
       display: flex;
       align-items: center;
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
     }
     
     .shot-likes::before {
@@ -304,8 +664,8 @@
       bottom: 15px;
       font-size: .75rem;
       color: #fff;
-      background: rgba(0,0,0,.5);
-      padding: 4px 10px;
+      background: rgba(0,0,0,.6);
+      padding: 6px 12px;
       border-radius: 20px;
       backdrop-filter: blur(4px);
     }
@@ -315,15 +675,18 @@
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.92);
+      background: rgba(0,0,0,.95);
       z-index: 1200;
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
     
     .lightbox.active {
       display: flex;
+      opacity: 1;
     }
     
     .lightbox-content {
@@ -337,27 +700,38 @@
       max-height: 80vh;
       border-radius: 12px;
       object-fit: contain;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
     }
     
     .lightbox .close {
       position: absolute;
-      top: -40px;
+      top: -50px;
       right: 0;
       background: #fff;
       border: 0;
-      padding: 10px 14px;
-      border-radius: 999px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
       font-weight: 800;
       cursor: pointer;
       z-index: 1201;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    
+    .lightbox .close:hover {
+      background: var(--brand);
+      color: white;
+      transform: rotate(90deg);
     }
     
     .lightbox-caption {
       color: white;
       text-align: center;
-      margin-top: 20px;
-      font-size: 1.1rem;
+      margin-top: 24px;
+      font-size: 1.2rem;
       max-width: 600px;
       padding: 0 20px;
     }
@@ -366,15 +740,16 @@
     .share .panel {
       display: grid;
       grid-template-columns: 1.1fr .9fr;
-      gap: 24px;
+      gap: 40px;
       align-items: center;
       background: #fff;
-      border-radius: 18px;
+      border-radius: var(--radius-lg);
       box-shadow: var(--shadow);
-      padding: 22px;
+      padding: 40px;
+      overflow: hidden;
     }
     
-    @media (max-width: 900px) {
+    @media (max-width: 1024px) {
       .share .panel {
         grid-template-columns: 1fr;
       }
@@ -384,12 +759,12 @@
       background: #f9f9ff;
       border: 1px dashed #d7d7ff;
       border-radius: 14px;
-      padding: 14px;
+      padding: 24px;
     }
     
     .form-row {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
     }
     
@@ -397,21 +772,23 @@
     input[type="text"],
     input[type="file"] {
       width: 100%;
-      padding: 12px 14px;
+      padding: 14px 18px;
       border: 1px solid #ddd;
-      border-radius: 10px;
+      border-radius: 12px;
       outline: none;
       font: inherit;
-      transition: border-color 0.2s;
+      transition: var(--transition);
+      background: #fff;
     }
     
     input:focus {
       border-color: var(--brand);
+      box-shadow: 0 0 0 3px rgba(233,30,99,0.1);
     }
     
     .inline {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
     }
     
@@ -420,25 +797,27 @@
       color: var(--muted);
     }
     
-    /* Testimonials - UPDATED */
+    /* Testimonials */
     .testimonials-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+      gap: 20px;
     }
     
     .tape {
       display: flex;
-      gap: 20px;
+      gap: 24px;
       overflow: auto;
       scroll-snap-type: x mandatory;
-      padding: 10px 5px 20px;
+      padding: 10px 5px 30px;
       scrollbar-width: thin;
     }
     
     .tape::-webkit-scrollbar {
-      height: 6px;
+      height: 8px;
     }
     
     .tape::-webkit-scrollbar-track {
@@ -447,50 +826,58 @@
     }
     
     .tape::-webkit-scrollbar-thumb {
-      background: #ccc;
+      background: var(--brand);
       border-radius: 10px;
     }
     
     .quote {
-      min-width: 320px;
-      max-width: 320px;
+      min-width: 360px;
+      max-width: 360px;
       scroll-snap-align: start;
       background: #fff;
-      padding: 24px;
-      border-radius: 16px;
+      padding: 32px;
+      border-radius: var(--radius-lg);
       border: 1px solid #eee;
       box-shadow: var(--shadow);
       position: relative;
+      transition: var(--transition);
+    }
+    
+    .quote:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
     }
     
     .quote::before {
       content: """;
       position: absolute;
-      top: 10px;
-      left: 15px;
-      font-size: 60px;
+      top: 15px;
+      left: 20px;
+      font-size: 80px;
       color: var(--brand);
-      opacity: 0.2;
+      opacity: 0.15;
       font-family: Georgia, serif;
+      line-height: 1;
     }
     
     .quote-text {
       position: relative;
       z-index: 1;
-      margin-bottom: 20px;
-      line-height: 1.6;
+      margin-bottom: 24px;
+      line-height: 1.7;
+      font-size: 1.05rem;
     }
     
     .quote .who {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-top: 15px;
+      gap: 15px;
+      margin-top: 20px;
     }
     
     .avatar {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid #fff;
@@ -504,17 +891,18 @@
     
     .who-name {
       font-weight: 600;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
     }
     
     .who-role {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--muted);
     }
     
     .stars {
       color: #ffc107;
       margin-top: 5px;
+      font-size: 1.1rem;
     }
     
     /* Contact */
@@ -522,44 +910,59 @@
       background: linear-gradient(135deg, var(--brand2), var(--brand));
       color: #fff;
       text-align: center;
-      border-radius: 18px;
+      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .contact::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
     
     .socials {
       display: flex;
-      gap: 12px;
+      gap: 15px;
       justify-content: center;
-      margin-top: 12px;
+      margin-top: 20px;
     }
     
     .socials a {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      background: rgba(255,255,255,.12);
-      transition: background 0.2s, color 0.2s;
+      background: rgba(255,255,255,.15);
+      transition: var(--transition);
+      font-size: 1.2rem;
     }
     
     .socials a:hover {
       background: #fff;
-      color: #000;
+      color: var(--brand);
+      transform: translateY(-5px);
     }
     
     /* Footer */
     footer {
-      padding: 28px 20px;
+      padding: 40px 20px;
       text-align: center;
       color: #888;
+      background: #f5f5f5;
     }
     
     /* Reveal on scroll */
     .reveal {
       opacity: 0;
-      transform: translateY(32px);
-      transition: all .7s ease;
+      transform: translateY(40px);
+      transition: all .8s cubic-bezier(0.175, 0.885, 0.32, 1.1);
     }
     
     .reveal.show {
@@ -570,52 +973,106 @@
     /* Scroll to top button */
     #scrollTop {
       position: fixed;
-      bottom: 24px;
-      right: 24px;
+      bottom: 30px;
+      right: 30px;
       display: none;
-      width: 50px;
-      height: 50px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
       border: none;
-      background: var(--brand);
+      background: linear-gradient(45deg, var(--brand), var(--brand2));
       color: white;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0,0,0,.2);
+      box-shadow: 0 6px 20px rgba(0,0,0,.2);
       z-index: 999;
-      transition: opacity 0.3s, transform 0.3s;
+      transition: var(--transition);
     }
     
     #scrollTop:hover {
-      transform: translateY(-3px);
-      background: var(--brand2);
+      transform: translateY(-5px) scale(1.1);
+      box-shadow: 0 10px 25px rgba(0,0,0,.3);
     }
+    
     /* Loading animation */
-    @keyframes fadeIn {from { opacity: 0; transform: translateY(20px); }to { opacity: 1; transform: translateY(0); }}
-    .fade-in {animation: fadeIn 1s ease forwards;}
+    @keyframes fadeIn {
+      from { 
+        opacity: 0; 
+        transform: translateY(30px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+    
+    .fade-in {
+      animation: fadeIn 1.2s ease forwards;
+    }
+    
     /* Image optimization styles */
-    .optimized-img {width: 400px;height: 300px;max-height: 600px    }
-    /* About section image */
-    .about img {max-width: 100%;height: auto;border-radius: 12px;}
-    /* Share section image */
-    .share img {max-width: 100%;height: auto;border-radius: 12px;}
+    .optimized-img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+    }
+    
     /* Low-quality image placeholders (LQIP) */
     .lazyload,
-    .lazyloading {opacity: 0.2;ransition: opacity 0.3s;}
-    .lazyloaded {opacity: 1;}
+    .lazyloading {
+      opacity: 0.2;
+      transition: opacity 0.5s;
+    }
+    
+    .lazyloaded {
+      opacity: 1;
+    }
+    
     /* Filter buttons for gallery */
-    .gallery-filters {display: flex;gap: 10px;margin-bottom: 20px;flex-wrap: wrap;}
-    .filter-btn {padding: 8px 16px;background: #f1f1f1;border: none;border-radius: 20px;cursor: pointer;transition: all 0.2s ease;}
+    .gallery-filters {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+      padding: 10px 20px;
+      background: #f1f1f1;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+    
     .filter-btn.active,
     .filter-btn:hover {
       background: var(--brand);
       color: white;
+      transform: translateY(-2px);
+    }
+    
+    /* Particle background for hero */
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
     }
   </style>
 </head>
 <body>
   <!-- Header -->
-  <header>
+  <header id="main-header">
     <div class="nav">
       <a class="logo" href="#home" aria-label="Home">
         <!-- Clean SVG cap logo -->
@@ -634,10 +1091,10 @@
         <a href="#home" class="active">Home</a>
         <a href="#about">About</a>
         <a href="#highlights">Highlights</a>
-        <a href="gallery.html">Gallery</a>
+        <a href="#gallery">Gallery</a>
         <a href="#share">Share</a>
-        <a href="support.html">Support</a>
-        <a href="contact.html">Contact</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
         <button class="cta-sign" onclick="openSign()">Sign In</button>
       </nav>
       <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" onclick="toggleDrawer()">
@@ -651,23 +1108,29 @@
     <a href="#home" onclick="closeDrawer()">Home</a>
     <a href="#about" onclick="closeDrawer()">About</a>
     <a href="#highlights" onclick="closeDrawer()">Highlights</a>
-    <a href="gallery.html" onclick="closeDrawer()">Gallery</a>
+    <a href="#gallery" onclick="closeDrawer()">Gallery</a>
     <a href="#share" onclick="closeDrawer()">Share</a>
-    <a href="support.html" onclick="closeDrawer()">support Us</a>
-    <a href="contact.html" onclick="closeDrawer()">Contact</a>
-    <button class="cta-sign" style="margin-top:16px" onclick="closeDrawer(); openSign()">Sign In</button>
+    <a href="#testimonials" onclick="closeDrawer()">Testimonials</a>
+    <a href="#contact" onclick="closeDrawer()">Contact</a>
+    <button class="cta-sign" style="margin-top:20px; width:100%" onclick="closeDrawer(); openSign()">Sign In</button>
   </aside>
   <div class="scrim" id="scrim" onclick="closeDrawer()"></div>
 
   <!-- Hero -->
   <section id="home" class="hero">
+    <div class="particles" id="particles"></div>
+    <div class="floating floating-1"></div>
+    <div class="floating floating-2"></div>
+    <div class="floating floating-3"></div>
     <div class="wrap">
-      <div class="eyebrow">CENTRAL COLLEGE MITYANA</div>
-      <h1 class="title fade-in">Relive the Magic of <span style="background:linear-gradient(45deg,#fff,#ffecf3); -webkit-background-clip:text; background-clip:text; color:transparent;">Prom Night 2024</span></h1>
-      <p class="subtitle fade-in">Red carpet arrivals, sparkling decor, epic dance floor moments, and memories we'll keep forever.</p>
-      <div class="btns">
-        <a class="btn primary" href="gallery.html">View Gallery</a>
-        <button class="btn ghost" onclick="openSign()">Share Memories</button>
+      <div class="hero-content">
+        <div class="eyebrow">CENTRAL COLLEGE MITYANA</div>
+        <h1 class="title fade-in">Relive the Magic of <span style="background:linear-gradient(45deg,#fff,#ffecf3); -webkit-background-clip:text; background-clip:text; color:transparent;">Prom Night 2024</span></h1>
+        <p class="subtitle fade-in">Red carpet arrivals, sparkling decor, epic dance floor moments, and memories we'll keep forever.</p>
+        <div class="btns">
+          <a class="btn primary" href="#gallery">View Gallery</a>
+          <button class="btn ghost" onclick="openSign()">Share Memories</button>
+        </div>
       </div>
     </div>
   </section>
@@ -680,9 +1143,11 @@
           <div class="kicker">About Prom Day</div>
           <h2 class="sec">Elegance, Friendship, and Unforgettable Moments</h2>
           <p class="muted">From the first flash on the red carpet to the last song from the DJ, Prom 2024 brought the class together in style. This page captures the story — your outfits, your smiles, and the energy that made the night special.</p>
-          <p class="small" style="margin-top:10px">Tip: Tap any image to view it large. Uploads are watermarked to protect your memories.</p>
+          <p class="small" style="margin-top:20px">Tip: Tap any image to view it large. Uploads are watermarked to protect your memories.</p>
         </div>
-        <img src="sd.jpg" loading="lazy" alt="Red carpet arrivals at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
+        <div>
+          <img src="https://images.unsplash.com/photo-1532635242-8e2e1e2f5c2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" loading="lazy" alt="Red carpet arrivals at Central College Mityana Prom 2024" class="about-img optimized-img" width="600" height="400">
+        </div>
       </div>
     </div>
   </section>
@@ -691,7 +1156,7 @@
   <section id="highlights">
     <div class="wrap highlights reveal">
       <h2 class="sec">Night Highlights</h2>
-      <div class="cards" style="margin-top:14px">
+      <div class="cards" style="margin-top:30px">
         <article class="card">
           <div class="pill">🎤 DJ Set</div>
           <h3>Dance Floor Vibes</h3>
@@ -716,7 +1181,7 @@
     </div>
   </section>
 
-  <!-- Gallery - UPDATED -->
+  <!-- Gallery -->
   <section id="gallery">
     <div class="wrap reveal">
       <div class="testimonials-header">
@@ -728,10 +1193,10 @@
           <button class="filter-btn" onclick="filterGallery('group')">Group Photos</button>
         </div>
       </div>
-      <div class="grid" style="margin-top:20px">
-        <!-- Sample shots with compressed WebP images -->
-        <a href="#" class="shot" data-big="70.jpg" onclick="openLightbox(event)" data-category="dance">
-          <img loading="lazy" src="70.jpg" alt="Dance floor at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
+      <div class="grid" style="margin-top:30px">
+        <!-- Sample shots with optimized images -->
+        <div class="shot" data-big="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" onclick="openLightbox(this)" data-category="dance">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Dance floor at Central College Mityana Prom 2024">
           <div class="shot-info">
             <h3 class="shot-title">Dance Floor Energy</h3>
             <p class="shot-desc">Students showing off their best moves to the DJ's beats</p>
@@ -740,9 +1205,9 @@
               <span class="wm">© Prom 2024</span>
             </div>
           </div>
-        </a>
-        <a href="#" class="shot" data-big="13.jpg" onclick="openLightbox(event)" data-category="group">
-          <img loading="lazy" src="13.jpg" alt="Group photo at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
+        </div>
+        <div class="shot" data-big="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" onclick="openLightbox(this)" data-category="group">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Group photo at Central College Mityana Prom 2024">
           <div class="shot-info">
             <h3 class="shot-title">Friends Forever</h3>
             <p class="shot-desc">Class of 2024 showing their strong bond</p>
@@ -751,9 +1216,9 @@
               <span class="wm">© Prom 2024</span>
             </div>
           </div>
-        </a>
-        <a href="#" class="shot" data-big="9.jpg" onclick="openLightbox(event)" data-category="red-carpet">
-          <img loading="lazy" src="100.jpg" alt="Students laughing at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
+        </div>
+        <div class="shot" data-big="https://images.unsplash.com/photo-1532635242-8e2e1e2f5c2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" onclick="openLightbox(this)" data-category="red-carpet">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1532635242-8e2e1e2f5c2a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Students laughing at Central College Mityana Prom 2024">
           <div class="shot-info">
             <h3 class="shot-title">Red Carpet Moments</h3>
             <p class="shot-desc">Stylish arrivals making a statement</p>
@@ -762,9 +1227,9 @@
               <span class="wm">© Prom 2024</span>
             </div>
           </div>
-        </a>
-        <a href="#" class="shot" data-big="534.jpg" onclick="openLightbox(event)" data-category="dance">
-          <img loading="lazy" src="169.jpg" alt="Award moment at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
+        </div>
+        <div class="shot" data-big="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" onclick="openLightbox(this)" data-category="dance">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Award moment at Central College Mityana Prom 2024">
           <div class="shot-info">
             <h3 class="shot-title">Award Celebration</h3>
             <p class="shot-desc">Recognizing outstanding students of the year</p>
@@ -773,10 +1238,10 @@
               <span class="wm">© Prom 2024</span>
             </div>
           </div>
-        </a>
+        </div>
         <!-- Additional gallery items -->
-        <a href="#" class="shot" data-big="47.jpg" onclick="openLightbox(event)" data-category="group">
-          <img loading="lazy" src="47.jpg" alt="Students posing at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
+        <div class="shot" data-big="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" onclick="openLightbox(this)" data-category="group">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Students posing at Central College Mityana Prom 2024">
           <div class="shot-info">
             <h3 class="shot-title">Best Friends</h3>
             <p class="shot-desc">Creating memories that will last a lifetime</p>
@@ -785,9 +1250,9 @@
               <span class="wm">© Prom 2024</span>
             </div>
           </div>
-        </a>
-        <a href="#" class="shot" data-big="608.jpg" onclick="openLightbox(event)" data-category="red-carpet">
-          <img loading="lazy" src="660.jpg" alt="Elegant dress at Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
+        </div>
+        <div class="shot" data-big="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" onclick="openLightbox(this)" data-category="red-carpet">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Elegant dress at Central College Mityana Prom 2024">
           <div class="shot-info">
             <h3 class="shot-title">Elegant Style</h3>
             <p class="shot-desc">Showcasing fashion and sophistication</p>
@@ -796,15 +1261,15 @@
               <span class="wm">© Prom 2024</span>
             </div>
           </div>
-        </a>
+        </div>
       </div>
-      <p class="small" style="margin-top:20px; text-align:center">More photos coming soon. For faster loads, thumbnails are optimized and full images open in a lightbox.</p>
+      <p class="small" style="margin-top:30px; text-align:center">More photos coming soon. For faster loads, thumbnails are optimized and full images open in a lightbox.</p>
     </div>
   </section>
 
-  <!-- Lightbox - UPDATED -->
+  <!-- Lightbox -->
   <div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
-    <button class="close" onclick="closeLightbox()">✕ Close</button>
+    <button class="close" onclick="closeLightbox()">✕</button>
     <div class="lightbox-content">
       <img alt="Preview image from Central College Mityana Prom 2024">
     </div>
@@ -818,14 +1283,14 @@
       <div class="panel">
         <div>
           <p class="muted">Sign in with your email to save or share images.</p>
-          <div class="well" style="margin-top:10px">
+          <div class="well" style="margin-top:20px">
             <div class="form-row">
               <input type="email" id="email" placeholder="Your email (e.g. charlie02056@gmail.com)" autocomplete="email">
               <button class="cta-sign" onclick="fakeSignIn()">Sign In</button>
             </div>
-            <p id="signin-status" class="small" style="margin:8px 0 0"></p>
+            <p id="signin-status" class="small" style="margin:12px 0 0"></p>
           </div>
-          <div id="uploadArea" style="display:none; margin-top:14px">
+          <div id="uploadArea" style="display:none; margin-top:20px">
             <div class="form-row">
               <input type="text" id="wmText" placeholder="Watermark text (default: your email)">
             </div>
@@ -834,20 +1299,22 @@
               <button class="btn primary" onclick="applyWatermark()">Apply Watermark</button>
             </div>
             <p class="small">After processing, right-click or long-press the preview to save, or use the Download button.</p>
-            <div id="previewWrap" style="margin-top:10px; display:none">
+            <div id="previewWrap" style="margin-top:20px; display:none">
               <canvas id="canvas" style="max-width:100%; border:1px solid #eee; border-radius:10px"></canvas>
-              <div class="inline" style="margin-top:10px">
+              <div class="inline" style="margin-top:15px">
                 <button class="btn" onclick="downloadCanvas()">Download Watermarked Image</button>
               </div>
             </div>
           </div>
         </div>
-        <img src="132 (1).jpg" loading="lazy" alt="Sharing memories from Central College Mityana Prom 2024" class="optimized-img" width="400" height="300">
+        <div>
+          <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" loading="lazy" alt="Sharing memories from Central College Mityana Prom 2024" class="optimized-img" width="500" height="350">
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Testimonials - UPDATED -->
+  <!-- Testimonials -->
   <section id="testimonials">
     <div class="wrap reveal">
       <div class="testimonials-header">
@@ -858,7 +1325,7 @@
         <article class="quote">
           <p class="quote-text">"The music, the outfits — everything was perfect. Best night of the year! I'll never forget dancing with my friends until we couldn't stand anymore."</p>
           <div class="who">
-            <img class="avatar" loading="lazy" src="690.jpg" alt="Aisha, S.6 student" width="40" height="40">
+            <img class="avatar" loading="lazy" src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Aisha, S.6 student" width="60" height="60">
             <div class="who-details">
               <span class="who-name">Aisha M.</span>
               <span class="who-role">S.6 Student</span>
@@ -869,7 +1336,7 @@
         <article class="quote">
           <p class="quote-text">"Photo booth with my crew was hilarious — memories secured! We must have taken like 50 different photos with all the silly props they had."</p>
           <div class="who">
-            <img class="avatar" loading="lazy" src="306.jpg" alt="Brian, S.4 student" width="40" height="40">
+            <img class="avatar" loading="lazy" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Brian, S.4 student" width="60" height="60">
             <div class="who-details">
               <span class="who-name">Brian K.</span>
               <span class="who-role">S.4 Student</span>
@@ -880,7 +1347,7 @@
         <article class="quote">
           <p class="quote-text">"The red carpet felt like a movie premiere. 10/10 experience. I felt like a celebrity with all the cameras flashing as I walked in with my date."</p>
           <div class="who">
-            <img class="avatar" loading="lazy" src="408.jpg" alt="Mercy, S.6 student" width="40" height="40">
+            <img class="avatar" loading="lazy" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Mercy, S.6 student" width="60" height="60">
             <div class="who-details">
               <span class="who-name">Mercy N.</span>
               <span class="who-role">S.6 Student</span>
@@ -891,7 +1358,7 @@
         <article class="quote">
           <p class="quote-text">"The food was amazing and the decorations transformed our hall into something magical. Huge thanks to the organizing committee!"</p>
           <div class="who">
-            <img class="avatar" loading="lazy" src="67.jpg" alt="David, S.5 student" width="40" height="40">
+            <img class="avatar" loading="lazy" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="David, S.5 student" width="60" height="60">
             <div class="who-details">
               <span class="who-name">David T.</span>
               <span class="who-role">S.5 Student</span>
@@ -900,7 +1367,7 @@
           </div>
         </article>
       </div>
-      <p class="small" style="text-align:center; margin-top:8px">Swipe sideways on mobile to see more.</p>
+      <p class="small" style="text-align:center; margin-top:15px">Swipe sideways on mobile to see more.</p>
     </div>
   </section>
 
@@ -908,8 +1375,8 @@
   <section id="contact">
     <div class="wrap contact reveal">
       <h2 class="sec" style="color:#fff">Get in Touch</h2>
-      <p>For photo inquiries or to request removals/credits:</p>
-      <p><strong>Email:</strong>charlie02056@gmail.com • <strong>WhatsApp:</strong> <a href="https://wa.me/256700955563" style="color:#fff; text-decoration:underline">+256 700 955563</a></p>
+      <p style="margin-bottom:10px">For photo inquiries or to request removals/credits:</p>
+      <p style="margin-bottom:20px"><strong>Email:</strong> charlie02056@gmail.com • <strong>WhatsApp:</strong> <a href="https://wa.me/256700955563" style="color:#fff; text-decoration:underline">+256 700 955563</a></p>
       <div class="socials">
         <a href="#" aria-label="Facebook">📘</a>
         <a href="#" aria-label="Instagram">📷</a>
@@ -921,11 +1388,11 @@
 
   <footer>
     <div class="wrap">
-      <div style="font-weight:700; color:#e91e63">Central College Mityana Prom Memories</div>
-      <div style="margin-top:10px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap">
-        <a href="#home">Home</a>•<a href="gallery.html">Gallery</a>•<a href="about.html">About</a>•<a href="support.htm">Support</a>•<a href="#">Privacy</a>
+      <div style="font-weight:700; color:#e91e63; font-size:1.2rem">Central College Mityana Prom Memories</div>
+      <div style="margin-top:15px; display:flex; gap:16px; justify-content:center; flex-wrap:wrap">
+        <a href="#home">Home</a>•<a href="#gallery">Gallery</a>•<a href="#about">About</a>•<a href="#share">Share</a>•<a href="#">Privacy</a>
       </div>
-      <div style="margin-top:8px">© 2025 Central College Mityana Prom. All rights reserved.</div>
+      <div style="margin-top:12px">© 2024 Central College Mityana Prom. All rights reserved.</div>
     </div>
   </footer>
 
@@ -933,14 +1400,14 @@
   <button id="scrollTop" aria-label="Scroll to top">↑</button>
 
   <!-- Sign-in Modal (lightweight) -->
-  <dialog id="signinModal" style="border:none; border-radius:16px; padding:0; max-width:420px; width:92vw;">
-    <div style="padding:22px 22px 18px">
-      <h3 style="margin:0 0 8px">Sign in to Share Images</h3>
-      <p class="small" style="margin:0 0 12px">Enter your email to continue.</p>
+  <dialog id="signinModal" style="border:none; border-radius:20px; padding:0; max-width:450px; width:92vw; box-shadow:var(--shadow-lg);">
+    <div style="padding:30px 30px 25px">
+      <h3 style="margin:0 0 12px; font-size:1.4rem">Sign in to Share Images</h3>
+      <p class="small" style="margin:0 0 20px">Enter your email to continue.</p>
       <div class="form-row">
-        <input type="email" id="emailModal" placeholder="you@example.com">
+        <input type="email" id="emailModal" placeholder="you@example.com" style="margin-bottom:10px">
       </div>
-      <div class="inline" style="margin-top:12px">
+      <div class="inline" style="margin-top:20px">
         <button class="cta-sign" onclick="applyModalSign()">Continue</button>
         <button class="btn" onclick="closeSign()">Cancel</button>
       </div>
@@ -948,13 +1415,13 @@
   </dialog>
 
   <script>
-    /* ======= Mobile drawer ======= */
+    /* ======= Mobile drawer with blur effect ======= */
     const drawer = document.getElementById('drawer');
     const scrim = document.getElementById('scrim');
     const burger = document.getElementById('burger');
     
     function toggleDrawer() {
-      const open = drawer.style.display === 'block';
+      const open = drawer.classList.contains('active');
       if (open) {
         closeDrawer();
       } else {
@@ -964,17 +1431,40 @@
     
     function openDrawer() {
       drawer.style.display = 'block';
-      scrim.style.display = 'block';
+      setTimeout(() => {
+        drawer.classList.add('active');
+        scrim.style.display = 'block';
+        setTimeout(() => {
+          scrim.classList.add('active');
+        }, 10);
+      }, 10);
       document.body.classList.add('noscr');
+      burger.classList.add('active');
       burger.setAttribute('aria-expanded', 'true');
     }
     
     function closeDrawer() {
-      drawer.style.display = 'none';
-      scrim.style.display = 'none';
+      drawer.classList.remove('active');
+      scrim.classList.remove('active');
+      setTimeout(() => {
+        drawer.style.display = 'none';
+        scrim.style.display = 'none';
+      }, 500);
       document.body.classList.remove('noscr');
+      burger.classList.remove('active');
       burger.setAttribute('aria-expanded', 'false');
     }
+    
+    /* ======= Header scroll effect ======= */
+    const header = document.getElementById('main-header');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
     
     /* ======= Smooth scroll with header offset ======= */
     document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -986,11 +1476,11 @@
         if (!el) return;
         
         e.preventDefault();
-        const y = el.getBoundingClientRect().top + window.pageYOffset - 70; // header offset
+        const y = el.getBoundingClientRect().top + window.pageYOffset - 80; // header offset
         window.scrollTo({top: y, behavior: 'smooth'});
         
         // Close mobile drawer if open
-        if (drawer.style.display === 'block') {
+        if (drawer.classList.contains('active')) {
           closeDrawer();
         }
       });
@@ -1024,20 +1514,18 @@
           io2.unobserve(ent.target);
         }
       });
-    }, {threshold: .12});
+    }, {threshold: .1});
     
     reveals.forEach(el => io2.observe(el));
     
-    /* ======= Lightbox - UPDATED ======= */
+    /* ======= Lightbox ======= */
     const lb = document.getElementById('lightbox');
     const lbCaption = document.getElementById('lightbox-caption');
     
-    function openLightbox(e) {
-      e.preventDefault();
-      const link = e.currentTarget;
-      const big = link.getAttribute('data-big');
-      const title = link.querySelector('.shot-title')?.textContent || '';
-      const desc = link.querySelector('.shot-desc')?.textContent || '';
+    function openLightbox(el) {
+      const big = el.getAttribute('data-big');
+      const title = el.querySelector('.shot-title')?.textContent || '';
+      const desc = el.querySelector('.shot-desc')?.textContent || '';
       
       lb.querySelector('img').src = big;
       lbCaption.textContent = `${title} - ${desc}`;
@@ -1048,8 +1536,10 @@
     function closeLightbox() {
       lb.classList.remove('active');
       document.body.classList.remove('noscr');
-      lb.querySelector('img').src = '';
-      lbCaption.textContent = '';
+      setTimeout(() => {
+        lb.querySelector('img').src = '';
+        lbCaption.textContent = '';
+      }, 300);
     }
     
     lb.addEventListener('click', (e) => {
@@ -1063,15 +1553,27 @@
       
       // Update active button
       filterBtns.forEach(btn => {
-        btn.classList.toggle('active', btn.textContent.toLowerCase().includes(category));
+        const btnText = btn.textContent.toLowerCase().replace(' ', '-');
+        btn.classList.toggle('active', category === 'all' ? 
+          btn.textContent.toLowerCase() === 'all' : 
+          btnText === category
+        );
       });
       
       // Filter shots
       shots.forEach(shot => {
         if (category === 'all' || shot.getAttribute('data-category') === category) {
           shot.style.display = 'block';
+          setTimeout(() => {
+            shot.style.opacity = '1';
+            shot.style.transform = 'translateY(0)';
+          }, 10);
         } else {
-          shot.style.display = 'none';
+          shot.style.opacity = '0';
+          shot.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            shot.style.display = 'none';
+          }, 300);
         }
       });
     }
@@ -1221,6 +1723,34 @@
       });
     });
     
+    /* ======= Particle background for hero ======= */
+    function createParticles() {
+      const container = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random properties
+        const size = Math.random() * 5 + 2;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const opacity = Math.random() * 0.5 + 0.1;
+        const animationDelay = Math.random() * 20;
+        const animationDuration = Math.random() * 10 + 10;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}%`;
+        particle.style.top = `${posY}%`;
+        particle.style.opacity = opacity;
+        particle.style.animation = `float ${animationDuration}s ease-in-out ${animationDelay}s infinite`;
+        
+        container.appendChild(particle);
+      }
+    }
+    
     // Initialize page with small animations
     document.addEventListener('DOMContentLoaded', () => {
       // Add loading="lazy" to all images that don't have it
@@ -1228,11 +1758,8 @@
         img.setAttribute('loading', 'lazy');
       });
       
-      // Preload critical images
-      const criticalImages = document.querySelectorAll('.hero, .logo');
-      criticalImages.forEach(img => {
-        img.removeAttribute('loading');
-      });
+      // Create particle background
+      createParticles();
       
       // Add width and height attributes to prevent layout shifts
       document.querySelectorAll('img').forEach(img => {
@@ -1246,20 +1773,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
