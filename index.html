@@ -1070,6 +1070,23 @@
       background: rgba(255,255,255,0.5);
       border-radius: 50%;
     }
+    .image-container {
+    width: 100%;
+    max-width: 600px;       /* Adjust max image width */
+    margin: 0 auto;         /* Center it */
+    border-radius: 20px;    /* Rounded corners of the white box */
+    padding: 15px;          /* Space inside the box */
+    background: white;      /* White background like in screenshot */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Soft shadow */
+}
+
+.image-container img {
+    width: 100%;            /* Makes image responsive */
+    height: auto;           /* Keeps aspect ratio */
+    border-radius: 20px;    /* Rounds image corners */
+    display: block;
+}
+
   </style>
 </head>
 <body>
@@ -1253,7 +1270,7 @@
             </div>
           </div>
         </div>
-        <div class="optimized-img" data-big="608.jpg" onclick="openLightbox(this)" data-category="red-carpet">
+        <div class="image-container" data-big="608.jpg" onclick="openLightbox(this)" data-category="red-carpet">
           <img loading="lazy" src="608.jpg" alt="Elegant dress at Central College Mityana Prom 2024" class="optimised-img" width="500" height="350">
           <div class="shot-info">
             <h3 class="shot-title">Elegant Style</h3>
@@ -1265,8 +1282,8 @@
           </div>
         </div>
         <!-- Additional images from the 1-800 range -->
-        <div class="optimised-img" data-big="222.jpg" onclick="openLightbox(this)" data-category="dance">
-          <img loading="lazy" src="222.jpg" alt="Prom night celebration at Central College Mityana" class="optimized-img" width="500" height="350">
+        <div class="image-container" data-big="222.jpg" onclick="openLightbox(this)" data-category="dance">
+          <img loading="lazy" src="222.jpg" alt="Prom night celebration at Central College">
           <div class="shot-info">
             <h3 class="shot-title">Celebration Time</h3>
             <p class="shot-desc">Students enjoying the festive atmosphere</p>
@@ -1276,8 +1293,8 @@
             </div>
           </div>
         </div>
-        <div class="optimized-img" data-big="345.jpg" onclick="openLightbox(this)" data-category="group">
-          <img loading="lazy" src="35.jpg" alt="Group of friends at Central College Mityana Prom" class="optimised-img" width="500" height="350">
+        <div class="image-container" data-big="345.jpg" onclick="openLightbox(this)" data-category="group">
+          <img loading="lazy" src="35.jpg" alt="Group of friends at Central College Mityana Prom">
           <div class="shot-info">
             <h3 class="shot-title">Memorable Moments</h3>
             <p class="shot-desc">Friends sharing laughs and creating memories</p>
@@ -1807,5 +1824,6 @@
   </script>
 </body>
 </html>
+
 
 
