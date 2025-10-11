@@ -6,112 +6,331 @@
   <title>About - Central College Mityana</title>
   <style>
     :root {
-      --brand: #e91e63;
-      --brand2: #ff4081;
-      --dark: #333;
-      --light: #f5f5f5;
-      --text: #444;
+      --brand: #8A4FFF;
+      --brand2: #B380FF;
+      --brand-dark: #6A30E0;
+      --accent: #FF6B9D;
+      --accent2: #FF4081;
+      --ink: #1A1A2E;
+      --muted: #5D5D7E;
+      --light: #F8F9FF;
+      --bg: #FAFAFF;
+      --panel: #FFFFFF;
+      --radius: 16px;
+      --radius-lg: 24px;
+      --shadow: 0 10px 24px rgba(138, 79, 255, 0.08);
+      --shadow-lg: 0 20px 40px rgba(138, 79, 255, 0.12);
+      --header-h: 80px;
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; color: #444; }
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    body { 
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; 
+      background: var(--bg); 
+      color: var(--ink); 
+      line-height: 1.6;
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      line-height: 1.2;
+    }
 
     /* Header */
     header {
-      position: sticky; top: 0; z-index: 1000;
+      position: sticky; 
+      top: 0; 
+      z-index: 1000;
       background: rgba(255,255,255,.95);
-      backdrop-filter: saturate(140%) blur(8px);
-      border-bottom: 1px solid #eee;
+      backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,.8);
+      transition: var(--transition);
     }
+    
+    header.scrolled {
+      background: rgba(255,255,255,.98);
+      box-shadow: 0 5px 20px rgba(0,0,0,.08);
+    }
+    
     .nav {
-      max-width: 1200px; margin: 0 auto; padding: 0 20px;
-      height: 60px; display: flex; align-items: center; justify-content: space-between;
+      max-width: 1400px; 
+      margin: 0 auto; 
+      padding: 0 30px;
+      height: var(--header-h); 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between;
     }
-    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--brand); }
-    .links { display: flex; align-items: center; gap: 22px; }
-    .links a { padding: 10px 6px; font-weight: 500; color: #333; position: relative; text-decoration: none; }
+    
+    .logo { 
+      display: flex; 
+      align-items: center; 
+      gap: 12px; 
+      font-weight: 800; 
+      color: var(--brand); 
+      font-size: 1.25rem;
+    }
+    
+    .logo svg {
+      width: 36px;
+      height: 36px;
+      transition: var(--transition);
+    }
+    
+    .logo:hover svg {
+      transform: rotate(-10deg) scale(1.1);
+    }
+    
+    .links { 
+      display: flex; 
+      align-items: center; 
+      gap: 28px; 
+    }
+    
+    .links a { 
+      padding: 10px 6px; 
+      font-weight: 500; 
+      color: #333; 
+      position: relative; 
+      text-decoration: none; 
+      transition: var(--transition);
+    }
+    
+    .links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 4px;
+      height: 2px;
+      width: 0;
+      background: linear-gradient(90deg, var(--brand), var(--accent));
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    
     .links a.active::after,
     .links a:hover::after {
-      content: ""; position: absolute; left: 0; bottom: 4px; height: 2px; width: 100%;
-      background: linear-gradient(90deg, var(--brand), var(--brand2)); border-radius: 2px;
+      width: 100%;
     }
+    
     .cta-sign {
-      margin-left: 6px; border: 0; padding: 10px 16px; border-radius: 999px;
-      cursor: pointer; background: linear-gradient(45deg, var(--brand), var(--brand2));
-      color: #fff; font-weight: 700; box-shadow: 0 6px 14px rgba(233,30,99,.2);
-      transition: transform 0.2s, box-shadow 0.2s;
+      margin-left: 6px; 
+      border: 0; 
+      padding: 12px 24px; 
+      border-radius: 999px;
+      cursor: pointer; 
+      background: linear-gradient(45deg, var(--brand), var(--accent));
+      color: #fff; 
+      font-weight: 700; 
+      box-shadow: 0 6px 14px rgba(138, 79, 255, 0.2);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
     }
-    .cta-sign:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(233,30,99,.3); }
+    
+    .cta-sign::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: 0.5s;
+    }
+    
+    .cta-sign:hover::before {
+      left: 100%;
+    }
+    
+    .cta-sign:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 10px 20px rgba(138, 79, 255, 0.3); 
+    }
 
-    /* Mobile drawer */
-    .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 5px; }
-    .burger span { width: 26px; height: 3px; background: #333; border-radius: 3px; transition: .25s; }
-    .drawer {
-      display: none; position: fixed; inset: 0 0 0 auto; width: min(78vw, 320px);
-      height: 100vh; background: #fff; padding: 90px 24px 24px; box-shadow: -12px 0 30px rgba(0,0,0,.12); z-index: 1001;
+    /* Mobile Navigation */
+    .burger { 
+      display: none; 
+      flex-direction: column; 
+      gap: 5px; 
+      cursor: pointer; 
+      background: none; 
+      border: none; 
+      padding: 8px; 
+      z-index: 1002;
+      position: relative;
     }
-    .drawer a { display: block; padding: 14px 0; border-bottom: 1px solid #eee; color: #333; text-decoration: none; }
-    .scrim { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 1000; }
+    
+    .burger span { 
+      width: 26px; 
+      height: 3px; 
+      background: #333; 
+      border-radius: 3px; 
+      transition: var(--transition);
+      transform-origin: center;
+    }
+    
+    .burger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(6px, 6px);
+    }
+    
+    .burger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .burger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+    
+    .drawer {
+      display: none; 
+      position: fixed; 
+      inset: 0 0 0 auto; 
+      width: min(85vw, 380px);
+      height: 100vh; 
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      padding: 100px 30px 40px; 
+      box-shadow: -12px 0 40px rgba(0,0,0,.15); 
+      z-index: 1001;
+      transform: translateX(100%);
+      transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+    
+    .drawer.active {
+      transform: translateX(0);
+    }
+    
+    .drawer a { 
+      display: block; 
+      padding: 16px 0; 
+      border-bottom: 1px solid rgba(0,0,0,.08); 
+      color: #333; 
+      text-decoration: none; 
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+    
+    .drawer a:hover {
+      color: var(--brand);
+      padding-left: 10px;
+    }
+    
+    .scrim { 
+      display: none; 
+      position: fixed; 
+      inset: 0; 
+      background: rgba(0,0,0,.5); 
+      backdrop-filter: blur(5px);
+      z-index: 1000; 
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .scrim.active {
+      opacity: 1;
+    }
+    
     .noscr { overflow: hidden; }
 
-    @media (max-width:900px) {
+    @media (max-width:1024px) {
       .links { display: none; }
       .burger { display: flex; }
     }
 
     /* About Page Styles */
     .about-hero {
-      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('sd.jpg');
-      background-size: cover;
-      background-position: center;
+      margin-top: var(--header-h);
+      padding: 120px 20px;
+      background: 
+        linear-gradient(135deg, rgba(138, 79, 255, 0.85), rgba(255, 107, 157, 0.7)), 
+        url('sd.jpg') center/cover no-repeat;
       color: white;
-      padding: 100px 20px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+      opacity: 0.3;
+    }
+    
+    .about-hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
     
     .about-hero h1 {
-      font-size: 3rem;
+      font-size: clamp(2.5rem, 5vw, 4rem);
       margin-bottom: 20px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
     
     .about-hero p {
-      font-size: 1.2rem;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
       max-width: 800px;
       margin: 0 auto;
+      opacity: 0.95;
     }
     
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
-      padding: 40px 20px;
+      padding: clamp(60px, 8vw, 100px) 20px;
     }
     
     .section-title {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 50px;
       color: var(--brand);
-      font-size: 2.2rem;
+      font-size: clamp(2rem, 4vw, 3rem);
     }
     
     .history-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 50px;
       align-items: center;
-      margin-bottom: 60px;
+      margin-bottom: 80px;
     }
     
     .history-content {
-      flex: 1;
-      min-width: 300px;
+      padding-right: 20px;
+    }
+    
+    .history-content p {
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--muted);
     }
     
     .history-image {
-      flex: 1;
-      min-width: 300px;
-      border-radius: 10px;
+      border-radius: var(--radius-lg);
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      box-shadow: var(--shadow-lg);
+      transition: var(--transition);
+    }
+    
+    .history-image:hover {
+      transform: translateY(-5px);
     }
     
     .history-image img {
@@ -121,11 +340,11 @@
     }
     
     .mission-vision {
-      background: white;
-      padding: 60px 20px;
-      border-radius: 10px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-      margin-bottom: 60px;
+      background: var(--panel);
+      padding: 60px 40px;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      margin-bottom: 80px;
     }
     
     .mv-grid {
@@ -136,158 +355,300 @@
     
     .mv-card {
       background: var(--light);
-      padding: 30px;
-      border-radius: 10px;
+      padding: 40px 30px;
+      border-radius: var(--radius);
       text-align: center;
-      transition: transform 0.3s;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .mv-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--brand), var(--accent));
+      transition: var(--transition);
     }
     
     .mv-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .mv-card:hover::before {
+      width: 8px;
     }
     
     .mv-card h3 {
       color: var(--brand);
-      margin-bottom: 15px;
+      margin-bottom: 20px;
+      font-size: 1.5rem;
     }
     
     .mv-icon {
-      font-size: 2.5rem;
-      color: var(--brand);
-      margin-bottom: 15px;
+      font-size: 3rem;
+      margin-bottom: 20px;
     }
     
     .team-section {
-      margin-bottom: 60px;
+      margin-bottom: 80px;
     }
     
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 30px;
     }
     
     .team-member {
-      background: white;
-      border-radius: 10px;
+      background: var(--panel);
+      border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
       text-align: center;
+    }
+    
+    .team-member:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
     }
     
     .team-img {
       width: 100%;
-      height: 250px;
+      height: 300px;
       object-fit: cover;
+      transition: transform .6s ease;
+    }
+    
+    .team-member:hover .team-img {
+      transform: scale(1.05);
     }
     
     .team-info {
-      padding: 20px;
+      padding: 25px 20px;
     }
     
     .team-info h3 {
       color: var(--brand);
-      margin-bottom: 5px;
+      margin-bottom: 8px;
+      font-size: 1.3rem;
     }
     
     .team-info p {
-      color: var(--text);
-      margin-bottom: 15px;
+      color: var(--muted);
+      margin-bottom: 5px;
     }
     
     .prom-details {
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      background: linear-gradient(135deg, var(--brand2), var(--brand));
       color: white;
-      padding: 60px 20px;
-      border-radius: 10px;
-      margin-bottom: 60px;
+      padding: 60px 40px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .prom-details::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
     
     .prom-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 30px;
+      position: relative;
+      z-index: 1;
     }
     
     .prom-card {
       background: rgba(255,255,255,0.1);
       padding: 30px;
-      border-radius: 10px;
+      border-radius: var(--radius);
       text-align: center;
       backdrop-filter: blur(10px);
+      transition: var(--transition);
+    }
+    
+    .prom-card:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-5px);
     }
     
     .prom-card h3 {
       margin-bottom: 15px;
+      font-size: 1.4rem;
     }
     
     .stats-section {
-      margin-bottom: 60px;
+      margin-bottom: 80px;
     }
     
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+      gap: 25px;
     }
     
     .stat-card {
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
+      background: var(--panel);
+      padding: 40px 20px;
+      border-radius: var(--radius);
       text-align: center;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--brand), var(--accent));
+      transition: var(--transition);
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .stat-card:hover::before {
+      height: 8px;
     }
     
     .stat-number {
-      font-size: 2.5rem;
+      font-size: 3rem;
       font-weight: bold;
       color: var(--brand);
       margin-bottom: 10px;
     }
     
     .stat-label {
-      color: var(--text);
+      color: var(--muted);
+      font-size: 1.1rem;
     }
     
     .cta-section {
       background: var(--light);
-      padding: 80px 20px;
+      padding: 80px 40px;
       text-align: center;
-      border-radius: 10px;
+      border-radius: var(--radius-lg);
       margin-bottom: 60px;
+      box-shadow: var(--shadow);
     }
     
     .cta-section h2 {
       color: var(--brand);
       margin-bottom: 20px;
+      font-size: 2.5rem;
     }
     
     .cta-section p {
       max-width: 700px;
       margin: 0 auto 30px;
+      font-size: 1.2rem;
+      color: var(--muted);
     }
     
     /* Footer */
-    footer { padding: 28px 20px; text-align: center; color: #888; background: #fff; }
-    footer a { color: #888; text-decoration: none; margin: 0 4px; }
-    footer a:hover { color: var(--brand); }
+    footer { 
+      padding: 40px 20px; 
+      text-align: center; 
+      color: #888; 
+      background: #fff; 
+    }
+    
+    footer a { 
+      color: #888; 
+      text-decoration: none; 
+      margin: 0 4px; 
+      transition: var(--transition);
+    }
+    
+    footer a:hover { 
+      color: var(--brand); 
+    }
 
     /* Scroll to top */
     #scrollTop {
-      position: fixed; bottom: 24px; right: 24px; display: none; width: 50px; height: 50px; border-radius: 50%; border: none;
-      background: var(--brand); color: white; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.2); z-index: 999;
-      transition: opacity 0.3s, transform 0.3s;
+      position: fixed; 
+      bottom: 30px; 
+      right: 30px; 
+      display: none; 
+      width: 56px; 
+      height: 56px; 
+      border-radius: 50%; 
+      border: none;
+      background: linear-gradient(45deg, var(--brand), var(--accent)); 
+      color: white; 
+      font-size: 1.3rem; 
+      cursor: pointer; 
+      box-shadow: 0 6px 20px rgba(0,0,0,.2); 
+      z-index: 999;
+      transition: var(--transition);
     }
-    #scrollTop:hover { transform: translateY(-3px); background: var(--brand2); }
+    
+    #scrollTop:hover { 
+      transform: translateY(-5px) scale(1.1); 
+      box-shadow: 0 10px 25px rgba(0,0,0,.3); 
+    }
 
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .history-section {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .history-content {
+        padding-right: 0;
+      }
+    }
+
+    /* Reveal on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all .8s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+    }
+    
+    .reveal.show {
+      opacity: 1;
+      transform: none;
+    }
   </style>
 </head>
 <body>
-  <header>
+  <header id="main-header">
     <div class="nav">
       <a class="logo" href="home.html" aria-label="Home">
-        Central College Mityana • Prom 2024
+        <!-- Clean SVG cap logo -->
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2L2 7l10 5 8-4.1V14h2V7L12 2Z" fill="url(#g)"/>
+          <path d="M6 10v4c0 2.2 4 4 6 4s6-1.8 6-4v-4" stroke="#8A4FFF" stroke-width="1.4" fill="none" />
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="24" y2="24">
+              <stop stop-color="#8A4FFF"/><stop offset="1" stop-color="#B380FF"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        Central College Mityana • 2024
       </a>
       <nav class="links">
         <a href="home.html">Home</a>
@@ -314,27 +675,29 @@
     <a href="#share" onclick="closeDrawer()">Share</a>
     <a href="support.html" onclick="closeDrawer()">Support</a>
     <a href="contact.html" onclick="closeDrawer()">Contact</a>
-    <button class="cta-sign" style="margin-top:16px" onclick="closeDrawer(); openSign()">Sign In</button>
+    <button class="cta-sign" style="margin-top:20px; width:100%" onclick="closeDrawer(); openSign()">Sign In</button>
   </aside>
   <div class="scrim" id="scrim" onclick="closeDrawer()"></div>
 
   <!-- Hero Section -->
   <section class="about-hero">
-    <h1>About Central College Mityana</h1>
-    <p>Excellence in Education Since 1995 • Shaping Future Leaders</p>
+    <div class="about-hero-content">
+      <h1>About Central College Mityana</h1>
+      <p>Excellence in Education Since 1995 • Shaping Future Leaders</p>
+    </div>
   </section>
 
   <!-- History Section -->
   <section class="container">
-    <h2 class="section-title">Our History</h2>
+    <h2 class="section-title reveal">Our History</h2>
     <div class="history-section">
-      <div class="history-content">
+      <div class="history-content reveal">
         <p>Founded in 1995, Central College Mityana has established itself as a premier institution of learning in the heart of Uganda. What began as a small community school has grown into a respected educational institution known for academic excellence and character development.</p>
         <p>Over the decades, we have maintained our commitment to providing quality education that combines traditional values with modern teaching methodologies. Our alumni network includes leaders in various fields across Uganda and beyond.</p>
         <p>The 2024 Prom represented another milestone in our rich history, celebrating the achievements of our students and creating lasting memories for the graduating class.</p>
       </div>
-      <div class="history-image">
-       <img src="" alt="Central College Mityana Campus">
+      <div class="history-image reveal">
+        <img src="sd.jpg" alt="Central College Mityana Campus" loading="lazy">
       </div>
     </div>
   </section>
@@ -342,19 +705,19 @@
   <!-- Mission & Vision -->
   <section class="container">
     <div class="mission-vision">
-      <h2 class="section-title">Our Mission & Vision</h2>
+      <h2 class="section-title reveal">Our Mission & Vision</h2>
       <div class="mv-grid">
-        <div class="mv-card">
+        <div class="mv-card reveal">
           <div class="mv-icon">🎯</div>
           <h3>Our Mission</h3>
           <p>To provide a holistic education that develops students academically, socially, and morally, preparing them to become responsible citizens and future leaders.</p>
         </div>
-        <div class="mv-card">
+        <div class="mv-card reveal">
           <div class="mv-icon">👁️</div>
           <h3>Our Vision</h3>
           <p>To be a center of academic excellence that nurtures talent, fosters innovation, and produces well-rounded individuals ready to contribute to society.</p>
         </div>
-        <div class="mv-card">
+        <div class="mv-card reveal">
           <div class="mv-icon">💎</div>
           <h3>Our Values</h3>
           <p>Integrity, Excellence, Respect, Responsibility, and Community. These core values guide everything we do at Central College Mityana.</p>
@@ -366,19 +729,19 @@
   <!-- Prom Details -->
   <section class="container">
     <div class="prom-details">
-      <h2 class="section-title" style="color: white;">Prom 2024B Details</h2>
+      <h2 class="section-title reveal" style="color: white;">Prom 2024 Details</h2>
       <div class="prom-grid">
-        <div class="prom-card">
+        <div class="prom-card reveal">
           <h3>Date & Time</h3>
           <p>October 7, 2024</p>
           <p>1:00 PM - Midnight</p>
         </div>
-        <div class="prom-card">
+        <div class="prom-card reveal">
           <h3>Venue</h3>
           <p>College Main Hall</p>
           <p>Central College Mityana Campus</p>
         </div>
-        <div class="prom-card">
+        <div class="prom-card reveal">
           <h3>Theme</h3>
           <p>"Starry Night of Elegance"</p>
           <p>Formal Attire</p>
@@ -390,34 +753,34 @@
   <!-- Team Section -->
   <section class="container">
     <div class="team-section">
-      <h2 class="section-title">Prom Organizing Committee</h2>
+      <h2 class="section-title reveal">Prom Organizing Committee</h2>
       <div class="team-grid">
-        <div class="team-member">
-          <img src="mm.jpg" alt="Head Teacher" class="team-img">
+        <div class="team-member reveal">
+          <img src="mm.jpg" alt="Head Teacher" class="team-img" loading="lazy">
           <div class="team-info">
             <h3>Mr. Kafuko</h3>
             <p>Head Teacher</p>
             <p>Prom Patron</p>
           </div>
         </div>
-        <div class="team-member">
-          <img src="" alt="Senior Teacher" class="team-img">
+        <div class="team-member reveal">
+          <img src="222.jpg" alt="Senior Teacher" class="team-img" loading="lazy">
           <div class="team-info">
             <h3>Ms. Sarah Nakato</h3>
             <p>Senior Teacher</p>
             <p>Committee Chair</p>
           </div>
         </div>
-        <div class="team-member">
-          <img src="" alt="Student President" class="team-img">
+        <div class="team-member reveal">
+          <img src="345.jpg" alt="Student President" class="team-img" loading="lazy">
           <div class="team-info">
             <h3>David Ssebunya</h3>
             <p>Student President</p>
             <p>Student Coordinator</p>
           </div>
         </div>
-        <div class="team-member">
-          <img src="" alt="Events Coordinator" class="team-img">
+        <div class="team-member reveal">
+          <img src="47.jpg" alt="Events Coordinator" class="team-img" loading="lazy">
           <div class="team-info">
             <h3>Grace Nalwoga</h3>
             <p>Events Coordinator</p>
@@ -431,21 +794,21 @@
   <!-- Stats Section -->
   <section class="container">
     <div class="stats-section">
-      <h2 class="section-title">By The Numbers</h2>
+      <h2 class="section-title reveal">By The Numbers</h2>
       <div class="stats-grid">
-        <div class="stat-card">
+        <div class="stat-card reveal">
           <div class="stat-number">30</div>
           <div class="stat-label">Years of Excellence</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-number">25+</div>
+        <div class="stat-card reveal">
+          <div class="stat-number">250+</div>
           <div class="stat-label">Prom Attendees</div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card reveal">
           <div class="stat-number">15</div>
           <div class="stat-label">Committee Members</div>
         </div>
-        <div class="stat-card">
+        <div class="stat-card reveal">
           <div class="stat-number">12</div>
           <div class="stat-label">Performing Acts</div>
         </div>
@@ -455,54 +818,150 @@
 
   <!-- CTA Section -->
   <section class="container">
-    <div class="cta-section">
+    <div class="cta-section reveal">
       <h2>Join Us For This Memorable Event</h2>
-      <p>The 2024 Prom promised to be an unforgettable day of celebration, recognised, and created lasting memories. We invited all students, faculty, and honored guests to join us for this special occasion.</p>
+      <p>The 2024 Prom promises to be an unforgettable day of celebration, recognition, and lasting memories. We invite all students, faculty, and honored guests to join us for this special occasion.</p>
       <button class="cta-sign">RSVP Now</button>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <div style="font-weight:700; color:#e91e63">Central College Mityana Prom Memories</div>
-    <div style="margin-top:10px;">
-      <a href="index.html">Home</a>•
+    <div style="font-weight:700; color:#8A4FFF; font-size:1.2rem">Central College Mityana Prom Memories</div>
+    <div style="margin-top:15px;">
+      <a href="home.html">Home</a>•
       <a href="gallery.html">Gallery</a>•
       <a href="about.html">About</a>•
-      <a href="support.html">support</a>•
+      <a href="support.html">Support</a>•
       <a href="#">Privacy</a>
     </div>
-    <div style="margin-top:8px">© 2025 Central College Mityana Prom. All rights reserved.</div>
+    <div style="margin-top:12px">© 2024 Central College Mityana Prom. All rights reserved.</div>
   </footer>
 
   <!-- Scroll to top -->
   <button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
+  <!-- Sign-in Modal -->
+  <dialog id="signinModal" style="border:none; border-radius:20px; padding:0; max-width:450px; width:92vw; box-shadow:var(--shadow-lg);">
+    <div style="padding:30px 30px 25px">
+      <h3 style="margin:0 0 12px; font-size:1.4rem">Sign in to Share Images</h3>
+      <p style="margin:0 0 20px; color:var(--muted)">Enter your email to continue.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:10px">
+        <input type="email" id="emailModal" placeholder="you@example.com" style="flex:1; padding:14px 18px; border:1px solid #ddd; border-radius:12px; outline:none; font:inherit;">
+      </div>
+      <div style="display:flex; gap:12px; margin-top:20px">
+        <button class="cta-sign" onclick="applyModalSign()">Continue</button>
+        <button class="btn" onclick="closeSign()" style="border:0; padding:12px 24px; border-radius:999px; cursor:pointer; background:#f1f1f1; font-weight:500;">Cancel</button>
+      </div>
+    </div>
+  </dialog>
+
   <script>
-    // Header drawer
+    // Header drawer with blur effect
     const drawer = document.getElementById('drawer');
     const scrim = document.getElementById('scrim');
+    const burger = document.getElementById('burger');
+    const header = document.getElementById('main-header');
+    
     function toggleDrawer() {
+      const open = drawer.classList.contains('active');
+      if (open) {
+        closeDrawer();
+      } else {
+        openDrawer();
+      }
+    }
+    
+    function openDrawer() {
       drawer.style.display = 'block';
-      scrim.style.display = 'block';
+      setTimeout(() => {
+        drawer.classList.add('active');
+        scrim.style.display = 'block';
+        setTimeout(() => {
+          scrim.classList.add('active');
+        }, 10);
+      }, 10);
       document.body.classList.add('noscr');
+      burger.classList.add('active');
+      burger.setAttribute('aria-expanded', 'true');
     }
+    
     function closeDrawer() {
-      drawer.style.display = 'none';
-      scrim.style.display = 'none';
+      drawer.classList.remove('active');
+      scrim.classList.remove('active');
+      setTimeout(() => {
+        drawer.style.display = 'none';
+        scrim.style.display = 'none';
+      }, 500);
       document.body.classList.remove('noscr');
+      burger.classList.remove('active');
+      burger.setAttribute('aria-expanded', 'false');
     }
-
+    
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
     // Sign modal
     const modal = document.getElementById('signinModal');
-    function openSign() { modal.showModal(); }
-    function closeSign() { modal.close(); }
-    function applyModalSign() { alert('Email submitted: '+document.getElementById('emailModal').value); closeSign(); }
+    function openSign() { 
+      if (typeof modal.showModal === 'function') {
+        modal.showModal();
+      } else {
+        modal.setAttribute('open', '');
+      }
+    }
+    
+    function closeSign() { 
+      if (typeof modal.close === 'function') {
+        modal.close();
+      } else {
+        modal.removeAttribute('open');
+      }
+    }
+    
+    function applyModalSign() { 
+      const email = document.getElementById('emailModal').value;
+      if (email) {
+        alert('Email submitted: ' + email); 
+        closeSign();
+      } else {
+        alert('Please enter your email');
+      }
+    }
 
     // Scroll to top button
     window.addEventListener('scroll', () => {
       const scrollBtn = document.getElementById('scrollTop');
       scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
+    });
+    
+    // Reveal on scroll animation
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((ents) => {
+      ents.forEach(ent => {
+        if (ent.isIntersecting) {
+          ent.target.classList.add('show');
+          io.unobserve(ent.target);
+        }
+      });
+    }, {threshold: .1});
+    
+    reveals.forEach(el => io.observe(el));
+    
+    // Image error handling
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('img').forEach(img => {
+        img.onerror = function() {
+          this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjhGOUZGIi8+CjxwYXRoIGQ9Ik0xMDAgMTUwTDE1MCAxMDBMMjAwIDE1MEwyNTAgMTAwTDMwMCAxNTAiIHN0cm9rZT0iIzhBNEZGRiIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxjaXJjbGUgY3g9IjE1MCIgY3k9IjE4MCIgcj0iMjAiIGZpbGw9IiM4QTRGRkYiIG9wYWNpdHk9IjAuNSIvPgo8Y2lyY2xlIGN4PSIyNTAiIGN5PSIxODAiIHI9IjIwIiBmaWxsPSIjOEE0RkZGIiBvcGFjaXR5PSIwLjUiLz4KPHN2Zz4=';
+          this.alt = 'Image not available';
+        };
+      });
     });
   </script>
 </body>
