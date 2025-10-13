@@ -632,6 +632,22 @@
       opacity: 1;
       transform: none;
     }
+.image-container {
+    width: 100%;
+    max-width: 600px;       /* Adjust max image width */
+    margin: 0 auto;         /* Center it */
+    border-radius: 20px;    /* Rounded corners of the white box */
+    padding: 15px;          /* Space inside the box */
+    background: white;      /* White background like in screenshot */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Soft shadow */
+}
+
+.image-container img {
+    width: 100%;            /* Makes image responsive */
+    height: auto;           /* Keeps aspect ratio */
+    border-radius: 20px;    /* Rounds image corners */
+    display: block;
+    }
   </style>
 </head>
 <body>
@@ -772,7 +788,7 @@
           </div>
         </div>
         <div class="team-member reveal">
-          <img src="345.jpg" alt="Student President" class="team-img" loading="lazy">
+          <img src="345.jpg" alt="Student President" class="image-container" loading="lazy">
           <div class="team-info">
             <h3>David Ssebunya</h3>
             <p>Student President</p>
@@ -780,7 +796,7 @@
           </div>
         </div>
         <div class="team-member reveal">
-          <img src="47.jpg" alt="Events Coordinator" class="team-img" loading="lazy">
+          <img src="47.jpg" alt="Events Coordinator" class="image-container" loading="lazy">
           <div class="team-info">
             <h3>Grace Nalwoga</h3>
             <p>Events Coordinator</p>
