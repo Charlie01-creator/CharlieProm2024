@@ -1,0 +1,33 @@
+name: Optimize Images
+
+on:
+  push:
+    paths:
+      - "*.jpg"
+      - "*.jpeg"
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Sharp
+        run: npm install sharp
+
+      - name: Optimize images
+        run: node optimize-images.js
+
+      - name: Commit optimized images
+        run: |
+          git config user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git add optimized
+          git commit -m "Auto optimized images" || echo "No new images"
+          git push
