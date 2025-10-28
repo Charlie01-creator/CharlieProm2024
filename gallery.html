@@ -9,53 +9,28 @@
       --brand: #e91e63;
       --brand2: #ff4081;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; }
 
     /* Header */
-    header {
-      position: sticky; top: 0; z-index: 1000;
-      background: rgba(255,255,255,.95);
-      backdrop-filter: saturate(140%) blur(20px);
-      border-bottom: 1px solid #eee;
-    }
-    .nav {
-      max-width: 1200px; margin: 0 auto; padding: 0 20px;
-      height: 60px; display: flex; align-items: center; justify-content: space-between;
-    border-radius: 20px;
-    }
+    header { position: sticky; top: 0; z-index: 1000; background: rgba(255,255,255,.95); backdrop-filter: saturate(140%) blur(20px); border-bottom: 1px solid #eee; }
+    .nav { max-width: 1200px; margin: 0 auto; padding: 0 20px; height: 60px; display: flex; align-items: center; justify-content: space-between; border-radius: 20px; }
     .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--brand); }
     .links { display: flex; align-items: center; gap: 22px; }
     .links a { padding: 10px 6px; font-weight: 500; color: #333; position: relative; text-decoration: none; }
-    .links a.active::after,
-    .links a:hover::after {
-      content: ""; position: absolute; left: 0; bottom: 4px; height: 2px; width: 100%;
-      background: linear-gradient(90deg, var(--brand), var(--brand2)); border-radius: 2px;
-    }
-    .cta-sign {
-      margin-left: 6px; border: 0; padding: 10px 16px; border-radius: 999px;
-      cursor: pointer; background: linear-gradient(45deg, var(--brand), var(--brand2));
-      color: #fff; font-weight: 700; box-shadow: 0 6px 14px rgba(233,30,99,.2);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
+    .links a.active::after, .links a:hover::after { content: ""; position: absolute; left: 0; bottom: 4px; height: 2px; width: 100%; background: linear-gradient(90deg, var(--brand), var(--brand2)); border-radius: 2px; }
+    .cta-sign { margin-left: 6px; border: 0; padding: 10px 16px; border-radius: 999px; cursor: pointer; background: linear-gradient(45deg, var(--brand), var(--brand2)); color: #fff; font-weight: 700; box-shadow: 0 6px 14px rgba(233,30,99,.2); transition: transform 0.2s, box-shadow 0.2s; }
     .cta-sign:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(233,30,99,.3); }
 
     /* Mobile drawer */
     .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 5px; }
     .burger span { width: 26px; height: 3px; background: #333; border-radius: 3px; transition: .25s; }
-    .drawer {
-      display: none; position: fixed; inset: 0 0 0 auto; width: min(78vw, 320px);
-      height: 100vh; background: #fff; padding: 90px 24px 24px; box-shadow: -12px 0 30px rgba(0,0,0,.12); z-index: 1001;
-    }
+    .drawer { display: none; position: fixed; inset: 0 0 0 auto; width: min(78vw, 320px); height: 100vh; background: #fff; padding: 90px 24px 24px; box-shadow: -12px 0 30px rgba(0,0,0,.12); z-index: 1001; }
     .drawer a { display: block; padding: 14px 0; border-bottom: 1px solid #eee; color: #333; text-decoration: none; }
     .scrim { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.45); z-index: 1000; }
     .noscr { overflow: hidden; }
 
-    @media (max-width:900px) {
-      .links { display: none; }
-      .burger { display: flex; }
-    }
+    @media (max-width:900px) { .links { display: none; } .burger { display: flex; } }
 
     /* Gallery */
     .gallery { display: flex; flex-wrap: wrap; gap: 10px; max-width: 1200px; margin: 40px auto; }
@@ -68,10 +43,7 @@
     .loading { text-align: center; padding: 20px; color: #666; }
 
     /* Lightbox */
-    #lightbox {
-      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85);
-      justify-content: center; align-items: center; z-index: 1002;
-    }
+    #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.85); justify-content: center; align-items: center; z-index: 1002; }
     #lightbox.active { display: flex; }
     #lightbox img { max-width: 90%; max-height: 80%; border-radius: 12px; }
     #lightbox-caption { margin-top: 12px; color: #fff; font-size: 1rem; text-align: center; }
@@ -82,21 +54,14 @@
     footer a:hover { color: var(--brand); }
 
     /* Scroll to top */
-    #scrollTop {
-      position: fixed; bottom: 24px; right: 24px; display: none; width: 50px; height: 50px; border-radius: 50%; border: none;
-      background: var(--brand); color: white; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.2); z-index: 999;
-      transition: opacity 0.3s, transform 0.3s;
-    }
+    #scrollTop { position: fixed; bottom: 24px; right: 24px; display: none; width: 50px; height: 50px; border-radius: 50%; border: none; background: var(--brand); color: white; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.2); z-index: 999; transition: opacity 0.3s, transform 0.3s; }
     #scrollTop:hover { transform: translateY(-3px); background: var(--brand2); }
-
   </style>
 </head>
 <body>
   <header>
     <div class="nav">
-      <a class="logo" href="#home" aria-label="Home">
-        Central College Mityana • Prom 2024
-      </a>
+      <a class="logo" href="#home">Central College Mityana • Prom 2024</a>
       <nav class="links">
         <a href="index.html" class="active">Home</a>
         <a href="#about">About</a>
@@ -107,14 +72,12 @@
         <a href="contact.html">Contact</a>
         <button class="cta-sign" onclick="openSign()">Sign In</button>
       </nav>
-      <button class="burger" id="burger" aria-label="Open menu" onclick="toggleDrawer()">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="burger" onclick="toggleDrawer()"><span></span><span></span><span></span></button>
     </div>
   </header>
 
   <!-- Mobile drawer -->
-  <aside class="drawer" id="drawer" role="dialog" aria-modal="true">
+  <aside class="drawer" id="drawer">
     <a href="index.html" onclick="closeDrawer()">Home</a>
     <a href="#about" onclick="closeDrawer()">About</a>
     <a href="#highlights" onclick="closeDrawer()">Highlights</a>
@@ -171,16 +134,8 @@
     // Header drawer
     const drawer = document.getElementById('drawer');
     const scrim = document.getElementById('scrim');
-    function toggleDrawer() {
-      drawer.style.display = 'block';
-      scrim.style.display = 'block';
-      document.body.classList.add('noscr');
-    }
-    function closeDrawer() {
-      drawer.style.display = 'none';
-      scrim.style.display = 'none';
-      document.body.classList.remove('noscr');
-    }
+    function toggleDrawer() { drawer.style.display = 'block'; scrim.style.display = 'block'; document.body.classList.add('noscr'); }
+    function closeDrawer() { drawer.style.display = 'none'; scrim.style.display = 'none'; document.body.classList.remove('noscr'); }
 
     // Sign modal
     const modal = document.getElementById('signinModal');
@@ -188,15 +143,12 @@
     function closeSign() { modal.close(); }
     function applyModalSign() { alert('Email submitted: '+document.getElementById('emailModal').value); closeSign(); }
 
-    // Scroll to top button
-    window.addEventListener('scroll', () => {
-      const scrollBtn = document.getElementById('scrollTop');
-      scrollBtn.style.display = window.scrollY > 300 ? 'block' : 'none';
-    });
+    // Scroll to top
+    window.addEventListener('scroll', () => { document.getElementById('scrollTop').style.display = window.scrollY > 300 ? 'block' : 'none'; });
 
     // Gallery
     const TOTAL_IMAGES = 18;
-    const IMAGES_PER_LOAD =9;
+    const IMAGES_PER_LOAD = 9;
     const COLUMN_COUNT = 3;
     const gallery = document.getElementById('gallery-container');
     const loadingElement = document.getElementById('loading');
@@ -205,87 +157,76 @@
 
     function createGalleryColumns() {
       for (let i = 0; i < COLUMN_COUNT; i++) {
-        const column = document.createElement('div');
-        column.className = 'gallery-column';
-        gallery.appendChild(column);
-        columns.push(column);
+        const col = document.createElement('div');
+        col.className = 'gallery-column';
+        gallery.appendChild(col);
+        columns.push(col);
       }
     }
 
-    function createImageElement(imageNumber) {
+    function createImageElement(num) {
       const img = document.createElement('img');
-      // Fixed: Images are in the same folder, not a subfolder
-      img.src = imageNumber + '.jpg';
-      img.alt = 'Prom Image ' + imageNumber;
+      img.src = `optimized/${num}-blur.webp`;   // blurred placeholder
+      img.dataset.src = `optimized/${num}-800.webp`; // full optimized image
+      img.alt = 'Prom Image ' + num;
       img.loading = 'lazy';
+      img.classList.add('lazy');
 
       const item = document.createElement('div');
       item.className = 'gallery-item';
       item.appendChild(img);
       item.addEventListener('click', () => openLightbox(img));
-
-      // Distribute images evenly across columns
-      columns[(imageNumber - 1) % COLUMN_COUNT].appendChild(item);
+      columns[(num-1) % COLUMN_COUNT].appendChild(item);
     }
 
     function loadImages(count) {
-      const endIndex = Math.min(loadedCount + count, TOTAL_IMAGES);
-      for (let i = loadedCount + 1; i <= endIndex; i++) {
-        createImageElement(i);
-      }
-      loadedCount = endIndex;
+      const end = Math.min(loadedCount + count, TOTAL_IMAGES);
+      for (let i = loadedCount + 1; i <= end; i++) createImageElement(i);
+      loadedCount = end;
       if (loadedCount >= TOTAL_IMAGES) loadingElement.style.display = 'none';
     }
 
     function setupScrollListener() {
-      window.addEventListener('scroll', function() {
-        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
-          if (loadedCount < TOTAL_IMAGES) loadImages(IMAGES_PER_LOAD);
-        }
+      window.addEventListener('scroll', () => {
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 && loadedCount < TOTAL_IMAGES)
+          loadImages(IMAGES_PER_LOAD);
       });
     }
+
+    // Lazy load images
+    document.addEventListener("DOMContentLoaded", () => {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            img.classList.remove('lazy');
+            obs.unobserve(img);
+          }
+        });
+      });
+      document.querySelectorAll("img.lazy").forEach(img => observer.observe(img));
+    });
 
     // Lightbox
     const lb = document.getElementById('lightbox');
     const lbImg = lb.querySelector('img');
     const lbCaption = document.getElementById('lightbox-caption');
-    function openLightbox(img) {
-      lbImg.src = img.src;
-      lbCaption.textContent = img.alt;
-      lb.classList.add('active');
-      document.body.classList.add('noscr');
-    }
-    function closeLightbox() {
-      lb.classList.remove('active');
-      document.body.classList.remove('noscr');
-      lbImg.src = '';
-      lbCaption.textContent = '';
-    }
-    
-    // Function to remove multiple images by numbers (pass as an array)
-    function removeImages(imageNumbers) {
-        const images = document.querySelectorAll('.gallery-item img');
+    function openLightbox(img) { lbImg.src = img.dataset.src || img.src; lbCaption.textContent = img.alt; lb.classList.add('active'); document.body.classList.add('noscr'); }
+    function closeLightbox() { lb.classList.remove('active'); document.body.classList.remove('noscr'); lbImg.src=''; lbCaption.textContent=''; }
 
-        images.forEach(img => {
-            const num = parseInt(img.alt.replace("Prom Image ", ""));
-            if (imageNumbers.includes(num)) {
-                img.parentElement.remove();
-                loadedCount--; // update the loaded image counter
-            }
-        });
+    function removeImages(nums) {
+      document.querySelectorAll('.gallery-item img').forEach(img => {
+        const n = parseInt(img.alt.replace('Prom Image ',''));
+        if (nums.includes(n)) img.parentElement.remove();
+      });
     }
 
-    // Initialize gallery
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', () => {
       createGalleryColumns();
       loadImages(IMAGES_PER_LOAD);
       setupScrollListener();
-      
-      // Remove specific images after a short delay to ensure DOM is ready
-      setTimeout(() => {
-        // Fixed: Pass only valid numbers in the array
-        removeImages([17, 18]);
-      }, 100);
+      setTimeout(() => removeImages([17,18]), 100);
     });
   </script>
 </body>
